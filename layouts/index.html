@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" class="index {{.Site.Data.Index.Platforms[0].Short}}">
+<html lang="{{ .Site.LanguageCode }}" class="index {{(index .Site.Data.Index.Platforms 0).Short}}">
 
   {{ partial "head.html" . }}
 
