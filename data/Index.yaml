@@ -1,0 +1,54 @@
+Features:
+  - Only one password to remember
+  - Conveniently integrated into your browser
+  - No need to trust us, your data stays on your device (safely encrypted)
+  - Most passwords never stored but generated when needed
+  - Easy to recover a password without access to your device
+  - Multiple backup strategies supported
+  - Free and open source
+
+
+Platforms:
+  - Name: Mozilla Firefox
+    Short: firefox
+    Url: https://addons.mozilla.org/addon/easy-passwords/
+
+  - Name: Google Chrome
+    Short: chrome
+    Url: https://chrome.google.com/webstore/detail/hplhaekjfmjfnfdllkpjpeenlbclffgh
+
+  - Name: Opera
+    Short: opera
+    Url: https://addons.opera.com/extensions/details/easy-passwords/
+
+
+FeaturedDocs:
+  - Url: /documentation/choosing-master-password/
+    Image: master-password.png
+    Title: Choosing a master password
+    Description: Choosing a strong master password is essential to protect your data. Common passwords and dictionary words offer little protection.
+
+  - Url: /documentation/generated-vs-stored/
+    Image: password-type.png
+    Title: Generated or stored password?
+    Description: Generated passwords aren't saved to disk but rather calculated whenever they are needed. What are the implications in practice?
+
+  - Url: /documentation/recovery-strategies/
+    Image: backup-options.png
+    Title: Recovery strategies
+    Description: What if your PfP data gets corrupted or you simply don't have access to your device? No reason to reset your passwords.
+
+  - Url: /documentation/autolock/
+    Image: autolock.png
+    Title: Why enter the master password so often?
+    Description: By default, PfP will log you out after 10 minutes of inactivity. If you leave your device unattended, this makes sure that your passwords will usually be safely locked.
+
+  - Url: /documentation/threat-analysis/
+    Image: bomb.svg
+    Title: What threats can PfP protect against?
+    Description: There are numerous ways how your passwords could be compromised. Using PfP will protect you against most of them, some threats will remain however.
+
+  - Url: /documentation/password-derivation/
+    Image: enter-master.png
+    Title: Secure password derivation
+    Description: A single password protecting access to the crown jewels, can this possibly be secure? Learn what PfP does to keep that password safe.

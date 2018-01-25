@@ -1,0 +1,16 @@
+baseURL: https://pfp.works/
+languageCode: en-us
+title: "PfP: Pain-free Passwords"
+disableKinds:
+  - RSS
+  - taxonomyTerm
+enableRobotsTXT: true
+
+menu:
+  main:
+    - Name: Home
+      URL: /
+      Weight: 1
+    - Name: Documentation
+      URL: /documentation/
+      Weight: 2

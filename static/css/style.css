@@ -1,0 +1,464 @@
+@import url("font-awesome.min.css");
+
+@font-face
+{
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Light-webfont.eot');
+  src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+       url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+       url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular-webfont.eot');
+  src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+       url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+       url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Semibold-webfont.eot');
+  src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+       url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+       url('../fonts/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Bold-webfont.eot');
+  src: url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/OpenSans-Bold-webfont.woff') format('woff'),
+       url('../fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+       url('../fonts/OpenSans-Bold-webfont.svg#open_sansbold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+*
+{
+  box-sizing: border-box;
+}
+
+body
+{
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6em;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  line-height:1.1em;
+}
+
+a
+{
+  text-decoration: none;
+}
+a:hover
+{
+  text-decoration: underline;
+}
+
+.content a
+{
+  color: #4ABDAC;
+}
+.content a:hover
+{
+  color: #86D3C7;
+}
+
+hr
+{
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid #EEEEEE;
+}
+
+code,
+pre
+{
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+code
+{
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+pre
+{
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 90%;
+  line-height: 1.42857143;
+  color: #333333;
+  background-color: #F5F5F5;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+}
+
+.container
+{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px)
+{
+  .container
+  {
+    width: 750px;
+  }
+}
+@media (min-width: 992px)
+{
+  .container
+  {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px)
+{
+  .container
+  {
+    width: 1170px;
+  }
+}
+
+.container::after,
+header::after,
+footer::before,
+.content::before,
+.content::after
+{
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.centered
+{
+  text-align: center;
+}
+
+.navbar
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 50px;
+  background-color: #4ABDAC;
+  color: #FFFFFF;
+  z-index: 1000;
+}
+
+.navbar a
+{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.logo
+{
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  line-height: 20px;
+  font-size: 250%;
+}
+
+@media (max-width: 600px)
+{
+  .logo
+  {
+    display: none;
+  }
+}
+
+.menu
+{
+  float: right;
+  padding: 0 15px;
+  list-style: none;
+  margin: 0;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.menuitem
+{
+  float: left;
+  margin: 0 0.2em;
+}
+
+.menuitem > a
+{
+  display: block;
+  padding: 1.5em;
+}
+.menuitem > a:hover
+{
+  background-color: #36CBD4;
+}
+.menuitem.selected > a
+{
+  background-color:#36CBD4;
+  cursor: default;
+}
+
+.content
+{
+  padding-top: 110px;
+}
+
+footer
+{
+  margin-top: 40px;
+  background: #4ABDAC;
+  padding: 20px 0;
+  color: #FFFFFF;
+}
+
+footer a
+{
+  color: #9AE5E9;
+}
+footer a:hover
+{
+  text-decoration: underline;
+  color: #36CBD4;
+}
+
+.license
+{
+  font-weight: 300;
+  float: right;
+}
+
+.scrollup
+{
+  position: fixed;
+  bottom: 10px;
+  right: 40px;
+  width: 55px;
+  height: 55px;
+  color: #FFFFFF;
+  font-size: 22px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  opacity: 0.5;
+  border-radius: 50%;
+  z-index: 999;
+}
+.scrollup:hover
+{
+  text-decoration: none;
+  opacity: 1;
+  background-color: #36CBD4;
+  color: #FFFFFF;
+}
+
+.flipped
+{
+  display: inline-block;
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.teaser a,
+footer a
+{
+  color: #F9C966;
+}
+
+.teaser a:hover,
+footer a:hover
+{
+  color: #FBDB99;
+}
+
+/*
+ * Index page
+ */
+
+:root.index .logo
+{
+  display: none;
+}
+
+.teaser
+{
+  padding-top: 110px;
+  background-color: #4ABDAC;
+  color: #FFFFFF;
+  font-size: 120%;
+}
+
+@media (min-width: 600px)
+{
+  .teaser > .container
+  {
+    padding-left: 224px;
+    background-image: url(/img/icon.svg);
+    background-size: 192px;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+}
+
+.teaser h1
+{
+  font-size: 220%;
+  font-weight: 700;
+}
+
+.teaser h2
+{
+  font-size: 180%;
+  font-weight: 600;
+}
+
+.features
+{
+  padding-left: 2em;
+}
+
+.teaser + .content
+{
+  padding-top: 0;
+}
+
+.teaser .install
+{
+  display: none;
+  background-color: #F7B733;
+  border: 1px solid #C5928F;
+  color: #FFFFFF;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  font-weight: 700;
+  margin: 1em 2em 0;
+  padding: 0.5em 1.5em;
+  border-radius: 0.3em;
+  text-decoration: none;
+}
+
+:root.firefox .install.firefox,
+:root.chrome .install.chrome,
+:root.opera .install.opera
+{
+  display: inline-block;
+}
+
+.teaser .install:hover,
+.teaser .install:active
+{
+  background-color: #F8C355;
+  color: #FFFFFF;
+}
+
+#type-selector
+{
+  display: none;
+}
+
+#type-selector.active
+{
+  display: block;
+  position: absolute;
+}
+
+.type-selector-arrow
+{
+  margin-left: 2em;
+  width: 0;
+  height: 0;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  border-bottom: 0.5em solid #000000;
+}
+
+.type-selector-inner
+{
+  border: 1px solid #000000;
+  background-color: #FFFFFF;
+  border-radius: 0.5em;
+  color: #000000;
+  margin: 0;
+  padding: 0.5em 0;
+  list-style-type: none;
+}
+
+.type-selector-inner a
+{
+  color: #4ABDAC;
+}
+.type-selector-inner a:hover
+{
+  color: #86D3C7;
+}
+
+.type-selector-link
+{
+  display: block;
+  padding: 0.5em 1em;
+}
+
+.tile
+{
+  float: left;
+  width: 450px;
+  min-height: 230px;
+  padding: 1em;
+  border: 1px solid #D0D0D0;
+  border-radius: 0.5em;
+  margin: 1em;
+}
+
+.tile > h3
+{
+  margin-top: 0;
+}
+
+.tile > img
+{
+  float: right;
+  width: 150px;
+  margin: 1em;
+}
+
+.tile::after
+{
+  clear: both;
+}

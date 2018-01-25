@@ -1,0 +1,13 @@
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <a class="logo" href="/">
+      <img src="/img/icon.svg" height="30">
+      <span class="flipped">P</span>fP: Pain-free Passwords
+    </a>
+    <ul class="menu" role="menubar">
+      {{range .Site.Menus.main}}
+        <li class="menuitem{{if eq $.Page.URL .URL}} selected{{end}}" role="menuitem"><a href="{{.URL}}">{{.Name}}</a></li>
+      {{end}}
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="index {{.Site.Data.Index.Platforms[0].Short}}">
+
+  {{ partial "head.html" . }}
+
+  <body>
+
+    {{ partial "nav.html" . }}
+
+    <div class="teaser">
+      <div class="container">
+        <h1><span class="flipped">P</span>fP: Pain-free Passwords</h1>
+        <h2>Your new best way to manage passwords</h2>
+        <ul class="features">
+          {{range .Site.Data.Index.Features}}
+            <li>{{.}}</li>
+          {{end}}
+        </ul>
+
+        <p>
+          {{range .Site.Data.Index.Platforms}}
+            <a class="install {{.Short}}" href="{{.Url}}">Get PfP for {{.Name}}</a>
+          {{end}}
+          <a class="show-type-selector" href="#">Choose a different browser</a>
+        </p>
+
+        <div id="type-selector">
+          <div class="type-selector-arrow"></div>
+          <ul class="type-selector-inner">
+            {{range .Site.Data.Index.Platforms}}
+              <li><a class="type-selector-link" data-type="{{.Short}}" href="#">{{.Name}}</a></li>
+            {{end}}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      {{range .Site.Data.Index.FeaturedDocs}}
+        <div class="tile">
+          <img src="/img/{{.Image}}">
+          <h3><a href="{{.Url}}">{{.Title}}</a></h3>
+          <p>
+            {{.Description}}<br>
+            <a href="{{.Url}}">Read more&hellip;</a>
+          </p>
+        </div>
+      {{end}}
+
+    </div>
+
+    {{ partial "footer.html" . }}
+
+  </body>
+</html>
