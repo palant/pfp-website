@@ -79,11 +79,13 @@ a:hover
   text-decoration: underline;
 }
 
-.content a
+.content a,
+.tiles a
 {
   color: #4ABDAC;
 }
-.content a:hover
+.content a:hover,
+.tiles a:hover
 {
   color: #86D3C7;
 }
@@ -156,7 +158,9 @@ pre
 header::after,
 footer::before,
 .content::before,
-.content::after
+.content::after,
+.tiles:before,
+.tiles:after
 {
   display: table;
   content: "";
@@ -353,11 +357,6 @@ footer a:hover
 .features
 {
   padding-left: 2em;
-}
-
-.teaser + .content
-{
-  padding-top: 0;
 }
 
 .teaser .install
