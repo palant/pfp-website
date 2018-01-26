@@ -37,15 +37,17 @@
 
     <div class="content">
 
-      {{range .Site.Data.Index.FeaturedDocs}}
-        <div class="tile">
-          <img src="/img/{{.Image}}">
-          <h3><a href="{{.Url}}">{{.Title}}</a></h3>
-          <p>
-            {{.Description}}<br>
-            <a href="{{.Url}}">Read more&hellip;</a>
-          </p>
-        </div>
+      {{range $.Site.Data.Index.FeaturedDocs}}
+        {{with $.Site.GetPage "page" .}}
+          <div class="tile">
+            <img src="/img/{{.Params.Image}}">
+            <h3><a href="{{.URL}}">{{.Title}}</a></h3>
+            <p>
+              {{.Description}}<br>
+              <a href="{{.URL}}">Read more&hellip;</a>
+            </p>
+          </div>
+        {{end}}
       {{end}}
 
     </div>
