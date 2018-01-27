@@ -4,8 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
 
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/site.js"></script>
+  <link rel="stylesheet" href="/css/style.css?{{now.Unix}}">
+  <script src="/js/site.js?{{now.Unix}}"></script>
 
   {{ .Hugo.Generator }}
 </head>
