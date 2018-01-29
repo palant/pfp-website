@@ -494,3 +494,14 @@ footer a:hover
 {
   clear: both;
 }
+
+/*
+ * Article pages
+ */
+
+.articleImage
+{
+  float: right;
+  margin: 1em 2em;
+  width: 300px;
+}

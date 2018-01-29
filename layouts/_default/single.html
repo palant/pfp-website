@@ -9,6 +9,9 @@
 
     <div class="content">
       <div class="container">
+        {{ if isset .Params "image" }}
+          <img class="articleImage" src="/img/{{.Params.Image}}">
+        {{ end }}
         <h1>{{ .Title }}</h1>
         <p>{{ .Description }}</p>
         <hr>
