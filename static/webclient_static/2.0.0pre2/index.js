@@ -98,6 +98,11 @@ function createFrame(id, src, listener) {
 }
 
 window.addEventListener("load", function () {
+  if (!crypto.subtle || typeof crypto.subtle.encrypt != "function") {
+    document.getElementById("no-webcrypto").hidden = false;
+    return;
+  }
+
   createFrame("background", "background/background.html", function () {
     createFrame("panel", "panel/panel.html", function (event) {
       event.target.setAttribute("data-active", "true");
