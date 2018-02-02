@@ -9,7 +9,7 @@ You should **never** enter your PfP master password on any website. While this p
 
 Also, the online version has a number of [important limitations](#limitations) that make it less secure than the PfP browser extension. Most importantly, it doesn't have the ability to fill in passwords for you, so it cannot verify that your password being entered on the right website. It is recommended that you [install the PfP browser extension](/) if possible.
 
-[Understood, let me try it now](#start-webclient)
+<button class="start-webclient">Understood, let me try it now</button>
 
 ## Limitations {#limitations}
 

@@ -1,5 +1,7 @@
 "use strict";
 
+var webclientVersion = "2.0.0pre";
+
 function animate(obj, property, steps, interval)
 {
   obj[property] = obj[property] - obj[property] / steps;
@@ -15,7 +17,7 @@ function animate(obj, property, steps, interval)
 document.addEventListener("click", function(event)
 {
   var target = event.target;
-  while (target && target.localName != "a")
+  while (target && target.localName != "a" && target.localName != "button")
     target = target.parentNode;
   if (target && /\bscrollup\b/.test(target.className))
   {
@@ -23,9 +25,29 @@ document.addEventListener("click", function(event)
     animate(obj, "scrollTop", 20, 20);
     event.preventDefault();
   }
-  else if (target && target.getAttribute("href") == "#start-webclient")
+  else if (target && /\bstart-webclient\b/.test(target.className))
   {
-    document.querySelector(".content").innerHTML = "<iframe class='webclient' src='/webclient_static/2.0.0pre/'></iframe>";
+    var frame = document.createElement("iframe");
+    frame.className = "webclient";
+    frame.src = "/webclient_static/" + webclientVersion + "/";
+    frame.addEventListener("load", function()
+    {
+      frame.contentWindow.focus();
+    }, false);
+
+    var content = document.querySelector(".content");
+    content.textContent = "";
+    content.appendChild(frame);
+
+    var onResize = function()
+    {
+      var optimalHeight = frame.offsetHeight +
+                          document.documentElement.clientHeight -
+                          document.documentElement.offsetHeight;
+      frame.style.height = optimalHeight > 300 ? optimalHeight + "px" : "";
+    };
+    window.addEventListener("resize", onResize, false);
+    onResize();
   }
   else if (target && /\bshow-type-selector\b/.test(target.className))
   {
@@ -45,7 +67,7 @@ document.addEventListener("click", function(event)
   else
   {
     var selector = document.getElementById("type-selector");
-    if (selector.className)
+    if (selector && selector.className)
       selector.className = "";
   }
 }, false);
