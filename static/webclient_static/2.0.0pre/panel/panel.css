@@ -1,0 +1,394 @@
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+:root {
+  margin: 0; }
+
+body {
+  margin: 0;
+  width: 600px;
+  padding: 10px;
+  background-color: #fff;
+  color: #000; }
+
+body,
+input,
+button,
+h1 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px; }
+
+h1 {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 15px; }
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 0; }
+  :root:not([dir="rtl"]) input[type="checkbox"] {
+    margin-right: 5px; }
+  :root[dir="rtl"] input[type="checkbox"] {
+    margin-left: 5px; }
+
+input[type="checkbox"]:checked {
+  background-image: url(../images/checkmark-round.svg);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+a {
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: underline; }
+
+.slide {
+  display: none; }
+
+.slide[data-active="true"] {
+  display: flex;
+  flex-direction: column; }
+
+.block-start,
+.button-container,
+.link-container {
+  margin-top: 15px; }
+
+.warning {
+  background-color: #faa;
+  border-radius: 5px;
+  padding: 5px;
+  background-image: url(../images/android-warning.svg);
+  background-size: 32px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat; }
+  :root:not([dir="rtl"]) .warning {
+    padding-left: 42px; }
+  :root[dir="rtl"] .warning {
+    padding-right: 42px; }
+
+.success {
+  background-color: #cfc;
+  border-radius: 5px; }
+
+.button-container:not([hidden]),
+.link-container:not([hidden]) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+.link-container {
+  font-size: 16px; }
+
+.error {
+  font-size: 16px;
+  color: #f44; }
+
+#unknown-error-details {
+  font-size: 16px;
+  white-space: pre-wrap; }
+
+#password-score {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch; }
+  #password-score * {
+    flex-grow: 1;
+    background-color: #ccc;
+    height: 5px;
+    margin: 2px; }
+
+#password-score[data-score="0"] #password-score-0 {
+  background-color: #f00; }
+
+#password-score[data-score="1"] #password-score-0,
+#password-score[data-score="1"] #password-score-1 {
+  background-color: #f80; }
+
+#password-score[data-score="2"] #password-score-0,
+#password-score[data-score="2"] #password-score-1,
+#password-score[data-score="2"] #password-score-2 {
+  background-color: #ee0; }
+
+#password-score[data-score="3"] #password-score-0,
+#password-score[data-score="3"] #password-score-1,
+#password-score[data-score="3"] #password-score-2,
+#password-score[data-score="3"] #password-score-3 {
+  background-color: #cf0; }
+
+#password-score[data-score="4"] #password-score-0,
+#password-score[data-score="4"] #password-score-1,
+#password-score[data-score="4"] #password-score-2,
+#password-score[data-score="4"] #password-score-3,
+#password-score[data-score="4"] #password-score-4 {
+  background-color: #0f0; }
+
+#enter-master {
+  background-size: 128px;
+  background-repeat: no-repeat;
+  background-position: 16px 16px;
+  background-image: url(../images/icon.svg);
+  min-height: 128px; }
+  :root:not([dir="rtl"]) #enter-master {
+    padding-left: 160px; }
+  :root[dir="rtl"] #enter-master {
+    padding-right: 160px; }
+
+#migration > p,
+#migration > ul {
+  font-size: 16px; }
+
+#migration > p {
+  margin: 7.5px 0; }
+
+#migration-in-progress:not([hidden]) {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+#migration-spinning-wheel {
+  min-width: 24px;
+  min-height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: url(../images/circles.svg); }
+  :root:not([dir="rtl"]) #migration-spinning-wheel {
+    margin-right: 5px; }
+  :root[dir="rtl"] #migration-spinning-wheel {
+    margin-left: 5px; }
+
+#site-container {
+  margin-bottom: 15px; }
+
+#site-name-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center; }
+
+#site {
+  flex-grow: 1; }
+
+#site-edit-accept,
+#site-edit-cancel {
+  min-width: 32px;
+  min-height: 32px;
+  background-size: 32px;
+  background-repeat: no-repeat; }
+  :root:not([dir="rtl"]) #site-edit-accept, :root:not([dir="rtl"])
+  #site-edit-cancel {
+    margin-right: 5px; }
+  :root[dir="rtl"] #site-edit-accept, :root[dir="rtl"]
+  #site-edit-cancel {
+    margin-left: 5px; }
+
+#site-edit-cancel {
+  background-image: url(../images/close-round.svg); }
+
+#site-edit-cancel[disabled="true"] {
+  opacity: 0.2; }
+
+#site[readonly] + #site-edit-cancel {
+  display: none; }
+
+#site-edit-accept {
+  background-image: url(../images/checkmark-round.svg); }
+
+#site[readonly] + * + #site-edit-accept {
+  display: none; }
+
+#site-edit-container {
+  font-size: 16px; }
+
+#password-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+  max-height: 300px;
+  overflow: auto; }
+
+.password-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.password-container:hover {
+  background-color: #e2f4ff; }
+
+.user-name-container {
+  flex-grow: 1; }
+
+.password-revision::before {
+  content: "#"; }
+
+.password-revision {
+  font-size: 16px;
+  vertical-align: text-top; }
+
+.iconic-link {
+  min-width: 32px;
+  min-height: 32px;
+  background-size: 32px;
+  background-repeat: no-repeat; }
+
+.user-name-container.legacy-warning {
+  min-width: 32px;
+  min-height: 32px;
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url("../images/android-warning.svg"); }
+
+.password-menu-link {
+  background-image: url("../images/android-menu.svg"); }
+
+.password-menu-link[data-menuactive] {
+  background-color: #b3b3b3; }
+
+.to-document-link {
+  background-image: url(../images/ios-color-wand.svg); }
+
+.to-clipboard-link {
+  background-image: url(../images/archive.svg); }
+
+.show-qrcode-link {
+  background-image: url(../images/ios-barcode-outline.svg); }
+
+.notes-link {
+  background-image: url(../images/ios-paper-outline.svg); }
+
+.bump-revision-link {
+  background-image: url(../images/ios-refresh-empty.svg); }
+
+.password-remove-link {
+  background-image: url(../images/ios-close-outline.svg); }
+
+#password-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px; }
+
+.menu-arrow {
+  position: relative;
+  left: 3px;
+  top: -12px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 7px 7px 7px;
+  border-color: transparent transparent #000 transparent; }
+
+.menu-arrow::after {
+  content: "";
+  position: relative;
+  display: block;
+  left: -6px;
+  top: 1px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent #fff transparent; }
+
+.password-menu-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none; }
+
+.password-menu-entry:hover {
+  background-color: #e2f4ff; }
+
+:root:not([dir="rtl"]) .password-menu-entry > .iconic-link {
+  margin-right: 5px; }
+
+:root[dir="rtl"] .password-menu-entry > .iconic-link {
+  margin-left: 5px; }
+
+:root.webclient .to-document-link,
+:root.webclient #menu-to-document {
+  display: none; }
+
+#generate-password-link,
+#stored-password-link {
+  min-height: 32px;
+  background-image: url(../images/ios-plus-outline.svg);
+  background-size: 32px;
+  background-repeat: no-repeat; }
+  :root:not([dir="rtl"]) #generate-password-link, :root:not([dir="rtl"])
+  #stored-password-link {
+    padding-left: 37px; }
+  :root[dir="rtl"] #generate-password-link, :root[dir="rtl"]
+  #stored-password-link {
+    padding-right: 37px; }
+
+#generate-password-site,
+#generate-password-user-name,
+#length-container,
+#charsets-container {
+  display: flex;
+  justify-content: space-between; }
+
+#generate-legacy-warning {
+  font-size: 16px; }
+
+#generate-change-password-revision,
+#stored-change-password-revision,
+#stored-use-recovery {
+  font-size: 16px; }
+
+#generate-password-revision-container:not([hidden]),
+#stored-password-revision-container:not([hidden]) {
+  display: flex;
+  flex-direction: column; }
+
+#password-length {
+  flex-grow: 1; }
+
+#password-length-value {
+  min-width: 3ch; }
+
+#recovery-code-accepted-container {
+  margin: 0;
+  font-size: 16px; }
+
+#recovery-code-accepted:empty + #recovery-code-strip {
+  display: none; }
+
+#recovery-code-strip {
+  display: inline-block;
+  min-width: 16px;
+  min-height: 16px;
+  margin: -2px 5px;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-image: url("../images/close-round.svg"); }
+
+#qrcode-canvas {
+  align-self: center; }
+
+#notes-textarea {
+  min-height: 300px; }
+
+#sync-setup > label {
+  font-weight: bold; }
+
+#sync-setup > div {
+  font-size: 16px; }
+
+#sync-setup-link,
+#sync-state-link {
+  /* Don't show sync UI yet, it is unfinished */
+  display: none; }

@@ -23,6 +23,10 @@ document.addEventListener("click", function(event)
     animate(obj, "scrollTop", 20, 20);
     event.preventDefault();
   }
+  else if (target && target.getAttribute("href") == "#start-webclient")
+  {
+    document.querySelector(".content").innerHTML = "<iframe class='webclient' src='/webclient_static/2.0.0pre/'></iframe>";
+  }
   else if (target && /\bshow-type-selector\b/.test(target.className))
   {
     var selector = document.getElementById("type-selector");

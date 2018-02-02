@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<!--
+ - This Source Code is subject to the terms of the Mozilla Public License
+ - version 2.0 (the "License"). You can obtain a copy of the License at
+ - http://mozilla.org/MPL/2.0/.
+ -->
+
+<html data-portname="panel">
+  <head>
+    <meta charset="utf-8">
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="panel.css">
+  </head>
+  <body>
+    <div id="messages" hidden>
+      <div data-l10n-id="password-too-short"></div>
+      <div data-l10n-id="passwords-differ"></div>
+      <div data-l10n-id="weak-password"></div>
+      <div data-l10n-id="password-declined"></div>
+      <div data-l10n-id="user-name-required"></div>
+      <div data-l10n-id="user-name-exists"></div>
+      <div data-l10n-id="user-name-exists-generated"></div>
+      <div data-l10n-id="no-characters-selected"></div>
+      <div data-l10n-id="password-value-required"></div>
+      <div data-l10n-id="password-type-generated"></div>
+      <div data-l10n-id="password-type-generated2"></div>
+      <div data-l10n-id="password-type-stored"></div>
+      <div data-l10n-id="password-info-notes"></div>
+      <div data-l10n-id="remove-password-confirmation"></div>
+      <div data-l10n-id="remove-alias-confirmation"></div>
+      <div data-l10n-id="add-notes"></div>
+      <div data-l10n-id="edit-notes"></div>
+      <div data-l10n-id="sync-lastTime-never"></div>
+      <div data-l10n-id="sync-disable-confirmation"></div>
+      <div data-l10n-id="recovery-checksum-mismatch"></div>
+    </div>
+
+    <div id="unknown-error" class="warning" hidden>
+      <span data-l10n-id="unknown-error"></span>
+      <a href="#" id="unknown-error-more" data-l10n-id="unknown-error-more"></a>
+      <div id="unknown-error-details"></div>
+    </div>
+
+    <form id="change-master" class="slide" data-default-element="new-master" data-custom-reset="password-score.data-score=0">
+      <div id="new-master-message" class="description" data-l10n-id="new-master-message"></div>
+      <div id="reset-master-message" class="description warning" data-l10n-id="reset-master-message"></div>
+      <label class="block-start" for="new-master" data-l10n-id="new-master"></label>
+      <input id="new-master" type="password">
+      <div class="error" hidden></div>
+      <div id="password-score" data-score="0">
+        <div id="password-score-0"></div>
+        <div id="password-score-1"></div>
+        <div id="password-score-2"></div>
+        <div id="password-score-3"></div>
+        <div id="password-score-4"></div>
+      </div>
+      <label class="block-start" for="new-master-repeat" data-l10n-id="new-master-repeat"></label>
+      <input id="new-master-repeat" type="password">
+      <div class="error" hidden></div>
+      <div class="button-container">
+        <button id="change-master-submit" type="submit" data-l10n-id="change-master-submit"></button>
+        <button id="reset-master-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="enter-master" class="slide" data-default-element="master-password">
+      <label for="master-password" data-l10n-id="master-password"></label>
+      <input id="master-password" type="password">
+      <div class="error" hidden></div>
+      <div class="button-container">
+        <button data-l10n-id="enter-master-submit"></button>
+      </div>
+      <div class="link-container">
+        <a id="reset-master-link" href="#" data-l10n-id="reset-master-link"></a>
+      </div>
+    </form>
+
+    <form id="migration" class="slide">
+      <h1 data-l10n-id="migration-title"></h1>
+      <div id="migration-in-progress">
+        <div id="migration-spinning-wheel"></div>
+        <div data-l10n-id="migration-in-progress"></div>
+      </div>
+      <p data-l10n-id="migration-features-intro"></p>
+      <ul>
+        <li data-l10n-id="migration-feature1"></li>
+        <li data-l10n-id="migration-feature2"></li>
+        <li data-l10n-id="migration-feature3"></li>
+      </ul>
+      <p data-l10n-id="migration-todos-intro"></p>
+      <ul>
+        <li data-l10n-id="migration-todo1"></li>
+        <li data-l10n-id="migration-todo2"></li>
+      </ul>
+      <div id="migration-buttons" class="button-container" hidden>
+        <button id="migration-continue" type="submit" data-l10n-id="migration-continue"></button>
+      </div>
+    </form>
+
+    <form id="password-list" class="slide" data-default-element="site">
+      <!-- Cannot use <template> tag here, template contents are removed from document before l10n does its job -->
+      <div id="password-template" hidden>
+        <div class="password-container">
+          <a href="#" class="password-menu-link iconic-link" data-l10n-id="password-menu"></a>
+          <a href="#" class="to-document-link iconic-link" data-l10n-id="to-document"></a>
+          <a href="#" class="to-clipboard-link iconic-link" data-l10n-id="to-clipboard"></a>
+          <span class="user-name-container">
+            <span class="user-name"></span>
+            <span class="password-revision"></span>
+          </span>
+        </div>
+      </div>
+
+      <div id="password-menu" hidden>
+        <div class="menu-arrow"></div>
+        <a href="#" id="menu-to-document" class="password-menu-entry">
+          <span class="to-document-link iconic-link"></span>
+          <span data-l10n-id="to-document"></span>
+        </a>
+        <a href="#" id="menu-to-clipboard" class="password-menu-entry">
+          <span class="to-clipboard-link iconic-link"></span>
+          <span data-l10n-id="to-clipboard"></span>
+        </a>
+        <a href="#" id="menu-show-qrcode" class="password-menu-entry">
+          <span class="show-qrcode-link iconic-link"></span>
+          <span data-l10n-id="show-qrcode"></span>
+        </a>
+        <a href="#" id="menu-notes" class="password-menu-entry">
+          <span class="notes-link iconic-link"></span>
+          <span class="menu-notes-link"></span>
+        </a>
+        <a href="#" id="menu-bump-revision" class="password-menu-entry">
+          <span class="bump-revision-link iconic-link"></span>
+          <span data-l10n-id="bump-revision"></span>
+        </a>
+        <a href="#" id="menu-password-remove" class="password-menu-entry">
+          <span class="password-remove-link iconic-link"></span>
+          <span data-l10n-id="remove-password"></span>
+        </a>
+      </div>
+
+      <label for="site" data-l10n-id="site"></label>
+      <div id="site-container">
+        <div id="site-name-container">
+          <input id="site" type="text" readonly>
+          <a href="#" id="site-edit-cancel" data-l10n-id="site-edit-cancel"></a>
+          <a href="#" id="site-edit-accept" data-l10n-id="site-edit-accept"></a>
+        </div>
+        <div id="site-edit-container">
+          <a href="#" id="add-alias" data-l10n-id="add-alias" hidden></a>
+          <span id="alias-container" hidden>
+            <span id="alias-text" data-l10n-id="alias-description"></span>
+            <a href="#" id="remove-alias" data-l10n-id="remove-alias"></a>
+          </span>
+        </div>
+      </div>
+      <div id="empty-site-name" class="warning" data-l10n-id="empty-site-name"></div>
+      <div id="password-ready-message" class="warning" data-l10n-id="password-ready-message"></div>
+      <div id="password-copied-message" class="success" data-l10n-id="password-copied-message"></div>
+      <div id="no-such-password" class="warning" data-l10n-id="no-such-password"></div>
+      <div id="unknown-generation-method" class="warning" data-l10n-id="unknown-generation-method"></div>
+      <div id="wrong-site-message" class="warning" data-l10n-id="wrong-site-message"></div>
+      <div id="no-password-fields" class="warning" data-l10n-id="no-password-fields"></div>
+      <div data-l10n-id="passwords-label" class="block-start"></div>
+      <div id="no-passwords-message" data-l10n-id="no-passwords-message"></div>
+      <div id="password-list-container"></div>
+      <a href="#" id="generate-password-link" data-l10n-id="generate-password-link"></a>
+      <a href="#" id="stored-password-link" data-l10n-id="stored-password-link"></a>
+      <div class="link-container">
+        <a id="show-all" href="#" data-l10n-id="show-all-passwords"></a>
+        <a id="sync-setup-link" href="#" data-l10n-id="sync-setup" hidden></a>
+        <a id="sync-state-link" href="#" data-l10n-id="sync-state" hidden></a>
+        <a id="lock-passwords" href="#" data-l10n-id="lock-passwords"></a>
+      </div>
+    </form>
+
+    <form id="generate-password" class="slide" data-default-element="generate-password-user-name" data-custom-reset="generate-change-password-revision.hidden,generate-password-revision-container.hidden=true,generate-legacy-warning.hidden=true">
+      <label data-l10n-id="site"></label>
+      <div id="generate-password-site"></div>
+      <label class="block-start" for="generate-password-user-name" data-l10n-id="user-name"></label>
+      <input id="generate-password-user-name" type="text">
+      <div class="error" hidden></div>
+      <a href="#" id="generate-change-password-revision" data-l10n-id="change-password-revision"></a>
+      <div id="generate-password-revision-container" hidden>
+        <label class="block-start" for="generate-password-revision" data-l10n-id="password-revision"></label>
+        <input id="generate-password-revision" type="text" value="1">
+      </div>
+      <label class="block-start" for="password-length" data-l10n-id="password-length"></label>
+      <div id="length-container">
+        <input id="password-length" type="range" min="4" max="24" step="1" value="16">
+        <span id="password-length-value"></span>
+      </div>
+      <label class="block-start" for="charset-lower" data-l10n-id="allowed-characters"></label>
+      <div id="charsets-container">
+        <label><input id="charset-lower" type="checkbox" data-error="charsets-error" checked>abc</label>
+        <label><input id="charset-upper" type="checkbox" data-error="charsets-error" checked>XYZ</label>
+        <label><input id="charset-number" type="checkbox" data-error="charsets-error" checked>789</label>
+        <label><input id="charset-symbol" type="checkbox" data-error="charsets-error" checked>+^;</label>
+      </div>
+      <div id="charsets-error" class="error" hidden></div>
+      <div id="generate-legacy-container" class="block-start">
+        <input id="generate-legacy" type="checkbox"><label for="generate-legacy" data-l10n-id="generate-legacy"></label>
+      </div>
+      <div id="generate-legacy-warning" class="warning" data-l10n-id="generate-legacy-warning" hidden></div>
+      <div class="button-container">
+        <button id="generate-password-submit" type="submit" data-l10n-id="generate-password"></button>
+        <button id="generate-password-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="stored-password" class="slide" data-default-element="stored-password-user-name" data-custom-reset="stored-change-password-revision.hidden,stored-password-revision-container.hidden=true">
+      <label data-l10n-id="site"></label>
+      <div id="stored-password-site"></div>
+      <div class="warning block-start" data-l10n-id="stored-password-warning"></div>
+      <label class="block-start" for="stored-password-user-name" data-l10n-id="user-name"></label>
+      <input id="stored-password-user-name" type="text">
+      <div class="error" hidden></div>
+      <a href="#" id="stored-change-password-revision" data-l10n-id="change-password-revision"></a>
+      <div id="stored-password-revision-container" hidden>
+        <label class="block-start" for="stored-password-revision" data-l10n-id="password-revision"></label>
+        <input id="stored-password-revision" type="text" value="1">
+      </div>
+      <label class="block-start" for="stored-password-value" data-l10n-id="password-value"></label>
+      <input id="stored-password-value" type="password">
+      <div class="error" hidden></div>
+      <a href="#" id="stored-use-recovery" data-l10n-id="use-recovery"></a>
+      <div class="button-container">
+        <button id="stored-password-save" type="submit" data-l10n-id="save-password"></button>
+        <button id="stored-password-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="recovery-code" class="slide" data-default-element="recovery-code-input">
+      <label data-l10n-id="site"></label>
+      <div id="recovery-code-website-name"></div>
+      <label class="block-start" for="recovery-code-value" data-l10n-id="recovery-code"></label>
+      <pre id="recovery-code-accepted-container"><span id="recovery-code-accepted"></span><a href="#" id="recovery-code-strip"></a></pre>
+      <input id="recovery-code-input" type="text">
+      <div class="error" hidden></div>
+      <div class="button-container">
+        <button id="recovery-code-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="notes" class="slide" data-default-element="notes-textarea">
+      <label data-l10n-id="site"></label>
+      <div id="notes-website-name"></div>
+      <label class="block-start" data-l10n-id="user-name"></label>
+      <div id="notes-user-name-container">
+        <span id="notes-user-name"></span>
+        <span id="notes-password-revision" class="password-revision"></span>
+      </div>
+      <label class="block-start" for="notes-textarea" data-l10n-id="password-notes"></label>
+      <textarea id="notes-textarea"></textarea>
+      <div class="button-container">
+        <button id="notes-save" type="submit" data-l10n-id="save-notes"></button>
+        <button id="notes-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="qrcode" class="slide" data-default-element="qrcode-ok">
+      <label data-l10n-id="site"></label>
+      <div id="qrcode-website-name"></div>
+      <label class="block-start" data-l10n-id="user-name"></label>
+      <div id="qrcode-user-name-container">
+        <span id="qrcode-user-name"></span>
+        <span id="qrcode-password-revision" class="password-revision"></span>
+      </div>
+      <canvas class="block-start" id="qrcode-canvas"></canvas>
+      <div class="button-container">
+        <button id="qrcode-ok" type="submit" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="sync-setup" class="slide" data-default-element="sync-authorize">
+      <label data-l10n-id="sync-how-label"></label>
+      <div data-l10n-id="sync-how-explanation"></div>
+      <label class="block-start" data-l10n-id="sync-safe-label"></label>
+      <div data-l10n-id="sync-safe-explanation"></div>
+      <label class="block-start" data-l10n-id="sync-no-account-label"></label>
+      <div data-l10n-id="sync-no-account-explanation"></div>
+      <div class="button-container">
+        <button id="sync-authorize" type="submit" data-l10n-id="sync-authorize"></button>
+        <button id="sync-setup-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="sync-state" class="slide" data-default-element="sync-provider">
+      <label for="sync-provider" data-l10n-id="sync-provider"></label>
+      <div id="sync-provider"></div>
+      <label class="block-start" for="sync-lastTime" data-l10n-id="sync-lastTime"></label>
+      <div id="sync-lastTime"></div>
+      <div class="button-container">
+        <button id="sync-disable" type="submit" data-l10n-id="sync-disable"></button>
+        <button id="sync-state-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="confirm" class="slide" data-default-element="confirm-yes">
+      <div id="confirm-message" class="warning"></div>
+      <div class="button-container">
+        <button id="confirm-yes" type="submit" data-l10n-id="yes"></button>
+        <button id="confirm-no" type="reset" data-l10n-id="no"></button>
+      </div>
+    </form>
+  </body>
+</html>

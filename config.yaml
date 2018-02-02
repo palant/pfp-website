@@ -11,6 +11,9 @@ menu:
     - Name: Home
       URL: /
       Weight: 1
+    - Name: Try Online
+      URL: /webclient/
+      Weight: 2
     - Name: Documentation
       URL: /documentation/
-      Weight: 2
+      Weight: 3

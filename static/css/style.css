@@ -505,3 +505,13 @@ footer a:hover
   margin: 1em 2em;
   width: 300px;
 }
+
+/**
+ * Web Client page
+ */
+.webclient
+{
+  border-width: 0;
+  width: 100%;
+  height: 600px;
+}
