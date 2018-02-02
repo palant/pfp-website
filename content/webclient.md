@@ -22,4 +22,4 @@ The online version has the following limitations compared to the PfP browser ext
 
 ## Getting your own copy {#install}
 
-Download the `pfp-web-n.n.n.zip` file for our [latest release](https://github.com/palant/pfp/releases/). Unpack the archive to some directory and double-click the `index.html` file in that directory. This should open PfP in your browser. Make sure that the page address starts with `file:///` meaning that PfP is being loaded from your computer rather than the web.
+Download the `pfp-web-n.n.n.zip` file for our [latest release](https://github.com/palant/pfp/releases/latest). Unpack the archive to some directory and double-click the `index.html` file in that directory. This should open PfP in your browser. Make sure that the page address starts with `file:///` meaning that PfP is being loaded from your computer rather than the web.
