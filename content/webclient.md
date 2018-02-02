@@ -18,6 +18,7 @@ The online version has the following limitations compared to the PfP browser ext
 * Passwords cannot be filled in automatically, only copied to clipboard.
 * The page doesn't know which website you are on, website has to be entered manually.
 * Copying passwords to clipboard requires two clicks rather than one.
+* Passwords will always stay unlocked until you reload the page or lock them manually.
 
 ## Getting your own copy {#install}
 
