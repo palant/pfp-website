@@ -17,10 +17,14 @@
         </ul>
 
         <p>
-          {{range .Site.Data.Index.Platforms}}
-            <a class="install {{.Short}}" href="{{.Url}}">Get PfP for {{.Name}}</a>
-          {{end}}
-          <a class="show-type-selector" href="#">Choose a different browser</a>
+          <span class="install-container">
+            {{range .Site.Data.Index.Platforms}}
+              <a class="install {{.Short}}" href="{{.Url}}">Get PfP for {{.Name}}</a>
+            {{end}}
+            <a class="show-type-selector" href="#">Using a different browser?</a>
+          </span>
+          <span class="install-separator">or</span>
+          <a href="/webclient">Try it online</a>
         </p>
 
         <div id="type-selector">

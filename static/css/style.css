@@ -352,6 +352,24 @@ footer a:hover
   padding-left: 2em;
 }
 
+.install-container
+{
+  display: inline-block;
+  margin: 1em 0 0 2em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.install-separator
+{
+  margin: 0 2em;
+}
+
+.install-container > *
+{
+  display: block;
+}
+
 .teaser .install
 {
   display: none;
@@ -360,7 +378,6 @@ footer a:hover
   color: #FFFFFF;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
   font-weight: 700;
-  margin: 1em 2em 0;
   padding: 0.5em 1.5em;
   border-radius: 0.3em;
   text-decoration: none;
