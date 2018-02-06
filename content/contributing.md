@@ -6,8 +6,8 @@ title: Contributing
 
 All the PfP development work happens on GitHub. The relevant repositories are:
 
-* [https://github.com/palant/pfp/](https://github.com/palant/pfp/) - source code of PfP extensions and web client
-* [https://github.com/palant/pfp-website/](https://github.com/palant/pfp-website/) - source code of this web site
+* [https://github.com/palant/pfp/](https://github.com/palant/pfp/): source code of PfP extensions and web client
+* [https://github.com/palant/pfp-website/](https://github.com/palant/pfp-website/): source code of this web site
 
 ## Reporting issues
 
