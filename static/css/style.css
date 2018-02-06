@@ -242,11 +242,11 @@ footer::before,
 }
 .menuitem > a:hover
 {
-  background-color: #60d0d0;
+  background-color: #5050ff;
 }
 .menuitem.selected > a
 {
-  background-color: #60d0d0;
+  background-color: #5050ff;
   cursor: default;
 }
 
@@ -285,7 +285,7 @@ footer
 .scrollup:hover
 {
   opacity: 1;
-  background-color: #60d0d0;
+  background-color: #5050ff;
 }
 
 .flipped
