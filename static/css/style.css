@@ -77,15 +77,29 @@ a:hover
   text-decoration: underline;
 }
 
-.content a,
-.tiles a
+.teaser a,
+footer a
 {
-  color: #4ABDAC;
+  color: #e0b840;
+}
+
+.teaser a:hover,
+footer a:hover
+{
+  color: #e7c96f;
+}
+
+.content a,
+.tiles a,
+.type-selector-inner a
+{
+  color: #60a8e0;
 }
 .content a:hover,
-.tiles a:hover
+.tiles a:hover,
+.type-selector-inner a:hover
 {
-  color: #86D3C7;
+  color: #87bde7;
 }
 
 hr
@@ -176,7 +190,7 @@ footer::before,
   left: 0;
   right: 0;
   min-height: 50px;
-  background-color: #4ABDAC;
+  background-color: #60a8e0;
   color: #FFFFFF;
   z-index: 1000;
 }
@@ -228,11 +242,11 @@ footer::before,
 }
 .menuitem > a:hover
 {
-  background-color: #36CBD4;
+  background-color: #60d0d0;
 }
 .menuitem.selected > a
 {
-  background-color:#36CBD4;
+  background-color: #60d0d0;
   cursor: default;
 }
 
@@ -244,19 +258,9 @@ footer::before,
 footer
 {
   margin-top: 40px;
-  background: #4ABDAC;
+  background-color: #60a8e0;
   padding: 20px 0;
   color: #FFFFFF;
-}
-
-footer a
-{
-  color: #9AE5E9;
-}
-footer a:hover
-{
-  text-decoration: underline;
-  color: #36CBD4;
 }
 
 .license
@@ -281,7 +285,7 @@ footer a:hover
 .scrollup:hover
 {
   opacity: 1;
-  background-color: #36CBD4;
+  background-color: #60d0d0;
 }
 
 .flipped
@@ -291,18 +295,6 @@ footer a:hover
   -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
-}
-
-.teaser a,
-footer a
-{
-  color: #F9C966;
-}
-
-.teaser a:hover,
-footer a:hover
-{
-  color: #FBDB99;
 }
 
 /*
@@ -317,7 +309,7 @@ footer a:hover
 .teaser
 {
   padding-top: 110px;
-  background-color: #4ABDAC;
+  background-color: #60a8e0;
   color: #FFFFFF;
   font-size: 120%;
 }
@@ -372,8 +364,8 @@ footer a:hover
 .teaser .install
 {
   display: none;
-  background-color: #F7B733;
-  border: 1px solid #C5928F;
+  background-color: #e7c96f;
+  border: 1px solid #e0b840;
   color: #FFFFFF;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
   font-weight: 700;
@@ -392,7 +384,7 @@ footer a:hover
 .teaser .install:hover,
 .teaser .install:active
 {
-  background-color: #F8C355;
+  background-color: #e0b840;
   color: #FFFFFF;
 }
 
@@ -426,15 +418,6 @@ footer a:hover
   margin: 0;
   padding: 0.5em 0;
   list-style-type: none;
-}
-
-.type-selector-inner a
-{
-  color: #4ABDAC;
-}
-.type-selector-inner a:hover
-{
-  color: #86D3C7;
 }
 
 .type-selector-link
