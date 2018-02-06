@@ -59,8 +59,9 @@ body
   line-height: 1.6em;
   padding: 0;
   margin: 0;
-  color: #000000;
-  background-color: #FFFFFF;
+  color: #ffffff;
+  background: #60a8e0 linear-gradient(170deg, #60a8e0, #60a8e0 30%, #5050ff 60%, #5050ff);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -77,14 +78,12 @@ a:hover
   text-decoration: underline;
 }
 
-.teaser a,
-footer a
+a
 {
   color: #e0b840;
 }
 
-.teaser a:hover,
-footer a:hover
+a:hover
 {
   color: #e7c96f;
 }
@@ -95,6 +94,7 @@ footer a:hover
 {
   color: #60a8e0;
 }
+
 .content a:hover,
 .tiles a:hover,
 .type-selector-inner a:hover
@@ -191,7 +191,6 @@ footer::before,
   right: 0;
   min-height: 50px;
   background-color: #60a8e0;
-  color: #FFFFFF;
   z-index: 1000;
 }
 
@@ -253,14 +252,20 @@ footer::before,
 .content
 {
   padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+.content,
+.tiles,
+.type-selector-inner
+{
+  color: #000000;
+  background-color: #FFFFFF;
 }
 
 footer
 {
-  margin-top: 40px;
-  background-color: #60a8e0;
   padding: 20px 0;
-  color: #FFFFFF;
 }
 
 .license
@@ -285,7 +290,7 @@ footer
 .scrollup:hover
 {
   opacity: 1;
-  background-color: #5050ff;
+  background-color: #60a8e0;
 }
 
 .flipped
@@ -309,8 +314,6 @@ footer
 .teaser
 {
   padding-top: 110px;
-  background: #60a8e0 linear-gradient(170deg, #60a8e0, #60a8e0 50%, #5050ff 80%, #5050ff);
-  color: #FFFFFF;
   font-size: 120%;
 }
 
@@ -366,7 +369,7 @@ footer
   display: none;
   background-color: #e7c96f;
   border: 1px solid #e0b840;
-  color: #FFFFFF;
+  color: #ffffff;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
   font-weight: 700;
   padding: 0.5em 1.5em;
@@ -385,7 +388,7 @@ footer
 .teaser .install:active
 {
   background-color: #e0b840;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .show-type-selector
@@ -417,9 +420,7 @@ footer
 .type-selector-inner
 {
   border: 1px solid #000000;
-  background-color: #FFFFFF;
   border-radius: 0.5em;
-  color: #000000;
   margin: 0;
   padding: 0.5em 0;
   list-style-type: none;
@@ -433,8 +434,7 @@ footer
 
 .tiles
 {
-  width: 450px;
-  margin: auto;
+  padding: 0 calc((100% - 450px) / 2);
   column-gap: 50px;
   -moz-column-gap: 50px;
   -webkit-column-gap: 50px;
@@ -445,8 +445,7 @@ footer
 {
   .tiles
   {
-    width: 950px;
-    margin: auto;
+    padding: 0 calc((100% - 950px) / 2);
     column-count: 2;
     -moz-column-count: 2;
     -webkit-column-count: 2;
@@ -458,8 +457,7 @@ footer
 {
   .tiles
   {
-    width: 1450px;
-    margin: auto;
+    padding: 0 calc((100% - 1450px) / 2);
     column-count: 3;
     -moz-column-count: 3;
     -webkit-column-count: 3;
