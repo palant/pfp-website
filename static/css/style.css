@@ -388,6 +388,11 @@ footer
   color: #FFFFFF;
 }
 
+.show-type-selector
+{
+  font-size: 80%;
+}
+
 #type-selector
 {
   display: none;
