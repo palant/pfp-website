@@ -309,7 +309,7 @@ footer
 .teaser
 {
   padding-top: 110px;
-  background-color: #60a8e0;
+  background: #60a8e0 linear-gradient(170deg, #60a8e0, #60a8e0 50%, #5050ff 80%, #5050ff);
   color: #FFFFFF;
   font-size: 120%;
 }
