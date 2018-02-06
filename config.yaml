@@ -17,3 +17,6 @@ menu:
     - Name: Documentation
       URL: /documentation/
       Weight: 3
+    - Name: Contributing
+      URL: /contributing/
+      Weight: 4
