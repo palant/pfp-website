@@ -1587,6 +1587,22 @@ function showAllPasswords() {
 }
 exports.showAllPasswords = showAllPasswords;
 
+function openReleaseNotes(version) {
+  return browser.tabs.create({
+    url: "https://pfp.works/release-notes/" + version,
+    active: true
+  }).then(function (tab) {});
+}
+exports.openReleaseNotes = openReleaseNotes;
+
+function openDocumentationLink(doc) {
+  return browser.tabs.create({
+    url: "https://pfp.works/documentation/" + doc + "/",
+    active: true
+  }).then(function (tab) {});
+}
+exports.openDocumentationLink = openDocumentationLink;
+
 function openAndWait(url, expectedUrl) {
   return browser.tabs.create({ url: url, active: true }).then(function (tab) {
     var id = tab.id;
@@ -2616,7 +2632,13 @@ function fillIn(site, name, revision) {
         if (source != scriptID) return;
 
         port.off("done", doneHandler);
-        if (result) reject(result);else resolve();
+        if (result) reject(result);else {
+          resolve();
+
+          // Make sure that the popup is closed on Firefox Android,
+          // work-around for https://bugzil.la/1433604
+          browser.tabs.update({ active: true });
+        }
       });
 
       browser.tabs.executeScript({
