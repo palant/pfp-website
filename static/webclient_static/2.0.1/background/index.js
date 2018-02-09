@@ -682,7 +682,7 @@ function importPasswordData(data) {
 }
 exports.importPasswordData = importPasswordData;
 
-function addGenerated(_ref5) {
+function addGenerated(_ref5, replaceExisting) {
   var site = _ref5.site,
       name = _ref5.name,
       revision = _ref5.revision,
@@ -698,6 +698,8 @@ function addGenerated(_ref5) {
   }).then(function () {
     return _getPasswordKey(site, name, revision);
   }).then(function (key) {
+    if (replaceExisting) return [key, false];
+
     return Promise.all([key, storage.has(key)]);
   }).then(function (_ref6) {
     var _ref7 = _slicedToArray(_ref6, 2),
@@ -1587,21 +1589,23 @@ function showAllPasswords() {
 }
 exports.showAllPasswords = showAllPasswords;
 
-function openReleaseNotes(version) {
-  return browser.tabs.create({
-    url: "https://pfp.works/release-notes/" + version,
-    active: true
-  }).then(function (tab) {});
-}
-exports.openReleaseNotes = openReleaseNotes;
+function getLink(_ref) {
+  var type = _ref.type,
+      param = _ref.param;
 
-function openDocumentationLink(doc) {
+  if (type == "relnotes") return "https://pfp.works/release-notes/" + param;else if (type == "documentation") return "https://pfp.works/documentation/" + param + "/";
+
+  throw new Error("Unexpected link type");
+}
+exports.getLink = getLink;
+
+function openLink(options) {
   return browser.tabs.create({
-    url: "https://pfp.works/documentation/" + doc + "/",
+    url: getLink(options),
     active: true
   }).then(function (tab) {});
 }
-exports.openDocumentationLink = openDocumentationLink;
+exports.openLink = openLink;
 
 function openAndWait(url, expectedUrl) {
   return browser.tabs.create({ url: url, active: true }).then(function (tab) {

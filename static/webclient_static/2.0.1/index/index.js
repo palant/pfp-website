@@ -71,9 +71,9 @@ var __webpack_require__ =
 /* 0 */
 /* no static exports found */
 /* all exports used */
-/*!**********************!*\
-  !*** ./web/index.js ***!
-  \**********************/
+/*!****************************!*\
+  !*** ./web/index/index.js ***!
+  \****************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103,8 +103,11 @@ window.addEventListener("load", function () {
     return;
   }
 
+  document.getElementById("inProgressOverlay").hidden = false;
+
   createFrame("background", "background/background.html", function () {
     createFrame("panel", "panel/panel.html", function (event) {
+      document.getElementById("inProgressOverlay").hidden = true;
       event.target.setAttribute("data-active", "true");
     });
     createFrame("allpasswords", null);

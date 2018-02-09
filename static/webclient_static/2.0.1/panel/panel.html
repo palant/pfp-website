@@ -24,11 +24,13 @@
       <div data-l10n-id="no-characters-selected"></div>
       <div data-l10n-id="password-value-required"></div>
       <div data-l10n-id="password-type-generated"></div>
+      <div data-l10n-id="password-type-generated-replace"></div>
       <div data-l10n-id="password-type-generated2"></div>
       <div data-l10n-id="password-type-stored"></div>
       <div data-l10n-id="password-info-notes"></div>
       <div data-l10n-id="remove-password-confirmation"></div>
       <div data-l10n-id="remove-alias-confirmation"></div>
+      <div data-l10n-id="upgrade-password-confirmation"></div>
       <div data-l10n-id="add-notes"></div>
       <div data-l10n-id="edit-notes"></div>
       <div data-l10n-id="sync-lastTime-never"></div>
@@ -47,7 +49,7 @@
       <div id="reset-master-message" class="description warning" data-l10n-id="reset-master-message"></div>
       <div>
         <span data-l10n-id="master-security-message"></span>
-        <a href="#" id="master-security-learn-more" data-l10n-id="master-security-learn-more"></a>
+        <a href="#" data-type="documentation" data-param="choosing-master-password" data-l10n-id="master-security-learn-more"></a>
       </div>
       <label class="block-start" for="new-master" data-l10n-id="new-master"></label>
       <input id="new-master" type="password">
@@ -97,7 +99,7 @@
         <li data-l10n-id="migration-todo1"></li>
         <li data-l10n-id="migration-todo2"></li>
       </ul>
-      <p><a href="#" id="migration-learn-more" data-l10n-id="migration-learn-more"></a></p>
+      <p><a href="#" data-type="relnotes" data-param="2.0.0" data-l10n-id="migration-learn-more"></a></p>
       <div id="migration-buttons" class="button-container" hidden>
         <button id="migration-continue" type="submit" data-l10n-id="migration-continue"></button>
       </div>
@@ -135,6 +137,10 @@
           <span class="notes-link iconic-link"></span>
           <span class="menu-notes-link"></span>
         </a>
+        <a href="#" id="menu-upgrade-password" class="password-menu-entry">
+          <span class="upgrade-password-link iconic-link"></span>
+          <span data-l10n-id="upgrade-password"></span>
+        </a>
         <a href="#" id="menu-bump-revision" class="password-menu-entry">
           <span class="bump-revision-link iconic-link"></span>
           <span data-l10n-id="bump-revision"></span>
@@ -148,7 +154,7 @@
       <label for="site" data-l10n-id="site"></label>
       <div id="site-container">
         <div id="site-name-container">
-          <input id="site" type="text" readonly>
+          <input id="site" type="text" placeholder="example.com" readonly>
           <a href="#" id="site-edit-cancel" data-l10n-id="site-edit-cancel"></a>
           <a href="#" id="site-edit-accept" data-l10n-id="site-edit-accept"></a>
         </div>
