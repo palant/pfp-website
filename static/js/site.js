@@ -44,6 +44,14 @@ document.addEventListener("click", function(event)
       var optimalHeight = frame.offsetHeight +
                           document.documentElement.clientHeight -
                           document.documentElement.offsetHeight;
+      if (optimalHeight <= 300 && !content.classList.contains("no-padding"))
+      {
+        document.querySelector("nav").hidden = true;
+        document.querySelector("footer").hidden = true;
+        content.classList.add("no-padding");
+        onResize();
+        return;
+      }
       frame.style.height = optimalHeight > 300 ? optimalHeight + "px" : "";
     };
     window.addEventListener("resize", onResize, false);

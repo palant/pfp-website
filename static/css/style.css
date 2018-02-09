@@ -255,6 +255,11 @@ footer::before,
   padding-bottom: 40px;
 }
 
+.content.no-padding
+{
+  padding: 0;
+}
+
 .content,
 .tiles,
 .type-selector-inner
