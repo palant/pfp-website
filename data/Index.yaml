@@ -23,9 +23,9 @@ Platforms:
 
 
 FeaturedDocs:
+  - documentation/painful-passwords.md
   - documentation/choosing-master-password.md
   - documentation/generated-vs-stored.md
   - documentation/recovery-strategies.md
   - documentation/autolock.md
   - documentation/threat-analysis.md
-  - documentation/password-derivation.md
