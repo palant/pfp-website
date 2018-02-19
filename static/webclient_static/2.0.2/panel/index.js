@@ -141,13 +141,6 @@ exports.setResetHandler = setResetHandler;
 
 
 
-var messages = exports.messages = {};
-var messageElements = $("messages").children;
-for (var i = 0; i < messageElements.length; i++) {
-  var messageElement = messageElements[i];
-  messages[messageElement.getAttribute("data-l10n-id")] = messageElement.textContent;
-}
-
 function $(id) {
   return document.getElementById(id);
 }
@@ -193,7 +186,7 @@ function resetForm(form) {
         }
       }
     }
-    __webpack_require__(/*! ./formValidation */ 4).updateForm(form);
+    __webpack_require__(/*! ./formValidation */ 5).updateForm(form);
   } finally {
     __webpack_require__(/*! ./events */ 0).disableResetHandlers = false;
   }
@@ -256,7 +249,7 @@ Promise.resolve().then(function () {
 
 
 
-var _require = __webpack_require__(/*! ../../lib/eventTarget */ 9),
+var _require = __webpack_require__(/*! ../../lib/eventTarget */ 10),
     EventTarget = _require.EventTarget,
     emit = _require.emit;
 
@@ -332,7 +325,7 @@ exports.set = set;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ./messaging */ 6),
+var _require = __webpack_require__(/*! ./messaging */ 7),
     port = _require.port;
 
 var errorHandlers = new Map();
@@ -415,6 +408,151 @@ exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
 /* 4 */
 /* no static exports found */
 /* all exports used */
+/*!********************************!*\
+  !*** ./web/data/browserAPI.js ***!
+  \********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var locale = __webpack_require__(/*! locale */ 14);
+
+var _require = __webpack_require__(/*! ../eventTarget */ 26),
+    EventTarget = _require.EventTarget;
+
+document.documentElement.classList.add("webclient");
+
+var ports = [];
+
+// Posting messages to proper origin isn't possible on file://
+var targetOrigin = location.protocol != "file:" ? location.origin : "*";
+
+var expectedPortIds = [];
+
+function getPortId() {
+  return new Promise(function (resolve, reject) {
+    expectedPortIds.push(resolve);
+    parent.postMessage({
+      type: "get-port-id"
+    }, targetOrigin);
+  });
+}
+
+module.exports = {
+  runtime: {
+    connect: function connect(params) {
+      var id = null;
+      var queue = [];
+
+      var port = {
+        postMessage: function postMessage(payload) {
+          if (id === null) {
+            queue.push(payload);
+            return;
+          }
+
+          parent.postMessage({
+            type: "message",
+            payload: payload,
+            id: id,
+            target: "background"
+          }, targetOrigin);
+        },
+
+        disconnect: function disconnect(message) {
+          delete ports[id];
+          parent.postMessage({
+            type: "disconnect",
+            id: id,
+            target: "background"
+          }, targetOrigin);
+        },
+
+        onMessage: new EventTarget()
+      };
+
+      getPortId().then(function (response) {
+        id = response;
+        ports[id] = port;
+        parent.postMessage({
+          type: "connect",
+          name: params.name,
+          id: id,
+          target: "background"
+        }, targetOrigin);
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = queue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var payload = _step.value;
+
+            port.postMessage(payload);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        queue = null;
+      });
+
+      return port;
+    },
+
+    getBackgroundPage: function getBackgroundPage() {
+      return Promise.reject(new Error("Not implemented"));
+    }
+  },
+  i18n: {
+    getMessage: function getMessage(id) {
+      return locale[id];
+    }
+  }
+};
+
+window.addEventListener("message", function (event) {
+  // On Chrome, file:// is used as document origin yet messages get origin null
+  if (event.origin != location.origin && !(event.origin == "null" && location.origin == "file://")) return;
+
+  var message = event.data;
+  if (message.type == "port-id") {
+    if (expectedPortIds.length) expectedPortIds.shift()(message.id);
+  } else if (message.type == "message") {
+    var port = ports[message.id];
+    if (port) port.onMessage._emit(message.payload);
+  }
+});
+
+window.addEventListener("show-panel", function (event) {
+  parent.postMessage({
+    type: "show-panel"
+  }, targetOrigin);
+});
+
+/***/ }),
+/* 5 */
+/* no static exports found */
+/* all exports used */
 /*!**************************************!*\
   !*** ./data/panel/formValidation.js ***!
   \**************************************/
@@ -431,9 +569,11 @@ exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var _require = __webpack_require__(/*! ./utils */ 1),
-    $ = _require.$,
-    messages = _require.messages;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
+
+var _require2 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require2.$;
 
 function setValidator(id, validator) {
   var elements = void 0;
@@ -627,14 +767,14 @@ exports.updateForm = updateForm;
 
 function enforceValue(messageId, element) {
   var value = element.value.trim();
-  if (value.length < 1) return messages[messageId];
+  if (value.length < 1) return i18n.getMessage(messageId);
 
   return null;
 }
 exports.enforceValue = enforceValue;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /* no static exports found */
 /* all exports used */
 /*!*******************************!*\
@@ -690,7 +830,7 @@ function confirm(message) {
 exports.confirm = confirm;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /* no static exports found */
 /* all exports used */
 /*!***************************!*\
@@ -709,9 +849,9 @@ exports.confirm = confirm;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var browser = __webpack_require__(/*! ./browserAPI */ 10);
+var browser = __webpack_require__(/*! ./browserAPI */ 4);
 
-var _require = __webpack_require__(/*! ../lib/eventTarget */ 9),
+var _require = __webpack_require__(/*! ../lib/eventTarget */ 10),
     EventTarget = _require.EventTarget,
     emit = _require.emit;
 
@@ -774,7 +914,7 @@ port.onMessage.addListener(function (message) {
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -793,27 +933,29 @@ port.onMessage.addListener(function (message) {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require.passwords,
-    masterPassword = _require.masterPassword;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setSubmitHandler = _require2.setSubmitHandler,
-    setResetHandler = _require2.setResetHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require2.passwords,
+    masterPassword = _require2.masterPassword;
 
-var _require3 = __webpack_require__(/*! ./formValidation */ 4),
-    setValidator = _require3.setValidator;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setSubmitHandler = _require3.setSubmitHandler,
+    setResetHandler = _require3.setResetHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    setActivePanel = _require4.setActivePanel,
-    showUnknownError = _require4.showUnknownError,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
 
-var _require5 = __webpack_require__(/*! ./confirm */ 5),
-    confirm = _require5.confirm;
+var _require6 = __webpack_require__(/*! ./confirm */ 6),
+    confirm = _require6.confirm;
 
 var zxcvbn = __webpack_require__(/*! ./zxcvbn-4.4.2 */ 13);
 
@@ -839,7 +981,7 @@ function updateMasterPasswordState() {
 
 function validateMasterPassword(element) {
   var value = element.value.trim();
-  if (value.length < 6) return messages["password-too-short"];
+  if (value.length < 6) return i18n.getMessage("password_too_short");
 
   return null;
 }
@@ -847,7 +989,7 @@ exports.validateMasterPassword = validateMasterPassword;
 
 function validateMasterPasswordRepeat(element) {
   var value = element.value.trim();
-  if (value != $("new-master").value.trim()) return messages["passwords-differ"];
+  if (value != $("new-master").value.trim()) return i18n.getMessage("passwords_differ");
 
   return null;
 }
@@ -861,7 +1003,7 @@ function checkPasswordScore() {
 function changeMasterPassword() {
   var newPassword = $("new-master").value.trim();
   var score = checkPasswordScore();
-  var ask = score < 3 ? confirm(messages["weak-password"]) : Promise.resolve(true);
+  var ask = score < 3 ? confirm(i18n.getMessage("weak_password")) : Promise.resolve(true);
   ask.then(function (accepted) {
     if (accepted) {
       masterPassword.changePassword(newPassword).then(function () {
@@ -879,7 +1021,7 @@ function changeMasterPassword() {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /* no static exports found */
 /* all exports used */
 /*!****************************************!*\
@@ -896,26 +1038,28 @@ function changeMasterPassword() {
 
 
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require.passwords;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setCommandHandler = _require2.setCommandHandler,
-    setSubmitHandler = _require2.setSubmitHandler,
-    setResetHandler = _require2.setResetHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./formValidation */ 4),
-    setValidator = _require3.setValidator,
-    markInvalid = _require3.markInvalid,
-    enforceValue = _require3.enforceValue;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler,
+    setResetHandler = _require3.setResetHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator,
+    markInvalid = _require4.markInvalid,
+    enforceValue = _require4.enforceValue;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    setActivePanel = _require4.setActivePanel,
-    showUnknownError = _require4.showUnknownError,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
 
 $("password-length").addEventListener("input", updatePasswordLengthDisplay);
 $("generate-password").addEventListener("reset", function () {
@@ -926,7 +1070,7 @@ $("generate-legacy").addEventListener("click", function () {
 });
 updatePasswordLengthDisplay();
 
-setValidator("generate-password-user-name", enforceValue.bind(null, "user-name-required"));
+setValidator("generate-password-user-name", enforceValue.bind(null, "user_name_required"));
 setValidator(["charset-lower", "charset-upper", "charset-number", "charset-symbol"], validateCharsets);
 
 // Dummy validator makes sure validation state is reset when necessary.
@@ -953,7 +1097,7 @@ function updatePasswordLengthDisplay() {
 }
 
 function validateCharsets(element1, element2, element3, element4) {
-  if (!element1.checked && !element2.checked && !element3.checked && !element4.checked) return messages["no-characters-selected"];
+  if (!element1.checked && !element2.checked && !element3.checked && !element4.checked) return i18n.getMessage("no_characters_selected");
 
   return null;
 }
@@ -984,14 +1128,14 @@ function addGeneratedPassword() {
     setActivePanel("password-list");
   }).catch(function (error) {
     if (error == "alreadyExists") {
-      markInvalid([$("generate-password-user-name"), $("generate-password-revision")], messages["user-name-exists-generated"]);
+      markInvalid([$("generate-password-user-name"), $("generate-password-revision")], i18n.getMessage("user_name_exists_generated"));
       showRevision();
     } else showUnknownError(error);
   });
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -1068,151 +1212,6 @@ exports.emit = function (obj, eventName) {
 };
 
 /***/ }),
-/* 10 */
-/* no static exports found */
-/* all exports used */
-/*!********************************!*\
-  !*** ./web/data/browserAPI.js ***!
-  \********************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-var locale = __webpack_require__(/*! locale */ 14);
-
-var _require = __webpack_require__(/*! ../eventTarget */ 26),
-    EventTarget = _require.EventTarget;
-
-document.documentElement.classList.add("webclient");
-
-var ports = [];
-
-// Posting messages to proper origin isn't possible on file://
-var targetOrigin = location.protocol != "file:" ? location.origin : "*";
-
-var expectedPortIds = [];
-
-function getPortId() {
-  return new Promise(function (resolve, reject) {
-    expectedPortIds.push(resolve);
-    parent.postMessage({
-      type: "get-port-id"
-    }, targetOrigin);
-  });
-}
-
-module.exports = {
-  runtime: {
-    connect: function connect(params) {
-      var id = null;
-      var queue = [];
-
-      var port = {
-        postMessage: function postMessage(payload) {
-          if (id === null) {
-            queue.push(payload);
-            return;
-          }
-
-          parent.postMessage({
-            type: "message",
-            payload: payload,
-            id: id,
-            target: "background"
-          }, targetOrigin);
-        },
-
-        disconnect: function disconnect(message) {
-          delete ports[id];
-          parent.postMessage({
-            type: "disconnect",
-            id: id,
-            target: "background"
-          }, targetOrigin);
-        },
-
-        onMessage: new EventTarget()
-      };
-
-      getPortId().then(function (response) {
-        id = response;
-        ports[id] = port;
-        parent.postMessage({
-          type: "connect",
-          name: params.name,
-          id: id,
-          target: "background"
-        }, targetOrigin);
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = queue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var payload = _step.value;
-
-            port.postMessage(payload);
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        queue = null;
-      });
-
-      return port;
-    },
-
-    getBackgroundPage: function getBackgroundPage() {
-      return Promise.reject(new Error("Not implemented"));
-    }
-  },
-  i18n: {
-    getMessage: function getMessage(id) {
-      return locale[id];
-    }
-  }
-};
-
-window.addEventListener("message", function (event) {
-  // On Chrome, file:// is used as document origin yet messages get origin null
-  if (event.origin != location.origin && !(event.origin == "null" && location.origin == "file://")) return;
-
-  var message = event.data;
-  if (message.type == "port-id") {
-    if (expectedPortIds.length) expectedPortIds.shift()(message.id);
-  } else if (message.type == "message") {
-    var port = ports[message.id];
-    if (port) port.onMessage._emit(message.payload);
-  }
-});
-
-window.addEventListener("show-panel", function (event) {
-  parent.postMessage({
-    type: "show-panel"
-  }, targetOrigin);
-});
-
-/***/ }),
 /* 11 */
 /* no static exports found */
 /* all exports used */
@@ -1230,7 +1229,7 @@ window.addEventListener("show-panel", function (event) {
 
 
 
-var _require = __webpack_require__(/*! ../messaging */ 6),
+var _require = __webpack_require__(/*! ../messaging */ 7),
     port = _require.port;
 
 port.on("init", function (state) {
@@ -1272,10 +1271,10 @@ function init() {
   }
 
   __webpack_require__(/*! ./enterMaster */ 16);
-  __webpack_require__(/*! ./changeMaster */ 7);
+  __webpack_require__(/*! ./changeMaster */ 8);
   __webpack_require__(/*! ./migration */ 18);
   __webpack_require__(/*! ./passwordList */ 20);
-  __webpack_require__(/*! ./generatePassword */ 8);
+  __webpack_require__(/*! ./generatePassword */ 9);
   __webpack_require__(/*! ./storedPassword */ 23);
   __webpack_require__(/*! ./syncSetup */ 24);
   __webpack_require__(/*! ./syncState */ 25);
@@ -1305,7 +1304,7 @@ module.exports = __webpack_require__;
 
 
 
-var browser = __webpack_require__(/*! ./browserAPI */ 10);
+var browser = __webpack_require__(/*! ./browserAPI */ 4);
 
 // i18n
 
@@ -1313,37 +1312,10 @@ window.addEventListener("DOMContentLoaded", function () {
   var elements = document.querySelectorAll("[data-l10n-id]");
   for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
-    var id = element.getAttribute("data-l10n-id").replace(/-/g, "_");
+    var id = element.getAttribute("data-l10n-id");
     element.textContent = browser.i18n.getMessage(id);
   }
 });
-
-// Work-around for https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9550897/,
-// inline all stylesheets.
-
-if (window.navigator.userAgent.indexOf(" Edge/") >= 0) {
-  window.addEventListener("DOMContentLoaded", function () {
-    var stylesheets = document.querySelectorAll("link[rel='stylesheet']");
-
-    var _loop = function _loop(i) {
-      var stylesheet = stylesheets[i];
-      var request = new XMLHttpRequest();
-      request.open("GET", stylesheet.href);
-      request.responseType = "text";
-      request.addEventListener("load", function () {
-        var element = document.createElement("style");
-        element.setAttribute("media", "print");
-        element.textContent = request.response;
-        stylesheet.parentNode.insertBefore(element, stylesheet.nextSibling);
-      });
-      request.send(null);
-    };
-
-    for (var i = 0; i < stylesheets.length; i++) {
-      _loop(i);
-    }
-  });
-}
 
 /***/ }),
 /* 13 */
@@ -1452,28 +1424,30 @@ exports.set = function (data) {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    masterPassword = _require.masterPassword,
-    passwords = _require.passwords;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setCommandHandler = _require2.setCommandHandler,
-    setSubmitHandler = _require2.setSubmitHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    masterPassword = _require2.masterPassword,
+    passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./formValidation */ 4),
-    setValidator = _require3.setValidator,
-    markInvalid = _require3.markInvalid;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator,
+    markInvalid = _require4.markInvalid;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    setActivePanel = _require4.setActivePanel,
-    showUnknownError = _require4.showUnknownError,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
 
-var _require5 = __webpack_require__(/*! ./changeMaster */ 7),
-    validateMasterPassword = _require5.validateMasterPassword;
+var _require6 = __webpack_require__(/*! ./changeMaster */ 8),
+    validateMasterPassword = _require6.validateMasterPassword;
 
 setCommandHandler("reset-master-link", function () {
   return setActivePanel("change-master");
@@ -1497,7 +1471,7 @@ setSubmitHandler("enter-master", function () {
 
     state.set({ origSite: origSite, site: site, pwdList: pwdList, masterPasswordState: "known" });
   }).catch(function (error) {
-    if (error == "declined") markInvalid("master-password", messages["password-declined"]);else if (error == "migrating") state.set({ masterPasswordState: "migrating" });else showUnknownError(error);
+    if (error == "declined") markInvalid("master-password", i18n.getMessage("password_declined"));else if (error == "migrating") state.set({ masterPasswordState: "migrating" });else showUnknownError(error);
   });
 });
 
@@ -2512,26 +2486,28 @@ function saveNotes() {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require.passwords,
-    masterPassword = _require.masterPassword,
-    passwordRetrieval = _require.passwordRetrieval,
-    ui = _require.ui;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setCommandHandler = _require2.setCommandHandler,
-    setSubmitHandler = _require2.setSubmitHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require2.passwords,
+    masterPassword = _require2.masterPassword,
+    passwordRetrieval = _require2.passwordRetrieval,
+    ui = _require2.ui;
+
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require3 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require3.$,
-    setActivePanel = _require3.setActivePanel,
-    messages = _require3.messages,
-    showUnknownError = _require3.showUnknownError;
+var _require4 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require4.$,
+    setActivePanel = _require4.setActivePanel,
+    showUnknownError = _require4.showUnknownError;
 
-var _require4 = __webpack_require__(/*! ./confirm */ 5),
-    confirm = _require4.confirm;
+var _require5 = __webpack_require__(/*! ./confirm */ 6),
+    confirm = _require5.confirm;
 
 var hidePasswordMessagesTimeout = null;
 
@@ -2720,7 +2696,7 @@ function removeAlias() {
   var origSite = state.origSite,
       site = state.site;
 
-  var message = messages["remove-alias-confirmation"].replace(/\{1\}/g, origSite).replace(/\{2\}/g, site);
+  var message = i18n.getMessage("remove_alias_confirmation").replace(/\{1\}/g, origSite).replace(/\{2\}/g, site);
   confirm(message).then(function (response) {
     if (response) {
       passwords.removeAlias(origSite).then(function () {
@@ -2767,8 +2743,8 @@ function showPasswords() {
 
         var tooltip = void 0;
         if (password.type == "generated2" || password.type == "generated") {
-          tooltip = messages["password-type-" + password.type];
-          if (password.type == "generated") tooltip += "\n" + messages["password-type-generated-replace"];
+          tooltip = i18n.getMessage("password_type_" + password.type);
+          if (password.type == "generated") tooltip += "\n" + i18n.getMessage("password_type_generated_replace");
 
           tooltip += "\n" + document.querySelector('label[for="password-length"]').textContent;
           tooltip += " " + password.length;
@@ -2778,9 +2754,9 @@ function showPasswords() {
           if (password.upper) tooltip += " " + "XYZ";
           if (password.number) tooltip += " " + "789";
           if (password.symbol) tooltip += " " + "+^;";
-        } else if (password.type == "stored") tooltip = messages["password-type-stored"];
+        } else if (password.type == "stored") tooltip = i18n.getMessage("password_type_stored");
 
-        if (password.notes) tooltip += "\n" + messages["password-info-notes"] + " " + password.notes;
+        if (password.notes) tooltip += "\n" + i18n.getMessage("password_info_notes") + " " + password.notes;
 
         var entry = template.cloneNode(true);
         setCommandHandler(entry.querySelector(".password-menu-link"), toggleMenu.bind(null, password, entry));
@@ -2825,8 +2801,8 @@ function showPasswords() {
 function showMenu(password, element) {
   hideMenu();
 
-  var notes_link_msg = password.notes ? "edit-notes" : "add-notes";
-  menu.querySelector(".menu-notes-link").textContent = messages[notes_link_msg];
+  var notes_link_msg = i18n.getMessage(password.notes ? "edit_notes" : "add_notes");
+  menu.querySelector(".menu-notes-link").textContent = notes_link_msg;
 
   menu.querySelector("#menu-upgrade-password").hidden = password.type != "generated";
 
@@ -2891,7 +2867,7 @@ function showNotes(password) {
 }
 
 function upgradePassword(password) {
-  var message = messages["upgrade-password-confirmation"].replace(/\{1\}/g, password.name).replace(/\{2\}/g, password.site);
+  var message = i18n.getMessage("upgrade_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, password.site);
   confirm(message).then(function (response) {
     if (response) {
       passwords.addGenerated({
@@ -2934,13 +2910,13 @@ function bumpRevision(password) {
     $("charset-symbol").checked = password.symbol;
   }
 
-  __webpack_require__(/*! ./generatePassword */ 8).showRevision();
+  __webpack_require__(/*! ./generatePassword */ 9).showRevision();
 }
 
 function removePassword(password) {
   var site = state.site;
 
-  var message = messages["remove-password-confirmation"].replace(/\{1\}/g, password.name).replace(/\{2\}/g, site);
+  var message = i18n.getMessage("remove_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, site);
   confirm(message).then(function (response) {
     if (response) {
       passwords.removePassword(site, password.name, password.revision).then(function (pwdList) {
@@ -3054,25 +3030,27 @@ exports.show = show;
 
 
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    recoveryCodes = _require.recoveryCodes;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setResetHandler = _require2.setResetHandler,
-    setCommandHandler = _require2.setCommandHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    recoveryCodes = _require2.recoveryCodes;
 
-var _require3 = __webpack_require__(/*! ./formValidation */ 4),
-    setValidator = _require3.setValidator,
-    markInvalid = _require3.markInvalid;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setResetHandler = _require3.setResetHandler,
+    setCommandHandler = _require3.setCommandHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator,
+    markInvalid = _require4.markInvalid;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    getActivePanel = _require4.getActivePanel,
-    setActivePanel = _require4.setActivePanel,
-    showUnknownError = _require4.showUnknownError,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    getActivePanel = _require5.getActivePanel,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
 
 var Formatter = __webpack_require__(/*! ./formatter */ 17);
 
@@ -3163,7 +3141,7 @@ function processRecoveryCodeInput(formatter, validChars) {
         });
       } else if (len - lineLen >= lineLen) return checkSubstr(len - lineLen);else throw result;
     }).catch(function (error) {
-      if (error == "checksum-mismatch") return messages["recovery-checksum-mismatch"];else throw error;
+      if (error == "checksum-mismatch") return i18n.getMessage("recovery_checksum_mismatch");else throw error;
     });
   };
   return checkSubstr(raw.length - raw.length % 24);
@@ -3192,29 +3170,31 @@ function stripLastCodeLine() {
 
 
 
-var _require = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require.passwords;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setCommandHandler = _require2.setCommandHandler,
-    setSubmitHandler = _require2.setSubmitHandler,
-    setResetHandler = _require2.setResetHandler;
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./formValidation */ 4),
-    setValidator = _require3.setValidator,
-    markInvalid = _require3.markInvalid,
-    enforceValue = _require3.enforceValue;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler,
+    setResetHandler = _require3.setResetHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator,
+    markInvalid = _require4.markInvalid,
+    enforceValue = _require4.enforceValue;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    setActivePanel = _require4.setActivePanel,
-    showUnknownError = _require4.showUnknownError,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
 
-setValidator("stored-password-user-name", enforceValue.bind(null, "user-name-required"));
-setValidator("stored-password-value", enforceValue.bind(null, "password-value-required"));
+setValidator("stored-password-user-name", enforceValue.bind(null, "user_name_required"));
+setValidator("stored-password-value", enforceValue.bind(null, "password_value_required"));
 
 // Dummy validator makes sure validation state is reset when necessary.
 setValidator("stored-password-revision", function () {
@@ -3234,13 +3214,6 @@ updateSite();
 
 function updateSite() {
   $("stored-password-site").textContent = state.site;
-}
-
-function enforcePasswordValue(element) {
-  var value = element.value.trim();
-  if (value.length < 1) return messages["password-value-required"];
-
-  return null;
 }
 
 function showRevision() {
@@ -3266,7 +3239,7 @@ function addStoredPassword() {
     state.set({ pwdList: pwdList });
     setActivePanel("password-list");
   }).catch(function (error) {
-    if (error == "alreadyExists") markInvalid([$("stored-password-user-name"), $("stored-password-revision")], messages["user-name-exists"]);else showUnknownError(error);
+    if (error == "alreadyExists") markInvalid([$("stored-password-user-name"), $("stored-password-revision")], i18n.getMessage("user_name_exists"));else showUnknownError(error);
   });
 }
 
@@ -3339,23 +3312,25 @@ function authorize() {
 
 
 
-var _require = __webpack_require__(/*! ./confirm */ 5),
-    confirm = _require.confirm;
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
-    setCommandHandler = _require2.setCommandHandler,
-    setSubmitHandler = _require2.setSubmitHandler,
-    setResetHandler = _require2.setResetHandler;
+var _require2 = __webpack_require__(/*! ./confirm */ 6),
+    confirm = _require2.confirm;
 
-var _require3 = __webpack_require__(/*! ../proxy */ 3),
-    sync = _require3.sync;
+var _require3 = __webpack_require__(/*! ./events */ 0),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler,
+    setResetHandler = _require3.setResetHandler;
+
+var _require4 = __webpack_require__(/*! ../proxy */ 3),
+    sync = _require4.sync;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
-    $ = _require4.$,
-    setActivePanel = _require4.setActivePanel,
-    messages = _require4.messages;
+var _require5 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel;
 
 setCommandHandler("sync-state-link", function () {
   return setActivePanel("sync-state");
@@ -3370,11 +3345,11 @@ state.on("update", updateState);
 function updateState() {
   $("sync-state-link").hidden = !state.syncProvider;
   $("sync-provider").textContent = state.syncProvider;
-  if (state.syncLastTime) $("sync-lastTime").textContent = new Date(state.syncLastTime).toLocaleString();else $("sync-lastTime").textContent = messages["sync-lastTime-never"];
+  if (state.syncLastTime) $("sync-lastTime").textContent = new Date(state.syncLastTime).toLocaleString();else $("sync-lastTime").textContent = i18n.getMessage("sync_lastTime_never");
 }
 
 function disable() {
-  confirm(messages["sync-disable-confirmation"]).then(function (disable) {
+  confirm(i18n.getMessage("sync_disable_confirmation")).then(function (disable) {
     if (disable) {
       sync.disable().then(function () {
         state.set({ syncProvider: null });

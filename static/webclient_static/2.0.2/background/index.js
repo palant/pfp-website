@@ -385,8 +385,8 @@ function _getPasswords(site) {
   });
 }
 
-function _setSiteData(site, siteData) {
-  return _getSiteKey(site).then(function (key) {
+function _setSiteData(siteData) {
+  return _getSiteKey(siteData.site).then(function (key) {
     return storage.set(key, siteData);
   });
 }
@@ -426,7 +426,7 @@ function addAlias(site, alias) {
   }).then(function (hasPasswords) {
     if (hasPasswords) throw "site-has-passwords";
 
-    return _setSiteData(site, { site: site, alias: alias });
+    return _setSiteData({ site: site, alias: alias });
   }).finally(function () {
     return lock.release();
   });
@@ -658,10 +658,6 @@ function importPasswordData(data) {
     return storage.set(key, value, null);
   }
 
-  function setSite(entry) {
-    return _setSiteData(entry.site, entry);
-  }
-
   function setPassword(entry) {
     return _getPasswordKey(entry.site, entry.name, entry.revision).then(function (key) {
       return storage.set(key, entry);
@@ -670,7 +666,7 @@ function importPasswordData(data) {
 
   function tryNext() {
     var importer = importers.shift();
-    return importer.import(data, setRaw, setSite, setPassword).catch(function (e) {
+    return importer.import(data, setRaw, _setSiteData, setPassword).catch(function (e) {
       if (e != "unknown-data-format" || !importers.length) throw e;
       return tryNext();
     });
@@ -814,10 +810,6 @@ exports.getNotes = getNotes;
 var migrationInProgress = null;
 
 function migrateData(master) {
-  function setSite(entry) {
-    return _setSiteData(entry.site, entry);
-  }
-
   function setPassword(entry) {
     return _getPasswordKey(entry.site, entry.name, entry.revision).then(function (key) {
       return storage.set(key, entry);
@@ -827,7 +819,7 @@ function migrateData(master) {
   if (!migrationInProgress) {
     var migration = __webpack_require__(/*! ./migration */ 16);
     migrationInProgress = lock.acquire().then(function () {
-      return migration.migrateData(master, setSite, setPassword);
+      return migration.migrateData(master, _setSiteData, setPassword);
     }).finally(function () {
       migrationInProgress = null;
       lock.release();
@@ -1113,7 +1105,7 @@ function deriveBits(password, salt, length) {
       jobId: currentJobId,
       password: encoder.encode(password),
       salt: encoder.encode(salt),
-      length: length
+      length: parseInt(length, 10)
     });
   });
 }
@@ -1152,7 +1144,7 @@ function deriveBitsLegacy(password, salt, length) {
       password: encoder.encode(password),
       // Reserve 4 bytes at the end of the salt, PBKDF2 will need them
       salt: encoder.encode(salt + "    "),
-      length: length
+      length: parseInt(length, 10)
     });
   });
 }
@@ -1187,7 +1179,11 @@ exports.encryptData = function (key, plaintext) {
     var initializationVector = new Uint8Array(12);
     crypto.getRandomValues(initializationVector);
 
-    return Promise.all([initializationVector, crypto.subtle.encrypt({ "name": "AES-GCM", iv: initializationVector }, key, encoder.encode(plaintext))]);
+    return Promise.all([initializationVector, crypto.subtle.encrypt({
+      name: "AES-GCM",
+      iv: initializationVector,
+      tagLength: 128
+    }, key, encoder.encode(plaintext))]);
   }).then(function (_ref3) {
     var _ref4 = _slicedToArray(_ref3, 2),
         initializationVector = _ref4[0],
@@ -1208,7 +1204,11 @@ exports.decryptData = function (key, ciphertext) {
         initializationVector = _ciphertext$split$map2[0],
         data = _ciphertext$split$map2[1];
 
-    return crypto.subtle.decrypt({ "name": "AES-GCM", iv: initializationVector }, key, data);
+    return crypto.subtle.decrypt({
+      name: "AES-GCM",
+      iv: initializationVector,
+      tagLength: 128
+    }, key, data);
   }).then(function (buffer) {
     return decoder.decode(buffer);
   });
@@ -1228,7 +1228,10 @@ exports.importHmacSecret = function (rawSecret) {
 
 exports.getDigest = function (hmacSecret, data) {
   return Promise.resolve().then(function () {
-    return crypto.subtle.sign("HMAC", hmacSecret, encoder.encode(data));
+    // Edge will fail if data is empty, see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7919579/
+    if (!data) return new Uint8Array(0);
+
+    return crypto.subtle.sign({ name: "HMAC", hash: "SHA-256" }, hmacSecret, encoder.encode(data));
   }).then(function (signature) {
     return toBase64(signature);
   });
@@ -1256,7 +1259,7 @@ exports.decryptPasswordLegacy = function (params) {
         password = _params$encrypted$spl2[1];
 
     return crypto.subtle.decrypt({ "name": "AES-CBC", iv: initializationVector }, key, password).catch(function (e) {
-      console.log(e);
+      console.error(e);
       throw "decryption-failure";
     });
   }).then(function (buffer) {
@@ -2745,7 +2748,7 @@ function getCode(site, name, revision) {
   }).then(function (password) {
     // Zero-pad passwords to fill up the row (don't allow deducing password
     // length from size of encrypted data)
-    var passwordLen = new TextEncoder().encode(password).length;
+    var passwordLen = new TextEncoder("utf-8").encode(password).length;
     while ((versionSize + saltSize + ivSize + tagSize + passwordLen) % blockSize) {
       password += "\0";
       passwordLen++;

@@ -71,276 +71,6 @@ var __webpack_require__ =
 /* 0 */
 /* no static exports found */
 /* all exports used */
-/*!************************************!*\
-  !*** ./data/allpasswords/utils.js ***!
-  \************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-function $(id) {
-  return document.getElementById(id);
-}
-exports.$ = $;
-
-function setCommandHandler(element, handler) {
-  if (typeof element == "string") element = $(element);
-  var wrapper = function wrapper(event) {
-    event.preventDefault();
-    handler.call(element, event);
-  };
-  element.addEventListener("click", wrapper);
-}
-exports.setCommandHandler = setCommandHandler;
-
-function showError(error) {
-  if (error == "canceled") return;
-
-  var message = $(error);
-  if (message && message.parentNode.id == "messages") message = message.textContent;else message = error;
-  alert(message);
-}
-exports.showError = showError;
-
-/***/ }),
-/* 1 */
-/* no static exports found */
-/* all exports used */
-/*!***************************!*\
-  !*** ./data/messaging.js ***!
-  \***************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var browser = __webpack_require__(/*! ./browserAPI */ 4);
-
-var _require = __webpack_require__(/*! ../lib/eventTarget */ 10),
-    EventTarget = _require.EventTarget,
-    emit = _require.emit;
-
-var messageQueue = null;
-var portName = "contentScript";
-if (typeof browser.runtime.getBackgroundPage == "function") {
-  // If we can access the background page we are not in a content script.
-  portName = document.documentElement.dataset.portname;
-  messageQueue = [];
-  document.addEventListener("DOMContentLoaded", function (event) {
-    var queue = messageQueue;
-    messageQueue = null;
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = queue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var message = _step.value;
-
-        emit.apply(undefined, [exports.port, message.eventName].concat(_toConsumableArray(message.args)));
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-  });
-}
-
-var port = browser.runtime.connect({ name: portName });
-
-exports.port = new EventTarget();
-exports.port.name = portName;
-
-exports.port.emit = function (eventName) {
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  port.postMessage({ eventName: eventName, args: args });
-};
-
-exports.port.disconnect = function () {
-  port.disconnect();
-};
-
-port.onMessage.addListener(function (message) {
-  if (messageQueue) messageQueue.push(message);else emit.apply(undefined, [exports.port, message.eventName].concat(_toConsumableArray(message.args)));
-});
-
-/***/ }),
-/* 2 */
-/* no static exports found */
-/* all exports used */
-/*!************************************!*\
-  !*** ./data/allpasswords/modal.js ***!
-  \************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-var _require = __webpack_require__(/*! ./utils */ 0),
-    $ = _require.$;
-
-function show(id) {
-  hide();
-
-  var element = $(id);
-  if (!element || element.parentNode.id != "modalOverlay") throw new Error("Invalid modal dialog ID");
-
-  element.setAttribute("active", "true");
-  element.parentNode.hidden = false;
-}
-exports.show = show;
-
-function hide() {
-  var active = document.querySelector("#modalOverlay > [active='true']");
-  if (active) active.removeAttribute("active");
-  $("modalOverlay").hidden = true;
-}
-exports.hide = hide;
-
-function active() {
-  var active = document.querySelector("#modalOverlay > [active='true']");
-  return active ? active.id : null;
-}
-exports.active = active;
-
-/***/ }),
-/* 3 */
-/* no static exports found */
-/* all exports used */
-/*!***********************!*\
-  !*** ./data/proxy.js ***!
-  \***********************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _require = __webpack_require__(/*! ./messaging */ 1),
-    port = _require.port;
-
-var errorHandlers = new Map();
-var currentHandlers = new Map();
-
-var maxMessageId = 0;
-function sendMessage(message) {
-  return new Promise(function (resolve, reject) {
-    var messageId = message.messageId = port.name + ++maxMessageId;
-    port.once("_proxyResponse-" + messageId, function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          error = _ref2[0],
-          result = _ref2[1];
-
-      if (error) {
-        var handler = errorHandlers.get(error);
-        if (handler) {
-          var promise = currentHandlers.get(error);
-          if (!promise) {
-            promise = handler(error, message).then(function () {
-              currentHandlers.delete(error);
-            }).catch(function (e) {
-              currentHandlers.delete(error);
-              throw e;
-            });
-            currentHandlers.set(error, promise);
-          }
-
-          // Have the handler deal with the error and retry.
-          promise.then(function () {
-            return sendMessage(message);
-          }).then(resolve, reject);
-        } else reject(error);
-      } else resolve(result);
-    });
-    port.emit("_proxy", message);
-  });
-}
-
-function Proxy(moduleName, methods) {
-  var proxy = {};
-
-  var _loop = function _loop(i) {
-    var method = methods[i];
-    proxy[method] = function () {
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return sendMessage({ moduleName: moduleName, method: method, args: args });
-    };
-  };
-
-  for (var i = 0; i < methods.length; i++) {
-    _loop(i);
-  }
-
-  return proxy;
-}
-
-exports.setErrorHandler = function (error, handler) {
-  return errorHandlers.set(error, handler);
-};
-
-exports.passwords = Proxy("passwords", ["exportPasswordData", "importPasswordData", "getPasswords", "addAlias", "removeAlias", "addGenerated", "addStored", "removePassword", "getPassword", "setNotes", "getAllPasswords", "isMigrating"]);
-
-exports.masterPassword = Proxy("masterPassword", ["changePassword", "checkPassword", "forgetPassword"]);
-
-exports.passwordRetrieval = Proxy("passwordRetrieval", ["fillIn", "copyToClipboard"]);
-
-exports.prefs = Proxy("prefs", ["get", "set"]);
-
-exports.recoveryCodes = Proxy("recoveryCodes", ["getValidChars", "getCode", "formatCode", "isValid", "decodeCode"]);
-
-exports.sync = Proxy("sync", ["authorize", "disable"]);
-
-exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
-
-/***/ }),
-/* 4 */
-/* no static exports found */
-/* all exports used */
 /*!********************************!*\
   !*** ./web/data/browserAPI.js ***!
   \********************************/
@@ -483,6 +213,282 @@ window.addEventListener("show-panel", function (event) {
 });
 
 /***/ }),
+/* 1 */
+/* no static exports found */
+/* all exports used */
+/*!************************************!*\
+  !*** ./data/allpasswords/utils.js ***!
+  \************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _require = __webpack_require__(/*! ../browserAPI */ 0),
+    i18n = _require.i18n;
+
+function $(id) {
+  return document.getElementById(id);
+}
+exports.$ = $;
+
+function setCommandHandler(element, handler) {
+  if (typeof element == "string") element = $(element);
+  var wrapper = function wrapper(event) {
+    event.preventDefault();
+    handler.call(element, event);
+  };
+  element.addEventListener("click", wrapper);
+}
+exports.setCommandHandler = setCommandHandler;
+
+function showError(error) {
+  if (error == "canceled") return;
+
+  try {
+    alert(i18n.getMessage(String(error).replace(/-/g, "_")) || error);
+  } catch (e) {
+    // Edge will throw for unknown messages
+    alert(error);
+  }
+}
+exports.showError = showError;
+
+/***/ }),
+/* 2 */
+/* no static exports found */
+/* all exports used */
+/*!***************************!*\
+  !*** ./data/messaging.js ***!
+  \***************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var browser = __webpack_require__(/*! ./browserAPI */ 0);
+
+var _require = __webpack_require__(/*! ../lib/eventTarget */ 10),
+    EventTarget = _require.EventTarget,
+    emit = _require.emit;
+
+var messageQueue = null;
+var portName = "contentScript";
+if (typeof browser.runtime.getBackgroundPage == "function") {
+  // If we can access the background page we are not in a content script.
+  portName = document.documentElement.dataset.portname;
+  messageQueue = [];
+  document.addEventListener("DOMContentLoaded", function (event) {
+    var queue = messageQueue;
+    messageQueue = null;
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = queue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var message = _step.value;
+
+        emit.apply(undefined, [exports.port, message.eventName].concat(_toConsumableArray(message.args)));
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  });
+}
+
+var port = browser.runtime.connect({ name: portName });
+
+exports.port = new EventTarget();
+exports.port.name = portName;
+
+exports.port.emit = function (eventName) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  port.postMessage({ eventName: eventName, args: args });
+};
+
+exports.port.disconnect = function () {
+  port.disconnect();
+};
+
+port.onMessage.addListener(function (message) {
+  if (messageQueue) messageQueue.push(message);else emit.apply(undefined, [exports.port, message.eventName].concat(_toConsumableArray(message.args)));
+});
+
+/***/ }),
+/* 3 */
+/* no static exports found */
+/* all exports used */
+/*!************************************!*\
+  !*** ./data/allpasswords/modal.js ***!
+  \************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _require = __webpack_require__(/*! ./utils */ 1),
+    $ = _require.$;
+
+function show(id) {
+  hide();
+
+  var element = $(id);
+  if (!element || element.parentNode.id != "modalOverlay") throw new Error("Invalid modal dialog ID");
+
+  element.setAttribute("active", "true");
+  element.parentNode.hidden = false;
+}
+exports.show = show;
+
+function hide() {
+  var active = document.querySelector("#modalOverlay > [active='true']");
+  if (active) active.removeAttribute("active");
+  $("modalOverlay").hidden = true;
+}
+exports.hide = hide;
+
+function active() {
+  var active = document.querySelector("#modalOverlay > [active='true']");
+  return active ? active.id : null;
+}
+exports.active = active;
+
+/***/ }),
+/* 4 */
+/* no static exports found */
+/* all exports used */
+/*!***********************!*\
+  !*** ./data/proxy.js ***!
+  \***********************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _require = __webpack_require__(/*! ./messaging */ 2),
+    port = _require.port;
+
+var errorHandlers = new Map();
+var currentHandlers = new Map();
+
+var maxMessageId = 0;
+function sendMessage(message) {
+  return new Promise(function (resolve, reject) {
+    var messageId = message.messageId = port.name + ++maxMessageId;
+    port.once("_proxyResponse-" + messageId, function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          error = _ref2[0],
+          result = _ref2[1];
+
+      if (error) {
+        var handler = errorHandlers.get(error);
+        if (handler) {
+          var promise = currentHandlers.get(error);
+          if (!promise) {
+            promise = handler(error, message).then(function () {
+              currentHandlers.delete(error);
+            }).catch(function (e) {
+              currentHandlers.delete(error);
+              throw e;
+            });
+            currentHandlers.set(error, promise);
+          }
+
+          // Have the handler deal with the error and retry.
+          promise.then(function () {
+            return sendMessage(message);
+          }).then(resolve, reject);
+        } else reject(error);
+      } else resolve(result);
+    });
+    port.emit("_proxy", message);
+  });
+}
+
+function Proxy(moduleName, methods) {
+  var proxy = {};
+
+  var _loop = function _loop(i) {
+    var method = methods[i];
+    proxy[method] = function () {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return sendMessage({ moduleName: moduleName, method: method, args: args });
+    };
+  };
+
+  for (var i = 0; i < methods.length; i++) {
+    _loop(i);
+  }
+
+  return proxy;
+}
+
+exports.setErrorHandler = function (error, handler) {
+  return errorHandlers.set(error, handler);
+};
+
+exports.passwords = Proxy("passwords", ["exportPasswordData", "importPasswordData", "getPasswords", "addAlias", "removeAlias", "addGenerated", "addStored", "removePassword", "getPassword", "setNotes", "getAllPasswords", "isMigrating"]);
+
+exports.masterPassword = Proxy("masterPassword", ["changePassword", "checkPassword", "forgetPassword"]);
+
+exports.passwordRetrieval = Proxy("passwordRetrieval", ["fillIn", "copyToClipboard"]);
+
+exports.prefs = Proxy("prefs", ["get", "set"]);
+
+exports.recoveryCodes = Proxy("recoveryCodes", ["getValidChars", "getCode", "formatCode", "isValid", "decodeCode"]);
+
+exports.sync = Proxy("sync", ["authorize", "disable"]);
+
+exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
+
+/***/ }),
 /* 5 */
 /* no static exports found */
 /* all exports used */
@@ -502,22 +508,25 @@ window.addEventListener("show-panel", function (event) {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var _require = __webpack_require__(/*! ../browserAPI */ 0),
+    i18n = _require.i18n;
+
 __webpack_require__(/*! ./enterMaster */ 8);
 
-var _require = __webpack_require__(/*! ./utils */ 0),
-    $ = _require.$,
-    setCommandHandler = _require.setCommandHandler,
-    showError = _require.showError;
+var _require2 = __webpack_require__(/*! ./utils */ 1),
+    $ = _require2.$,
+    setCommandHandler = _require2.setCommandHandler,
+    showError = _require2.showError;
 
-var modal = __webpack_require__(/*! ./modal */ 2);
+var modal = __webpack_require__(/*! ./modal */ 3);
 
-var _require2 = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require2.passwords,
-    passwordRetrieval = _require2.passwordRetrieval,
-    recoveryCodes = _require2.recoveryCodes;
+var _require3 = __webpack_require__(/*! ../proxy */ 4),
+    passwords = _require3.passwords,
+    passwordRetrieval = _require3.passwordRetrieval,
+    recoveryCodes = _require3.recoveryCodes;
 
-var _require3 = __webpack_require__(/*! ../messaging */ 1),
-    port = _require3.port;
+var _require4 = __webpack_require__(/*! ../messaging */ 2),
+    port = _require4.port;
 
 function copyToClipboard(site, password, passwordInfo) {
   passwords.getPassword(site, password.name, password.revision).then(function (password) {
@@ -547,7 +556,7 @@ function copyToClipboard(site, password, passwordInfo) {
 }
 
 function removePassword(site, password, passwordInfo) {
-  var message = $("remove-password-confirmation").textContent.replace(/\{1\}/g, password.name).replace(/\{2\}/g, site);
+  var message = i18n.getMessage("remove_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, site);
   if (confirm(message)) {
     passwords.removePassword(site, password.name, password.revision).then(function () {
       var siteInfo = passwordInfo.parentNode;
@@ -564,7 +573,7 @@ function exportData() {
       // and it would ignore the file name anyway (https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6594876/).
       // data: URIs don't work either (https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4282810/).
       // Let the user copy the text manually, that's the only way.
-      if (confirm($("allpasswords-export-edge").textContent)) document.body.textContent = data;
+      if (confirm(i18n.getMessage("allpasswords_export_edge"))) document.body.textContent = data;
     } else {
       // See https://bugzil.la/1379960, in Firefox this will only work with a
       // link inside a frame.
@@ -590,11 +599,11 @@ function importData() {
 function importDataFromFile(file) {
   var reader = new FileReader();
   reader.onload = function () {
-    if (confirm($("allpasswords-import-confirm").textContent)) {
+    if (confirm(i18n.getMessage("allpasswords_import_confirm"))) {
       modal.show("in-progress");
       passwords.importPasswordData(reader.result).then(function () {
         modal.hide();
-        alert($("allpasswords-import-success").textContent);
+        alert(i18n.getMessage("allpasswords_import_success"));
         window.location.reload();
       }).catch(function (error) {
         modal.hide();
@@ -622,7 +631,7 @@ var retrievedPasswords = false;
 function showPasswords(event) {
   var state = event.target.checked;
   if (state && !askedPasswords) {
-    if (confirm($("allpasswords-show-confirm").textContent)) askedPasswords = true;else {
+    if (confirm(i18n.getMessage("allpasswords_show_confirm"))) askedPasswords = true;else {
       event.target.checked = false;
       return;
     }
@@ -673,7 +682,7 @@ function goToSite(site, event) {
         site = _ref2[1],
         pwdList = _ref2[2];
 
-    __webpack_require__(/*! ../messaging */ 1).port.emit("forward-to-panel", {
+    __webpack_require__(/*! ../messaging */ 2).port.emit("forward-to-panel", {
       name: "init",
       args: [{ origSite: origSite, site: site, pwdList: pwdList }]
     });
@@ -726,158 +735,158 @@ window.addEventListener("DOMContentLoaded", function () {
   showNotes({ target: notesCheckbox });
 
   $("show-passwords").addEventListener("click", showPasswords);
-});
 
-passwords.getAllPasswords().then(function (sites) {
-  var siteTemplate = $("site-template").firstElementChild;
-  var passwordTemplate = $("password-template").firstElementChild;
-  var links = passwordTemplate.querySelectorAll("a");
-  for (var i = 0; i < links.length; i++) {
-    var link = links[i];
-    if (link.textContent) {
-      link.setAttribute("title", link.textContent);
-      link.textContent = "";
+  passwords.getAllPasswords().then(function (sites) {
+    var siteTemplate = $("site-template").firstElementChild;
+    var passwordTemplate = $("password-template").firstElementChild;
+    var links = passwordTemplate.querySelectorAll("a");
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      if (link.textContent) {
+        link.setAttribute("title", link.textContent);
+        link.textContent = "";
+      }
     }
-  }
 
-  var siteNames = Object.keys(sites);
-  siteNames.sort();
+    var siteNames = Object.keys(sites);
+    siteNames.sort();
 
-  var recoveryCodeOperations = [];
-  var container = $("list");
-  var currentLetter = null;
-  var prevInfo = null;
-  var isWebClient = document.documentElement.classList.contains("webclient");
+    var recoveryCodeOperations = [];
+    var container = $("list");
+    var currentLetter = null;
+    var prevInfo = null;
+    var isWebClient = document.documentElement.classList.contains("webclient");
 
-  var _loop2 = function _loop2(site) {
-    var _sites$site = sites[site],
-        passwords = _sites$site.passwords,
-        aliases = _sites$site.aliases;
+    var _loop2 = function _loop2(site) {
+      var _sites$site = sites[site],
+          passwords = _sites$site.passwords,
+          aliases = _sites$site.aliases;
 
 
-    var siteInfo = siteTemplate.cloneNode(true);
-    if (isWebClient) {
-      var _link = document.createElement("a");
-      _link.setAttribute("href", "#");
-      _link.textContent = site;
-      _link.addEventListener("click", goToSite.bind(null, site));
-      siteInfo.querySelector(".site-name").appendChild(_link);
-    } else siteInfo.querySelector(".site-name").textContent = site;
+      var siteInfo = siteTemplate.cloneNode(true);
+      if (isWebClient) {
+        var _link = document.createElement("a");
+        _link.setAttribute("href", "#");
+        _link.textContent = site;
+        _link.addEventListener("click", goToSite.bind(null, site));
+        siteInfo.querySelector(".site-name").appendChild(_link);
+      } else siteInfo.querySelector(".site-name").textContent = site;
 
-    if (aliases.length) siteInfo.querySelector(".site-aliases-value").textContent = aliases.sort().join(", ");else siteInfo.querySelector(".site-aliases").hidden = true;
+      if (aliases.length) siteInfo.querySelector(".site-aliases-value").textContent = aliases.sort().join(", ");else siteInfo.querySelector(".site-aliases").hidden = true;
 
-    var _loop3 = function _loop3(passwordData) {
-      var passwordInfo = passwordTemplate.cloneNode(true);
-      passwordInfo._data = [site, passwordData];
-      passwordInfo.querySelector(".user-name").textContent = passwordData.name;
+      var _loop3 = function _loop3(passwordData) {
+        var passwordInfo = passwordTemplate.cloneNode(true);
+        passwordInfo._data = [site, passwordData];
+        passwordInfo.querySelector(".user-name").textContent = passwordData.name;
 
-      var revisionNode = passwordInfo.querySelector(".password-revision");
-      revisionNode.hidden = !passwordData.revision;
-      revisionNode.textContent = passwordData.revision;
+        var revisionNode = passwordInfo.querySelector(".password-revision");
+        revisionNode.hidden = !passwordData.revision;
+        revisionNode.textContent = passwordData.revision;
 
-      setCommandHandler(passwordInfo.querySelector(".to-clipboard-link"), copyToClipboard.bind(null, site, passwordData, passwordInfo));
-      setCommandHandler(passwordInfo.querySelector(".password-remove-link"), removePassword.bind(null, site, passwordData, passwordInfo));
+        setCommandHandler(passwordInfo.querySelector(".to-clipboard-link"), copyToClipboard.bind(null, site, passwordData, passwordInfo));
+        setCommandHandler(passwordInfo.querySelector(".password-remove-link"), removePassword.bind(null, site, passwordData, passwordInfo));
 
-      if (passwordData.type == "generated2" || passwordData.type == "generated") {
-        passwordInfo.querySelector(".password-info.stored").hidden = true;
-        passwordInfo.querySelector(".password-type." + passwordData.type).hidden = false;
-        if (passwordData.type == "generated") passwordInfo.querySelector(".password-type.generated-print").hidden = false;
-        passwordInfo.querySelector(".password-length-value").textContent = passwordData.length;
+        if (passwordData.type == "generated2" || passwordData.type == "generated") {
+          passwordInfo.querySelector(".password-info.stored").hidden = true;
+          passwordInfo.querySelector(".password-type." + passwordData.type).hidden = false;
+          if (passwordData.type == "generated") passwordInfo.querySelector(".password-type.generated-print").hidden = false;
+          passwordInfo.querySelector(".password-length-value").textContent = passwordData.length;
 
-        var chars = [];
-        if (passwordData.lower) chars.push("abc");
-        if (passwordData.upper) chars.push("XYZ");
-        if (passwordData.number) chars.push("789");
-        if (passwordData.symbol) chars.push("+^;");
-        passwordInfo.querySelector(".password-allowed-chars-value").textContent = chars.join(" ");
-      } else {
-        passwordInfo.querySelector(".password-info.generated").hidden = true;
-        recoveryCodeOperations.push(recoveryCodes.getCode(site, passwordData.name, passwordData.revision).then(function (code) {
-          passwordInfo.querySelector(".password-recovery").textContent = code;
-        }));
+          var chars = [];
+          if (passwordData.lower) chars.push("abc");
+          if (passwordData.upper) chars.push("XYZ");
+          if (passwordData.number) chars.push("789");
+          if (passwordData.symbol) chars.push("+^;");
+          passwordInfo.querySelector(".password-allowed-chars-value").textContent = chars.join(" ");
+        } else {
+          passwordInfo.querySelector(".password-info.generated").hidden = true;
+          recoveryCodeOperations.push(recoveryCodes.getCode(site, passwordData.name, passwordData.revision).then(function (code) {
+            passwordInfo.querySelector(".password-recovery").textContent = code;
+          }));
+        }
+
+        var notes = passwordInfo.querySelector(".password-info.notes");
+        notes.hidden = !passwordData.notes;
+        if (passwordData.notes) notes.textContent += " " + passwordData.notes;
+
+        siteInfo.appendChild(passwordInfo);
+      };
+
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = passwords[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var passwordData = _step3.value;
+
+          _loop3(passwordData);
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
-      var notes = passwordInfo.querySelector(".password-info.notes");
-      notes.hidden = !passwordData.notes;
-      if (passwordData.notes) notes.textContent += " " + passwordData.notes;
+      container.appendChild(siteInfo);
 
-      siteInfo.appendChild(passwordInfo);
+      var letter = site[0].toUpperCase();
+      if (letter != currentLetter) {
+        currentLetter = letter;
+        var _link2 = document.createElement("a");
+        _link2.textContent = currentLetter;
+        _link2.href = "#";
+        setCommandHandler(_link2, function () {
+          var div = siteInfo;
+          while (div && !div.parentNode) {
+            div = div._nextSiteInfo;
+          }if (div) div.scrollIntoView(true);
+        });
+        $("shortcuts").appendChild(_link2);
+        _link2.focus();
+      }
+
+      if (prevInfo) prevInfo._nextSiteInfo = siteInfo;
+      prevInfo = siteInfo;
     };
 
-    var _iteratorNormalCompletion3 = true;
-    var _didIteratorError3 = false;
-    var _iteratorError3 = undefined;
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
 
     try {
-      for (var _iterator3 = passwords[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-        var passwordData = _step3.value;
+      for (var _iterator2 = siteNames[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var site = _step2.value;
 
-        _loop3(passwordData);
+        _loop2(site);
       }
     } catch (err) {
-      _didIteratorError3 = true;
-      _iteratorError3 = err;
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion3 && _iterator3.return) {
-          _iterator3.return();
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
         }
       } finally {
-        if (_didIteratorError3) {
-          throw _iteratorError3;
+        if (_didIteratorError2) {
+          throw _iteratorError2;
         }
       }
     }
 
-    container.appendChild(siteInfo);
-
-    var letter = site[0].toUpperCase();
-    if (letter != currentLetter) {
-      currentLetter = letter;
-      var _link2 = document.createElement("a");
-      _link2.textContent = currentLetter;
-      _link2.href = "#";
-      setCommandHandler(_link2, function () {
-        var div = siteInfo;
-        while (div && !div.parentNode) {
-          div = div._nextSiteInfo;
-        }if (div) div.scrollIntoView(true);
-      });
-      $("shortcuts").appendChild(_link2);
-      _link2.focus();
-    }
-
-    if (prevInfo) prevInfo._nextSiteInfo = siteInfo;
-    prevInfo = siteInfo;
-  };
-
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
-
-  try {
-    for (var _iterator2 = siteNames[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var site = _step2.value;
-
-      _loop2(site);
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
-  }
-
-  Promise.all(recoveryCodeOperations).catch(showError);
-}).catch(showError);
+    Promise.all(recoveryCodeOperations).catch(showError);
+  }).catch(showError);
+});
 
 // Hack: expose __webpack_require__ for simpler debugging
 /* global __webpack_require__ */
@@ -901,7 +910,7 @@ module.exports = __webpack_require__;
 
 
 
-var browser = __webpack_require__(/*! ./browserAPI */ 4);
+var browser = __webpack_require__(/*! ./browserAPI */ 0);
 
 // i18n
 
@@ -909,37 +918,10 @@ window.addEventListener("DOMContentLoaded", function () {
   var elements = document.querySelectorAll("[data-l10n-id]");
   for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
-    var id = element.getAttribute("data-l10n-id").replace(/-/g, "_");
+    var id = element.getAttribute("data-l10n-id");
     element.textContent = browser.i18n.getMessage(id);
   }
 });
-
-// Work-around for https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9550897/,
-// inline all stylesheets.
-
-if (window.navigator.userAgent.indexOf(" Edge/") >= 0) {
-  window.addEventListener("DOMContentLoaded", function () {
-    var stylesheets = document.querySelectorAll("link[rel='stylesheet']");
-
-    var _loop = function _loop(i) {
-      var stylesheet = stylesheets[i];
-      var request = new XMLHttpRequest();
-      request.open("GET", stylesheet.href);
-      request.responseType = "text";
-      request.addEventListener("load", function () {
-        var element = document.createElement("style");
-        element.setAttribute("media", "print");
-        element.textContent = request.response;
-        stylesheet.parentNode.insertBefore(element, stylesheet.nextSibling);
-      });
-      request.send(null);
-    };
-
-    for (var i = 0; i < stylesheets.length; i++) {
-      _loop(i);
-    }
-  });
-}
 
 /***/ }),
 /* 7 */
@@ -970,12 +952,12 @@ module.exports = {"password_too_short":"The master password should be at least 6
 
 
 
-var _require = __webpack_require__(/*! ./utils */ 0),
+var _require = __webpack_require__(/*! ./utils */ 1),
     $ = _require.$,
     showError = _require.showError;
 
-var modal = __webpack_require__(/*! ./modal */ 2);
-var proxy = __webpack_require__(/*! ../proxy */ 3);
+var modal = __webpack_require__(/*! ./modal */ 3);
+var proxy = __webpack_require__(/*! ../proxy */ 4);
 var masterPassword = proxy.masterPassword;
 
 

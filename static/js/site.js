@@ -1,6 +1,6 @@
 "use strict";
 
-var webclientVersion = "2.0.1";
+var webclientVersion = "2.0.2";
 
 function animate(obj, property, steps, interval)
 {
