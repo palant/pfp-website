@@ -85,6 +85,9 @@ a:hover {
   display: flex;
   flex-direction: column; }
 
+.special-site {
+  font-style: italic; }
+
 .block-start,
 .button-container,
 .link-container {
@@ -172,46 +175,30 @@ a:hover {
   :root[dir="rtl"] #migration-spinning-wheel {
     margin-left: 5px; }
 
-#site-container {
+#password-list-header {
   margin-bottom: 15px; }
 
-#site-name-container {
+#password-list-site-container {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center; }
 
-#site {
+#password-list-site {
   flex-grow: 1; }
 
-#site-edit-accept,
-#site-edit-cancel {
+#select-site {
   min-width: 32px;
   min-height: 32px;
+  background-image: url(../images/search.svg);
   background-size: 32px;
   background-repeat: no-repeat; }
-  :root:not([dir="rtl"]) #site-edit-accept, :root:not([dir="rtl"])
-  #site-edit-cancel {
+  :root:not([dir="rtl"]) #select-site {
     margin-right: 5px; }
-  :root[dir="rtl"] #site-edit-accept, :root[dir="rtl"]
-  #site-edit-cancel {
+  :root[dir="rtl"] #select-site {
     margin-left: 5px; }
 
-#site-edit-cancel {
-  background-image: url(../images/close-round.svg); }
-
-#site-edit-cancel[disabled="true"] {
-  opacity: 0.2; }
-
-#site[readonly] + #site-edit-cancel {
-  display: none; }
-
-#site-edit-accept {
-  background-image: url(../images/checkmark-round.svg); }
-
-#site[readonly] + * + #site-edit-accept {
-  display: none; }
-
-#site-edit-container {
+#add-alias,
+#alias-container {
   font-size: 16px; }
 
 #password-list-container {
@@ -370,6 +357,19 @@ a:hover {
 #password-length-value {
   min-width: 3ch; }
 
+#site-autocomplete {
+  border: 1px solid #000;
+  padding: 5px;
+  max-height: 192px;
+  overflow: auto; }
+
+#site-autocomplete > [data-site] {
+  cursor: pointer; }
+
+#site-autocomplete > .active[data-site],
+#site-autocomplete > [data-site]:hover {
+  background-color: #e2f4ff; }
+
 #recovery-code-accepted-container {
   margin: 0;
   font-size: 16px; }
@@ -398,7 +398,35 @@ a:hover {
 #sync-setup > div {
   font-size: 16px; }
 
-#sync-setup-link,
-#sync-state-link {
-  /* Don't show sync UI yet, it is unfinished */
+#sync-provider-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+.sync-storage-provider {
+  height: 32px;
+  margin-top: 15px;
+  cursor: pointer; }
+
+#sync-state-link.failed {
+  color: #f44; }
+
+#sync-lastTime-container {
+  display: flex;
+  flex-direction: row; }
+
+#sync-lastTime-container:not(.succeeded) #sync-succeeded {
   display: none; }
+
+#sync-lastTime-container:not(.failed) #sync-failed {
+  display: none; }
+
+#sync-failed {
+  color: #f44; }
+
+#sync-status-container {
+  flex-grow: 1;
+  margin: 0 5px; }
+
+#sync-error {
+  margin-top: 15px; }

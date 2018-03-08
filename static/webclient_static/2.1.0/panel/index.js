@@ -64,11 +64,131 @@ var __webpack_require__ =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/* no static exports found */
+/* all exports used */
+/*!*****************************!*\
+  !*** ./data/panel/utils.js ***!
+  \*****************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+function $(id) {
+  return document.getElementById(id);
+}
+exports.$ = $;
+
+function setFocus() {
+  var activePanel = getActivePanel();
+  if (!activePanel) return;
+
+  var defaultElement = $(activePanel).getAttribute("data-default-element");
+  if (defaultElement) $(defaultElement).focus();else document.documentElement.focus();
+}
+
+function resetForm(form) {
+  __webpack_require__(/*! ./events */ 1).disableResetHandlers = true;
+  try {
+    form.reset();
+    var custom = form.dataset.customReset;
+    if (custom) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = custom.split(/\s*,\s*/)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var statement = _step.value;
+
+          var match = /^([^\.]+)\.([^=]+)(?:=(.*))?/.exec(statement);
+          if (match && match[3]) $(match[1]).setAttribute(match[2], match[3]);else if (match) $(match[1]).removeAttribute(match[2]);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }
+    __webpack_require__(/*! ./formValidation */ 5).updateForm(form);
+  } finally {
+    __webpack_require__(/*! ./events */ 1).disableResetHandlers = false;
+  }
+}
+
+function getActivePanel() {
+  var selection = document.querySelector("[data-active='true']");
+  return selection ? selection.id : null;
+}
+exports.getActivePanel = getActivePanel;
+
+function setActivePanel(id, noReset) {
+  var oldSelection = getActivePanel();
+  if (oldSelection == id) return;
+
+  if (oldSelection) $(oldSelection).removeAttribute("data-active");
+
+  if (id) {
+    var form = $(id);
+    if (!noReset) resetForm(form);
+    form.setAttribute("data-active", "true");
+    $("unknown-error").hidden = true;
+
+    setFocus();
+  }
+}
+exports.setActivePanel = setActivePanel;
+
+function setSiteName(element) {
+  if (typeof element == "string") element = $(element);
+
+  var _require = __webpack_require__(/*! ./state */ 2),
+      site = _require.site,
+      siteDisplayName = _require.siteDisplayName;
+
+  element.textContent = siteDisplayName;
+  if (site != siteDisplayName) element.classList.add("special-site");else element.classList.remove("special-site");
+}
+exports.setSiteName = setSiteName;
+
+function showUnknownError(e) {
+  $("unknown-error-details").textContent = e;
+  $("unknown-error").hidden = false;
+  $("unknown-error-more").hidden = false;
+  $("unknown-error-details").hidden = true;
+}
+exports.showUnknownError = showUnknownError;
+
+// Avoid circular references here
+Promise.resolve().then(function () {
+  __webpack_require__(/*! ./events */ 1).setCommandHandler("unknown-error-more", function () {
+    $("unknown-error-more").hidden = true;
+    $("unknown-error-details").hidden = false;
+  });
+});
+
+/***/ }),
+/* 1 */
 /* no static exports found */
 /* all exports used */
 /*!******************************!*\
@@ -85,7 +205,7 @@ var __webpack_require__ =
 
 
 
-var _require = __webpack_require__(/*! ./utils */ 1),
+var _require = __webpack_require__(/*! ./utils */ 0),
     $ = _require.$;
 
 exports.disableResetHandlers = false;
@@ -123,112 +243,18 @@ function setResetHandler(element, handler) {
 }
 exports.setResetHandler = setResetHandler;
 
-/***/ }),
-/* 1 */
-/* no static exports found */
-/* all exports used */
-/*!*****************************!*\
-  !*** ./data/panel/utils.js ***!
-  \*****************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-function $(id) {
-  return document.getElementById(id);
-}
-exports.$ = $;
-
-function setFocus() {
-  var activePanel = getActivePanel();
-  if (!activePanel) return;
-
-  var defaultElement = $(activePanel).getAttribute("data-default-element");
-  if (defaultElement) $(defaultElement).focus();
-}
-
-function resetForm(form) {
-  __webpack_require__(/*! ./events */ 0).disableResetHandlers = true;
-  try {
-    form.reset();
-    var custom = form.dataset.customReset;
-    if (custom) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = custom.split(/\s*,\s*/)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var statement = _step.value;
-
-          var match = /^([^\.]+)\.([^=]+)(?:=(.*))?/.exec(statement);
-          if (match && match[3]) $(match[1]).setAttribute(match[2], match[3]);else if (match) $(match[1]).removeAttribute(match[2]);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+document.addEventListener("keydown", function (event) {
+  // This currently doesn't work in Firefox: https://bugzil.la/1443758
+  if (event.key == "Escape") {
+    var activePanel = __webpack_require__(/*! ./utils */ 0).getActivePanel();
+    if (activePanel) {
+      var button = $(activePanel).querySelector("button[type='reset']");
+      if (button) {
+        button.click();
+        event.preventDefault();
       }
     }
-    __webpack_require__(/*! ./formValidation */ 5).updateForm(form);
-  } finally {
-    __webpack_require__(/*! ./events */ 0).disableResetHandlers = false;
   }
-}
-
-function getActivePanel() {
-  var selection = document.querySelector("[data-active='true']");
-  return selection ? selection.id : null;
-}
-exports.getActivePanel = getActivePanel;
-
-function setActivePanel(id, noReset) {
-  var oldSelection = getActivePanel();
-  if (oldSelection == id) return;
-
-  if (oldSelection) $(oldSelection).removeAttribute("data-active");
-
-  if (id) {
-    var form = $(id);
-    if (!noReset) resetForm(form);
-    form.setAttribute("data-active", "true");
-    $("unknown-error").hidden = true;
-
-    setFocus();
-  }
-}
-exports.setActivePanel = setActivePanel;
-
-function showUnknownError(e) {
-  $("unknown-error-details").textContent = e;
-  $("unknown-error").hidden = false;
-  $("unknown-error-more").hidden = false;
-  $("unknown-error-details").hidden = true;
-}
-exports.showUnknownError = showUnknownError;
-
-// Avoid circular references here
-Promise.resolve().then(function () {
-  __webpack_require__(/*! ./events */ 0).setCommandHandler("unknown-error-more", function () {
-    $("unknown-error-more").hidden = true;
-    $("unknown-error-details").hidden = false;
-  });
 });
 
 /***/ }),
@@ -249,13 +275,14 @@ Promise.resolve().then(function () {
 
 
 
-var _require = __webpack_require__(/*! ../../lib/eventTarget */ 10),
+var _require = __webpack_require__(/*! ../../lib/eventTarget */ 12),
     EventTarget = _require.EventTarget,
     emit = _require.emit;
 
 module.exports = exports = new EventTarget();
 exports.site = null;
 exports.origSite = null;
+exports.siteDisplayName = null;
 exports.pwdList = null;
 exports.masterPasswordState = null;
 
@@ -292,8 +319,10 @@ function set(state) {
     }
   }
 
+  if ("site" in state) exports.siteDisplayName = __webpack_require__(/*! ../common */ 7).getSiteDisplayName(state.site);
+
   if ("masterPasswordState" in state) {
-    var _require2 = __webpack_require__(/*! ./utils */ 1),
+    var _require2 = __webpack_require__(/*! ./utils */ 0),
         getActivePanel = _require2.getActivePanel,
         setActivePanel = _require2.setActivePanel;
 
@@ -325,7 +354,7 @@ exports.set = set;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ./messaging */ 7),
+var _require = __webpack_require__(/*! ./messaging */ 8),
     port = _require.port;
 
 var errorHandlers = new Map();
@@ -390,7 +419,7 @@ exports.setErrorHandler = function (error, handler) {
   return errorHandlers.set(error, handler);
 };
 
-exports.passwords = Proxy("passwords", ["exportPasswordData", "importPasswordData", "getPasswords", "addAlias", "removeAlias", "addGenerated", "addStored", "removePassword", "getPassword", "setNotes", "getAllPasswords", "isMigrating"]);
+exports.passwords = Proxy("passwords", ["exportPasswordData", "importPasswordData", "getPasswords", "addAlias", "removeAlias", "addGenerated", "addStored", "removePassword", "getPassword", "setNotes", "getAllPasswords", "getAllSites", "isMigrating"]);
 
 exports.masterPassword = Proxy("masterPassword", ["changePassword", "checkPassword", "forgetPassword"]);
 
@@ -400,7 +429,7 @@ exports.prefs = Proxy("prefs", ["get", "set"]);
 
 exports.recoveryCodes = Proxy("recoveryCodes", ["getValidChars", "getCode", "formatCode", "isValid", "decodeCode"]);
 
-exports.sync = Proxy("sync", ["authorize", "disable"]);
+exports.sync = Proxy("sync", ["authorize", "getManualAuthURL", "manualAuthorization", "disable", "sync"]);
 
 exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
 
@@ -422,9 +451,9 @@ exports.ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
 
 
 
-var locale = __webpack_require__(/*! locale */ 14);
+var locale = __webpack_require__(/*! locale */ 16);
 
-var _require = __webpack_require__(/*! ../eventTarget */ 26),
+var _require = __webpack_require__(/*! ../eventTarget */ 29),
     EventTarget = _require.EventTarget;
 
 document.documentElement.classList.add("webclient");
@@ -572,7 +601,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var _require = __webpack_require__(/*! ../browserAPI */ 4),
     i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ./utils */ 1),
+var _require2 = __webpack_require__(/*! ./utils */ 0),
     $ = _require2.$;
 
 function setValidator(id, validator) {
@@ -791,11 +820,11 @@ exports.enforceValue = enforceValue;
 
 
 
-var _require = __webpack_require__(/*! ./events */ 0),
+var _require = __webpack_require__(/*! ./events */ 1),
     setSubmitHandler = _require.setSubmitHandler,
     setResetHandler = _require.setResetHandler;
 
-var _require2 = __webpack_require__(/*! ./utils */ 1),
+var _require2 = __webpack_require__(/*! ./utils */ 0),
     $ = _require2.$,
     setActivePanel = _require2.setActivePanel,
     getActivePanel = _require2.getActivePanel;
@@ -833,6 +862,29 @@ exports.confirm = confirm;
 /* 7 */
 /* no static exports found */
 /* all exports used */
+/*!************************!*\
+  !*** ./data/common.js ***!
+  \************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+function getSiteDisplayName(site) {
+  if (site == "pfp.invalid") return __webpack_require__(/*! ./browserAPI */ 4).i18n.getMessage("no_site_placeholder");else if (site) return site;else return "???";
+}
+exports.getSiteDisplayName = getSiteDisplayName;
+
+/***/ }),
+/* 8 */
+/* no static exports found */
+/* all exports used */
 /*!***************************!*\
   !*** ./data/messaging.js ***!
   \***************************/
@@ -851,7 +903,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var browser = __webpack_require__(/*! ./browserAPI */ 4);
 
-var _require = __webpack_require__(/*! ../lib/eventTarget */ 10),
+var _require = __webpack_require__(/*! ../lib/eventTarget */ 12),
     EventTarget = _require.EventTarget,
     emit = _require.emit;
 
@@ -914,7 +966,7 @@ port.onMessage.addListener(function (message) {
 });
 
 /***/ }),
-/* 8 */
+/* 9 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -940,7 +992,7 @@ var _require2 = __webpack_require__(/*! ../proxy */ 3),
     passwords = _require2.passwords,
     masterPassword = _require2.masterPassword;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setSubmitHandler = _require3.setSubmitHandler,
     setResetHandler = _require3.setResetHandler;
 
@@ -949,7 +1001,7 @@ var _require4 = __webpack_require__(/*! ./formValidation */ 5),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
     setActivePanel = _require5.setActivePanel,
     showUnknownError = _require5.showUnknownError;
@@ -957,7 +1009,7 @@ var _require5 = __webpack_require__(/*! ./utils */ 1),
 var _require6 = __webpack_require__(/*! ./confirm */ 6),
     confirm = _require6.confirm;
 
-var zxcvbn = __webpack_require__(/*! ./zxcvbn-4.4.2 */ 13);
+var zxcvbn = __webpack_require__(/*! ./zxcvbn-4.4.2 */ 15);
 
 setValidator("new-master", validateMasterPassword);
 setValidator("new-master-repeat", validateMasterPasswordRepeat);
@@ -1021,7 +1073,7 @@ function changeMasterPassword() {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /* no static exports found */
 /* all exports used */
 /*!****************************************!*\
@@ -1044,7 +1096,7 @@ var _require = __webpack_require__(/*! ../browserAPI */ 4),
 var _require2 = __webpack_require__(/*! ../proxy */ 3),
     passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require3.setCommandHandler,
     setSubmitHandler = _require3.setSubmitHandler,
     setResetHandler = _require3.setResetHandler;
@@ -1056,9 +1108,10 @@ var _require4 = __webpack_require__(/*! ./formValidation */ 5),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
     setActivePanel = _require5.setActivePanel,
+    setSiteName = _require5.setSiteName,
     showUnknownError = _require5.showUnknownError;
 
 $("password-length").addEventListener("input", updatePasswordLengthDisplay);
@@ -1089,7 +1142,7 @@ state.on("update", updateSite);
 updateSite();
 
 function updateSite() {
-  $("generate-password-site").textContent = state.site;
+  setSiteName("generate-password-site");
 }
 
 function updatePasswordLengthDisplay() {
@@ -1135,7 +1188,63 @@ function addGeneratedPassword() {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
+/* no static exports found */
+/* all exports used */
+/*!*************************************!*\
+  !*** ./data/panel/syncAuthorize.js ***!
+  \*************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _require = __webpack_require__(/*! ./events */ 1),
+    setSubmitHandler = _require.setSubmitHandler,
+    setResetHandler = _require.setResetHandler;
+
+var _require2 = __webpack_require__(/*! ./utils */ 0),
+    $ = _require2.$,
+    getActivePanel = _require2.getActivePanel,
+    setActivePanel = _require2.setActivePanel;
+
+var currentRequest = null;
+
+setSubmitHandler("sync-authorize", function () {
+  return done($("sync-token").value.trim());
+});
+setResetHandler("sync-authorize", function () {
+  return done();
+});
+
+function done(value) {
+  if (!currentRequest) return;
+
+  setActivePanel(currentRequest.originalSelection, true);
+  if (value) currentRequest.resolve(value);else currentRequest.reject();
+  currentRequest = null;
+}
+
+function show() {
+  var originalSelection = getActivePanel();
+  setActivePanel("sync-authorize");
+
+  return new Promise(function (resolve, reject) {
+    currentRequest = {
+      resolve: resolve, reject: reject, originalSelection: originalSelection
+    };
+  });
+}
+exports.show = show;
+
+/***/ }),
+/* 12 */
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -1212,7 +1321,7 @@ exports.emit = function (obj, eventName) {
 };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -1229,7 +1338,7 @@ exports.emit = function (obj, eventName) {
 
 
 
-var _require = __webpack_require__(/*! ../messaging */ 7),
+var _require = __webpack_require__(/*! ../messaging */ 8),
     port = _require.port;
 
 port.on("init", function (state) {
@@ -1242,10 +1351,10 @@ function init() {
   var _require2 = __webpack_require__(/*! ../proxy */ 3),
       ui = _require2.ui;
 
-  var _require3 = __webpack_require__(/*! ./events */ 0),
+  var _require3 = __webpack_require__(/*! ./events */ 1),
       setCommandHandler = _require3.setCommandHandler;
 
-  var _require4 = __webpack_require__(/*! ./utils */ 1),
+  var _require4 = __webpack_require__(/*! ./utils */ 0),
       showUnknownError = _require4.showUnknownError;
 
   var isWebClient = document.documentElement.classList.contains("webclient");
@@ -1270,14 +1379,14 @@ function init() {
     _loop(i);
   }
 
-  __webpack_require__(/*! ./enterMaster */ 16);
-  __webpack_require__(/*! ./changeMaster */ 8);
-  __webpack_require__(/*! ./migration */ 18);
-  __webpack_require__(/*! ./passwordList */ 20);
-  __webpack_require__(/*! ./generatePassword */ 9);
-  __webpack_require__(/*! ./storedPassword */ 23);
-  __webpack_require__(/*! ./syncSetup */ 24);
-  __webpack_require__(/*! ./syncState */ 25);
+  __webpack_require__(/*! ./enterMaster */ 18);
+  __webpack_require__(/*! ./changeMaster */ 9);
+  __webpack_require__(/*! ./migration */ 20);
+  __webpack_require__(/*! ./passwordList */ 22);
+  __webpack_require__(/*! ./generatePassword */ 10);
+  __webpack_require__(/*! ./storedPassword */ 26);
+  __webpack_require__(/*! ./syncSetup */ 27);
+  __webpack_require__(/*! ./syncState */ 28);
 }
 
 window.addEventListener("load", init);
@@ -1287,7 +1396,7 @@ window.addEventListener("load", init);
 module.exports = __webpack_require__;
 
 /***/ }),
-/* 12 */
+/* 14 */
 /* no static exports found */
 /* all exports used */
 /*!**************************!*\
@@ -1318,7 +1427,7 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 /***/ }),
-/* 13 */
+/* 15 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -1357,7 +1466,7 @@ var time_estimates;time_estimates={estimate_attack_times:function(e){var t,n,s,o
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /* no static exports found */
 /* all exports used */
 /*!*********************************!*\
@@ -1365,10 +1474,10 @@ var time_estimates;time_estimates={estimate_attack_times:function(e){var t,n,s,o
   \*********************************/
 /***/ (function(module, exports) {
 
-module.exports = {"password_too_short":"The master password should be at least 6 characters long.","passwords_differ":"Passwords don't match.","weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","password_declined":"This doesn't seem to be the master password you have used before.","decryption_failure":"Some data could not be decrypted, maybe wrong master password was used?","wrong_master_password":"It seems that this backup was created with a different master password.","user_name_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","user_name_exists":"This user name already exists.","user_name_exists_generated":"This user name and revision combination already exists. Maybe increase the revision number?","no_characters_selected":"At least one character set has to be selected.","password_value_required":"Please enter the password you used on this website.","password_type_generated":"Password generated by an older extension version","password_type_generated_replace":"Click to replace!","password_type_generated_print":"Generated by Easy Passwords 1.x","password_type_generated2":"Generated password","password_type_stored":"Stored password","password_type_stored_with_recovery":"Stored password, recovery code below","password_info_notes":"Notes:","remove_password_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","upgrade_password_confirmation":"Upgrading the password will change its value. Make sure that you already filled in \"current password\" in the website's password change form. Proceed replacing password \"{1}\" for the website {2}?","recovery_checksum_mismatch":"Row is mistyped or not the next row.","cancel":"Cancel","yes":"Yes","no":"No","unknown_error":"The operation failed unexpectedly.","unknown_error_more":"Show error message","new_master_message":"You didn't define a master password yet, please do so below.","reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","master_security_message":"It is essential that you choose a strong master password.","master_security_learn_more":"Learn more…","new_master":"New master password:","new_master_repeat":"Please reenter password:","change_master_submit":"Set master password","master_password":"Enter master password:","enter_master_submit":"Access passwords","reset_master_link":"Reset master password","migration_title":"Easy Passwords is now PfP: Pain-free Passwords!","migration_features_intro":"Some important security improvements have been implemented:","migration_feature1":"All data is now encrypted on disk, not only the stored passwords.","migration_feature2":"Your backups will also be encrypted, any data can only be retrieved with the right master password.","migration_feature3":"Updated password generation approach makes guessing your master password even harder.","migration_todos_intro":"There will be a six months transitional period. It is recommended that you do the following during that time:","migration_todo1":"Replace any of your old generated passwords, otherwise these will be automatically converted to stored passwords at the end of the transitional period.","migration_todo2":"Create a new (encrypted) backup. Unencrypted backups will no longer be supported after the end of the transitional period.","migration_in_progress":"Updating your data, please wait…","migration_learn_more":"Learn more…","migration_continue":"Continue","site":"Website name:","site_edit_accept":"Save new name","site_edit_cancel":"Discard new name","add_alias":"This website shares passwords with another?","alias_description":"You indicated that {1} shares passwords with this website.","remove_alias":"Revert","show_all_passwords":"Show all passwords","sync_setup":"Set up sync","sync_state":"Show sync state","lock_passwords":"Lock passwords","empty_site_name":"Website name cannot be empty.","password_copied_message":"Password has been copied to clipboard.","no_such_password":"Unknown password!","unknown_generation_method":"Unknown password generation method!","wrong_site_message":"You are no longer on the same site!","no_password_fields":"The page has no password fields or the password fields belong to a different site!","no_passwords_message":"No passwords yet","password_ready_message":"Your password is ready, click again anywhere to copy it.","passwords_label":"Passwords:","password_menu":"All actions","to_document":"Fill in","to_clipboard":"Copy to clipboard","show_qrcode":"Show as QR code","add_notes":"Add notes","edit_notes":"Edit notes","upgrade_password":"Replace by PfP 2.x password","bump_revision":"Generate new password for this user name","remove_password":"Remove password","generate_password_link":"Generate new password","stored_password_link":"Enter stored password","user_name":"User name:","change_password_revision":"Need a new password for the same username?","password_revision":"Revision:","password_length":"Length:","allowed_characters":"Allowed characters:","generate_legacy":"Easy Passwords 1.x password","generate_legacy_warning":"Don't use this option for new passwords! Only check when recovering a password that was initially created with an older extension version.","generate_password":"Generate password","stored_password_warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","password_value":"Password:","use_recovery":"Use recovery code","save_password":"Save password","recovery_code":"Recovery code:","password_notes":"Password notes:","save_notes":"Save notes","sync_how_label":"How does this work?","sync_how_explanation":"You grant PfP access to a directory within your personal Dropbox account. This access will be used to upload a file with passwords metadata regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically - assuming that they all use the same master password.","sync_safe_label":"Is this safe?","sync_safe_explanation":"Yes. PfP can only access its own file, not the other files stored in your Dropbox account. Also, the file doesn't contain any passwords. Your master password is still required to generate the other passwords, and this one never leaves your computer.","sync_no_account_label":"What if I don't use Dropbox?","sync_no_account_explanation":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","sync_authorize":"Authorize","sync_provider":"Sync target:","sync_lastTime":"Last sync:","sync_lastTime_never":"Never","sync_disable":"Disable sync","sync_disable_confirmation":"Do you really want to disable sync functionality? Your passwords metadata will no longer be uploaded to your provider automatically.","allpasswords_title":"All passwords known to PfP","allpasswords_export":"Save password definitions to a file","allpasswords_import":"Import password definitions from a file","allpasswords_print":"Print","allpasswords_show_notes":"Show notes","allpasswords_show_passwords":"Show passwords","allpasswords_intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords_aliases":"Aliases:","master_password_required":"Your passwords are currently locked. Please unlock them by clicking PfP icon and try again.","unknown_data_format":"Unknown data format!","syntax_error":"The file contains errors and could not be imported.","allpasswords_import_confirm":"Importing passwords is only possible if the master password didn't change. Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords_import_success":"Passwords data has been imported.","allpasswords_show_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","allpasswords_export_edge":"Bugs in Microsoft Edge currently prevent extensions from offering files for download. You will need to copy the text manually and paste it into a text editor such as Notepad.","autolock_title":"Enable auto-lock","autolock_description":"Lock passwords automatically when the panel is closed","autolock_delay_title":"Auto-lock delay","autolock_delay_description":"Interval in minutes after which the passwords should be locked"};
+module.exports = {"password_too_short":"The master password should be at least 6 characters long.","passwords_differ":"Passwords don't match.","weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","password_declined":"This doesn't seem to be the master password you have used before.","decryption_failure":"Some data could not be decrypted, maybe wrong master password was used?","user_name_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","user_name_exists":"This user name already exists.","user_name_exists_generated":"This user name and revision combination already exists. Maybe increase the revision number?","no_characters_selected":"At least one character set has to be selected.","password_value_required":"Please enter the password you used on this website.","password_type_generated":"Password generated by an older extension version","password_type_generated_replace":"Click to replace!","password_type_generated_print":"Generated by Easy Passwords 1.x","password_type_generated2":"Generated password","password_type_stored":"Stored password","password_type_stored_with_recovery":"Stored password, recovery code below","password_info_notes":"Notes:","remove_password_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","upgrade_password_confirmation":"Upgrading the password will change its value. Make sure that you already filled in \"current password\" in the website's password change form. Proceed replacing password \"{1}\" for the website {2}?","recovery_checksum_mismatch":"Row is mistyped or not the next row.","sync_invalid_token":"Access has been denied, you probably need to authorize PfP again.","sync_unknown_data_format":"Format of currently stored data is unrecognized, it might have been created by a newer PfP version.","sync_connection_error":"Server connection failed.","sync_too_many_retries":"Too many retries after conflicting modifications.","sync_multiple_candidates":"Your storage provider has multiple PfP files stored for some reason. You probably need to delete PfP data there and sync again.","sync_wrong_master_password":"It seems that the currently stored data was encrypted with a different master password.","ok":"OK","cancel":"Cancel","yes":"Yes","no":"No","no_site_placeholder":"(none)","learn_more":"Learn more…","unknown_error":"The operation failed unexpectedly.","unknown_error_more":"Show error message","new_master_message":"You didn't define a master password yet, please do so below.","reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","master_security_message":"It is essential that you choose a strong master password.","new_master":"New master password:","new_master_repeat":"Please reenter password:","change_master_submit":"Set master password","master_password":"Enter master password:","enter_master_submit":"Access passwords","reset_master_link":"Reset master password","migration_title":"Easy Passwords is now PfP: Pain-free Passwords!","migration_features_intro":"Some important security improvements have been implemented:","migration_feature1":"All data is now encrypted on disk, not only the stored passwords.","migration_feature2":"Your backups will also be encrypted, any data can only be retrieved with the right master password.","migration_feature3":"Updated password generation approach makes guessing your master password even harder.","migration_todos_intro":"There will be a six months transitional period. It is recommended that you do the following during that time:","migration_todo1":"Replace any of your old generated passwords, otherwise these will be automatically converted to stored passwords at the end of the transitional period.","migration_todo2":"Create a new (encrypted) backup. Unencrypted backups will no longer be supported after the end of the transitional period.","migration_in_progress":"Updating your data, please wait…","migration_continue":"Continue","site":"Website name:","select_site_label":"Select site","add_alias":"This website shares passwords with another?","alias_description":"You indicated that {1} shares passwords with this website.","remove_alias":"Revert","show_all_passwords":"Show all passwords","sync_setup":"Set up sync","sync_state":"Show sync state","lock_passwords":"Lock passwords","password_copied_message":"Password has been copied to clipboard.","no_such_password":"Unknown password!","unknown_generation_method":"Unknown password generation method!","wrong_site_message":"You are not on the right website!","no_password_fields":"The page has no password fields or the password fields belong to a different site!","no_passwords_message":"No passwords yet","password_ready_message":"Your password is ready, click again anywhere to copy it.","passwords_label":"Passwords:","password_menu":"All actions","to_document":"Fill in","to_clipboard":"Copy to clipboard","show_qrcode":"Show as QR code","add_notes":"Add notes","edit_notes":"Edit notes","upgrade_password":"Replace by PfP 2.x password","bump_revision":"Generate new password for this user name","remove_password":"Remove password","generate_password_link":"Generate new password","stored_password_link":"Enter stored password","user_name":"User name:","change_password_revision":"Need a new password for the same username?","password_revision":"Revision:","password_length":"Length:","allowed_characters":"Allowed characters:","generate_legacy":"Easy Passwords 1.x password","generate_legacy_warning":"Don't use this option for new passwords! Only check when recovering a password that was initially created with an older extension version.","generate_password":"Generate password","stored_password_warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","password_value":"Password:","use_recovery":"Use recovery code","save_password":"Save password","select_alias":"Mark \"{1}\" as an alias for:","select_site":"Show passwords for site:","autocomplete_no_sites":"No sites matched your search","recovery_code":"Recovery code:","password_notes":"Password notes:","save_notes":"Save notes","sync_selection_label":"Please select your storage provider:","sync_how_label":"How does this work?","sync_how_explanation":"You grant PfP access to a directory within your personal account on Dropbox or Google Drive™. This access will be used to upload a file with encrypted data regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically - assuming that they all use the same master password.","sync_safe_label":"Is this safe?","sync_safe_explanation":"Yes. PfP can only access its own file, not the other files stored in your account. Also, the file's data is fully encrypted and can only be decrypted using your master password.","sync_no_account_label":"What if I don't have an account?","sync_no_account_explanation":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","sync_token_label":"Please paste the code given by the storage provider:","sync_provider":"Uploading to:","sync_lastTime":"Last upload:","sync_lastTime_never":"Never","sync_lastTime_now":"Running…","sync_succeeded":"(succeeded)","sync_failed":"(failed)","do_sync":"Upload now","sync_reauthorize":"Reauthorize…","sync_disable":"Disable sync","sync_disable_confirmation":"Do you really want to disable sync functionality? Your data will no longer be backed up to your provider automatically.","allpasswords_title":"All passwords known to PfP","allpasswords_export":"Save password definitions to a file","allpasswords_import":"Import password definitions from a file","allpasswords_print":"Print","allpasswords_show_notes":"Show notes","allpasswords_show_passwords":"Show passwords","allpasswords_intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords_aliases":"Aliases:","master_password_required":"Your passwords are currently locked. Please unlock them by clicking PfP icon and try again.","unknown_data_format":"Unknown data format!","syntax_error":"The file contains errors and could not be imported.","allpasswords_import_confirm":"Importing passwords is only possible if the master password didn't change. Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords_import_with_master":"It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.","allpasswords_import_success":"Passwords data has been imported.","allpasswords_show_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","allpasswords_export_edge":"Bugs in Microsoft Edge currently prevent extensions from offering files for download. You will need to copy the text manually and paste it into a text editor such as Notepad.","autolock_title":"Enable auto-lock","autolock_description":"Lock passwords automatically when the panel is closed","autolock_delay_title":"Auto-lock delay","autolock_delay_description":"Interval in minutes after which the passwords should be locked"};
 
 /***/ }),
-/* 15 */
+/* 17 */
 /* no static exports found */
 /* all exports used */
 /*!***************************!*\
@@ -1405,7 +1514,7 @@ exports.set = function (data) {
 };
 
 /***/ }),
-/* 16 */
+/* 18 */
 /* no static exports found */
 /* all exports used */
 /*!***********************************!*\
@@ -1431,7 +1540,7 @@ var _require2 = __webpack_require__(/*! ../proxy */ 3),
     masterPassword = _require2.masterPassword,
     passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require3.setCommandHandler,
     setSubmitHandler = _require3.setSubmitHandler;
 
@@ -1441,12 +1550,12 @@ var _require4 = __webpack_require__(/*! ./formValidation */ 5),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
     setActivePanel = _require5.setActivePanel,
     showUnknownError = _require5.showUnknownError;
 
-var _require6 = __webpack_require__(/*! ./changeMaster */ 8),
+var _require6 = __webpack_require__(/*! ./changeMaster */ 9),
     validateMasterPassword = _require6.validateMasterPassword;
 
 setCommandHandler("reset-master-link", function () {
@@ -1476,7 +1585,7 @@ setSubmitHandler("enter-master", function () {
 });
 
 /***/ }),
-/* 17 */
+/* 19 */
 /* no static exports found */
 /* all exports used */
 /*!*********************************!*\
@@ -2339,7 +2448,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 18 */
+/* 20 */
 /* no static exports found */
 /* all exports used */
 /*!*********************************!*\
@@ -2361,12 +2470,12 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _require = __webpack_require__(/*! ../proxy */ 3),
     passwords = _require.passwords;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
+var _require2 = __webpack_require__(/*! ./events */ 1),
     setSubmitHandler = _require2.setSubmitHandler;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require3 = __webpack_require__(/*! ./utils */ 1),
+var _require3 = __webpack_require__(/*! ./utils */ 0),
     $ = _require3.$,
     showUnknownError = _require3.showUnknownError;
 
@@ -2400,7 +2509,7 @@ setSubmitHandler("migration", function () {
 });
 
 /***/ }),
-/* 19 */
+/* 21 */
 /* no static exports found */
 /* all exports used */
 /*!*****************************!*\
@@ -2420,15 +2529,16 @@ setSubmitHandler("migration", function () {
 var _require = __webpack_require__(/*! ../proxy */ 3),
     passwords = _require.passwords;
 
-var _require2 = __webpack_require__(/*! ./events */ 0),
+var _require2 = __webpack_require__(/*! ./events */ 1),
     setSubmitHandler = _require2.setSubmitHandler,
     setResetHandler = _require2.setResetHandler;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require3 = __webpack_require__(/*! ./utils */ 1),
+var _require3 = __webpack_require__(/*! ./utils */ 0),
     $ = _require3.$,
     setActivePanel = _require3.setActivePanel,
+    setSiteName = _require3.setSiteName,
     showUnknownError = _require3.showUnknownError;
 
 setSubmitHandler("notes", saveNotes);
@@ -2440,7 +2550,7 @@ updateSiteName();
 var currentPassword = null;
 
 function updateSiteName() {
-  $("notes-website-name").textContent = state.site;
+  setSiteName("notes-website-name");
 }
 
 function edit(password) {
@@ -2467,7 +2577,7 @@ function saveNotes() {
 }
 
 /***/ }),
-/* 20 */
+/* 22 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -2495,15 +2605,17 @@ var _require2 = __webpack_require__(/*! ../proxy */ 3),
     passwordRetrieval = _require2.passwordRetrieval,
     ui = _require2.ui;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require3.setCommandHandler,
     setSubmitHandler = _require3.setSubmitHandler;
 
+var siteSelection = __webpack_require__(/*! ./siteSelection */ 25);
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require4 = __webpack_require__(/*! ./utils */ 1),
+var _require4 = __webpack_require__(/*! ./utils */ 0),
     $ = _require4.$,
     setActivePanel = _require4.setActivePanel,
+    setSiteName = _require4.setSiteName,
     showUnknownError = _require4.showUnknownError;
 
 var _require5 = __webpack_require__(/*! ./confirm */ 6),
@@ -2511,35 +2623,12 @@ var _require5 = __webpack_require__(/*! ./confirm */ 6),
 
 var hidePasswordMessagesTimeout = null;
 
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
+var selectSiteElement = $("select-site");
+selectSiteElement.setAttribute("title", selectSiteElement.textContent);
+selectSiteElement.textContent = "";
+setCommandHandler(selectSiteElement, selectSite);
 
-try {
-  for (var _iterator = ["site-edit-accept", "site-edit-cancel"].map($)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-    var element = _step.value;
-
-    element.setAttribute("title", element.textContent);
-    element.textContent = "";
-  }
-} catch (err) {
-  _didIteratorError = true;
-  _iteratorError = err;
-} finally {
-  try {
-    if (!_iteratorNormalCompletion && _iterator.return) {
-      _iterator.return();
-    }
-  } finally {
-    if (_didIteratorError) {
-      throw _iteratorError;
-    }
-  }
-}
-
-setCommandHandler("add-alias", function () {
-  return editSite();
-});
+setCommandHandler("add-alias", addAlias);
 setCommandHandler("remove-alias", removeAlias);
 setCommandHandler("show-all", function () {
   ui.showAllPasswords().then(function () {
@@ -2551,9 +2640,6 @@ setCommandHandler("lock-passwords", function () {
     return state.set({ masterPasswordState: "set" });
   }).catch(showUnknownError);
 });
-setCommandHandler("site-edit-accept", finishEditingSite);
-setCommandHandler("site-edit-cancel", abortEditingSite);
-setSubmitHandler("password-list", finishEditingSite);
 
 var menuPassword = null;
 setCommandHandler("menu-to-document", function () {
@@ -2597,7 +2683,8 @@ function initPasswordList() {
 
 function setSite() {
   var origSite = state.origSite,
-      site = state.site;
+      site = state.site,
+      masterPasswordState = state.masterPasswordState;
 
 
   if (origSite != site) {
@@ -2608,23 +2695,20 @@ function setSite() {
     $("alias-container").hidden = false;
   } else $("alias-container").hidden = true;
 
-  $("site-edit-container").hidden = false;
-  $("add-alias").hidden = !site || origSite != site || state.pwdList.length;
+  $("add-alias").hidden = !site || origSite != site || site == "pfp.invalid" || state.pwdList.length;
 
-  var field = $("site");
-  field.setAttribute("value", site || "???");
-  field.value = field.getAttribute("value");
-  field.setAttribute("readonly", "readonly");
+  var field = $("password-list-site");
+  setSiteName(field);
   $("generate-password-link").hidden = $("stored-password-link").hidden = !site;
 
-  if (!site) editSite(true);
+  if (masterPasswordState == "known" && !site) selectSite();
 }
 
 function hidePasswordMessages() {
   if (hidePasswordMessagesTimeout) window.clearTimeout(hidePasswordMessagesTimeout);
   hidePasswordMessagesTimeout = null;
 
-  var _arr = ["empty-site-name", "password-ready-message", "password-copied-message", "no-such-password", "unknown-generation-method", "wrong-site-message", "no-password-fields"];
+  var _arr = ["password_ready_message", "password_copied_message", "no_such_password", "unknown_generation_method", "wrong_site_message", "no_password_fields"];
   for (var _i = 0; _i < _arr.length; _i++) {
     var id = _arr[_i];
     $(id).hidden = true;
@@ -2645,67 +2729,58 @@ function showPasswordMessage(error) {
   hidePasswordMessagesTimeout = window.setTimeout(hidePasswordMessages, 3000);
 }
 
-function editSite(mandatory) {
-  $("site-edit-container").hidden = true;
-  $("site-edit-cancel").setAttribute("disabled", mandatory ? "true" : null);
+function selectSite() {
+  var message = i18n.getMessage("select_site");
+  siteSelection.show(message).then(function (site) {
+    passwords.getPasswords(site).then(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          origSite = _ref2[0],
+          site = _ref2[1],
+          pwdList = _ref2[2];
 
-  var field = $("site");
-  field.removeAttribute("readonly");
-  field.value = state.site;
-  field.select();
-  field.focus();
+      return state.set({ origSite: origSite, site: site, pwdList: pwdList });
+    }).catch(showUnknownError);
+  }).catch(function () {
+    // User cancelled
+  });
 }
 
-function finishEditingSite() {
-  var field = $("site");
-  var alias = field.value.trim();
-  if (!alias) {
-    showPasswordMessage("empty-site-name");
-    return;
-  }
+function addAlias() {
+  var origSite = state.origSite;
 
-  var site = state.site;
+  var message = i18n.getMessage("select_alias").replace(/\{1\}/g, origSite);
+  siteSelection.show(message).then(function (alias) {
+    if (alias == origSite) return;
 
-  if (alias == site) {
-    abortEditingSite();
-    return;
-  }
+    passwords.addAlias(origSite, alias).then(function () {
+      return passwords.getPasswords(state.origSite);
+    }).then(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 3),
+          origSite = _ref4[0],
+          site = _ref4[1],
+          pwdList = _ref4[2];
 
-  Promise.resolve().then(function () {
-    if (site) return passwords.addAlias(site, alias);else return undefined;
-  }).then(function () {
-    return passwords.getPasswords(state.origSite || alias);
-  }).then(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 3),
-        origSite = _ref2[0],
-        site = _ref2[1],
-        pwdList = _ref2[2];
-
-    return state.set({ origSite: origSite, site: site, pwdList: pwdList });
-  }).catch(showUnknownError);
-  field.setAttribute("readonly", "readonly");
-}
-
-function abortEditingSite() {
-  if ($("site-edit-cancel").getAttribute("disabled") == "true") return;
-
-  setSite();
+      return state.set({ origSite: origSite, site: site, pwdList: pwdList });
+    }).catch(showUnknownError);
+  }).catch(function () {
+    // User cancelled
+  });
 }
 
 function removeAlias() {
   var origSite = state.origSite,
-      site = state.site;
+      siteDisplayName = state.siteDisplayName;
 
-  var message = i18n.getMessage("remove_alias_confirmation").replace(/\{1\}/g, origSite).replace(/\{2\}/g, site);
+  var message = i18n.getMessage("remove_alias_confirmation").replace(/\{1\}/g, origSite).replace(/\{2\}/g, siteDisplayName);
   confirm(message).then(function (response) {
     if (response) {
       passwords.removeAlias(origSite).then(function () {
         return passwords.getPasswords(origSite);
-      }).then(function (_ref3) {
-        var _ref4 = _slicedToArray(_ref3, 3),
-            origSite = _ref4[0],
-            site = _ref4[1],
-            pwdList = _ref4[2];
+      }).then(function (_ref5) {
+        var _ref6 = _slicedToArray(_ref5, 3),
+            origSite = _ref6[0],
+            site = _ref6[1],
+            pwdList = _ref6[2];
 
         return state.set({ origSite: origSite, site: site, pwdList: pwdList });
       }).catch(showUnknownError);
@@ -2733,13 +2808,13 @@ function showPasswords() {
       }
     }
 
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
     try {
-      for (var _iterator2 = pwdList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var password = _step2.value;
+      for (var _iterator = pwdList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var password = _step.value;
 
         var tooltip = void 0;
         if (password.type == "generated2" || password.type == "generated") {
@@ -2780,16 +2855,16 @@ function showPasswords() {
         list.appendChild(entry);
       }
     } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
+      _didIteratorError = true;
+      _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
         }
       } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
+        if (_didIteratorError) {
+          throw _iteratorError;
         }
       }
     }
@@ -2838,13 +2913,13 @@ function copyToClipboard(password) {
 
   passwords.getPassword(site, password.name, password.revision).then(function (password) {
     var doCopy = function doCopy() {
-      __webpack_require__(/*! ../clipboard */ 15).set(password);
-      showPasswordMessage("password-copied-message");
+      __webpack_require__(/*! ../clipboard */ 17).set(password);
+      showPasswordMessage("password_copied_message");
     };
 
     var isWebClient = document.documentElement.classList.contains("webclient");
     if (!isWebClient) doCopy();else {
-      showPasswordMessage("password-ready-message");
+      showPasswordMessage("password_ready_message");
       var handler = function handler(event) {
         window.removeEventListener("click", handler, true);
         event.stopPropagation();
@@ -2858,16 +2933,16 @@ function copyToClipboard(password) {
 
 function showQRCode(password) {
   passwords.getPassword(state.site, password.name, password.revision).then(function (value) {
-    return __webpack_require__(/*! ./qrcode */ 21).show(password, value);
+    return __webpack_require__(/*! ./qrcode */ 23).show(password, value);
   }).catch(showPasswordMessage);
 }
 
 function showNotes(password) {
-  __webpack_require__(/*! ./notes */ 19).edit(password);
+  __webpack_require__(/*! ./notes */ 21).edit(password);
 }
 
 function upgradePassword(password) {
-  var message = i18n.getMessage("upgrade_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, password.site);
+  var message = i18n.getMessage("upgrade_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, state.siteDisplayName);
   confirm(message).then(function (response) {
     if (response) {
       passwords.addGenerated({
@@ -2910,16 +2985,16 @@ function bumpRevision(password) {
     $("charset-symbol").checked = password.symbol;
   }
 
-  __webpack_require__(/*! ./generatePassword */ 9).showRevision();
+  __webpack_require__(/*! ./generatePassword */ 10).showRevision();
 }
 
 function removePassword(password) {
-  var site = state.site;
+  var siteDisplayName = state.siteDisplayName;
 
-  var message = i18n.getMessage("remove_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, site);
+  var message = i18n.getMessage("remove_password_confirmation").replace(/\{1\}/g, password.name).replace(/\{2\}/g, siteDisplayName);
   confirm(message).then(function (response) {
     if (response) {
-      passwords.removePassword(site, password.name, password.revision).then(function (pwdList) {
+      passwords.removePassword(password.site, password.name, password.revision).then(function (pwdList) {
         return state.set({ pwdList: pwdList });
       }).catch(showPasswordMessage);
     }
@@ -2933,7 +3008,7 @@ function removeWhitespace(element) {
 }
 
 /***/ }),
-/* 21 */
+/* 23 */
 /* no static exports found */
 /* all exports used */
 /*!******************************!*\
@@ -2950,14 +3025,15 @@ function removeWhitespace(element) {
 
 
 
-var _require = __webpack_require__(/*! ./events */ 0),
+var _require = __webpack_require__(/*! ./events */ 1),
     setSubmitHandler = _require.setSubmitHandler;
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require2 = __webpack_require__(/*! ./utils */ 1),
+var _require2 = __webpack_require__(/*! ./utils */ 0),
     $ = _require2.$,
     getActivePanel = _require2.getActivePanel,
+    setSiteName = _require2.setSiteName,
     setActivePanel = _require2.setActivePanel;
 
 var originalSelection = null;
@@ -2966,7 +3042,7 @@ state.on("update", updateSiteName);
 updateSiteName();
 
 function updateSiteName() {
-  $("qrcode-website-name").textContent = state.site;
+  setSiteName("qrcode-website-name");
 }
 
 setSubmitHandler("qrcode", function () {
@@ -2982,7 +3058,7 @@ function show(password, text) {
 
   originalSelection = getActivePanel();
 
-  var qr = new (__webpack_require__(/*! ./jsqr-1.0.2 */ 27).JSQR)();
+  var qr = new (__webpack_require__(/*! ./jsqr-1.0.2 */ 30).JSQR)();
 
   var code = new qr.Code();
   code.encodeMode = code.ENCODE_MODE.BYTE;
@@ -3013,7 +3089,7 @@ function show(password, text) {
 exports.show = show;
 
 /***/ }),
-/* 22 */
+/* 24 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -3036,7 +3112,7 @@ var _require = __webpack_require__(/*! ../browserAPI */ 4),
 var _require2 = __webpack_require__(/*! ../proxy */ 3),
     recoveryCodes = _require2.recoveryCodes;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setResetHandler = _require3.setResetHandler,
     setCommandHandler = _require3.setCommandHandler;
 
@@ -3046,13 +3122,14 @@ var _require4 = __webpack_require__(/*! ./formValidation */ 5),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
     getActivePanel = _require5.getActivePanel,
     setActivePanel = _require5.setActivePanel,
+    setSiteName = _require5.setSiteName,
     showUnknownError = _require5.showUnknownError;
 
-var Formatter = __webpack_require__(/*! ./formatter */ 17);
+var Formatter = __webpack_require__(/*! ./formatter */ 19);
 
 var originalSelection = null;
 var targetElement = null;
@@ -3097,7 +3174,7 @@ recoveryCodes.getValidChars().then(function (validChars) {
 }).catch(showUnknownError);
 
 function updateSiteName() {
-  $("recovery-code-website-name").textContent = state.site;
+  setSiteName("recovery-code-website-name");
 }
 
 setResetHandler("recovery-code", function () {
@@ -3153,7 +3230,184 @@ function stripLastCodeLine() {
 }
 
 /***/ }),
-/* 23 */
+/* 25 */
+/* no static exports found */
+/* all exports used */
+/*!*************************************!*\
+  !*** ./data/panel/siteSelection.js ***!
+  \*************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
+
+var _require2 = __webpack_require__(/*! ../common */ 7),
+    getSiteDisplayName = _require2.getSiteDisplayName;
+
+var _require3 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require3.passwords;
+
+var _require4 = __webpack_require__(/*! ./events */ 1),
+    setResetHandler = _require4.setResetHandler,
+    setSubmitHandler = _require4.setSubmitHandler,
+    setCommandHandler = _require4.setCommandHandler;
+
+var state = __webpack_require__(/*! ./state */ 2);
+
+var _require5 = __webpack_require__(/*! ./utils */ 0),
+    $ = _require5.$,
+    getActivePanel = _require5.getActivePanel,
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
+
+var currentRequest = null;
+var sites = null;
+
+setSubmitHandler("site-selection", function () {
+  return done($("site-selection-site").value.trim());
+});
+setResetHandler("site-selection", function () {
+  return done(null);
+});
+setCommandHandler("site-autocomplete", handleAutocompleteClick);
+$("site-selection-site").addEventListener("input", findMatchingSites);
+$("site-selection-site").addEventListener("keydown", handleKeyDown);
+
+function done(value) {
+  if (!currentRequest) return;
+
+  setActivePanel(currentRequest.originalSelection, true);
+  if (value) currentRequest.resolve(value);else currentRequest.reject();
+  currentRequest = null;
+  sites = null;
+}
+
+function show(message) {
+  $("site-selection-label").textContent = message;
+
+  var originalSelection = getActivePanel();
+  setActivePanel("site-selection");
+
+  $("site-selection-site").value = state.site && state.siteDisplayName;
+  $("site-selection-site").select();
+
+  findMatchingSites();
+  passwords.getAllSites().then(function (allSites) {
+    sites = allSites;
+    var index = sites.indexOf("pfp.invalid");
+    if (index >= 0) sites.splice(index, 1);
+    sites.unshift("pfp.invalid");
+    findMatchingSites();
+  }).catch(showUnknownError);
+
+  return new Promise(function (resolve, reject) {
+    currentRequest = {
+      resolve: resolve, reject: reject, originalSelection: originalSelection
+    };
+  });
+}
+exports.show = show;
+
+function findMatchingSites() {
+  var autocompleteBox = $("site-autocomplete");
+  while (autocompleteBox.lastChild) {
+    autocompleteBox.removeChild(autocompleteBox.lastChild);
+  }if (!sites) return;
+
+  var seenResult = false;
+  var query = $("site-selection-site").value.trim();
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = sites[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var site = _step.value;
+
+      var displayName = getSiteDisplayName(site);
+      var index = displayName.indexOf(query);
+      if (index < 0) continue;
+
+      seenResult = true;
+
+      var el = document.createElement("div");
+      if (site != displayName) el.classList.add("special-site");
+      el.setAttribute("data-site", site);
+      if (index > 0) el.appendChild(document.createTextNode(displayName.substr(0, index)));
+      if (query) {
+        el.appendChild(document.createElement("strong"));
+        el.lastChild.appendChild(document.createTextNode(query));
+      }
+      if (index + query.length < site.length) el.appendChild(document.createTextNode(displayName.substr(index + query.length)));
+      autocompleteBox.appendChild(el);
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  if (!seenResult) autocompleteBox.appendChild(document.createTextNode(i18n.getMessage("autocomplete_no_sites")));
+}
+
+function handleAutocompleteClick(event) {
+  var target = event.target;
+  while (target && target.id != "site-autocomplete" && !target.hasAttribute("data-site")) {
+    target = target.parentNode;
+  }if (target.hasAttribute("data-site")) done(target.getAttribute("data-site"));
+}
+
+function handleKeyDown(event) {
+  if (event.key == "ArrowDown") {
+    var autocompleteBox = $("site-autocomplete");
+    var active = autocompleteBox.querySelector(".active");
+    if (active && active.nextSibling) {
+      active.classList.remove("active");
+      active.nextSibling.classList.add("active");
+      active.nextSibling.scrollIntoView({ block: "nearest" });
+    } else if (!active && autocompleteBox.firstChild && autocompleteBox.firstChild.hasAttribute("data-site")) autocompleteBox.firstChild.classList.add("active");
+    event.preventDefault();
+  } else if (event.key == "ArrowUp") {
+    var _autocompleteBox = $("site-autocomplete");
+    var _active = _autocompleteBox.querySelector(".active");
+    if (_active) {
+      _active.classList.remove("active");
+      if (_active.previousSibling) {
+        _active.previousSibling.classList.add("active");
+        _active.previousSibling.scrollIntoView({ block: "nearest" });
+      }
+    }
+    event.preventDefault();
+  } else if (event.key == "Enter") {
+    var _autocompleteBox2 = $("site-autocomplete");
+    var _active2 = _autocompleteBox2.querySelector(".active");
+    if (_active2) {
+      done(_active2.getAttribute("data-site"));
+      event.preventDefault();
+    }
+  }
+}
+
+/***/ }),
+/* 26 */
 /* no static exports found */
 /* all exports used */
 /*!**************************************!*\
@@ -3176,7 +3430,7 @@ var _require = __webpack_require__(/*! ../browserAPI */ 4),
 var _require2 = __webpack_require__(/*! ../proxy */ 3),
     passwords = _require2.passwords;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require3.setCommandHandler,
     setSubmitHandler = _require3.setSubmitHandler,
     setResetHandler = _require3.setResetHandler;
@@ -3188,9 +3442,10 @@ var _require4 = __webpack_require__(/*! ./formValidation */ 5),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
     setActivePanel = _require5.setActivePanel,
+    setSiteName = _require5.setSiteName,
     showUnknownError = _require5.showUnknownError;
 
 setValidator("stored-password-user-name", enforceValue.bind(null, "user_name_required"));
@@ -3213,7 +3468,7 @@ state.on("update", updateSite);
 updateSite();
 
 function updateSite() {
-  $("stored-password-site").textContent = state.site;
+  setSiteName("stored-password-site");
 }
 
 function showRevision() {
@@ -3223,7 +3478,7 @@ function showRevision() {
 }
 
 function showRecovery() {
-  __webpack_require__(/*! ./recoveryCode */ 22).show($("stored-password-value"));
+  __webpack_require__(/*! ./recoveryCode */ 24).show($("stored-password-value"));
 }
 
 function addStoredPassword() {
@@ -3244,7 +3499,7 @@ function addStoredPassword() {
 }
 
 /***/ }),
-/* 24 */
+/* 27 */
 /* no static exports found */
 /* all exports used */
 /*!*********************************!*\
@@ -3261,7 +3516,7 @@ function addStoredPassword() {
 
 
 
-var _require = __webpack_require__(/*! ./events */ 0),
+var _require = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require.setCommandHandler,
     setSubmitHandler = _require.setSubmitHandler,
     setResetHandler = _require.setResetHandler;
@@ -3271,31 +3526,64 @@ var _require2 = __webpack_require__(/*! ../proxy */ 3),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require3 = __webpack_require__(/*! ./utils */ 1),
+var _require3 = __webpack_require__(/*! ./utils */ 0),
     $ = _require3.$,
-    setActivePanel = _require3.setActivePanel;
+    setActivePanel = _require3.setActivePanel,
+    showUnknownError = _require3.showUnknownError;
 
 setCommandHandler("sync-setup-link", function () {
   return setActivePanel("sync-setup");
 });
-setSubmitHandler("sync-setup", authorize);
 setResetHandler("sync-setup", function () {
   return setActivePanel("password-list");
 });
 
 state.on("update", updateLink);
 
+var isWebClient = document.documentElement.classList.contains("webclient");
+if (isWebClient) {
+  var nodes = $("sync-provider-selection").querySelectorAll("[data-provider]");
+
+  var _loop = function _loop(i) {
+    var node = nodes[i];
+    var provider = node.getAttribute("data-provider");
+    sync.getManualAuthURL(provider).then(function (url) {
+      node.href = url;
+      node.target = "_blank";
+      node.addEventListener("click", function () {
+        __webpack_require__(/*! ./syncAuthorize */ 11).show().then(function (code) {
+          return sync.manualAuthorization(provider, code).then(function () {
+            setActivePanel("sync-state");
+          }).catch(showUnknownError);
+        }).catch(function (error) {
+          // User cancelled, ignore
+        });
+      });
+    }).catch(showUnknownError);
+  };
+
+  for (var i = 0; i < nodes.length; i++) {
+    _loop(i);
+  }
+} else setCommandHandler("sync-provider-selection", authorize);
+
 function updateLink() {
-  $("sync-setup-link").hidden = state.syncProvider;
+  $("sync-setup-link").hidden = state.sync.provider;
 }
 
-function authorize() {
-  sync.authorize();
+function authorize(event) {
+  var target = event.target;
+  while (target && target.id != "sync-provider-selection" && !target.hasAttribute("data-provider")) {
+    target = target.parentNode;
+  }if (!target || !target.hasAttribute("data-provider")) return;
+
+  event.preventDefault();
+  sync.authorize(target.getAttribute("data-provider"));
   window.close();
 }
 
 /***/ }),
-/* 25 */
+/* 28 */
 /* no static exports found */
 /* all exports used */
 /*!*********************************!*\
@@ -3318,7 +3606,7 @@ var _require = __webpack_require__(/*! ../browserAPI */ 4),
 var _require2 = __webpack_require__(/*! ./confirm */ 6),
     confirm = _require2.confirm;
 
-var _require3 = __webpack_require__(/*! ./events */ 0),
+var _require3 = __webpack_require__(/*! ./events */ 1),
     setCommandHandler = _require3.setCommandHandler,
     setSubmitHandler = _require3.setSubmitHandler,
     setResetHandler = _require3.setResetHandler;
@@ -3328,12 +3616,18 @@ var _require4 = __webpack_require__(/*! ../proxy */ 3),
 
 var state = __webpack_require__(/*! ./state */ 2);
 
-var _require5 = __webpack_require__(/*! ./utils */ 1),
+var _require5 = __webpack_require__(/*! ./utils */ 0),
     $ = _require5.$,
-    setActivePanel = _require5.setActivePanel;
+    setActivePanel = _require5.setActivePanel,
+    showUnknownError = _require5.showUnknownError;
+
+var displayNames = new Map([["dropbox", "Dropbox"], ["gdrive", "Google Drive"]]);
 
 setCommandHandler("sync-state-link", function () {
   return setActivePanel("sync-state");
+});
+setCommandHandler("do-sync", function () {
+  return sync.sync();
 });
 setSubmitHandler("sync-state", disable);
 setResetHandler("sync-state", function () {
@@ -3342,17 +3636,74 @@ setResetHandler("sync-state", function () {
 
 state.on("update", updateState);
 
+function localize(error) {
+  if (/\s/.test(error)) return error;
+
+  try {
+    return i18n.getMessage(error) || error;
+  } catch (e) {
+    // Edge will throw for unknown messages
+    return error;
+  }
+}
+
 function updateState() {
-  $("sync-state-link").hidden = !state.syncProvider;
-  $("sync-provider").textContent = state.syncProvider;
-  if (state.syncLastTime) $("sync-lastTime").textContent = new Date(state.syncLastTime).toLocaleString();else $("sync-lastTime").textContent = i18n.getMessage("sync_lastTime_never");
+  $("sync-state-link").hidden = !state.sync.provider;
+  $("sync-provider").textContent = displayNames.get(state.sync.provider) || state.sync.provider;
+  $("do-sync").disabled = state.sync.isSyncing;
+  if (state.sync.isSyncing) {
+    $("sync-lastTime").textContent = i18n.getMessage("sync_lastTime_now");
+    $("sync-lastTime-container").className = "";
+  } else if (state.sync.lastSync) {
+    $("sync-lastTime").textContent = new Date(state.sync.lastSync).toLocaleString();
+    $("sync-lastTime-container").className = state.sync.error ? "failed" : "succeeded";
+  } else {
+    $("sync-lastTime").textContent = i18n.getMessage("sync_lastTime_never");
+    $("sync-lastTime-container").className = "";
+  }
+
+  if (state.sync.error) {
+    $("sync-error").textContent = localize(state.sync.error);
+    if (state.sync.error == "sync_invalid_token") {
+      var link = document.createElement("a");
+      link.textContent = i18n.getMessage("sync_reauthorize");
+      $("sync-error").appendChild(document.createTextNode(" "));
+
+      var provider = state.sync.provider;
+
+      var isWebClient = document.documentElement.classList.contains("webclient");
+      if (isWebClient) {
+        sync.getManualAuthURL(provider).then(function (url) {
+          link.href = url;
+          link.target = "_blank";
+          link.addEventListener("click", function () {
+            __webpack_require__(/*! ./syncAuthorize */ 11).show().then(function (code) {
+              return sync.manualAuthorization(provider, code).catch(showUnknownError);
+            }).catch(function (error) {
+              // User cancelled, ignore
+            });
+          });
+          $("sync-error").appendChild(link);
+        }).catch(showUnknownError);
+      } else {
+        link.href = "#";
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          sync.authorize(provider);
+          window.close();
+        });
+        $("sync-error").appendChild(link);
+      }
+    }
+  }
+  $("sync-error").hidden = !state.sync.error;
+  $("sync-state-link").className = state.sync.error && state.sync.error != "sync_connection_error" ? "failed" : "";
 }
 
 function disable() {
   confirm(i18n.getMessage("sync_disable_confirmation")).then(function (disable) {
     if (disable) {
       sync.disable().then(function () {
-        state.set({ syncProvider: null });
         setActivePanel("password-list");
       });
     }
@@ -3360,7 +3711,7 @@ function disable() {
 }
 
 /***/ }),
-/* 26 */
+/* 29 */
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -3421,7 +3772,7 @@ EventTarget.prototype = {
 exports.EventTarget = EventTarget;
 
 /***/ }),
-/* 27 */
+/* 30 */
 /* no static exports found */
 /* all exports used */
 /*!**********************************!*\
@@ -5235,7 +5586,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 /***/ }),
-/* 28 */
+/* 31 */
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -5243,8 +5594,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   \*****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/wladimir/repos/pfp/data/platform.js */12);
-module.exports = __webpack_require__(/*! /home/wladimir/repos/pfp/data/panel/main.js */11);
+__webpack_require__(/*! /home/wladimir/repos/pfp/data/platform.js */14);
+module.exports = __webpack_require__(/*! /home/wladimir/repos/pfp/data/panel/main.js */13);
 
 
 /***/ })

@@ -24,7 +24,7 @@
       <div id="reset-master-message" class="description warning" data-l10n-id="reset_master_message"></div>
       <div>
         <span data-l10n-id="master_security_message"></span>
-        <a href="#" data-type="documentation" data-param="choosing-master-password" data-l10n-id="master_security_learn_more"></a>
+        <a href="#" data-type="documentation" data-param="choosing-master-password" data-l10n-id="learn_more"></a>
       </div>
       <label class="block-start" for="new-master" data-l10n-id="new_master"></label>
       <input id="new-master" type="password">
@@ -74,13 +74,13 @@
         <li data-l10n-id="migration_todo1"></li>
         <li data-l10n-id="migration_todo2"></li>
       </ul>
-      <p><a href="#" data-type="relnotes" data-param="2.0.0" data-l10n-id="migration_learn_more"></a></p>
+      <p><a href="#" data-type="relnotes" data-param="2.0.0" data-l10n-id="learn_more"></a></p>
       <div id="migration-buttons" class="button-container" hidden>
         <button id="migration-continue" type="submit" data-l10n-id="migration_continue"></button>
       </div>
     </form>
 
-    <form id="password-list" class="slide" data-default-element="site">
+    <form id="password-list" class="slide" data-default-element="select-site">
       <!-- Cannot use <template> tag here, template contents are removed from document before l10n does its job -->
       <div id="password-template" hidden>
         <div class="password-container">
@@ -126,28 +126,24 @@
         </a>
       </div>
 
-      <label for="site" data-l10n-id="site"></label>
-      <div id="site-container">
-        <div id="site-name-container">
-          <input id="site" type="text" placeholder="example.com" readonly>
-          <a href="#" id="site-edit-cancel" data-l10n-id="site_edit_cancel"></a>
-          <a href="#" id="site-edit-accept" data-l10n-id="site_edit_accept"></a>
+      <div id="password-list-header">
+        <label for="password-list-site" data-l10n-id="site"></label>
+        <div id="password-list-site-container">
+          <a href="#" id="select-site" data-l10n-id="select_site_label"></a>
+          <div id="password-list-site"></div>
         </div>
-        <div id="site-edit-container">
-          <a href="#" id="add-alias" data-l10n-id="add_alias" hidden></a>
-          <span id="alias-container" hidden>
-            <span id="alias-text" data-l10n-id="alias_description"></span>
-            <a href="#" id="remove-alias" data-l10n-id="remove_alias"></a>
-          </span>
-        </div>
+        <a href="#" id="add-alias" data-l10n-id="add_alias" hidden></a>
+        <span id="alias-container" hidden>
+          <span id="alias-text" data-l10n-id="alias_description"></span>
+          <a href="#" id="remove-alias" data-l10n-id="remove_alias"></a>
+        </span>
       </div>
-      <div id="empty-site-name" class="warning" data-l10n-id="empty_site_name"></div>
-      <div id="password-ready-message" class="warning" data-l10n-id="password_ready_message"></div>
-      <div id="password-copied-message" class="success" data-l10n-id="password_copied_message"></div>
-      <div id="no-such-password" class="warning" data-l10n-id="no_such_password"></div>
-      <div id="unknown-generation-method" class="warning" data-l10n-id="unknown_generation_method"></div>
-      <div id="wrong-site-message" class="warning" data-l10n-id="wrong_site_message"></div>
-      <div id="no-password-fields" class="warning" data-l10n-id="no_password_fields"></div>
+      <div id="password_ready_message" class="warning" data-l10n-id="password_ready_message"></div>
+      <div id="password_copied_message" class="success" data-l10n-id="password_copied_message"></div>
+      <div id="no_such_password" class="warning" data-l10n-id="no_such_password"></div>
+      <div id="unknown_generation_method" class="warning" data-l10n-id="unknown_generation_method"></div>
+      <div id="wrong_site_message" class="warning" data-l10n-id="wrong_site_message"></div>
+      <div id="no_password_fields" class="warning" data-l10n-id="no_password_fields"></div>
       <div data-l10n-id="passwords_label" class="block-start"></div>
       <div id="no-passwords-message" data-l10n-id="no_passwords_message"></div>
       <div id="password-list-container"></div>
@@ -217,6 +213,16 @@
       </div>
     </form>
 
+    <form id="site-selection" class="slide" data-default-element="site-selection-site">
+      <label id="site-selection-label" for="site-selection-site"></label>
+      <input id="site-selection-site" type="text" placeholder="example.com" autocomplete="off">
+      <div id="site-autocomplete"></div>
+      <div class="button-container">
+        <button type="submit" data-l10n-id="ok"></button>
+        <button type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
     <form id="recovery-code" class="slide" data-default-element="recovery-code-input">
       <label data-l10n-id="site"></label>
       <div id="recovery-code-website-name"></div>
@@ -260,23 +266,47 @@
     </form>
 
     <form id="sync-setup" class="slide" data-default-element="sync-authorize">
-      <label data-l10n-id="sync_how_label"></label>
-      <div data-l10n-id="sync_how_explanation"></div>
+      <label data-l10n-id="sync_selection_label"></label>
+      <div id="sync-provider-selection">
+        <a href="#" data-provider="dropbox"><img class="sync-storage-provider" src="../images/dropbox.svg" alt="Dropbox"></a>
+        <a href="#" data-provider="gdrive"><img class="sync-storage-provider" src="../images/gdrive.png" alt="Google Drive"></a>
+      </div>
+      <label class="block-start" data-l10n-id="sync_how_label"></label>
+      <div>
+        <span data-l10n-id="sync_how_explanation"></span>
+        <a href="#" data-type="documentation" data-param="sync" data-l10n-id="learn_more"></a>
+      </div>
       <label class="block-start" data-l10n-id="sync_safe_label"></label>
       <div data-l10n-id="sync_safe_explanation"></div>
       <label class="block-start" data-l10n-id="sync_no_account_label"></label>
       <div data-l10n-id="sync_no_account_explanation"></div>
       <div class="button-container">
-        <button id="sync-authorize" type="submit" data-l10n-id="sync_authorize"></button>
         <button id="sync-setup-cancel" type="reset" data-l10n-id="cancel"></button>
       </div>
     </form>
 
-    <form id="sync-state" class="slide" data-default-element="sync-provider">
+    <form id="sync-authorize" class="slide" data-default-element="sync-token">
+      <label for="sync-token" data-l10n-id="sync_token_label"></label>
+      <input id="sync-token">
+      <div class="button-container">
+        <button id="sync-authorize-ok" type="submit" data-l10n-id="ok"></button>
+        <button id="sync-authorize-cancel" type="reset" data-l10n-id="cancel"></button>
+      </div>
+    </form>
+
+    <form id="sync-state" class="slide" data-default-element="do-sync">
       <label for="sync-provider" data-l10n-id="sync_provider"></label>
       <div id="sync-provider"></div>
       <label class="block-start" for="sync-lastTime" data-l10n-id="sync_lastTime"></label>
-      <div id="sync-lastTime"></div>
+      <div id="sync-lastTime-container">
+        <div id="sync-lastTime"></div>
+        <div id="sync-status-container">
+          <div id="sync-succeeded" data-l10n-id="sync_succeeded"></div>
+          <div id="sync-failed" data-l10n-id="sync_failed"></div>
+        </div>
+        <button id="do-sync" data-l10n-id="do_sync"></button>
+      </div>
+      <div id="sync-error" class="warning"></div>
       <div class="button-container">
         <button id="sync-disable" type="submit" data-l10n-id="sync_disable"></button>
         <button id="sync-state-cancel" type="reset" data-l10n-id="cancel"></button>
