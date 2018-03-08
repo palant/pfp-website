@@ -7,6 +7,10 @@ description: PfP can synchronize data between multiple devices. How does that wo
 
 For data synchronization, PfP uses your account at a storage provider like Dropbox. You grant PfP limited access to that account, and PfP will regularly upload its backup file. This file is fully encrypted, same as your manual backup.
 
+## Which storage provider should I choose?
+
+You should choose the provider that is most convenient for you, usually meaning the one where you have an account already. If you are still undecided, choose Dropbox. Unlike Google Drive, Dropbox will make the data uploaded by PfP visible to you and allow downloading it. Also, Dropbox support is simpler and should be less error-prone.
+
 ## Can PfP read my files?
 
 No. PfP requests access only to its own folder at your storage provider. All it can do is read and write files in that folder. In fact, it will only access the file `passwords.json` there.

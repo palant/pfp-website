@@ -32,3 +32,18 @@ Most importantly however, you should choose a password that you **don't use anyw
 ## How to choose a strong password
 
 There are plenty of different suggestions online on choosing strong passwords. For example, [this article by University of California](https://it.ucsf.edu/policies/choose-right-password) gives good advise.
+
+## How do I change my master password?
+
+Starting with PfP 2.1.0, a backup can be imported even if it was created with a different master password. This allows changing your master password:
+
+* Click PfP icon and log in.
+* Click "Show all passwords."
+* Click the backup button and save a backup with your passwords.
+* Click PfP icon again and "Lock passwords."
+* Click "Reset master password" and choose a new master password (this **removes all existings passwords**).
+* Click "Show all passwords."
+* Click the import button and restore the backup file you created previously.
+* When prompted, enter your old master password which will be used to decrypt the backup file.
+
+The side-effect is that all generated passwords will be converted into stored passwords because password generation depends on the master password. It is recommended that you replace these passwords by new generated passwords.

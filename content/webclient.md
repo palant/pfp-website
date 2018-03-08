@@ -19,6 +19,7 @@ The online version has the following limitations compared to the PfP browser ext
 * The page doesn't know which website you are on, website has to be entered manually.
 * Copying passwords to clipboard requires two clicks rather than one.
 * Passwords will always stay unlocked until you reload the page or lock them manually.
+* Setting up sync requires copying the authorization code manually.
 
 ## Getting your own copy {#install}
 

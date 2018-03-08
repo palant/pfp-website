@@ -28,6 +28,10 @@ You can restore your backup on the All Passwords page as well, using the middle 
 
 Ideally, you should create backups regularly and upload them to an online service where you can access them from anywhere. The backups are encrypted, so this service won't know which websites you have accounts on.
 
+## Automatic backups
+
+[Sync functionality](/documentation/sync/) allows creating backups and uploading them to cloud storage automatically. Even if you use PfP on only one device, it's a good idea to set up sync. If your PfP data is lost for some reason, you will always have a fresh backup this way. Just install PfP again, set the same master password you used before and sync it to the same account as before. All your data will be restored automatically.
+
 ## Paper backups
 
 You don't trust digital copies? Yes, better safe than sorry. You can print the list of your passwords, so that you can recover them manually whenever needed:
