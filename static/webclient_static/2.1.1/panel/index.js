@@ -319,7 +319,7 @@ function set(state) {
     }
   }
 
-  if ("site" in state) exports.siteDisplayName = __webpack_require__(/*! ../common */ 7).getSiteDisplayName(state.site);
+  if ("site" in state) exports.siteDisplayName = __webpack_require__(/*! ../common */ 8).getSiteDisplayName(state.site);
 
   if ("masterPasswordState" in state) {
     var _require2 = __webpack_require__(/*! ./utils */ 0),
@@ -354,7 +354,7 @@ exports.set = set;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _require = __webpack_require__(/*! ./messaging */ 8),
+var _require = __webpack_require__(/*! ./messaging */ 9),
     port = _require.port;
 
 var errorHandlers = new Map();
@@ -862,6 +862,121 @@ exports.confirm = confirm;
 /* 7 */
 /* no static exports found */
 /* all exports used */
+/*!****************************************!*\
+  !*** ./data/panel/generatePassword.js ***!
+  \****************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+var _require = __webpack_require__(/*! ../browserAPI */ 4),
+    i18n = _require.i18n;
+
+var _require2 = __webpack_require__(/*! ../proxy */ 3),
+    passwords = _require2.passwords;
+
+var _require3 = __webpack_require__(/*! ./events */ 1),
+    setCommandHandler = _require3.setCommandHandler,
+    setSubmitHandler = _require3.setSubmitHandler,
+    setResetHandler = _require3.setResetHandler;
+
+var _require4 = __webpack_require__(/*! ./formValidation */ 5),
+    setValidator = _require4.setValidator,
+    markInvalid = _require4.markInvalid,
+    enforceValue = _require4.enforceValue;
+
+var state = __webpack_require__(/*! ./state */ 2);
+
+var _require5 = __webpack_require__(/*! ./utils */ 0),
+    $ = _require5.$,
+    setActivePanel = _require5.setActivePanel,
+    setSiteName = _require5.setSiteName,
+    showUnknownError = _require5.showUnknownError;
+
+$("password-length").addEventListener("input", updatePasswordLengthDisplay);
+$("generate-password").addEventListener("reset", function () {
+  setTimeout(updatePasswordLengthDisplay, 0);
+});
+$("generate-legacy").addEventListener("click", function () {
+  $("generate-legacy-warning").hidden = !$("generate-legacy").checked;
+});
+updatePasswordLengthDisplay();
+
+setValidator("generate-password-user-name", enforceValue.bind(null, "user_name_required"));
+setValidator(["charset-lower", "charset-upper", "charset-number", "charset-symbol"], validateCharsets);
+
+// Dummy validator makes sure validation state is reset when necessary.
+setValidator("generate-password-revision", function () {
+  return null;
+});
+
+setCommandHandler("generate-change-password-revision", showRevision);
+
+setSubmitHandler("generate-password", addGeneratedPassword);
+setResetHandler("generate-password", function () {
+  return setActivePanel("password-list");
+});
+
+state.on("update", updateSite);
+updateSite();
+
+function updateSite() {
+  setSiteName("generate-password-site");
+}
+
+function updatePasswordLengthDisplay() {
+  $("password-length-value").textContent = $("password-length").value;
+}
+
+function validateCharsets(element1, element2, element3, element4) {
+  if (!element1.checked && !element2.checked && !element3.checked && !element4.checked) return i18n.getMessage("no_characters_selected");
+
+  return null;
+}
+
+function showRevision() {
+  $("generate-change-password-revision").hidden = true;
+  $("generate-password-revision-container").hidden = false;
+  $("generate-password-revision").focus();
+}
+exports.showRevision = showRevision;
+
+function addGeneratedPassword() {
+  var revision = $("generate-password-revision").value.trim();
+  if (revision == "1") revision = "";
+
+  passwords.addGenerated({
+    site: state.site,
+    name: $("generate-password-user-name").value,
+    revision: revision,
+    length: $("password-length").value,
+    lower: $("charset-lower").checked,
+    upper: $("charset-upper").checked,
+    number: $("charset-number").checked,
+    symbol: $("charset-symbol").checked,
+    legacy: $("generate-legacy").checked
+  }, $("generate-password-user-name").hasAttribute("readonly")).then(function (pwdList) {
+    state.set({ pwdList: pwdList });
+    setActivePanel("password-list");
+  }).catch(function (error) {
+    if (error == "alreadyExists") {
+      markInvalid([$("generate-password-user-name"), $("generate-password-revision")], i18n.getMessage("user_name_exists_generated"));
+      showRevision();
+    } else showUnknownError(error);
+  });
+}
+
+/***/ }),
+/* 8 */
+/* no static exports found */
+/* all exports used */
 /*!************************!*\
   !*** ./data/common.js ***!
   \************************/
@@ -882,7 +997,7 @@ function getSiteDisplayName(site) {
 exports.getSiteDisplayName = getSiteDisplayName;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /* no static exports found */
 /* all exports used */
 /*!***************************!*\
@@ -966,7 +1081,7 @@ port.onMessage.addListener(function (message) {
 });
 
 /***/ }),
-/* 9 */
+/* 10 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -1069,121 +1184,6 @@ function changeMasterPassword() {
         state.set({ origSite: origSite, site: site, pwdList: pwdList, masterPasswordState: "known" });
       }).catch(showUnknownError);
     }
-  });
-}
-
-/***/ }),
-/* 10 */
-/* no static exports found */
-/* all exports used */
-/*!****************************************!*\
-  !*** ./data/panel/generatePassword.js ***!
-  \****************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-var _require = __webpack_require__(/*! ../browserAPI */ 4),
-    i18n = _require.i18n;
-
-var _require2 = __webpack_require__(/*! ../proxy */ 3),
-    passwords = _require2.passwords;
-
-var _require3 = __webpack_require__(/*! ./events */ 1),
-    setCommandHandler = _require3.setCommandHandler,
-    setSubmitHandler = _require3.setSubmitHandler,
-    setResetHandler = _require3.setResetHandler;
-
-var _require4 = __webpack_require__(/*! ./formValidation */ 5),
-    setValidator = _require4.setValidator,
-    markInvalid = _require4.markInvalid,
-    enforceValue = _require4.enforceValue;
-
-var state = __webpack_require__(/*! ./state */ 2);
-
-var _require5 = __webpack_require__(/*! ./utils */ 0),
-    $ = _require5.$,
-    setActivePanel = _require5.setActivePanel,
-    setSiteName = _require5.setSiteName,
-    showUnknownError = _require5.showUnknownError;
-
-$("password-length").addEventListener("input", updatePasswordLengthDisplay);
-$("generate-password").addEventListener("reset", function () {
-  setTimeout(updatePasswordLengthDisplay, 0);
-});
-$("generate-legacy").addEventListener("click", function () {
-  $("generate-legacy-warning").hidden = !$("generate-legacy").checked;
-});
-updatePasswordLengthDisplay();
-
-setValidator("generate-password-user-name", enforceValue.bind(null, "user_name_required"));
-setValidator(["charset-lower", "charset-upper", "charset-number", "charset-symbol"], validateCharsets);
-
-// Dummy validator makes sure validation state is reset when necessary.
-setValidator("generate-password-revision", function () {
-  return null;
-});
-
-setCommandHandler("generate-change-password-revision", showRevision);
-
-setSubmitHandler("generate-password", addGeneratedPassword);
-setResetHandler("generate-password", function () {
-  return setActivePanel("password-list");
-});
-
-state.on("update", updateSite);
-updateSite();
-
-function updateSite() {
-  setSiteName("generate-password-site");
-}
-
-function updatePasswordLengthDisplay() {
-  $("password-length-value").textContent = $("password-length").value;
-}
-
-function validateCharsets(element1, element2, element3, element4) {
-  if (!element1.checked && !element2.checked && !element3.checked && !element4.checked) return i18n.getMessage("no_characters_selected");
-
-  return null;
-}
-
-function showRevision() {
-  $("generate-change-password-revision").hidden = true;
-  $("generate-password-revision-container").hidden = false;
-  $("generate-password-revision").focus();
-}
-exports.showRevision = showRevision;
-
-function addGeneratedPassword() {
-  var revision = $("generate-password-revision").value.trim();
-  if (revision == "1") revision = "";
-
-  passwords.addGenerated({
-    site: state.site,
-    name: $("generate-password-user-name").value,
-    revision: revision,
-    length: $("password-length").value,
-    lower: $("charset-lower").checked,
-    upper: $("charset-upper").checked,
-    number: $("charset-number").checked,
-    symbol: $("charset-symbol").checked,
-    legacy: $("generate-legacy").checked
-  }).then(function (pwdList) {
-    state.set({ pwdList: pwdList });
-    setActivePanel("password-list");
-  }).catch(function (error) {
-    if (error == "alreadyExists") {
-      markInvalid([$("generate-password-user-name"), $("generate-password-revision")], i18n.getMessage("user_name_exists_generated"));
-      showRevision();
-    } else showUnknownError(error);
   });
 }
 
@@ -1338,7 +1338,7 @@ exports.emit = function (obj, eventName) {
 
 
 
-var _require = __webpack_require__(/*! ../messaging */ 8),
+var _require = __webpack_require__(/*! ../messaging */ 9),
     port = _require.port;
 
 port.on("init", function (state) {
@@ -1380,10 +1380,10 @@ function init() {
   }
 
   __webpack_require__(/*! ./enterMaster */ 18);
-  __webpack_require__(/*! ./changeMaster */ 9);
+  __webpack_require__(/*! ./changeMaster */ 10);
   __webpack_require__(/*! ./migration */ 20);
   __webpack_require__(/*! ./passwordList */ 22);
-  __webpack_require__(/*! ./generatePassword */ 10);
+  __webpack_require__(/*! ./generatePassword */ 7);
   __webpack_require__(/*! ./storedPassword */ 26);
   __webpack_require__(/*! ./syncSetup */ 27);
   __webpack_require__(/*! ./syncState */ 28);
@@ -1474,7 +1474,7 @@ var time_estimates;time_estimates={estimate_attack_times:function(e){var t,n,s,o
   \*********************************/
 /***/ (function(module, exports) {
 
-module.exports = {"password_too_short":"The master password should be at least 6 characters long.","passwords_differ":"Passwords don't match.","weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","password_declined":"This doesn't seem to be the master password you have used before.","decryption_failure":"Some data could not be decrypted, maybe wrong master password was used?","user_name_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","user_name_exists":"This user name already exists.","user_name_exists_generated":"This user name and revision combination already exists. Maybe increase the revision number?","no_characters_selected":"At least one character set has to be selected.","password_value_required":"Please enter the password you used on this website.","password_type_generated":"Password generated by an older extension version","password_type_generated_replace":"Click to replace!","password_type_generated_print":"Generated by Easy Passwords 1.x","password_type_generated2":"Generated password","password_type_stored":"Stored password","password_type_stored_with_recovery":"Stored password, recovery code below","password_info_notes":"Notes:","remove_password_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","upgrade_password_confirmation":"Upgrading the password will change its value. Make sure that you already filled in \"current password\" in the website's password change form. Proceed replacing password \"{1}\" for the website {2}?","recovery_checksum_mismatch":"Row is mistyped or not the next row.","sync_invalid_token":"Access has been denied, you probably need to authorize PfP again.","sync_unknown_data_format":"Format of currently stored data is unrecognized, it might have been created by a newer PfP version.","sync_connection_error":"Server connection failed.","sync_too_many_retries":"Too many retries after conflicting modifications.","sync_multiple_candidates":"Your storage provider has multiple PfP files stored for some reason. You probably need to delete PfP data there and sync again.","sync_wrong_master_password":"It seems that the currently stored data was encrypted with a different master password.","ok":"OK","cancel":"Cancel","yes":"Yes","no":"No","no_site_placeholder":"(none)","learn_more":"Learn more…","unknown_error":"The operation failed unexpectedly.","unknown_error_more":"Show error message","new_master_message":"You didn't define a master password yet, please do so below.","reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","master_security_message":"It is essential that you choose a strong master password.","new_master":"New master password:","new_master_repeat":"Please reenter password:","change_master_submit":"Set master password","master_password":"Enter master password:","enter_master_submit":"Access passwords","reset_master_link":"Reset master password","migration_title":"Easy Passwords is now PfP: Pain-free Passwords!","migration_features_intro":"Some important security improvements have been implemented:","migration_feature1":"All data is now encrypted on disk, not only the stored passwords.","migration_feature2":"Your backups will also be encrypted, any data can only be retrieved with the right master password.","migration_feature3":"Updated password generation approach makes guessing your master password even harder.","migration_todos_intro":"There will be a six months transitional period. It is recommended that you do the following during that time:","migration_todo1":"Replace any of your old generated passwords, otherwise these will be automatically converted to stored passwords at the end of the transitional period.","migration_todo2":"Create a new (encrypted) backup. Unencrypted backups will no longer be supported after the end of the transitional period.","migration_in_progress":"Updating your data, please wait…","migration_continue":"Continue","site":"Website name:","select_site_label":"Select site","add_alias":"This website shares passwords with another?","alias_description":"You indicated that {1} shares passwords with this website.","remove_alias":"Revert","show_all_passwords":"Show all passwords","sync_setup":"Set up sync","sync_state":"Show sync state","lock_passwords":"Lock passwords","password_copied_message":"Password has been copied to clipboard.","no_such_password":"Unknown password!","unknown_generation_method":"Unknown password generation method!","wrong_site_message":"You are not on the right website!","no_password_fields":"The page has no password fields or the password fields belong to a different site!","no_passwords_message":"No passwords yet","password_ready_message":"Your password is ready, click again anywhere to copy it.","passwords_label":"Passwords:","password_menu":"All actions","to_document":"Fill in","to_clipboard":"Copy to clipboard","show_qrcode":"Show as QR code","add_notes":"Add notes","edit_notes":"Edit notes","upgrade_password":"Replace by PfP 2.x password","bump_revision":"Generate new password for this user name","remove_password":"Remove password","generate_password_link":"Generate new password","stored_password_link":"Enter stored password","user_name":"User name:","change_password_revision":"Need a new password for the same username?","password_revision":"Revision:","password_length":"Length:","allowed_characters":"Allowed characters:","generate_legacy":"Easy Passwords 1.x password","generate_legacy_warning":"Don't use this option for new passwords! Only check when recovering a password that was initially created with an older extension version.","generate_password":"Generate password","stored_password_warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","password_value":"Password:","use_recovery":"Use recovery code","save_password":"Save password","select_alias":"Mark \"{1}\" as an alias for:","select_site":"Show passwords for site:","autocomplete_no_sites":"No sites matched your search","recovery_code":"Recovery code:","password_notes":"Password notes:","save_notes":"Save notes","sync_selection_label":"Please select your storage provider:","sync_how_label":"How does this work?","sync_how_explanation":"You grant PfP access to a directory within your personal account on Dropbox or Google Drive™. This access will be used to upload a file with encrypted data regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically - assuming that they all use the same master password.","sync_safe_label":"Is this safe?","sync_safe_explanation":"Yes. PfP can only access its own file, not the other files stored in your account. Also, the file's data is fully encrypted and can only be decrypted using your master password.","sync_no_account_label":"What if I don't have an account?","sync_no_account_explanation":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","sync_token_label":"Please paste the code given by the storage provider:","sync_provider":"Uploading to:","sync_lastTime":"Last upload:","sync_lastTime_never":"Never","sync_lastTime_now":"Running…","sync_succeeded":"(succeeded)","sync_failed":"(failed)","do_sync":"Upload now","sync_reauthorize":"Reauthorize…","sync_disable":"Disable sync","sync_disable_confirmation":"Do you really want to disable sync functionality? Your data will no longer be backed up to your provider automatically.","allpasswords_title":"All passwords known to PfP","allpasswords_export":"Save password definitions to a file","allpasswords_import":"Import password definitions from a file","allpasswords_print":"Print","allpasswords_show_notes":"Show notes","allpasswords_show_passwords":"Show passwords","allpasswords_intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords_aliases":"Aliases:","master_password_required":"Your passwords are currently locked. Please unlock them by clicking PfP icon and try again.","unknown_data_format":"Unknown data format!","syntax_error":"The file contains errors and could not be imported.","allpasswords_import_confirm":"Importing passwords is only possible if the master password didn't change. Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords_import_with_master":"It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.","allpasswords_import_success":"Passwords data has been imported.","allpasswords_show_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","allpasswords_export_edge":"Bugs in Microsoft Edge currently prevent extensions from offering files for download. You will need to copy the text manually and paste it into a text editor such as Notepad.","autolock_title":"Enable auto-lock","autolock_description":"Lock passwords automatically when the panel is closed","autolock_delay_title":"Auto-lock delay","autolock_delay_description":"Interval in minutes after which the passwords should be locked"};
+module.exports = {"password_too_short":"The master password should be at least 6 characters long.","passwords_differ":"Passwords don't match.","weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","password_declined":"This doesn't seem to be the master password you have used before.","decryption_failure":"Some data could not be decrypted, maybe wrong master password was used?","user_name_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","user_name_exists":"This user name already exists.","user_name_exists_generated":"This user name and revision combination already exists. Maybe increase the revision number?","no_characters_selected":"At least one character set has to be selected.","password_value_required":"Please enter the password you used on this website.","password_type_generated":"Password generated by an older extension version","password_type_generated_replace":"Click to replace!","password_type_generated_print":"Generated by Easy Passwords 1.x","password_type_generated2":"Generated password","password_type_stored":"Stored password","password_type_stored_with_recovery":"Stored password, recovery code below","password_info_notes":"Notes:","remove_password_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","upgrade_password_confirmation":"Upgrading the password will change its value. Make sure that you already filled in \"current password\" in the website's password change form. Proceed replacing password \"{1}\" for the website {2}?","recovery_checksum_mismatch":"Row is mistyped or not the next row.","sync_invalid_token":"Access has been denied, you probably need to authorize PfP again.","sync_unknown_data_format":"Format of currently stored data is unrecognized, it might have been created by a newer PfP version.","sync_connection_error":"Server connection failed.","sync_too_many_retries":"Too many retries after conflicting modifications.","sync_multiple_candidates":"Your storage provider has multiple PfP files stored for some reason. You probably need to delete PfP data there and sync again.","sync_wrong_master_password":"It seems that the currently stored data was encrypted with a different master password.","ok":"OK","cancel":"Cancel","yes":"Yes","no":"No","no_site_placeholder":"(none)","learn_more":"Learn more…","unknown_error":"The operation failed unexpectedly.","unknown_error_more":"Show error message","new_master_message":"You didn't define a master password yet, please do so below.","reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","master_security_message":"It is essential that you choose a strong master password.","new_master":"New master password:","new_master_repeat":"Please reenter password:","change_master_submit":"Set master password","master_password":"Enter master password:","enter_master_submit":"Access passwords","reset_master_link":"Reset master password","migration_title":"Easy Passwords is now PfP: Pain-free Passwords!","migration_features_intro":"Some important security improvements have been implemented:","migration_feature1":"All data is now encrypted on disk, not only the stored passwords.","migration_feature2":"Your backups will also be encrypted, any data can only be retrieved with the right master password.","migration_feature3":"Updated password generation approach makes guessing your master password even harder.","migration_todos_intro":"There will be a six months transitional period. It is recommended that you do the following during that time:","migration_todo1":"Replace any of your old generated passwords, otherwise these will be automatically converted to stored passwords at the end of the transitional period.","migration_todo2":"Create a new (encrypted) backup. Unencrypted backups will no longer be supported after the end of the transitional period.","migration_in_progress":"Updating your data, please wait…","migration_continue":"Continue","site":"Website name:","select_site_label":"Select site","add_alias":"This website shares passwords with another?","alias_description":"You indicated that {1} shares passwords with this website.","remove_alias":"Revert","show_all_passwords":"Show all passwords","sync_setup":"Set up sync","sync_state":"Show sync state","lock_passwords":"Lock passwords","password_copied_message":"Password has been copied to clipboard.","no_such_password":"Unknown password!","unknown_generation_method":"Unknown password generation method!","wrong_site_message":"You are not on the right website!","no_password_fields":"The page has no password fields or the password fields belong to a different site!","no_passwords_message":"No passwords yet","password_ready_message":"Your password is ready, click again anywhere to copy it.","passwords_label":"Passwords:","password_menu":"All actions","to_document":"Fill in","to_clipboard":"Copy to clipboard","show_qrcode":"Show as QR code","add_notes":"Add notes","edit_notes":"Edit notes","upgrade_password":"Replace by PfP 2.x password","make_generated":"Replace by generated password","bump_revision":"Generate new password for this user name","remove_password":"Remove password","generate_password_link":"Generate new password","stored_password_link":"Enter stored password","replace_password_warning":"Making this a generated password will change its value. Make sure that you already filled in \"current password\" in the website's password change form.","user_name":"User name:","change_password_revision":"Need a new password for the same username?","password_revision":"Revision:","password_length":"Length:","allowed_characters":"Allowed characters:","generate_legacy":"Easy Passwords 1.x password","generate_legacy_warning":"Don't use this option for new passwords! Only check when recovering a password that was initially created with an older extension version.","generate_password":"Generate password","stored_password_warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","password_value":"Password:","use_recovery":"Use recovery code","save_password":"Save password","select_alias":"Mark \"{1}\" as an alias for:","select_site":"Show passwords for site:","autocomplete_no_sites":"No sites matched your search","recovery_code":"Recovery code:","password_notes":"Password notes:","save_notes":"Save notes","sync_selection_label":"Please select your storage provider:","sync_how_label":"How does this work?","sync_how_explanation":"You grant PfP access to a directory within your personal account on Dropbox or Google Drive™. This access will be used to upload a file with encrypted data regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically - assuming that they all use the same master password.","sync_safe_label":"Is this safe?","sync_safe_explanation":"Yes. PfP can only access its own file, not the other files stored in your account. Also, the file's data is fully encrypted and can only be decrypted using your master password.","sync_no_account_label":"What if I don't have an account?","sync_no_account_explanation":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","sync_token_label":"Please paste the code given by the storage provider:","sync_provider":"Uploading to:","sync_lastTime":"Last upload:","sync_lastTime_never":"Never","sync_lastTime_now":"Running…","sync_succeeded":"(succeeded)","sync_failed":"(failed)","do_sync":"Upload now","sync_reauthorize":"Reauthorize…","sync_disable":"Disable sync","sync_disable_confirmation":"Do you really want to disable sync functionality? Your data will no longer be backed up to your provider automatically.","allpasswords_title":"All passwords known to PfP","allpasswords_export":"Save password definitions to a file","allpasswords_import":"Import password definitions from a file","allpasswords_print":"Print","allpasswords_show_notes":"Show notes","allpasswords_show_passwords":"Show passwords","allpasswords_intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords_aliases":"Aliases:","master_password_required":"Your passwords are currently locked. Please unlock them by clicking PfP icon and try again.","unknown_data_format":"Unknown data format!","syntax_error":"The file contains errors and could not be imported.","allpasswords_import_confirm":"Importing passwords is only possible if the master password didn't change. Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords_import_with_master":"It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.","allpasswords_import_success":"Passwords data has been imported.","allpasswords_show_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","allpasswords_export_edge":"Bugs in Microsoft Edge currently prevent extensions from offering files for download. You will need to copy the text manually and paste it into a text editor such as Notepad.","autolock_title":"Enable auto-lock","autolock_description":"Lock passwords automatically when the panel is closed","autolock_delay_title":"Auto-lock delay","autolock_delay_description":"Interval in minutes after which the passwords should be locked"};
 
 /***/ }),
 /* 17 */
@@ -1555,7 +1555,7 @@ var _require5 = __webpack_require__(/*! ./utils */ 0),
     setActivePanel = _require5.setActivePanel,
     showUnknownError = _require5.showUnknownError;
 
-var _require6 = __webpack_require__(/*! ./changeMaster */ 9),
+var _require6 = __webpack_require__(/*! ./changeMaster */ 10),
     validateMasterPassword = _require6.validateMasterPassword;
 
 setCommandHandler("reset-master-link", function () {
@@ -2657,6 +2657,9 @@ setCommandHandler("menu-notes", function () {
 setCommandHandler("menu-upgrade-password", function () {
   return upgradePassword(menuPassword);
 });
+setCommandHandler("menu-make-generated", function () {
+  return makeGenerated(menuPassword);
+});
 setCommandHandler("menu-bump-revision", function () {
   return bumpRevision(menuPassword);
 });
@@ -2880,6 +2883,7 @@ function showMenu(password, element) {
   menu.querySelector(".menu-notes-link").textContent = notes_link_msg;
 
   menu.querySelector("#menu-upgrade-password").hidden = password.type != "generated";
+  menu.querySelector("#menu-make-generated").hidden = password.type != "stored";
 
   menuPassword = password;
   element.parentNode.insertBefore(menu, element.nextSibling);
@@ -2962,6 +2966,20 @@ function upgradePassword(password) {
   });
 }
 
+function makeGenerated(password) {
+  setActivePanel("generate-password");
+
+  $("replace-password-warning").hidden = false;
+  $("generate-password-user-name").value = password.name;
+  $("generate-password-user-name").setAttribute("readonly", "readonly");
+  if (password.revision && password.revision != "1") {
+    $("generate-password-revision").value = password.revision || "1";
+    __webpack_require__(/*! ./generatePassword */ 7).showRevision();
+  } else $("generate-change-password-revision").hidden = true;
+  $("generate-password-revision").setAttribute("readonly", "readonly");
+  $("generate-legacy-container").hidden = true;
+}
+
 function bumpRevision(password) {
   setActivePanel("generate-password");
 
@@ -2985,7 +3003,7 @@ function bumpRevision(password) {
     $("charset-symbol").checked = password.symbol;
   }
 
-  __webpack_require__(/*! ./generatePassword */ 10).showRevision();
+  __webpack_require__(/*! ./generatePassword */ 7).showRevision();
 }
 
 function removePassword(password) {
@@ -3250,7 +3268,7 @@ function stripLastCodeLine() {
 var _require = __webpack_require__(/*! ../browserAPI */ 4),
     i18n = _require.i18n;
 
-var _require2 = __webpack_require__(/*! ../common */ 7),
+var _require2 = __webpack_require__(/*! ../common */ 8),
     getSiteDisplayName = _require2.getSiteDisplayName;
 
 var _require3 = __webpack_require__(/*! ../proxy */ 3),

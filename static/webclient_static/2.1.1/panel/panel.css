@@ -258,7 +258,8 @@ a:hover {
 .notes-link {
   background-image: url(../images/ios-paper-outline.svg); }
 
-.upgrade-password-link {
+.upgrade-password-link,
+.make-generated-link {
   background-image: url(../images/arrow-up-a.svg); }
 
 .bump-revision-link {
@@ -338,6 +339,7 @@ a:hover {
   display: flex;
   justify-content: space-between; }
 
+#replace-password-warning,
 #generate-legacy-warning {
   font-size: 16px; }
 
