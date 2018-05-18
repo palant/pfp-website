@@ -1,5 +1,5 @@
 ---
-title: Legal notice
+title: Legal Notice
 ---
 
 Responsible for this website in accordance with § 5 of the Telemedia Act (TMG):

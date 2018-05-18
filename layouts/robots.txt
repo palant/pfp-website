@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /webclient_static/
+Disallow: /privacy-policy/
+Disallow: /impressum/
 Sitemap: {{.Site.BaseURL}}sitemap.xml
