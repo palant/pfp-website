@@ -11,7 +11,7 @@ Germany
 
 ## Contact Information
 
-E-Mail: [zmiblog@palant.de](mailto:zmiblog@palant.de)\
+E-Mail: [ynhblog@palant.de](mailto:ynhblog@palant.de)\
 Internet address: https://palant.de/
 
 ## Disclaimer
