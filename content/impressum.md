@@ -11,7 +11,7 @@ Germany
 
 ## Contact Information
 
-E-Mail: [ynhblog@palant.de](mailto:ajepfp@palant.de)\
+E-Mail: [ajepfp@palant.de](mailto:ajepfp@palant.de)\
 Internet address: https://palant.de/
 
 ## Disclaimer
