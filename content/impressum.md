@@ -11,7 +11,7 @@ Germany
 
 ## Contact Information
 
-E-Mail: [ajepfp@palant.de](mailto:ajepfp@palant.de)\
+E-Mail: [tfwpfp@palant.de](mailto:tfwpfp@palant.de)\
 Internet address: https://palant.de/
 
 ## Disclaimer
