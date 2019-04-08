@@ -9,8 +9,8 @@
 
     <div class="content">
       <div class="container">
-        {{ if isset .Params "image" }}
-          <img class="articleImage" src="/img/{{.Params.Image}}">
+        {{ with .Params.image }}
+          <img class="articleImage" src="{{ ($.Resources.GetMatch .).RelPermalink }}">
         {{ end }}
         <h1>{{ .Title }}</h1>
         <p>{{ .Description }}</p>

@@ -43,11 +43,11 @@
       {{range $.Site.Data.Index.FeaturedDocs}}
         {{with $.Site.GetPage "page" .}}
           <div class="tile">
-            <img src="/img/{{.Params.Image}}">
-            <h3><a href="{{.URL}}">{{.Title}}</a></h3>
+            <img src="{{ (.Resources.GetMatch .Params.image).RelPermalink }}">
+            <h3><a href="{{.RelPermalink}}">{{.Title}}</a></h3>
             <p>
               {{.Description}}<br>
-              <a href="{{.URL}}">Read more&hellip;</a>
+              <a href="{{.RelPermalink}}">Read more&hellip;</a>
             </p>
           </div>
         {{end}}
