@@ -11,7 +11,7 @@ Germany
 
 ## Contact Information
 
-E-Mail: [rrxpfp@palant.de](mailto:rrxpfp@palant.de)\
+E-Mail: [lqlpfp@palant.de](mailto:lqlpfp@palant.de)\
 Internet address: https://palant.de/
 
 ## Disclaimer
