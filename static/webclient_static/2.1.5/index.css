@@ -39,6 +39,28 @@ button {
   font-size: 16px;
   color: #f44; }
 
+:root:not([dir="rtl"]) .unknown-error-cancel {
+  float: right; }
+
+:root[dir="rtl"] .unknown-error-cancel {
+  float: left; }
+
+.unknown-error-details {
+  font-size: 16px;
+  white-space: pre-wrap; }
+
+.help-icon {
+  display: inline-block;
+  cursor: help;
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: url("../images/ios-help-circle-outline.svg"); }
+  @media print {
+    .help-icon {
+      display: none; } }
+
 input[type="checkbox"] {
   width: 24px;
   height: 24px;
@@ -58,50 +80,59 @@ input[type="checkbox"]:checked {
   background-repeat: no-repeat;
   background-position: center; }
 
-iframe {
-  display: none;
-  position: fixed;
-  top: 0;
-  height: 100%;
-  border-width: 0; }
-
-iframe[data-active="true"] {
-  display: block; }
-
-#allpasswords {
-  left: 0;
-  width: 100%; }
-
-#panel {
-  width: 620px;
-  left: calc((100% - 620px) / 2); }
-
-#inProgressOverlay:not([hidden]) {
+.modalOverlay {
+  display: flex;
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  background-color: rgba(0, 0, 0, 0.3); }
-
-#in-progress {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 20px;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7); }
+
+.modalOverlay-inner {
   margin: auto;
   background-color: #fff;
   border: 1px solid black;
   border-radius: 5px; }
+  .modalOverlay-inner.stretch {
+    width: 100%; }
+  .modalOverlay-inner > :last-child {
+    display: flex;
+    flex-direction: column;
+    padding: 20px; }
+  .modalOverlay-inner.cancelable > :last-child {
+    padding-top: 0; }
 
-#spinning-wheel {
+.modalOverlay-cancel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; }
+
+.cancel {
+  display: inline-block;
+  min-width: 16px;
+  min-height: 16px;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-image: url("../images/close-round.svg"); }
+  .cancel:hover {
+    background-color: #e2f4ff; }
+
+.modalOverlay-cancel-container > .cancel {
+  margin: 5px; }
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0; }
+
+.spinning-wheel {
   min-width: 200px;
   min-height: 200px;
   background-size: 200px;
   background-repeat: no-repeat;
-  background-image: url(../images/circles.svg); }
+  background-image: url(images/circles.svg); }
