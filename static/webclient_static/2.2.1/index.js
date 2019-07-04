@@ -82,7 +82,7 @@ var __webpack_require__ =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -176,6 +176,18 @@ exports.emit = function (obj, eventName) {
 
 /***/ }),
 /* 2 */
+/*!*************************************!*\
+  !*** ./build-web/locale/en_US.json ***!
+  \*************************************/
+/*! exports provided: ok, cancel, no_site_placeholder, allpasswords@App@title, allpasswords@App@show_notes, allpasswords@App@show_passwords, allpasswords@App@intro, allpasswords@App@show_passwords_confirm, components@Confirm@yes, components@Confirm@no, components@EnterMaster@master_password, components@EnterMaster@submit, components@EnterMaster@password_too_short, components@EnterMaster@password_declined, components@PasswordMessage@password_ready, components@PasswordMessage@password_copied, components@PasswordMessage@username_copied, components@PasswordMessage@no_such_password, components@PasswordMessage@unknown_generation_method, components@PasswordMessage@wrong_site, components@PasswordMessage@no_password_fields, components@PasswordMessage@import_success, components@PasswordMessage@unknown_data_format, components@PasswordMessage@syntax_error, components@Setting@autolock_title, components@Setting@autolock_description, components@Setting@autolock_delay_title, components@Setting@autolock_delay_description, components@UnknownError@close, components@UnknownError@description, components@UnknownError@more, panel@App@select_site, panel@App@password_list, panel@App@sync_setup, panel@App@sync_state, panel@App@settings, panel@App@lock_passwords, web@App@compat_message, allpasswords@components@GlobalActions@export, allpasswords@components@GlobalActions@import, allpasswords@components@GlobalActions@print, allpasswords@components@GlobalActions@import_with_master, allpasswords@components@GlobalActions@import_confirm, allpasswords@components@PasswordInfo@password_type_stored, allpasswords@components@PasswordInfo@recovery_code_explanation, allpasswords@components@SiteInfo@aliases_label, panel@components@GeneratedPassword@replace_warning, panel@components@GeneratedPassword@keep_notes, panel@components@GeneratedPassword@length_label, panel@components@GeneratedPassword@allowed_characters_label, panel@components@GeneratedPassword@submit, panel@components@GeneratedPassword@no_characters_selected, panel@components@ManualAuth@token_label, panel@components@NotesEditor@notes_label, panel@components@NotesEditor@submit, panel@components@PasswordEntry@password_menu, panel@components@PasswordEntry@password_type_generated2, panel@components@PasswordEntry@password_type_stored, panel@components@PasswordEntry@password_length, panel@components@PasswordEntry@allowed_characters, panel@components@PasswordEntry@notes, panel@components@PasswordEntry@remove_confirmation, panel@components@PasswordEntry@remove_confirmation_notes, panel@components@PasswordMenu@to_document, panel@components@PasswordMenu@to_clipboard, panel@components@PasswordMenu@to_clipboard_username, panel@components@PasswordMenu@show_qrcode, panel@components@PasswordMenu@add_notes, panel@components@PasswordMenu@edit_notes, panel@components@PasswordMenu@make_generated, panel@components@PasswordMenu@bump_revision, panel@components@PasswordMenu@remove_password, panel@components@PasswordNameEntry@username_label, panel@components@PasswordNameEntry@change_password_revision, panel@components@PasswordNameEntry@revision_label, panel@components@PasswordNameEntry@username_required, panel@components@PasswordNameEntry@username_exists, panel@components@RecoveryCode@label, panel@components@RecoveryCode@remove_line, panel@components@RecoveryCode@checksum_mismatch, panel@components@RecoveryCode@wrong_version, panel@components@RemoteStorageUsernameInput@username_label, panel@components@RemoteStorageUsernameInput@get_account, panel@components@RemoteStorageUsernameInput@invalid_username, panel@components@SiteSelection@no_sites, panel@components@SiteSelection@submit, panel@components@StoredPassword@warning, panel@components@StoredPassword@password_label, panel@components@StoredPassword@use_recovery, panel@components@StoredPassword@cancel_recovery, panel@components@StoredPassword@submit, panel@components@StoredPassword@password_value_required, panel@pages@ChangeMaster@new_master_message, panel@pages@ChangeMaster@reset_master_message, panel@pages@ChangeMaster@master_security_message, panel@pages@ChangeMaster@new_master, panel@pages@ChangeMaster@new_master_repeat, panel@pages@ChangeMaster@submit, panel@pages@ChangeMaster@weak_password, panel@pages@ChangeMaster@passwords_differ, panel@pages@EnterMaster@reset, panel@pages@Migration@title, panel@pages@Migration@intro, panel@pages@Migration@change1, panel@pages@Migration@change2, panel@pages@Migration@conclusion, panel@pages@Migration@in_progress, panel@pages@Migration@continue, panel@pages@PasswordList@site, panel@pages@PasswordList@alias_description, panel@pages@PasswordList@remove_alias, panel@pages@PasswordList@add_alias, panel@pages@PasswordList@select_alias, panel@pages@PasswordList@remove_alias_confirmation, panel@pages@PasswordList@passwords_label, panel@pages@PasswordList@no_passwords_message, panel@pages@PasswordList@generate_password_link, panel@pages@PasswordList@stored_password_link, panel@pages@PasswordList@show_all_passwords, panel@pages@SelectSite@label, panel@pages@Sync@provider_label, panel@pages@Sync@lastTime_label, panel@pages@Sync@lastTime_now, panel@pages@Sync@lastTime_never, panel@pages@Sync@failed, panel@pages@Sync@succeeded, panel@pages@Sync@reauthorize, panel@pages@Sync@do_sync, panel@pages@Sync@disable, panel@pages@Sync@disable_confirmation, panel@pages@Sync@selection_label, panel@pages@Sync@how_heading, panel@pages@Sync@how_text, panel@pages@Sync@security_heading, panel@pages@Sync@security_text, panel@pages@Sync@no_account_heading, panel@pages@Sync@no_account_text, panel@pages@Sync@sync_invalid_token, panel@pages@Sync@sync_unknown_data_format, panel@pages@Sync@sync_connection_error, panel@pages@Sync@sync_too_many_retries, panel@pages@Sync@sync_multiple_candidates, panel@pages@Sync@sync_malformed_response, panel@pages@Sync@sync_wrong_master_password, panel@pages@Sync@sync_unrelated_client, panel@pages@Sync@sync_tampered_data, panel@pages@Sync@sync_master_password_required, panel@pages@learn_more, default */
+/*! exports used: default */
+/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
+/***/ (function(module) {
+
+module.exports = {"ok":"OK","cancel":"Cancel","no_site_placeholder":"(none)","allpasswords@App@title":"All passwords known to PfP","allpasswords@App@show_notes":"Show notes","allpasswords@App@show_passwords":"Show passwords","allpasswords@App@intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords@App@show_passwords_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","components@Confirm@yes":"Yes","components@Confirm@no":"No","components@EnterMaster@master_password":"Enter master password:","components@EnterMaster@submit":"Access passwords","components@EnterMaster@password_too_short":"The master password should be at least 6 characters long.","components@EnterMaster@password_declined":"This doesn't seem to be the master password you have used before.","components@PasswordMessage@password_ready":"Your password is ready, click again anywhere to copy it.","components@PasswordMessage@password_copied":"Password has been copied to clipboard.","components@PasswordMessage@username_copied":"User name has been copied to clipboard.","components@PasswordMessage@no_such_password":"Unknown password!","components@PasswordMessage@unknown_generation_method":"Unknown password generation method!","components@PasswordMessage@wrong_site":"You are not on the right website!","components@PasswordMessage@no_password_fields":"The page has no password fields or the password fields belong to a different site! Maybe click the user name field and try again.","components@PasswordMessage@import_success":"Passwords data has been imported.","components@PasswordMessage@unknown_data_format":"Unknown data format!","components@PasswordMessage@syntax_error":"The file contains errors and could not be imported.","components@Setting@autolock_title":"Enable auto-lock","components@Setting@autolock_description":"Lock passwords automatically when the panel is closed","components@Setting@autolock_delay_title":"Auto-lock delay","components@Setting@autolock_delay_description":"Interval in minutes after which the passwords should be locked","components@UnknownError@close":"Close","components@UnknownError@description":"The operation failed unexpectedly.","components@UnknownError@more":"Show error message","panel@App@select_site":"Select site","panel@App@password_list":"Password list","panel@App@sync_setup":"Set up sync","panel@App@sync_state":"Show sync state","panel@App@settings":"Settings","panel@App@lock_passwords":"Lock passwords","web@App@compat_message":"Your browser lacks the required functionality for this application. At least Mozilla Firefox 43, Google Chrome 51, Opera 38, Apple Safari 11 or Microsoft Edge 12 is required.","allpasswords@components@GlobalActions@export":"Save password definitions to a file","allpasswords@components@GlobalActions@import":"Import password definitions from a file","allpasswords@components@GlobalActions@print":"Print","allpasswords@components@GlobalActions@import_with_master":"It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.","allpasswords@components@GlobalActions@import_confirm":"Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords@components@PasswordInfo@password_type_stored":"Stored password, recovery code below","allpasswords@components@PasswordInfo@recovery_code_explanation":"Recovery codes can be entered instead of the password when adding a stored password. They are safe to print, decryption is only possible with the right master password.","allpasswords@components@SiteInfo@aliases_label":"Aliases:","panel@components@GeneratedPassword@replace_warning":"Making this a generated password will change its value. Make sure that you already filled in \"current password\" in the website's password change form.","panel@components@GeneratedPassword@keep_notes":"Keep notes from original password","panel@components@GeneratedPassword@length_label":"Length:","panel@components@GeneratedPassword@allowed_characters_label":"Allowed characters:","panel@components@GeneratedPassword@submit":"Generate password","panel@components@GeneratedPassword@no_characters_selected":"At least one character set has to be selected.","panel@components@ManualAuth@token_label":"Please paste the code given by the storage provider:","panel@components@NotesEditor@notes_label":"Password notes:","panel@components@NotesEditor@submit":"Save notes","panel@components@PasswordEntry@password_menu":"All actions","panel@components@PasswordEntry@password_type_generated2":"Generated password","panel@components@PasswordEntry@password_type_stored":"Stored password","panel@components@PasswordEntry@password_length":"Length:","panel@components@PasswordEntry@allowed_characters":"Allowed characters:","panel@components@PasswordEntry@notes":"Notes:","panel@components@PasswordEntry@remove_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","panel@components@PasswordEntry@remove_confirmation_notes":"This password has notes attached to it: {1}","panel@components@PasswordMenu@to_document":"Fill in","panel@components@PasswordMenu@to_clipboard":"Copy to clipboard","panel@components@PasswordMenu@to_clipboard_username":"Copy user name","panel@components@PasswordMenu@show_qrcode":"Show as QR code","panel@components@PasswordMenu@add_notes":"Add notes","panel@components@PasswordMenu@edit_notes":"Edit notes","panel@components@PasswordMenu@make_generated":"Replace by generated password","panel@components@PasswordMenu@bump_revision":"Generate new password for this user name","panel@components@PasswordMenu@remove_password":"Remove password","panel@components@PasswordNameEntry@username_label":"User name:","panel@components@PasswordNameEntry@change_password_revision":"Need a new password for the same username?","panel@components@PasswordNameEntry@revision_label":"Revision:","panel@components@PasswordNameEntry@username_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","panel@components@PasswordNameEntry@username_exists":"This user name and revision combination already exists. Maybe increase the revision number?","panel@components@RecoveryCode@label":"Recovery code:","panel@components@RecoveryCode@remove_line":"Remove line","panel@components@RecoveryCode@checksum_mismatch":"Row is mistyped or not the next row.","panel@components@RecoveryCode@wrong_version":"Unknown recovery code format, maybe generated by a newer version.","panel@components@RemoteStorageUsernameInput@username_label":"Please enter your remoteStorage user address:","panel@components@RemoteStorageUsernameInput@get_account":"Don't have remoteStorage? Learn where to get an account or how to host your own.","panel@components@RemoteStorageUsernameInput@invalid_username":"This doesn't seem to be a valid remoteStorage user address.","panel@components@SiteSelection@no_sites":"No sites matched your search","panel@components@SiteSelection@submit":"Select","panel@components@StoredPassword@warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","panel@components@StoredPassword@password_label":"Password:","panel@components@StoredPassword@use_recovery":"Use recovery code","panel@components@StoredPassword@cancel_recovery":"Enter password directly","panel@components@StoredPassword@submit":"Save password","panel@components@StoredPassword@password_value_required":"Please enter the password you used on this website.","panel@pages@ChangeMaster@new_master_message":"You didn't define a master password yet, please do so below.","panel@pages@ChangeMaster@reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","panel@pages@ChangeMaster@master_security_message":"It is essential that you choose a strong master password.","panel@pages@ChangeMaster@new_master":"New master password:","panel@pages@ChangeMaster@new_master_repeat":"Please reenter password:","panel@pages@ChangeMaster@submit":"Set master password","panel@pages@ChangeMaster@weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","panel@pages@ChangeMaster@passwords_differ":"Passwords don't match.","panel@pages@EnterMaster@reset":"Reset master password","panel@pages@Migration@title":"Legacy passwords and data are no longer supported","panel@pages@Migration@intro":"In order for PfP: Pain-free Passwords to be more robust, some outdated functionality has been removed:","panel@pages@Migration@change1":"Legacy (EasyPasswords 1.x) generated passwords are no longer supported. If you still have any, these will be converted to stored passwords now.","panel@pages@Migration@change2":"Legacy (unencrypted) backups will no longer be imported.","panel@pages@Migration@conclusion":"None of this is likely to affect you. Still, you might want to create a new backup just so you have one with current data.","panel@pages@Migration@in_progress":"Updating your data, please wait…","panel@pages@Migration@continue":"Continue","panel@pages@PasswordList@site":"Website name:","panel@pages@PasswordList@alias_description":"You indicated that {1} shares passwords with this website.","panel@pages@PasswordList@remove_alias":"Revert","panel@pages@PasswordList@add_alias":"This website shares passwords with another?","panel@pages@PasswordList@select_alias":"Mark \"{1}\" as an alias for:","panel@pages@PasswordList@remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","panel@pages@PasswordList@passwords_label":"Passwords:","panel@pages@PasswordList@no_passwords_message":"No passwords yet","panel@pages@PasswordList@generate_password_link":"Generate new password","panel@pages@PasswordList@stored_password_link":"Enter stored password","panel@pages@PasswordList@show_all_passwords":"Show all passwords","panel@pages@SelectSite@label":"Please select a site:","panel@pages@Sync@provider_label":"Uploading to:","panel@pages@Sync@lastTime_label":"Last upload:","panel@pages@Sync@lastTime_now":"Running…","panel@pages@Sync@lastTime_never":"Never","panel@pages@Sync@failed":"(failed)","panel@pages@Sync@succeeded":"(succeeded)","panel@pages@Sync@reauthorize":"Reauthorize…","panel@pages@Sync@do_sync":"Upload now","panel@pages@Sync@disable":"Disable sync","panel@pages@Sync@disable_confirmation":"Do you really want to disable sync functionality? Your data will no longer be backed up to your provider automatically.","panel@pages@Sync@selection_label":"Please select your storage provider:","panel@pages@Sync@how_heading":"How does this work?","panel@pages@Sync@how_text":"You grant PfP access to a directory within your personal account on Dropbox or another storage provider. This access will be used to upload a file with encrypted data regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically – assuming that they all use the same master password.","panel@pages@Sync@security_heading":"Is this safe?","panel@pages@Sync@security_text":"Yes. PfP can only access its own file, not the other files stored in your account. Also, the file's data is fully encrypted and can only be decrypted using your master password.","panel@pages@Sync@no_account_heading":"What if I don't have an account?","panel@pages@Sync@no_account_text":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","panel@pages@Sync@sync_invalid_token":"Access has been denied, you probably need to authorize PfP again.","panel@pages@Sync@sync_unknown_data_format":"Format of currently stored data is unrecognized, it might have been created by a newer PfP version.","panel@pages@Sync@sync_connection_error":"Server connection failed.","panel@pages@Sync@sync_too_many_retries":"Too many retries after conflicting modifications.","panel@pages@Sync@sync_multiple_candidates":"Your storage provider has multiple PfP files stored for some reason. You probably need to delete PfP data there and sync again.","panel@pages@Sync@sync_malformed_response":"Your storage provider responded in a way that PfP could not understand.","panel@pages@Sync@sync_wrong_master_password":"It seems that the currently stored data was encrypted with a different master password.","panel@pages@Sync@sync_unrelated_client":"It seems that remote data has been created by an unrelated PfP instance. If you want to sync to it, disable sync now and set it up again.","panel@pages@Sync@sync_tampered_data":"It seems that remote data has either been tampered with or reset to an older revision. Remove remote data to fix this issue.","panel@pages@Sync@sync_master_password_required":"Initial sync requires passwords to be unlocked, please click \"Upload now\" to retry.","panel@pages@learn_more":"Learn more…"};
+
+/***/ }),
+/* 3 */
 /*!*************************!*\
   !*** external "zxcvbn" ***!
   \*************************/
@@ -187,7 +199,7 @@ exports.emit = function (obj, eventName) {
 module.exports = zxcvbn;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /*!***********************!*\
   !*** external "JSQR" ***!
   \***********************/
@@ -199,12 +211,13 @@ module.exports = zxcvbn;
 module.exports = JSQR;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /*!************************************!*\
-  !*** ./web/index.js + 190 modules ***!
+  !*** ./web/index.js + 204 modules ***!
   \************************************/
 /*! no exports provided */
 /*! all exports used */
+/*! ModuleConcatenation bailout: Cannot concat with ./build-web/locale/en_US.json (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./lib/eventTarget.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with external "JSQR" (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with external "Vue" (<- Module is not an ECMAScript module) */
@@ -218,8 +231,9 @@ __webpack_require__.r(__webpack_exports__);
 var external_Vue_ = __webpack_require__(0);
 var external_Vue_default = /*#__PURE__*/__webpack_require__.n(external_Vue_);
 
-// CONCATENATED MODULE: ./locale/en-US.properties
-/* harmony default export */ var en_US_properties = ({"password_too_short":"The master password should be at least 6 characters long.","passwords_differ":"Passwords don't match.","weak_password":"Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?","password_declined":"This doesn't seem to be the master password you have used before.","decryption_failure":"Some data could not be decrypted, maybe wrong master password was used?","user_name_required":"Please enter your user name or an arbitrary name if the website doesn't require one.","user_name_exists":"This user name and revision combination already exists. Maybe increase the revision number?","no_characters_selected":"At least one character set has to be selected.","password_value_required":"Please enter the password you used on this website.","password_type_generated2":"Generated password","password_type_stored":"Stored password","password_type_stored_with_recovery":"Stored password, recovery code below","recovery_code_explanation":"Recovery codes can be entered instead of the password when adding a stored password. They are safe to print, decryption is only possible with the right master password.","password_info_notes":"Notes:","remove_password_confirmation":"Do you really want to remove the password \"{1}\" for the website {2}?","remove_password_confirmation_notes":"This password has notes attached to it: {1}","remove_alias_confirmation":"Do you really want to stop treating {1} as an alias for {2}?","recovery_checksum_mismatch":"Row is mistyped or not the next row.","sync_invalid_token":"Access has been denied, you probably need to authorize PfP again.","sync_unknown_data_format":"Format of currently stored data is unrecognized, it might have been created by a newer PfP version.","sync_connection_error":"Server connection failed.","sync_too_many_retries":"Too many retries after conflicting modifications.","sync_multiple_candidates":"Your storage provider has multiple PfP files stored for some reason. You probably need to delete PfP data there and sync again.","sync_malformed_response":"Your storage provider responded in a way that PfP could not understand.","sync_wrong_master_password":"It seems that the currently stored data was encrypted with a different master password.","sync_unrelated_client":"It seems that remote data has been created by an unrelated PfP instance. If you want to sync to it, disable sync now and set it up again.","sync_tampered_data":"It seems that remote data has either been tampered with or reset to an older revision. Remove remote data to fix this issue.","sync_master_password_required":"Initial sync requires passwords to be unlocked, please click \"Upload now\" to retry.","ok":"OK","cancel":"Cancel","close":"Close","yes":"Yes","no":"No","no_site_placeholder":"(none)","learn_more":"Learn more…","unknown_error":"The operation failed unexpectedly.","unknown_error_more":"Show error message","new_master_message":"You didn't define a master password yet, please do so below.","reset_master_message":"Warning: If you change your master password all your existing passwords will be reset.","master_security_message":"It is essential that you choose a strong master password.","new_master":"New master password:","new_master_repeat":"Please reenter password:","change_master_submit":"Set master password","master_password":"Enter master password:","enter_master_submit":"Access passwords","reset_master_link":"Reset master password","migration_title":"Legacy passwords and data are no longer supported","migration_intro":"In order for PfP: Pain-free Passwords to be more robust, some outdated functionality has been removed:","migration_change1":"Legacy (EasyPasswords 1.x) generated passwords are no longer supported. If you still have any, these will be converted to stored passwords now.","migration_change2":"Legacy (unencrypted) backups will no longer be imported.","migration_conclusion":"None of this is likely to affect you. Still, you might want to create a new backup just so you have one with current data.","migration_in_progress":"Updating your data, please wait…","migration_continue":"Continue","select_site_label":"Select site","password_list":"Password list","sync_setup":"Set up sync","sync_state":"Show sync state","settings":"Settings","site":"Website name:","add_alias":"This website shares passwords with another?","alias_description":"You indicated that {1} shares passwords with this website.","remove_alias":"Revert","show_all_passwords":"Show all passwords","lock_passwords":"Lock passwords","password_copied_message":"Password has been copied to clipboard.","username_copied_message":"User name has been copied to clipboard.","no_such_password":"Unknown password!","unknown_generation_method":"Unknown password generation method!","wrong_site_message":"You are not on the right website!","no_password_fields":"The page has no password fields or the password fields belong to a different site! Maybe click the user name and try again.","no_passwords_message":"No passwords yet","password_ready_message":"Your password is ready, click again anywhere to copy it.","passwords_label":"Passwords:","password_menu":"All actions","to_document":"Fill in","to_clipboard":"Copy to clipboard","to_clipboard_username":"Copy user name","show_qrcode":"Show as QR code","add_notes":"Add notes","edit_notes":"Edit notes","make_generated":"Replace by generated password","bump_revision":"Generate new password for this user name","remove_password":"Remove password","generate_password_link":"Generate new password","stored_password_link":"Enter stored password","replace_password_warning":"Making this a generated password will change its value. Make sure that you already filled in \"current password\" in the website's password change form.","user_name":"User name:","change_password_revision":"Need a new password for the same username?","password_revision":"Revision:","keep_notes":"Keep notes from original password","password_length":"Length:","allowed_characters":"Allowed characters:","generate_password":"Generate password","stored_password_warning":"Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.","password_value":"Password:","use_recovery":"Use recovery code","save_password":"Save password","select_alias":"Mark \"{1}\" as an alias for:","select_site":"Please select a site:","autocomplete_no_sites":"No sites matched your search","select":"Select","recovery_code":"Recovery code:","recovery_remove_line":"Remove line","cancel_recovery":"Enter password directly","password_notes":"Password notes:","save_notes":"Save notes","sync_selection_label":"Please select your storage provider:","sync_how_label":"How does this work?","sync_how_explanation":"You grant PfP access to a directory within your personal account on Dropbox or another storage provider. This access will be used to upload a file with encrypted data regularly. It's the same data as with your manual backup, but you can connect multiple devices to the same account and changes will propagate to all of them automatically – assuming that they all use the same master password.","sync_safe_label":"Is this safe?","sync_safe_explanation":"Yes. PfP can only access its own file, not the other files stored in your account. Also, the file's data is fully encrypted and can only be decrypted using your master password.","sync_no_account_label":"What if I don't have an account?","sync_no_account_explanation":"It doesn't matter, you can create an account for free. You don't need to use that account for anything beyond PfP.","sync_token_label":"Please paste the code given by the storage provider:","sync_provider":"Uploading to:","sync_lastTime":"Last upload:","sync_lastTime_never":"Never","sync_lastTime_now":"Running…","sync_succeeded":"(succeeded)","sync_failed":"(failed)","do_sync":"Upload now","sync_reauthorize":"Reauthorize…","sync_disable":"Disable sync","sync_disable_confirmation":"Do you really want to disable sync functionality? Your data will no longer be backed up to your provider automatically.","remoteStorage_username_label":"Please enter your remoteStorage user address:","remoteStorage_get_account":"Don't have remoteStorage? Learn where to get an account or how to host your own.","remoteStorage_invalid_username":"This doesn't seem to be a valid remoteStorage user address.","allpasswords_title":"All passwords known to PfP","allpasswords_export":"Save password definitions to a file","allpasswords_import":"Import password definitions from a file","allpasswords_print":"Print","allpasswords_show_notes":"Show notes","allpasswords_show_passwords":"Show passwords","allpasswords_intro":"Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).","allpasswords_aliases":"Aliases:","master_password_required":"Your passwords are currently locked. Please unlock them by clicking PfP icon and try again.","unknown_data_format":"Unknown data format!","syntax_error":"The file contains errors and could not be imported.","allpasswords_import_confirm":"Your existing passwords might get overwritten. Are you sure you want to proceed?","allpasswords_import_with_master":"It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.","allpasswords_import_success":"Passwords data has been imported.","allpasswords_show_confirm":"This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.","web_compat_message":"Your browser lacks the required functionality for this application. At least Mozilla Firefox 43, Google Chrome 51, Opera 38, Apple Safari 11 or Microsoft Edge 12 is required.","autolock_title":"Enable auto-lock","autolock_description":"Lock passwords automatically when the panel is closed","autolock_delay_title":"Auto-lock delay","autolock_delay_description":"Interval in minutes after which the passwords should be locked"});
+// EXTERNAL MODULE: ./build-web/locale/en_US.json
+var en_US = __webpack_require__(2);
+
 // CONCATENATED MODULE: ./web/eventTarget.js
 /*
  * This Source Code is subject to the terms of the Mozilla Public License
@@ -295,11 +309,58 @@ var runtime = {
 };
 var i18n = {
   getMessage: function getMessage(id) {
-    return en_US_properties[id];
+    return en_US[id];
   }
 };
 window.addEventListener("fromBackground", function (event) {
   port.onMessage._emit(event.detail);
+});
+// CONCATENATED MODULE: ./ui/i18n.js
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+
+
+function $t(id) {
+  var path;
+
+  if (id.length && id[0] == "/") {
+    path = "";
+    id = id.substr(1);
+  } else {
+    path = this.$options.localePath;
+    if (!path) throw new Error("Components not setting localePath can only use absolute string paths.");
+  }
+
+  while (id.length) {
+    if (id[0] == ".") {
+      path = path.replace(/\/?[^/]+$/, "");
+      id = id.substr(1);
+    } else if (id[0] == "(") {
+      var index = id.indexOf(")");
+      if (index < 0) throw new Error("Unclosed path component in string ID.");
+      if (path) path += "/";
+      path += id.substring(1, index);
+      id = id.substr(index + 1);
+    } else break;
+  }
+
+  if (path) id = path.replace(/\//g, "@") + "@" + id;
+  var message = i18n.getMessage(id);
+
+  for (var i = 0; i < (arguments.length <= 1 ? 0 : arguments.length - 1); i++) {
+    message = message.replace(new RegExp("\\{".concat(i + 1, "\\}"), "g"), i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1]);
+  }
+
+  return message;
+}
+/* harmony default export */ var ui_i18n = ({
+  install: function install(Vue) {
+    Vue.prototype.$t = $t;
+  }
 });
 // CONCATENATED MODULE: ./ui/common.js
 /*
@@ -310,11 +371,8 @@ window.addEventListener("fromBackground", function (event) {
 
 
 
-function validateMasterPassword(val) {
-  if (val.value.length < 6) val.error = this.$t("password_too_short");
-}
 function getSiteDisplayName(site) {
-  if (site == "pfp.invalid") return i18n.getMessage("no_site_placeholder");else if (site) return site;else return "???";
+  if (site == "pfp.invalid") return $t("/no_site_placeholder");else if (site) return site;else return "???";
 }
 function keyboardNavigationType(event) {
   var rtl = document.documentElement.getAttribute("dir") == "rtl";
@@ -347,28 +405,6 @@ function keyboardNavigationType(event) {
 
   return null;
 }
-// CONCATENATED MODULE: ./ui/i18n.js
-/*
- * This Source Code is subject to the terms of the Mozilla Public License
- * version 2.0 (the "License"). You can obtain a copy of the License at
- * http://mozilla.org/MPL/2.0/.
- */
-
-
-
-/* harmony default export */ var ui_i18n = ({
-  install: function install(Vue) {
-    Vue.prototype.$t = function (id) {
-      var message = i18n.getMessage(id);
-
-      for (var i = 0; i < (arguments.length <= 1 ? 0 : arguments.length - 1); i++) {
-        message = message.replace(new RegExp("\\{".concat(i + 1, "\\}"), "g"), i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1]);
-      }
-
-      return message;
-    };
-  }
-});
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ExternalLink.vue?vue&type=template&id=86bb9e1e&
 var render = function() {
   var _vm = this
@@ -575,7 +611,7 @@ var prefs = Proxy("prefs", ["get", "set"]);
 var recoveryCodes = Proxy("recoveryCodes", ["getValidChars", "getCode", "formatCode", "isValid", "decodeCode"]);
 var sync = Proxy("sync", ["authorize", "getManualAuthURL", "manualAuthorization", "disable", "sync"]);
 var ui = Proxy("ui", ["showAllPasswords", "getLink", "openLink"]);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ExternalLink.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ExternalLink.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -750,6 +786,74 @@ var component = normalizeComponent(
 if (false) { var api; }
 component.options.__file = "ui/components/ExternalLink.vue"
 /* harmony default export */ var ExternalLink = (component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/IconicLink.vue?vue&type=template&id=0b143d0e&
+var IconicLinkvue_type_template_id_0b143d0e_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("a", {
+    attrs: { href: "#", title: _vm.title, "aria-label": _vm.title },
+    on: {
+      click: function($event) {
+        $event.preventDefault()
+        return _vm.$emit("click")
+      }
+    }
+  })
+}
+var IconicLinkvue_type_template_id_0b143d0e_staticRenderFns = []
+IconicLinkvue_type_template_id_0b143d0e_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./ui/components/IconicLink.vue?vue&type=template&id=0b143d0e&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/IconicLink.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var IconicLinkvue_type_script_lang_js_ = ({
+  name: "IconicLink",
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  }
+});
+// CONCATENATED MODULE: ./ui/components/IconicLink.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_IconicLinkvue_type_script_lang_js_ = (IconicLinkvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./ui/components/IconicLink.vue
+
+
+
+
+
+/* normalize component */
+
+var IconicLink_component = normalizeComponent(
+  components_IconicLinkvue_type_script_lang_js_,
+  IconicLinkvue_type_template_id_0b143d0e_render,
+  IconicLinkvue_type_template_id_0b143d0e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var IconicLink_api; }
+IconicLink_component.options.__file = "ui/components/IconicLink.vue"
+/* harmony default export */ var IconicLink = (IconicLink_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ModalOverlay.vue?vue&type=template&id=f8d9e722&
 var ModalOverlayvue_type_template_id_f8d9e722_render = function() {
   var _vm = this
@@ -781,20 +885,24 @@ var ModalOverlayvue_type_template_id_f8d9e722_render = function() {
         },
         [
           _vm.cancelable
-            ? _c("div", { staticClass: "modalOverlay-cancel-container" }, [
-                _c("a", {
-                  directives: [{ name: "cancel", rawName: "v-cancel" }],
-                  ref: "cancel",
-                  staticClass: "cancel",
-                  attrs: { href: "#", title: _vm.$t("cancel") },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.$emit("cancel")
+            ? _c(
+                "div",
+                { staticClass: "modalOverlay-cancel-container" },
+                [
+                  _c("iconic-link", {
+                    directives: [{ name: "cancel", rawName: "v-cancel" }],
+                    ref: "cancel",
+                    staticClass: "cancel",
+                    attrs: { title: _vm.$t("/cancel") },
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("cancel")
+                      }
                     }
-                  }
-                })
-              ])
+                  })
+                ],
+                1
+              )
             : _vm._e(),
           _c("div", [_vm._t("default")], 2)
         ]
@@ -808,7 +916,7 @@ ModalOverlayvue_type_template_id_f8d9e722_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/ModalOverlay.vue?vue&type=template&id=f8d9e722&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ModalOverlay.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ModalOverlay.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -848,7 +956,8 @@ var activeModal = null;
   },
   data: function data() {
     return {
-      savedActiveElement: null
+      savedActiveElement: null,
+      observer: null
     };
   },
   beforeMount: function beforeMount() {
@@ -857,15 +966,23 @@ var activeModal = null;
   },
   mounted: function mounted() {
     this.ensureDocHeight();
-  },
-  updated: function updated() {
-    this.ensureDocHeight();
+    this.observer = new MutationObserver(this.ensureDocHeight);
+    this.observer.observe(this.$el, {
+      childList: true,
+      attributes: true,
+      subtree: true
+    });
   },
   beforeDestroy: function beforeDestroy() {
     if (activeModal == this) {
       document.body.style.minHeight = "";
       if (this.savedActiveElement) this.savedActiveElement.focus();
       activeModal = null;
+    }
+
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
     }
   },
   methods: {
@@ -928,7 +1045,7 @@ ValidatedFormvue_type_template_id_e3f704d4_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/ValidatedForm.vue?vue&type=template&id=e3f704d4&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ValidatedForm.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ValidatedForm.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -976,7 +1093,7 @@ ValidatedFormvue_type_template_id_e3f704d4_render._withStripped = true
       var seenErrors = false;
       this.forValidatedChildren(function (child) {
         child.eagerValidation = true;
-        var error = child.update(true).error;
+        var error = child.update();
 
         if (error && !seenErrors) {
           seenErrors = true;
@@ -1017,10 +1134,31 @@ var ValidatedInputvue_type_template_id_2f0b5c68_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    domProps: { value: _vm.value.value },
-    on: { input: _vm.update, change: _vm.update }
-  })
+  return _vm.visible
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model.trim",
+            value: _vm.actualValue,
+            expression: "actualValue",
+            modifiers: { trim: true }
+          }
+        ],
+        domProps: { value: _vm.actualValue },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.actualValue = $event.target.value.trim()
+          },
+          blur: function($event) {
+            return _vm.$forceUpdate()
+          }
+        }
+      })
+    : _vm._e()
 }
 var ValidatedInputvue_type_template_id_2f0b5c68_staticRenderFns = []
 ValidatedInputvue_type_template_id_2f0b5c68_render._withStripped = true
@@ -1028,7 +1166,7 @@ ValidatedInputvue_type_template_id_2f0b5c68_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/ValidatedInput.vue?vue&type=template&id=2f0b5c68&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ValidatedInput.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/ValidatedInput.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1045,38 +1183,42 @@ ValidatedInputvue_type_template_id_2f0b5c68_render._withStripped = true
   name: "ValidatedInput",
   props: {
     "value": {
+      type: String,
+      required: true
+    },
+    "error": {
       type: Object,
-      required: true,
-      validator: function validator(val) {
-        return typeof val.value == "string";
-      }
+      "default": null
+    },
+    "visible": {
+      type: Boolean,
+      "default": true
     }
   },
   data: function data() {
     return {
+      actualValue: this.value,
       eagerValidation: false
     };
   },
-  methods: {
-    setValue: function setValue(value) {
-      this.$el.value = value;
+  watch: {
+    value: function value() {
+      this.actualValue = this.value;
       this.update();
     },
-    update: function update(forced) {
-      var value = this.$el.value.trim();
-      if (forced !== true && value == this.value.value) return null;
-      var newData = {
-        value: value,
-        error: this.value.error
-      };
-
-      if (this.eagerValidation) {
-        newData.error = null;
-        this.$emit("validate", newData);
-      }
-
-      this.$emit("input", newData);
-      return newData;
+    actualValue: function actualValue() {
+      this.$emit("input", this.actualValue);
+    }
+  },
+  methods: {
+    update: function update() {
+      if (!this.eagerValidation) return null;
+      var error = null;
+      this.$emit("validate", this.value, function (e) {
+        return error = e;
+      });
+      this.$emit("update:error", error);
+      return error;
     }
   }
 });
@@ -1121,6 +1263,7 @@ ValidatedInput_component.options.__file = "ui/components/ValidatedInput.vue"
 
 
 
+
 if (!("isConnected" in Node.prototype)) {
   // Edge and Firefox <53 don't have Node.isConnected
   Object.defineProperty(Node.prototype, "isConnected", {
@@ -1132,6 +1275,7 @@ if (!("isConnected" in Node.prototype)) {
 
 external_Vue_default.a.use(ui_i18n);
 external_Vue_default.a.component("external-link", ExternalLink);
+external_Vue_default.a.component("iconic-link", IconicLink);
 external_Vue_default.a.component("modal-overlay", ModalOverlay);
 external_Vue_default.a.component("validated-form", ValidatedForm);
 external_Vue_default.a.component("validated-input", ValidatedInput);
@@ -1211,7 +1355,7 @@ var Appvue_type_template_id_19c0bea8_render = function() {
     [
       !_vm.browserSupported
         ? _c("div", { staticClass: "warning" }, [
-            _vm._v(_vm._s(_vm.$t("web_compat_message")))
+            _vm._v(_vm._s(_vm.$t("compat_message")))
           ])
         : _vm._e(),
       _vm.currentPage == "panel"
@@ -1309,7 +1453,7 @@ var Appvue_type_template_id_4ab8aec9_render = function() {
             { staticClass: "tabs" },
             [
               _c(
-                "div",
+                "nav",
                 {
                   directives: [
                     {
@@ -1319,33 +1463,32 @@ var Appvue_type_template_id_4ab8aec9_render = function() {
                       expression: "tab"
                     }
                   ],
-                  staticClass: "tablist"
+                  staticClass: "tablist",
+                  attrs: { role: "list" }
                 },
                 [
                   _c("div"),
-                  _c("a", {
+                  _c("iconic-link", {
                     staticClass: "tab select-site",
                     class: { active: _vm.currentPage == "select-site" },
-                    attrs: { href: "#", title: _vm.$t("select_site_label") },
+                    attrs: { role: "listitem", title: _vm.$t("select_site") },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.currentPage = "select-site"
                       }
                     }
                   }),
-                  _c("a", {
+                  _c("iconic-link", {
                     staticClass: "tab password-list",
                     class: { active: _vm.currentPage == "password-list" },
-                    attrs: { href: "#", title: _vm.$t("password_list") },
+                    attrs: { role: "listitem", title: _vm.$t("password_list") },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.currentPage = "password-list"
                       }
                     }
                   }),
-                  _c("a", {
+                  _c("iconic-link", {
                     staticClass: "tab sync",
                     class: {
                       active: _vm.currentPage == "sync",
@@ -1354,42 +1497,38 @@ var Appvue_type_template_id_4ab8aec9_render = function() {
                         _vm.$app.sync.error != "sync_connection_error"
                     },
                     attrs: {
-                      href: "#",
+                      role: "listitem",
                       title: _vm.$t(
                         _vm.$app.sync.provider ? "sync_state" : "sync_setup"
                       )
                     },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.currentPage = "sync"
                       }
                     }
                   }),
-                  _c("a", {
+                  _c("iconic-link", {
                     staticClass: "tab settings",
                     class: { active: _vm.currentPage == "settings" },
-                    attrs: { href: "#", title: _vm.$t("settings") },
+                    attrs: { role: "listitem", title: _vm.$t("settings") },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.currentPage = "settings"
                       }
                     }
                   }),
                   _c("div", { staticClass: "spacer" }),
-                  _c("a", {
-                    directives: [{ name: "cancel", rawName: "v-cancel" }],
+                  _c("iconic-link", {
                     staticClass: "tab lock",
-                    attrs: { href: "#", title: _vm.$t("lock_passwords") },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.lockPasswords($event)
-                      }
-                    }
+                    attrs: {
+                      role: "listitem",
+                      title: _vm.$t("lock_passwords")
+                    },
+                    on: { click: _vm.lockPasswords }
                   })
-                ]
+                ],
+                1
               ),
               _vm.currentPage == "select-site"
                 ? _c("select-site", {
@@ -1427,47 +1566,33 @@ var EnterMastervue_type_template_id_2fabdb37_render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "validated-form",
-    { staticClass: "page", on: { validated: _vm.submit } },
+    "div",
     [
-      _c("label", { attrs: { for: "master-password" } }, [
-        _vm._v(_vm._s(_vm.$t("master_password")))
-      ]),
-      _c("validated-input", {
-        directives: [{ name: "focus", rawName: "v-focus" }],
-        attrs: { id: "master-password", type: "password" },
-        on: { validate: _vm.validateMasterPassword },
-        model: {
-          value: _vm.masterPassword,
-          callback: function($$v) {
-            _vm.masterPassword = $$v
-          },
-          expression: "masterPassword"
-        }
-      }),
-      _vm.masterPassword.error
-        ? _c("div", { staticClass: "error" }, [
-            _vm._v(" " + _vm._s(_vm.masterPassword.error) + " ")
+      _c(
+        "enter-master",
+        {
+          staticClass: "page",
+          attrs: { cancelable: false },
+          on: { done: _vm.done }
+        },
+        [
+          _c("div", { staticClass: "link-container" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$app.resettingMaster = true
+                  }
+                }
+              },
+              [_vm._v(" " + _vm._s(_vm.$t("reset")) + " ")]
+            )
           ])
-        : _vm._e(),
-      _c("div", { staticClass: "button-container" }, [
-        _c("button", [_vm._v(_vm._s(_vm.$t("enter_master_submit")))])
-      ]),
-      _c("div", { staticClass: "link-container" }, [
-        _c(
-          "a",
-          {
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.$app.resettingMaster = true
-              }
-            }
-          },
-          [_vm._v(" " + _vm._s(_vm.$t("reset_master_link")) + " ")]
-        )
-      ])
+        ]
+      )
     ],
     1
   )
@@ -1478,7 +1603,77 @@ EnterMastervue_type_template_id_2fabdb37_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/pages/EnterMaster.vue?vue&type=template&id=2fabdb37&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/EnterMaster.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/EnterMaster.vue?vue&type=template&id=9ccc3804&
+var EnterMastervue_type_template_id_9ccc3804_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "validated-form",
+    {
+      on: { validated: _vm.submit },
+      nativeOn: {
+        reset: function($event) {
+          $event.preventDefault()
+          return _vm.$emit("done", false)
+        }
+      }
+    },
+    [
+      _vm.warning
+        ? _c("div", { staticClass: "warning" }, [_vm._v(_vm._s(_vm.warning))])
+        : _vm._e(),
+      _c("label", { attrs: { for: "master-password" } }, [
+        _vm._v(_vm._s(_vm.$t("master_password")))
+      ]),
+      _c("validated-input", {
+        directives: [{ name: "focus", rawName: "v-focus" }],
+        attrs: {
+          id: "master-password",
+          type: "password",
+          error: _vm.masterPasswordError
+        },
+        on: {
+          "update:error": function($event) {
+            _vm.masterPasswordError = $event
+          },
+          validate: _vm.validateMasterPassword
+        },
+        model: {
+          value: _vm.masterPassword,
+          callback: function($$v) {
+            _vm.masterPassword = $$v
+          },
+          expression: "masterPassword"
+        }
+      }),
+      _vm.masterPasswordError
+        ? _c("div", { staticClass: "error" }, [
+            _vm._v(" " + _vm._s(_vm.masterPasswordError) + " ")
+          ])
+        : _vm._e(),
+      _c("div", { staticClass: "button-container" }, [
+        _c("button", { attrs: { type: "submit" } }, [
+          _vm._v(_vm._s(_vm.$t("submit")))
+        ]),
+        _vm.cancelable
+          ? _c("button", { attrs: { type: "reset" } }, [
+              _vm._v(_vm._s(_vm.$t("/cancel")))
+            ])
+          : _vm._e()
+      ]),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var EnterMastervue_type_template_id_9ccc3804_staticRenderFns = []
+EnterMastervue_type_template_id_9ccc3804_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./ui/components/EnterMaster.vue?vue&type=template&id=9ccc3804&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/EnterMaster.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1487,6 +1682,96 @@ EnterMastervue_type_template_id_2fabdb37_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+function validateMasterPassword(value, setError) {
+  if (value.length < 6) setError(this.$t("/(components)(EnterMaster)password_too_short"));
+}
+/* harmony default export */ var EnterMastervue_type_script_lang_js_ = ({
+  name: "EnterMaster",
+  localePath: "components/EnterMaster",
+  props: {
+    callback: {
+      type: Function,
+      "default": null
+    },
+    warning: {
+      type: String,
+      "default": null
+    },
+    cancelable: {
+      type: Boolean,
+      "default": true
+    }
+  },
+  data: function data() {
+    return {
+      masterPassword: "",
+      masterPasswordError: null
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      if (this.callback) {
+        this.callback(this.masterPassword);
+        this.$emit("done", true);
+      } else {
+        masterPassword.checkPassword(this.masterPassword).then(function () {
+          _this.$emit("done", true);
+        })["catch"](function (error) {
+          if (error == "declined") _this.masterPasswordError = _this.$t("password_declined");else if (error == "migrating") _this.$emit("done", error);else _this.$app.showUnknownError(error);
+        });
+      }
+    },
+    validateMasterPassword: validateMasterPassword
+  }
+});
+// CONCATENATED MODULE: ./ui/components/EnterMaster.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_EnterMastervue_type_script_lang_js_ = (EnterMastervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./ui/components/EnterMaster.vue
+
+
+
+
+
+/* normalize component */
+
+var EnterMaster_component = normalizeComponent(
+  components_EnterMastervue_type_script_lang_js_,
+  EnterMastervue_type_template_id_9ccc3804_render,
+  EnterMastervue_type_template_id_9ccc3804_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var EnterMaster_api; }
+EnterMaster_component.options.__file = "ui/components/EnterMaster.vue"
+/* harmony default export */ var EnterMaster = (EnterMaster_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/EnterMaster.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1517,40 +1802,35 @@ function EnterMastervue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isAr
 
 
 
-/* harmony default export */ var EnterMastervue_type_script_lang_js_ = ({
+/* harmony default export */ var pages_EnterMastervue_type_script_lang_js_ = ({
   name: "EnterMaster",
-  data: function data() {
-    return {
-      masterPassword: {
-        value: ""
-      }
-    };
+  localePath: "panel/pages/EnterMaster",
+  components: {
+    "enter-master": EnterMaster
   },
   methods: {
-    submit: function submit() {
+    done: function done(success) {
       var _this = this;
 
-      masterPassword.checkPassword(this.masterPassword.value).then(function () {
-        return passwords.getPasswords(_this.$app.origSite);
-      }).then(function (_ref) {
-        var _ref2 = EnterMastervue_type_script_lang_js_slicedToArray(_ref, 3),
-            origSite = _ref2[0],
-            site = _ref2[1],
-            pwdList = _ref2[2];
+      if (!success) return;
+      if (success == "migrating") this.$app.masterPasswordState = "migrating";else {
+        passwords.getPasswords(this.$app.origSite).then(function (_ref) {
+          var _ref2 = EnterMastervue_type_script_lang_js_slicedToArray(_ref, 3),
+              origSite = _ref2[0],
+              site = _ref2[1],
+              pwdList = _ref2[2];
 
-        _this.$app.origSite = origSite;
-        _this.$app.site = site;
-        _this.$app.pwdList = pwdList;
-        _this.$app.masterPasswordState = "known";
-      })["catch"](function (error) {
-        if (error == "declined") _this.masterPassword.error = _this.$t("password_declined");else if (error == "migrating") _this.$app.masterPasswordState = "migrating";else _this.$app.showUnknownError(error);
-      });
-    },
-    validateMasterPassword: validateMasterPassword
+          _this.$app.origSite = origSite;
+          _this.$app.site = site;
+          _this.$app.pwdList = pwdList;
+          _this.$app.masterPasswordState = "known";
+        })["catch"](this.$app.showUnknownError);
+      }
+    }
   }
 });
 // CONCATENATED MODULE: ./ui/panel/pages/EnterMaster.vue?vue&type=script&lang=js&
- /* harmony default export */ var pages_EnterMastervue_type_script_lang_js_ = (EnterMastervue_type_script_lang_js_); 
+ /* harmony default export */ var panel_pages_EnterMastervue_type_script_lang_js_ = (pages_EnterMastervue_type_script_lang_js_); 
 // CONCATENATED MODULE: ./ui/panel/pages/EnterMaster.vue
 
 
@@ -1559,8 +1839,8 @@ function EnterMastervue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isAr
 
 /* normalize component */
 
-var EnterMaster_component = normalizeComponent(
-  pages_EnterMastervue_type_script_lang_js_,
+var pages_EnterMaster_component = normalizeComponent(
+  panel_pages_EnterMastervue_type_script_lang_js_,
   EnterMastervue_type_template_id_2fabdb37_render,
   EnterMastervue_type_template_id_2fabdb37_staticRenderFns,
   false,
@@ -1571,9 +1851,9 @@ var EnterMaster_component = normalizeComponent(
 )
 
 /* hot reload */
-if (false) { var EnterMaster_api; }
-EnterMaster_component.options.__file = "ui/panel/pages/EnterMaster.vue"
-/* harmony default export */ var EnterMaster = (EnterMaster_component.exports);
+if (false) { var pages_EnterMaster_api; }
+pages_EnterMaster_component.options.__file = "ui/panel/pages/EnterMaster.vue"
+/* harmony default export */ var pages_EnterMaster = (pages_EnterMaster_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/ChangeMaster.vue?vue&type=template&id=43f96e25&
 var ChangeMastervue_type_template_id_43f96e25_render = function() {
   var _vm = this
@@ -1609,7 +1889,7 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
                 param: "choosing-master-password"
               }
             },
-            [_vm._v(" " + _vm._s(_vm.$t("learn_more")) + " ")]
+            [_vm._v(" " + _vm._s(_vm.$t(".learn_more")) + " ")]
           )
         ],
         2
@@ -1621,8 +1901,17 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
       ),
       _c("validated-input", {
         directives: [{ name: "focus", rawName: "v-focus" }],
-        attrs: { id: "new-master", type: "password" },
-        on: { validate: _vm.validateMasterPassword },
+        attrs: {
+          id: "new-master",
+          type: "password",
+          error: _vm.newMasterError
+        },
+        on: {
+          "update:error": function($event) {
+            _vm.newMasterError = $event
+          },
+          validate: _vm.validateMasterPassword
+        },
         model: {
           value: _vm.newMaster,
           callback: function($$v) {
@@ -1631,14 +1920,14 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
           expression: "newMaster"
         }
       }),
-      _vm.newMaster.error
+      _vm.newMasterError
         ? _c("div", { staticClass: "error" }, [
-            _vm._v(" " + _vm._s(_vm.newMaster.error) + " ")
+            _vm._v(" " + _vm._s(_vm.newMasterError) + " ")
           ])
         : _vm._e(),
       _c("password-score", {
         ref: "passwordScore",
-        attrs: { password: _vm.newMaster.value }
+        attrs: { password: _vm.newMaster }
       }),
       _c(
         "label",
@@ -1646,8 +1935,17 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
         [_vm._v(_vm._s(_vm.$t("new_master_repeat")))]
       ),
       _c("validated-input", {
-        attrs: { id: "new-master-repeat", type: "password" },
-        on: { validate: _vm.validateMasterPasswordRepeat },
+        attrs: {
+          id: "new-master-repeat",
+          type: "password",
+          error: _vm.newMasterRepeatError
+        },
+        on: {
+          "update:error": function($event) {
+            _vm.newMasterRepeatError = $event
+          },
+          validate: _vm.validateMasterPasswordRepeat
+        },
         model: {
           value: _vm.newMasterRepeat,
           callback: function($$v) {
@@ -1656,14 +1954,14 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
           expression: "newMasterRepeat"
         }
       }),
-      _vm.newMasterRepeat.error
+      _vm.newMasterRepeatError
         ? _c("div", { staticClass: "error" }, [
-            _vm._v(" " + _vm._s(_vm.newMasterRepeat.error) + " ")
+            _vm._v(" " + _vm._s(_vm.newMasterRepeatError) + " ")
           ])
         : _vm._e(),
       _c("div", { staticClass: "button-container" }, [
         _c("button", { attrs: { type: "submit" } }, [
-          _vm._v(_vm._s(_vm.$t("change_master_submit")))
+          _vm._v(_vm._s(_vm.$t("submit")))
         ]),
         _vm.hasPassword
           ? _c(
@@ -1672,7 +1970,7 @@ var ChangeMastervue_type_template_id_43f96e25_render = function() {
                 directives: [{ name: "cancel", rawName: "v-cancel" }],
                 attrs: { type: "reset" }
               },
-              [_vm._v(_vm._s(_vm.$t("cancel")))]
+              [_vm._v(_vm._s(_vm.$t("/cancel")))]
             )
           : _vm._e()
       ])
@@ -1710,10 +2008,10 @@ PasswordScorevue_type_template_id_7a83d774_render._withStripped = true
 // CONCATENATED MODULE: ./ui/panel/components/PasswordScore.vue?vue&type=template&id=7a83d774&
 
 // EXTERNAL MODULE: external "zxcvbn"
-var external_zxcvbn_ = __webpack_require__(2);
+var external_zxcvbn_ = __webpack_require__(3);
 var external_zxcvbn_default = /*#__PURE__*/__webpack_require__.n(external_zxcvbn_);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordScore.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordScore.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1777,7 +2075,9 @@ var PasswordScore_component = normalizeComponent(
 if (false) { var PasswordScore_api; }
 PasswordScore_component.options.__file = "ui/panel/components/PasswordScore.vue"
 /* harmony default export */ var PasswordScore = (PasswordScore_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/ChangeMaster.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/ChangeMaster.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -1838,17 +2138,16 @@ function ChangeMastervue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
 
 /* harmony default export */ var ChangeMastervue_type_script_lang_js_ = ({
   name: "ChangeMaster",
+  localePath: "panel/pages/ChangeMaster",
   components: {
     "password-score": PasswordScore
   },
   data: function data() {
     return {
-      newMaster: {
-        value: ""
-      },
-      newMasterRepeat: {
-        value: ""
-      }
+      newMaster: "",
+      newMasterError: null,
+      newMasterRepeat: "",
+      newMasterRepeatError: null
     };
   },
   computed: {
@@ -1864,7 +2163,7 @@ function ChangeMastervue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
       var ask = score < 3 ? this.$app.confirm(this.$t("weak_password")) : Promise.resolve(true);
       ask.then(function (accepted) {
         if (accepted) {
-          masterPassword.changePassword(_this.newMaster.value).then(function () {
+          masterPassword.changePassword(_this.newMaster).then(function () {
             return passwords.getPasswords(_this.$app.origSite);
           }).then(function (_ref) {
             var _ref2 = ChangeMastervue_type_script_lang_js_slicedToArray(_ref, 3),
@@ -1882,8 +2181,8 @@ function ChangeMastervue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
       });
     },
     validateMasterPassword: validateMasterPassword,
-    validateMasterPasswordRepeat: function validateMasterPasswordRepeat(newData) {
-      if (newData.value != this.newMaster.value) newData.error = this.$t("passwords_differ");
+    validateMasterPasswordRepeat: function validateMasterPasswordRepeat(value, setError) {
+      if (value != this.newMaster) setError(this.$t("passwords_differ"));
     }
   }
 });
@@ -1918,24 +2217,24 @@ var Migrationvue_type_template_id_ebb4322a_render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "migration page" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.$t("migration_title")))]),
+    _c("h1", [_vm._v(_vm._s(_vm.$t("title")))]),
     _vm.inProgress
       ? _c("div", { staticClass: "migration-in-progress" }, [
           _c("div", { staticClass: "migration-spinning-wheel" }),
-          _c("div", [_vm._v(_vm._s(_vm.$t("migration_in_progress")))])
+          _c("div", [_vm._v(_vm._s(_vm.$t("in_progress")))])
         ])
       : _vm._e(),
-    _c("p", [_vm._v(_vm._s(_vm.$t("migration_intro")))]),
+    _c("p", [_vm._v(_vm._s(_vm.$t("intro")))]),
     _c("ul", [
-      _c("li", [_vm._v(_vm._s(_vm.$t("migration_change1")))]),
-      _c("li", [_vm._v(_vm._s(_vm.$t("migration_change2")))])
+      _c("li", [_vm._v(_vm._s(_vm.$t("change1")))]),
+      _c("li", [_vm._v(_vm._s(_vm.$t("change2")))])
     ]),
-    _c("p", [_vm._v(_vm._s(_vm.$t("migration_conclusion")))]),
+    _c("p", [_vm._v(_vm._s(_vm.$t("conclusion")))]),
     _c(
       "p",
       [
         _c("external-link", { attrs: { type: "relnotes", param: "2.2.0" } }, [
-          _vm._v(" " + _vm._s(_vm.$t("learn_more")) + " ")
+          _vm._v(" " + _vm._s(_vm.$t(".learn_more")) + " ")
         ])
       ],
       1
@@ -1948,7 +2247,7 @@ var Migrationvue_type_template_id_ebb4322a_render = function() {
               directives: [{ name: "focus", rawName: "v-focus" }],
               on: { click: _vm.done }
             },
-            [_vm._v(_vm._s(_vm.$t("migration_continue")))]
+            [_vm._v(_vm._s(_vm.$t("continue")))]
           )
         ])
       : _vm._e()
@@ -1960,7 +2259,7 @@ Migrationvue_type_template_id_ebb4322a_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/pages/Migration.vue?vue&type=template&id=ebb4322a&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Migration.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Migration.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -2004,6 +2303,7 @@ function Migrationvue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isArra
 
 /* harmony default export */ var Migrationvue_type_script_lang_js_ = ({
   name: "Migration",
+  localePath: "panel/pages/Migration",
   data: function data() {
     return {
       inProgress: true,
@@ -2183,12 +2483,12 @@ var PasswordListvue_type_template_id_23cab64c_render = function() {
         staticClass: "block-start",
         attrs: {
           messages: {
-            password_ready_message: false,
-            password_copied_message: true,
-            username_copied_message: true,
+            password_ready: false,
+            password_copied: true,
+            username_copied: true,
             no_such_password: false,
             unknown_generation_method: false,
-            wrong_site_message: false,
+            wrong_site: false,
             no_password_fields: false
           }
         }
@@ -2202,12 +2502,17 @@ var PasswordListvue_type_template_id_23cab64c_render = function() {
             "div",
             {
               staticClass: "password-list-container",
+              attrs: { role: "list" },
               on: { keydown: _vm.keyboardNavigation }
             },
             _vm._l(_vm.$app.pwdList, function(password, index) {
               return _c("password-entry", {
                 key: password.name + "\0" + password.revision,
-                attrs: { password: password, focus: index == 0 }
+                attrs: {
+                  role: "listitem",
+                  password: password,
+                  focus: index == 0
+                }
               })
             }),
             1
@@ -2304,7 +2609,7 @@ PasswordMessagevue_type_template_id_449c9290_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/PasswordMessage.vue?vue&type=template&id=449c9290&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/PasswordMessage.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/PasswordMessage.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -2320,6 +2625,7 @@ PasswordMessagevue_type_template_id_449c9290_render._withStripped = true
 var messageHideDelay = 3000;
 /* harmony default export */ var PasswordMessagevue_type_script_lang_js_ = ({
   name: "PasswordMessage",
+  localePath: "components/PasswordMessage",
   props: {
     messages: {
       type: Object,
@@ -2407,102 +2713,26 @@ var GeneratedPasswordvue_type_template_id_8323884e_render = function() {
         [
           _vm.options.replacing
             ? _c("div", { staticClass: "warning replacing" }, [
-                _vm._v(_vm._s(_vm.$t("replace_password_warning")))
+                _vm._v(_vm._s(_vm.$t("replace_warning")))
               ])
             : _vm._e(),
-          _c(
-            "label",
-            {
-              class: { "block-start": _vm.options.replacing },
-              attrs: { for: "user-name" }
+          _c("password-name-entry", {
+            ref: "name-entry",
+            class: { "block-start": _vm.options.replacing },
+            attrs: { revision: _vm.revision, readonly: _vm.options.replacing },
+            on: {
+              "update:revision": function($event) {
+                _vm.revision = $event
+              }
             },
-            [_vm._v(_vm._s(_vm.$t("user_name")))]
-          ),
-          _c(
-            "validated-input",
-            _vm._b(
-              {
-                directives: [{ name: "focus", rawName: "v-focus" }],
-                attrs: { id: "user-name", type: "text" },
-                on: { validate: _vm.validateName },
-                model: {
-                  value: _vm.name,
-                  callback: function($$v) {
-                    _vm.name = typeof $$v === "string" ? $$v.trim() : $$v
-                  },
-                  expression: "name"
-                }
+            model: {
+              value: _vm.name,
+              callback: function($$v) {
+                _vm.name = $$v
               },
-              "validated-input",
-              { readonly: _vm.options.replacing },
-              false
-            )
-          ),
-          _vm.name.error
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(" " + _vm._s(_vm.name.error) + " ")
-              ])
-            : _vm._e(),
-          !_vm.revisionVisible && !_vm.options.replacing
-            ? _c(
-                "a",
-                {
-                  staticClass: "change-password-revision",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.revisionVisible = true
-                    }
-                  }
-                },
-                [_vm._v(" " + _vm._s(_vm.$t("change_password_revision")) + " ")]
-              )
-            : _vm.revisionVisible
-            ? [
-                _c(
-                  "label",
-                  {
-                    staticClass: "block-start",
-                    attrs: { for: "password-revision" }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("password_revision")))]
-                ),
-                _c(
-                  "input",
-                  _vm._b(
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.revision,
-                          expression: "revision",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      ref: "revision",
-                      attrs: { id: "password-revision", type: "text" },
-                      domProps: { value: _vm.revision },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.revision = $event.target.value.trim()
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    },
-                    "input",
-                    { readonly: _vm.options.replacing },
-                    false
-                  )
-                )
-              ]
-            : _vm._e(),
+              expression: "name"
+            }
+          }),
           _vm.password && _vm.password.notes
             ? _c("label", { staticClass: "block-start" }, [
                 _c("input", {
@@ -2548,7 +2778,7 @@ var GeneratedPasswordvue_type_template_id_8323884e_render = function() {
           _c(
             "label",
             { staticClass: "block-start", attrs: { for: "password-length" } },
-            [_vm._v(_vm._s(_vm.$t("password_length")))]
+            [_vm._v(_vm._s(_vm.$t("length_label")))]
           ),
           _c("div", { staticClass: "length-container" }, [
             _c("input", {
@@ -2585,7 +2815,7 @@ var GeneratedPasswordvue_type_template_id_8323884e_render = function() {
           _c(
             "label",
             { staticClass: "block-start", attrs: { for: "charset-lower" } },
-            [_vm._v(_vm._s(_vm.$t("allowed_characters")))]
+            [_vm._v(_vm._s(_vm.$t("allowed_characters_label")))]
           ),
           _c("div", { staticClass: "charsets-container" }, [
             _c("label", [
@@ -2750,9 +2980,13 @@ var GeneratedPasswordvue_type_template_id_8323884e_render = function() {
             ])
           ]),
           _c("validated-input", {
-            ref: "charsets",
-            attrs: { hidden: "" },
-            on: { validate: _vm.validateCharsets },
+            attrs: { error: _vm.charsetsError, visible: false },
+            on: {
+              "update:error": function($event) {
+                _vm.charsetsError = $event
+              },
+              validate: _vm.validateCharsets
+            },
             model: {
               value: _vm.charsets,
               callback: function($$v) {
@@ -2761,21 +2995,21 @@ var GeneratedPasswordvue_type_template_id_8323884e_render = function() {
               expression: "charsets"
             }
           }),
-          _vm.charsets.error
+          _vm.charsetsError
             ? _c("div", { staticClass: "error" }, [
-                _vm._v(_vm._s(_vm.charsets.error))
+                _vm._v(_vm._s(_vm.charsetsError))
               ])
             : _vm._e(),
           _c("div", { staticClass: "button-container" }, [
             _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("generate_password")))
+              _vm._v(_vm._s(_vm.$t("submit")))
             ]),
             _c("button", { attrs: { type: "reset" } }, [
-              _vm._v(_vm._s(_vm.$t("cancel")))
+              _vm._v(_vm._s(_vm.$t("/cancel")))
             ])
           ])
         ],
-        2
+        1
       )
     ],
     1
@@ -2787,7 +3021,229 @@ GeneratedPasswordvue_type_template_id_8323884e_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/GeneratedPassword.vue?vue&type=template&id=8323884e&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/GeneratedPassword.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordNameEntry.vue?vue&type=template&id=09fad1db&
+var PasswordNameEntryvue_type_template_id_09fad1db_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "password-name-entry" },
+    [
+      _c("label", { attrs: { for: "user-name" } }, [
+        _vm._v(_vm._s(_vm.$t("username_label")))
+      ]),
+      _c(
+        "validated-input",
+        _vm._b(
+          {
+            directives: [{ name: "focus", rawName: "v-focus" }],
+            attrs: { id: "user-name", error: _vm.error, type: "text" },
+            on: {
+              "update:error": function($event) {
+                _vm.error = $event
+              },
+              validate: _vm.validateName
+            },
+            model: {
+              value: _vm.name,
+              callback: function($$v) {
+                _vm.name = $$v
+              },
+              expression: "name"
+            }
+          },
+          "validated-input",
+          { readonly: _vm.readonly },
+          false
+        )
+      ),
+      _vm.error
+        ? _c("div", { staticClass: "error" }, [
+            _vm._v(" " + _vm._s(_vm.error) + " ")
+          ])
+        : _vm._e(),
+      !_vm.revisionVisible && !_vm.readonly
+        ? _c(
+            "a",
+            {
+              staticClass: "change-password-revision",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.revisionVisible = true
+                }
+              }
+            },
+            [_vm._v(" " + _vm._s(_vm.$t("change_password_revision")) + " ")]
+          )
+        : _vm.revisionVisible
+        ? [
+            _c(
+              "label",
+              {
+                staticClass: "block-start",
+                attrs: { for: "password-revision" }
+              },
+              [_vm._v(_vm._s(_vm.$t("revision_label")))]
+            ),
+            _c(
+              "input",
+              _vm._b(
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.actualRevision,
+                      expression: "actualRevision",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  ref: "revision",
+                  attrs: { id: "password-revision", type: "text" },
+                  domProps: { value: _vm.actualRevision },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.actualRevision = $event.target.value.trim()
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                },
+                "input",
+                { readonly: _vm.readonly },
+                false
+              )
+            )
+          ]
+        : _vm._e()
+    ],
+    2
+  )
+}
+var PasswordNameEntryvue_type_template_id_09fad1db_staticRenderFns = []
+PasswordNameEntryvue_type_template_id_09fad1db_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./ui/panel/components/PasswordNameEntry.vue?vue&type=template&id=09fad1db&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordNameEntry.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var PasswordNameEntryvue_type_script_lang_js_ = ({
+  name: "PasswordNameEntry",
+  localePath: "panel/components/PasswordNameEntry",
+  props: {
+    value: {
+      type: String,
+      required: true
+    },
+    revision: {
+      type: String,
+      required: true
+    },
+    readonly: {
+      type: Boolean,
+      "default": false
+    }
+  },
+  data: function data() {
+    return {
+      name: this.value,
+      error: null,
+      actualRevision: this.revision,
+      revisionVisible: this.revision != "1"
+    };
+  },
+  watch: {
+    value: function value() {
+      this.name = this.value;
+    },
+    name: function name() {
+      this.$emit("input", this.name);
+    },
+    actualRevision: function actualRevision() {
+      this.$emit("update:revision", this.actualRevision);
+      if (this.error == this.$t("username_exists")) this.error = null;
+    },
+    revisionVisible: function revisionVisible() {
+      var _this = this;
+
+      if (this.revisionVisible) {
+        this.$nextTick(function () {
+          _this.$refs.revision.focus();
+        });
+      }
+    }
+  },
+  methods: {
+    validateName: function validateName(value, setError) {
+      if (!value) setError(this.$t("username_required"));
+    },
+    nameConflict: function nameConflict() {
+      this.error = this.$t("username_exists");
+      this.revisionVisible = true;
+    }
+  }
+});
+// CONCATENATED MODULE: ./ui/panel/components/PasswordNameEntry.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_PasswordNameEntryvue_type_script_lang_js_ = (PasswordNameEntryvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./ui/panel/components/PasswordNameEntry.vue
+
+
+
+
+
+/* normalize component */
+
+var PasswordNameEntry_component = normalizeComponent(
+  components_PasswordNameEntryvue_type_script_lang_js_,
+  PasswordNameEntryvue_type_template_id_09fad1db_render,
+  PasswordNameEntryvue_type_template_id_09fad1db_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var PasswordNameEntry_api; }
+PasswordNameEntry_component.options.__file = "ui/panel/components/PasswordNameEntry.vue"
+/* harmony default export */ var PasswordNameEntry = (PasswordNameEntry_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/GeneratedPassword.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -2836,19 +3292,16 @@ GeneratedPasswordvue_type_template_id_8323884e_render._withStripped = true
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ var GeneratedPasswordvue_type_script_lang_js_ = ({
   name: "GeneratedPassword",
+  localePath: "panel/components/GeneratedPassword",
+  components: {
+    "password-name-entry": PasswordNameEntry
+  },
   props: {
     password: {
       type: Object,
@@ -2882,37 +3335,19 @@ GeneratedPasswordvue_type_template_id_8323884e_render._withStripped = true
     }
 
     return {
-      name: {
-        value: name,
-        error: null
-      },
+      name: name,
       revision: revision || "1",
-      revisionVisible: !!revision,
       length: getProp("length", 16),
       lower: getProp("lower", true),
       upper: getProp("upper", true),
       number: getProp("number", true),
       symbol: getProp("symbol", true),
-      charsets: {
-        value: "",
-        error: null
-      },
+      charsets: "",
+      charsetsError: null,
       keepNotes: !!this.password
     };
   },
   watch: {
-    revision: function revision() {
-      if (this.name.error == this.$t("user_name_exists")) this.name.error = null;
-    },
-    revisionVisible: function revisionVisible() {
-      var _this2 = this;
-
-      if (this.revisionVisible) {
-        this.$nextTick(function () {
-          _this2.$refs.revision.focus();
-        });
-      }
-    },
     lower: function lower() {
       this.updateCharsets();
     },
@@ -2930,24 +3365,21 @@ GeneratedPasswordvue_type_template_id_8323884e_render._withStripped = true
     this.updateCharsets();
   },
   methods: {
-    validateName: function validateName(newData) {
-      if (!newData.value) newData.error = this.$t("user_name_required");
-    },
     updateCharsets: function updateCharsets() {
-      this.$refs.charsets.setValue([this.lower, this.upper, this.number, this.symbol].join(" "));
+      this.charsets = [this.lower, this.upper, this.number, this.symbol].join(" ");
     },
-    validateCharsets: function validateCharsets(newData) {
-      if (newData.value.split(" ").every(function (c) {
+    validateCharsets: function validateCharsets(value, setError) {
+      if (value.split(" ").every(function (c) {
         return c == "false";
-      })) newData.error = this.$t("no_characters_selected");
+      })) setError(this.$t("no_characters_selected"));
     },
     submit: function submit() {
-      var _this3 = this;
+      var _this2 = this;
 
       var revision = this.revision != "1" ? this.revision : "";
       passwords.addGenerated({
         site: this.$app.site,
-        name: this.name.value,
+        name: this.name,
         revision: revision,
         length: this.length,
         lower: this.lower,
@@ -2956,14 +3388,11 @@ GeneratedPasswordvue_type_template_id_8323884e_render._withStripped = true
         symbol: this.symbol,
         notes: this.keepNotes ? this.password.notes : null
       }, this.options.replacing).then(function (pwdList) {
-        _this3.$app.pwdList = pwdList;
+        _this2.$app.pwdList = pwdList;
 
-        _this3.$emit("cancel");
+        _this2.$emit("cancel");
       })["catch"](function (error) {
-        if (error == "alreadyExists") {
-          _this3.name.error = _this3.$t("user_name_exists");
-          _this3.revisionVisible = true;
-        } else _this3.$app.showUnknownError(error);
+        if (error == "alreadyExists") _this2.$refs["name-entry"].nameConflict();else _this2.$app.showUnknownError(error);
       });
     }
   }
@@ -3001,69 +3430,66 @@ var PasswordEntryvue_type_template_id_2745ee26_render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "password-container" }, [
-        _c("a", {
-          staticClass: "password-menu-link iconic-link",
-          class: { menuactive: _vm.modal == "menu" },
-          attrs: { href: "#", title: _vm.$t("password_menu") },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.modal = "menu"
-            }
-          }
-        }),
-        !_vm.$isWebClient
-          ? _c("a", {
-              directives: [
-                {
-                  name: "focus",
-                  rawName: "v-focus",
-                  value: _vm.focus,
-                  expression: "focus"
-                }
-              ],
-              staticClass: "to-document-link iconic-link",
-              attrs: { href: "#", title: _vm.$t("to_document") },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.fillIn($event)
-                }
+      _c(
+        "div",
+        { staticClass: "password-container" },
+        [
+          _c("iconic-link", {
+            staticClass: "password-menu-link iconic-link",
+            class: { menuactive: _vm.modal == "menu" },
+            attrs: { title: _vm.$t("password_menu") },
+            on: {
+              click: function($event) {
+                _vm.modal = "menu"
               }
-            })
-          : _vm._e(),
-        _c("a", {
-          directives: [
+            }
+          }),
+          !_vm.$isWebClient
+            ? _c("iconic-link", {
+                directives: [
+                  {
+                    name: "focus",
+                    rawName: "v-focus",
+                    value: _vm.focus,
+                    expression: "focus"
+                  }
+                ],
+                staticClass: "to-document-link iconic-link",
+                attrs: { title: _vm.$t(".(PasswordMenu)to_document") },
+                on: { click: _vm.fillIn }
+              })
+            : _vm._e(),
+          _c("iconic-link", {
+            directives: [
+              {
+                name: "focus",
+                rawName: "v-focus",
+                value: _vm.$isWebClient && _vm.focus,
+                expression: "$isWebClient && focus"
+              }
+            ],
+            staticClass: "to-clipboard-link iconic-link",
+            attrs: { title: _vm.$t(".(PasswordMenu)to_clipboard") },
+            on: { click: _vm.copy }
+          }),
+          _c(
+            "span",
             {
-              name: "focus",
-              rawName: "v-focus",
-              value: _vm.$isWebClient && _vm.focus,
-              expression: "$isWebClient && focus"
-            }
-          ],
-          staticClass: "to-clipboard-link iconic-link",
-          attrs: { href: "#", title: _vm.$t("to_clipboard") },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.copy($event)
-            }
-          }
-        }),
-        _c(
-          "span",
-          { staticClass: "user-name-container", attrs: { title: _vm.tooltip } },
-          [
-            _c("span", [_vm._v(_vm._s(_vm.password.name))]),
-            _vm.password.revision
-              ? _c("span", { staticClass: "password-revision" }, [
-                  _vm._v(_vm._s(_vm.password.revision))
-                ])
-              : _vm._e()
-          ]
-        )
-      ]),
+              staticClass: "user-name-container",
+              attrs: { title: _vm.tooltip }
+            },
+            [
+              _c("span", [_vm._v(_vm._s(_vm.password.name))]),
+              _vm.password.revision
+                ? _c("span", { staticClass: "password-revision" }, [
+                    _vm._v(_vm._s(_vm.password.revision))
+                  ])
+                : _vm._e()
+            ]
+          )
+        ],
+        1
+      ),
       _vm.modal == "generated"
         ? _c("generated-password", {
             attrs: { password: _vm.password, options: _vm.passwordOptions },
@@ -3168,7 +3594,9 @@ var NotesEditorvue_type_template_id_6b7be546_render = function() {
           }
         },
         [
-          _c("label", [_vm._v(_vm._s(_vm.$t("user_name")))]),
+          _c("label", [
+            _vm._v(_vm._s(_vm.$t(".(PasswordNameEntry)username_label")))
+          ]),
           _c("div", [
             _vm._v(" " + _vm._s(_vm.password.name) + " "),
             _vm.password.revision
@@ -3180,7 +3608,7 @@ var NotesEditorvue_type_template_id_6b7be546_render = function() {
           _c(
             "label",
             { staticClass: "block-start", attrs: { for: "notes-textarea" } },
-            [_vm._v(_vm._s(_vm.$t("password_notes")))]
+            [_vm._v(_vm._s(_vm.$t("notes_label")))]
           ),
           _c("textarea", {
             directives: [
@@ -3210,10 +3638,10 @@ var NotesEditorvue_type_template_id_6b7be546_render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "button-container" }, [
             _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("save_notes")))
+              _vm._v(_vm._s(_vm.$t("submit")))
             ]),
             _c("button", { attrs: { type: "reset" } }, [
-              _vm._v(_vm._s(_vm.$t("cancel")))
+              _vm._v(_vm._s(_vm.$t("/cancel")))
             ])
           ])
         ]
@@ -3227,7 +3655,7 @@ NotesEditorvue_type_template_id_6b7be546_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/NotesEditor.vue?vue&type=template&id=6b7be546&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/NotesEditor.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/NotesEditor.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3256,6 +3684,8 @@ NotesEditorvue_type_template_id_6b7be546_render._withStripped = true
 
 
 /* harmony default export */ var NotesEditorvue_type_script_lang_js_ = ({
+  name: "NotesEditor",
+  localePath: "panel/components/NotesEditor",
   props: {
     password: {
       type: Object,
@@ -3320,7 +3750,9 @@ var QRCodevue_type_template_id_068b728f_render = function() {
       }
     },
     [
-      _c("label", [_vm._v(_vm._s(_vm.$t("user_name")))]),
+      _c("label", [
+        _vm._v(_vm._s(_vm.$t(".(PasswordNameEntry)username_label")))
+      ]),
       _c("div", [
         _c("span", [_vm._v(_vm._s(_vm.password.name))]),
         _vm.password.revision
@@ -3345,10 +3777,10 @@ QRCodevue_type_template_id_068b728f_render._withStripped = true
 // CONCATENATED MODULE: ./ui/panel/components/QRCode.vue?vue&type=template&id=068b728f&
 
 // EXTERNAL MODULE: external "JSQR"
-var external_JSQR_ = __webpack_require__(3);
+var external_JSQR_ = __webpack_require__(4);
 var external_JSQR_default = /*#__PURE__*/__webpack_require__.n(external_JSQR_);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/QRCode.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/QRCode.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3373,6 +3805,7 @@ var external_JSQR_default = /*#__PURE__*/__webpack_require__.n(external_JSQR_);
 
 /* harmony default export */ var QRCodevue_type_script_lang_js_ = ({
   name: "QRCode",
+  localePath: "panel/components/QRCode",
   props: {
     password: {
       type: Object,
@@ -3617,7 +4050,7 @@ PasswordMenuvue_type_template_id_c7db5e4a_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/PasswordMenu.vue?vue&type=template&id=c7db5e4a&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordMenu.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordMenu.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3665,6 +4098,8 @@ PasswordMenuvue_type_template_id_c7db5e4a_render._withStripped = true
 
 
 /* harmony default export */ var PasswordMenuvue_type_script_lang_js_ = ({
+  name: "PasswordMenu",
+  localePath: "panel/components/PasswordMenu",
   props: {
     password: {
       type: Object,
@@ -3697,7 +4132,16 @@ var PasswordMenu_component = normalizeComponent(
 if (false) { var PasswordMenu_api; }
 PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
 /* harmony default export */ var PasswordMenu = (PasswordMenu_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordEntry.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/PasswordEntry.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3740,6 +4184,8 @@ PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
 
 
 /* harmony default export */ var PasswordEntryvue_type_script_lang_js_ = ({
+  name: "PasswordEntry",
+  localePath: "panel/components/PasswordEntry",
   components: {
     "generated-password": GeneratedPassword,
     "notes-editor": NotesEditor,
@@ -3779,7 +4225,7 @@ PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
         if (password.symbol) tooltip += " " + "+^;";
       } else if (password.type == "stored") tooltip = this.$t("password_type_stored");
 
-      if (password.notes) tooltip += "\n" + this.$t("password_info_notes") + " " + password.notes;
+      if (password.notes) tooltip += "\n" + this.$t("notes") + " " + password.notes;
       return tooltip;
     }
   },
@@ -3815,13 +4261,13 @@ PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
       var doCopy = function doCopy() {
         set(_this3.value);
 
-        _this3.$parent.showPasswordMessage("password_copied_message");
+        _this3.$parent.showPasswordMessage("password_copied");
       };
 
       if (this.value) doCopy();else {
         this.ensureValue().then(function () {
           if (!_this3.$isWebClient) doCopy();else {
-            _this3.$parent.showPasswordMessage("password_ready_message");
+            _this3.$parent.showPasswordMessage("password_ready");
 
             var handler = function handler(event) {
               window.removeEventListener("click", handler, true);
@@ -3840,7 +4286,7 @@ PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
     copyUsername: function copyUsername() {
       this.modal = null;
       set(this.password.name);
-      this.$parent.showPasswordMessage("username_copied_message");
+      this.$parent.showPasswordMessage("username_copied");
     },
     showQRCode: function showQRCode() {
       var _this4 = this;
@@ -3871,8 +4317,8 @@ PasswordMenu_component.options.__file = "ui/panel/components/PasswordMenu.vue"
       var _this5 = this;
 
       this.modal = null;
-      var message = this.$t("remove_password_confirmation", this.password.name, this.$app.siteDisplayName);
-      if (this.password.notes) message += " " + this.$t("remove_password_confirmation_notes", this.password.notes);
+      var message = this.$t("remove_confirmation", this.password.name, this.$app.siteDisplayName);
+      if (this.password.notes) message += " " + this.$t("remove_confirmation_notes", this.password.notes);
       this.$app.confirm(message).then(function (response) {
         if (response) {
           passwords.removePassword(_this5.password).then(function (pwdList) {
@@ -4036,16 +4482,14 @@ var SiteSelectionvue_type_template_id_48cab294_render = function() {
             )
           }),
           !_vm.sites.length
-            ? _c("div", [
-                _vm._v(" " + _vm._s(_vm.$t("autocomplete_no_sites")) + " ")
-              ])
+            ? _c("div", [_vm._v(" " + _vm._s(_vm.$t("no_sites")) + " ")])
             : _vm._e()
         ],
         2
       ),
       _c("div", { staticClass: "button-container" }, [
         _c("button", { attrs: { type: "submit" } }, [
-          _vm._v(_vm._s(_vm.$t("select")))
+          _vm._v(_vm._s(_vm.$t("submit")))
         ])
       ])
     ]
@@ -4057,7 +4501,7 @@ SiteSelectionvue_type_template_id_48cab294_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/SiteSelection.vue?vue&type=template&id=48cab294&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/SiteSelection.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/SiteSelection.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -4099,6 +4543,8 @@ SiteSelectionvue_type_template_id_48cab294_render._withStripped = true
 
 
 /* harmony default export */ var SiteSelectionvue_type_script_lang_js_ = ({
+  name: "SiteSelection",
+  localePath: "panel/components/SiteSelection",
   props: {
     message: {
       type: String,
@@ -4139,10 +4585,6 @@ SiteSelectionvue_type_template_id_48cab294_render._withStripped = true
 
       _this.updateSites();
     })["catch"](this.$app.showUnknownError);
-  },
-  updated: function updated() {
-    // If our parent is ModalOverlay, make sure to notify it about updates.
-    if (this.$parent.ensureDocHeight) this.$parent.ensureDocHeight();
   },
   methods: {
     updateSites: function updateSites() {
@@ -4222,79 +4664,25 @@ var StoredPasswordvue_type_template_id_bef38d42_render = function() {
         },
         [
           _c("div", { staticClass: "warning" }, [
-            _vm._v(_vm._s(_vm.$t("stored_password_warning")))
+            _vm._v(_vm._s(_vm.$t("warning")))
           ]),
-          _c(
-            "label",
-            { staticClass: "block-start", attrs: { for: "user-name" } },
-            [_vm._v(_vm._s(_vm.$t("user_name")))]
-          ),
-          _c("validated-input", {
-            directives: [{ name: "focus", rawName: "v-focus" }],
-            attrs: { id: "user-name", type: "text" },
-            on: { validate: _vm.validateName },
+          _c("password-name-entry", {
+            ref: "name-entry",
+            staticClass: "block-start",
+            attrs: { revision: _vm.revision },
+            on: {
+              "update:revision": function($event) {
+                _vm.revision = $event
+              }
+            },
             model: {
               value: _vm.name,
               callback: function($$v) {
-                _vm.name = typeof $$v === "string" ? $$v.trim() : $$v
+                _vm.name = $$v
               },
               expression: "name"
             }
           }),
-          _vm.name.error
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(" " + _vm._s(_vm.name.error) + " ")
-              ])
-            : _vm._e(),
-          !_vm.revisionVisible
-            ? _c(
-                "a",
-                {
-                  staticClass: "change-password-revision",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.revisionVisible = true
-                    }
-                  }
-                },
-                [_vm._v(" " + _vm._s(_vm.$t("change_password_revision")) + " ")]
-              )
-            : [
-                _c(
-                  "label",
-                  {
-                    staticClass: "block-start",
-                    attrs: { for: "password-revision" }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("password_revision")))]
-                ),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.revision,
-                      expression: "revision",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  attrs: { id: "password-revision", type: "text" },
-                  domProps: { value: _vm.revision },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.revision = $event.target.value.trim()
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ],
           !_vm.recoveryActive
             ? [
                 _c(
@@ -4303,22 +4691,32 @@ var StoredPasswordvue_type_template_id_bef38d42_render = function() {
                     staticClass: "block-start",
                     attrs: { for: "password-value" }
                   },
-                  [_vm._v(_vm._s(_vm.$t("password_value")))]
+                  [_vm._v(_vm._s(_vm.$t("password_label")))]
                 ),
                 _c("validated-input", {
-                  attrs: { id: "password-value", type: "password" },
-                  on: { validate: _vm.validatePassword },
+                  ref: "password",
+                  attrs: {
+                    id: "password-value",
+                    error: _vm.passwordError,
+                    type: "password"
+                  },
+                  on: {
+                    "update:error": function($event) {
+                      _vm.passwordError = $event
+                    },
+                    validate: _vm.validatePassword
+                  },
                   model: {
                     value: _vm.password,
                     callback: function($$v) {
-                      _vm.password = typeof $$v === "string" ? $$v.trim() : $$v
+                      _vm.password = $$v
                     },
                     expression: "password"
                   }
                 }),
-                _vm.password.error
+                _vm.passwordError
                   ? _c("div", { staticClass: "error" }, [
-                      _vm._v(" " + _vm._s(_vm.password.error) + " ")
+                      _vm._v(" " + _vm._s(_vm.passwordError) + " ")
                     ])
                   : _vm._e(),
                 _c(
@@ -4355,10 +4753,10 @@ var StoredPasswordvue_type_template_id_bef38d42_render = function() {
               ],
           _c("div", { staticClass: "button-container" }, [
             _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("save_password")))
+              _vm._v(_vm._s(_vm.$t("submit")))
             ]),
             _c("button", { attrs: { type: "reset" } }, [
-              _vm._v(_vm._s(_vm.$t("cancel")))
+              _vm._v(_vm._s(_vm.$t("/cancel")))
             ])
           ])
         ],
@@ -4383,27 +4781,31 @@ var RecoveryCodevue_type_template_id_2ff81d63_render = function() {
     _c(
       "label",
       { staticClass: "block-start", attrs: { for: "recoveryInput" } },
-      [_vm._v(_vm._s(_vm.$t("recovery_code")))]
+      [_vm._v(_vm._s(_vm.$t("label")))]
     ),
     _c(
       "div",
       { staticClass: "recovery-code-accepted" },
       _vm._l(_vm.accepted, function(line, index) {
-        return _c("div", { key: line }, [
-          _vm._v(" " + _vm._s(line) + " "),
-          index == _vm.accepted.length - 1
-            ? _c("a", {
-                staticClass: "recovery-code-strip cancel",
-                attrs: { href: "#", title: _vm.$t("recovery_remove_line") },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.accepted.pop()
+        return _c(
+          "div",
+          { key: line },
+          [
+            _vm._v(" " + _vm._s(line) + " "),
+            index == _vm.accepted.length - 1
+              ? _c("iconic-link", {
+                  staticClass: "recovery-code-strip cancel",
+                  attrs: { title: _vm.$t("remove_line") },
+                  on: {
+                    click: function($event) {
+                      return _vm.accepted.pop()
+                    }
                   }
-                }
-              })
-            : _vm._e()
-        ])
+                })
+              : _vm._e()
+          ],
+          1
+        )
       }),
       0
     ),
@@ -4463,8 +4865,7 @@ RecoveryCodevue_type_template_id_2ff81d63_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/RecoveryCode.vue?vue&type=template&id=2ff81d63&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/RecoveryCode.vue?vue&type=script&lang=js&
-//
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/RecoveryCode.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -4504,6 +4905,8 @@ function RecoveryCodevue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
 
 
 /* harmony default export */ var RecoveryCodevue_type_script_lang_js_ = ({
+  name: "RecoveryCode",
+  localePath: "panel/components/RecoveryCode",
   data: function data() {
     return {
       validChars: "",
@@ -4576,14 +4979,20 @@ function RecoveryCodevue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
             _this2.setValue([value.substr(index + 1), selectionDirection]);
 
             if (result == "ok") {
-              recoveryCodes.decodeCode(code).then(function (password) {
+              return recoveryCodes.decodeCode(code).then(function (password) {
                 _this2.$emit("done", password);
-              })["catch"](_this2.$app.showUnknownError);
+
+                if (error) throw error;
+              })["catch"](function (error) {
+                if (error == "wrong_version") throw _this2.$t(error);
+
+                _this2.$app.showUnknownError(error);
+              });
             }
 
             return error ? Promise.reject(error) : Promise.resolve();
           } else {
-            if (result == "checksum-mismatch") error = _this2.$t("recovery_checksum_mismatch");else error = result;
+            if (result == "checksum_mismatch") error = _this2.$t(result);else error = result;
             return checkSubstr(index - 1);
           }
         });
@@ -4638,7 +5047,7 @@ var RecoveryCode_component = normalizeComponent(
 if (false) { var RecoveryCode_api; }
 RecoveryCode_component.options.__file = "ui/panel/components/RecoveryCode.vue"
 /* harmony default export */ var RecoveryCode = (RecoveryCode_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/StoredPassword.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/StoredPassword.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -4676,70 +5085,59 @@ RecoveryCode_component.options.__file = "ui/panel/components/RecoveryCode.vue"
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 
 /* harmony default export */ var StoredPasswordvue_type_script_lang_js_ = ({
   name: "StoredPassword",
+  localePath: "panel/components/StoredPassword",
   components: {
+    "password-name-entry": PasswordNameEntry,
     "recovery-code": RecoveryCode
   },
   data: function data() {
     return {
       name: "",
       revision: "1",
-      revisionVisible: false,
-      password: {
-        value: "",
-        error: null
-      },
+      password: "",
+      passwordError: null,
       recoveryActive: false
     };
   },
   watch: {
-    revision: function revision() {
-      if (this.name.error == this.$t("user_name_exists")) this.name.error = null;
+    recoveryActive: function recoveryActive() {
+      var _this = this;
+
+      if (!this.recoveryActive) this.$nextTick(function () {
+        return _this.$refs.password.$el.focus();
+      });
     }
   },
   methods: {
-    validateName: function validateName(newData) {
-      if (!newData.value) newData.error = this.$t("user_name_required");
-    },
-    validatePassword: function validatePassword(newData) {
-      if (!newData.value) newData.error = this.$t("password_value_required");
+    validatePassword: function validatePassword(value, setError) {
+      if (!value) setError(this.$t("password_value_required"));
     },
     setPassword: function setPassword(password) {
       this.recoveryActive = false;
-      this.password.value = password;
+      this.password = password;
     },
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
 
       var revision = this.revision != "1" ? this.revision : "";
       passwords.addStored({
         site: this.$app.site,
-        name: this.name.value,
+        name: this.name,
         revision: revision,
-        password: this.password.value
+        password: this.password
       }).then(function (pwdList) {
-        _this.$app.pwdList = pwdList;
+        _this2.$app.pwdList = pwdList;
 
-        _this.$emit("cancel");
+        _this2.$emit("cancel");
       })["catch"](function (error) {
-        if (error == "alreadyExists") {
-          _this.name.error = _this.$t("user_name_exists");
-          _this.revisionVisible = true;
-        } else _this.$app.showUnknownError(error);
+        if (error == "alreadyExists") _this2.$refs["name-entry"].nameConflict();else _this2.$app.showUnknownError(error);
       });
     }
   }
@@ -4769,7 +5167,7 @@ var StoredPassword_component = normalizeComponent(
 if (false) { var StoredPassword_api; }
 StoredPassword_component.options.__file = "ui/panel/components/StoredPassword.vue"
 /* harmony default export */ var StoredPassword = (StoredPassword_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/PasswordList.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/PasswordList.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -4863,6 +5261,7 @@ function PasswordListvue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isA
 
 /* harmony default export */ var PasswordListvue_type_script_lang_js_ = ({
   name: "PasswordList",
+  localePath: "panel/pages/PasswordList",
   components: {
     "password-message": PasswordMessage,
     "generated-password": GeneratedPassword,
@@ -4985,7 +5384,7 @@ var SelectSitevue_type_template_id_a4e066d4_render = function() {
     { staticClass: "page" },
     [
       _c("site-selection", {
-        attrs: { message: _vm.$t("select_site"), callback: _vm.selected }
+        attrs: { message: _vm.$t("label"), callback: _vm.selected }
       })
     ],
     1
@@ -4997,7 +5396,7 @@ SelectSitevue_type_template_id_a4e066d4_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/pages/SelectSite.vue?vue&type=template&id=a4e066d4&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/SelectSite.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/SelectSite.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -5024,6 +5423,7 @@ function SelectSitevue_type_script_lang_js_arrayWithHoles(arr) { if (Array.isArr
 
 /* harmony default export */ var SelectSitevue_type_script_lang_js_ = ({
   name: "SelectSite",
+  localePath: "panel/pages/SelectSite",
   components: {
     "site-selection": SiteSelection
   },
@@ -5186,7 +5586,7 @@ Settingvue_type_template_id_df095c18_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/Setting.vue?vue&type=template&id=df095c18&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/Setting.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/Setting.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -5209,6 +5609,7 @@ Settingvue_type_template_id_df095c18_render._withStripped = true
 
 /* harmony default export */ var Settingvue_type_script_lang_js_ = ({
   name: "Setting",
+  localePath: "components/Setting",
   props: {
     name: {
       type: String,
@@ -5266,7 +5667,7 @@ var Setting_component = normalizeComponent(
 if (false) { var Setting_api; }
 Setting_component.options.__file = "ui/components/Setting.vue"
 /* harmony default export */ var Setting = (Setting_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Settings.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Settings.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -5325,7 +5726,7 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
     [
       _vm.$app.sync.provider
         ? [
-            _c("div", [_vm._v(_vm._s(_vm.$t("sync_provider")))]),
+            _c("div", [_vm._v(_vm._s(_vm.$t("provider_label")))]),
             _c(
               "div",
               [
@@ -5341,13 +5742,13 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
               2
             ),
             _c("div", { staticClass: "block-start" }, [
-              _vm._v(_vm._s(_vm.$t("sync_lastTime")))
+              _vm._v(_vm._s(_vm.$t("lastTime_label")))
             ]),
             _c(
               "div",
               [
                 _vm.$app.sync.isSyncing
-                  ? [_vm._v(_vm._s(_vm.$t("sync_lastTime_now")))]
+                  ? [_vm._v(_vm._s(_vm.$t("lastTime_now")))]
                   : _vm.$app.sync.lastSync
                   ? [
                       _vm._v(
@@ -5356,14 +5757,14 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
                         )
                       )
                     ]
-                  : [_vm._v(_vm._s(_vm.$t("sync_lastTime_never")))],
+                  : [_vm._v(_vm._s(_vm.$t("lastTime_never")))],
                 _vm.$app.sync.lastSync && !_vm.$app.sync.isSyncing
                   ? [
                       _vm.$app.sync.error
                         ? _c("span", { staticClass: "sync-failed" }, [
-                            _vm._v(_vm._s(" " + _vm.$t("sync_failed")))
+                            _vm._v(_vm._s(" " + _vm.$t("failed")))
                           ])
-                        : [_vm._v(_vm._s(" " + _vm.$t("sync_succeeded")))]
+                        : [_vm._v(_vm._s(" " + _vm.$t("succeeded")))]
                     ]
                   : _vm._e()
               ],
@@ -5384,7 +5785,7 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
                             }
                           }
                         },
-                        [_vm._v(" " + _vm._s(_vm.$t("sync_reauthorize")) + " ")]
+                        [_vm._v(" " + _vm._s(_vm.$t("reauthorize")) + " ")]
                       )
                     : _vm._e()
                 ])
@@ -5400,13 +5801,13 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
                 [_vm._v(_vm._s(_vm.$t("do_sync")))]
               ),
               _c("button", { on: { click: _vm.disableSync } }, [
-                _vm._v(_vm._s(_vm.$t("sync_disable")))
+                _vm._v(_vm._s(_vm.$t("disable")))
               ])
             ])
           ]
         : [
             _c("div", { staticClass: "sync-section" }, [
-              _vm._v(_vm._s(_vm.$t("sync_selection_label")))
+              _vm._v(_vm._s(_vm.$t("selection_label")))
             ]),
             _c(
               "div",
@@ -5455,32 +5856,32 @@ var Syncvue_type_template_id_d5a9dde4_render = function() {
               0
             ),
             _c("div", { staticClass: "block-start sync-section" }, [
-              _vm._v(_vm._s(_vm.$t("sync_how_label")))
+              _vm._v(_vm._s(_vm.$t("how_heading")))
             ]),
             _c(
               "div",
               { staticClass: "sync-explanation" },
               [
-                _vm._v(" " + _vm._s(_vm.$t("sync_how_explanation")) + " "),
+                _vm._v(" " + _vm._s(_vm.$t("how_text")) + " "),
                 _c(
                   "external-link",
                   { attrs: { type: "documentation", param: "sync" } },
-                  [_vm._v(" " + _vm._s(_vm.$t("learn_more")) + " ")]
+                  [_vm._v(" " + _vm._s(_vm.$t(".learn_more")) + " ")]
                 )
               ],
               1
             ),
             _c("div", { staticClass: "block-start sync-section" }, [
-              _vm._v(_vm._s(_vm.$t("sync_safe_label")))
+              _vm._v(_vm._s(_vm.$t("security_heading")))
             ]),
             _c("div", { staticClass: "sync-explanation" }, [
-              _vm._v(_vm._s(_vm.$t("sync_safe_explanation")))
+              _vm._v(_vm._s(_vm.$t("security_text")))
             ]),
             _c("div", { staticClass: "block-start sync-section" }, [
-              _vm._v(_vm._s(_vm.$t("sync_no_account_label")))
+              _vm._v(_vm._s(_vm.$t("no_account_heading")))
             ]),
             _c("div", { staticClass: "sync-explanation" }, [
-              _vm._v(_vm._s(_vm.$t("sync_no_account_explanation")))
+              _vm._v(_vm._s(_vm.$t("no_account_text")))
             ])
           ],
       _vm.manualAuthCallback
@@ -5541,7 +5942,7 @@ var ManualAuthvue_type_template_id_0229b50f_render = function() {
         },
         [
           _c("label", { attrs: { for: "sync-token" } }, [
-            _vm._v(_vm._s(_vm.$t("sync_token_label")))
+            _vm._v(_vm._s(_vm.$t("token_label")))
           ]),
           _c("input", {
             directives: [
@@ -5570,7 +5971,7 @@ var ManualAuthvue_type_template_id_0229b50f_render = function() {
           }),
           _c("div", { staticClass: "button-container" }, [
             _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("ok")))
+              _vm._v(_vm._s(_vm.$t("/ok")))
             ])
           ])
         ]
@@ -5584,7 +5985,7 @@ ManualAuthvue_type_template_id_0229b50f_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/panel/components/ManualAuth.vue?vue&type=template&id=0229b50f&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/ManualAuth.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/ManualAuth.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -5607,6 +6008,7 @@ ManualAuthvue_type_template_id_0229b50f_render._withStripped = true
 
 /* harmony default export */ var ManualAuthvue_type_script_lang_js_ = ({
   name: "ManualAuth",
+  localePath: "panel/components/ManualAuth",
   props: {
     callback: {
       type: Function,
@@ -5670,23 +6072,32 @@ var RemoteStorageUsernameInputvue_type_template_id_7eef2980_render = function() 
         { staticClass: "modal-form", on: { validated: _vm.done } },
         [
           _c("label", { attrs: { for: "username" } }, [
-            _vm._v(_vm._s(_vm.$t("remoteStorage_username_label")))
+            _vm._v(_vm._s(_vm.$t("username_label")))
           ]),
           _c("validated-input", {
             directives: [{ name: "focus", rawName: "v-focus" }],
-            attrs: { id: "username", placeholder: "me@example.com" },
-            on: { validate: _vm.validateUsername },
+            attrs: {
+              id: "username",
+              error: _vm.usernameError,
+              placeholder: "me@example.com"
+            },
+            on: {
+              "update:error": function($event) {
+                _vm.usernameError = $event
+              },
+              validate: _vm.validateUsername
+            },
             model: {
               value: _vm.username,
               callback: function($$v) {
-                _vm.username = typeof $$v === "string" ? $$v.trim() : $$v
+                _vm.username = $$v
               },
               expression: "username"
             }
           }),
-          _vm.username.error
+          _vm.usernameError
             ? _c("div", { staticClass: "error" }, [
-                _vm._v(" " + _vm._s(_vm.username.error) + " ")
+                _vm._v(" " + _vm._s(_vm.usernameError) + " ")
               ])
             : _vm._e(),
           _c(
@@ -5701,18 +6112,14 @@ var RemoteStorageUsernameInputvue_type_template_id_7eef2980_render = function() 
                     param: "https://wiki.remotestorage.io/Servers"
                   }
                 },
-                [
-                  _vm._v(
-                    " " + _vm._s(_vm.$t("remoteStorage_get_account")) + " "
-                  )
-                ]
+                [_vm._v(" " + _vm._s(_vm.$t("get_account")) + " ")]
               )
             ],
             1
           ),
           _c("div", { staticClass: "button-container" }, [
             _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("ok")))
+              _vm._v(_vm._s(_vm.$t("/ok")))
             ])
           ])
         ],
@@ -5728,7 +6135,10 @@ RemoteStorageUsernameInputvue_type_template_id_7eef2980_render._withStripped = t
 
 // CONCATENATED MODULE: ./ui/panel/components/RemoteStorageUsernameInput.vue?vue&type=template&id=7eef2980&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/RemoteStorageUsernameInput.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/components/RemoteStorageUsernameInput.vue?vue&type=script&lang=js&
+//
+//
+//
 //
 //
 //
@@ -5760,7 +6170,8 @@ RemoteStorageUsernameInputvue_type_template_id_7eef2980_render._withStripped = t
 
 
 /* harmony default export */ var RemoteStorageUsernameInputvue_type_script_lang_js_ = ({
-  name: "ManualAuth",
+  name: "RemoteStorageUsernameInput",
+  localePath: "panel/components/RemoteStorageUsernameInput",
   props: {
     target: {
       type: String,
@@ -5773,20 +6184,19 @@ RemoteStorageUsernameInputvue_type_template_id_7eef2980_render._withStripped = t
   },
   data: function data() {
     return {
-      username: {
-        value: ""
-      }
+      username: "",
+      usernameError: null
     };
   },
   methods: {
     done: function done() {
       this.$emit("cancel");
-      if (this.callback && this.username.value) this.callback(this.username.value);
+      if (this.callback && this.username) this.callback(this.username);
     },
-    validateUsername: function validateUsername(newData) {
-      var index = newData.value.indexOf("@");
-      if (index <= 0 || /\s/.test(newData.value)) newData.error = this.$t("remoteStorage_invalid_username");else {
-        var host = newData.value.substr(index + 1).toLowerCase(); // URL object will always encode non-ASCII characters, yet all of them
+    validateUsername: function validateUsername(value, setError) {
+      var index = value.indexOf("@");
+      if (index <= 0 || /\s/.test(value)) setError(this.$t("invalid_username"));else {
+        var host = value.substr(index + 1).toLowerCase(); // URL object will always encode non-ASCII characters, yet all of them
         // are valid. Replace by ASCII letters for validation.
 
         host = host.replace(/[\u0080-\uFFFF]/g, "a");
@@ -5794,7 +6204,7 @@ RemoteStorageUsernameInputvue_type_template_id_7eef2980_render._withStripped = t
         try {
           if (new URL("https://" + host + "/").hostname != host) throw "invalid";
         } catch (e) {
-          newData.error = this.$t("remoteStorage_invalid_username");
+          setError(this.$t("invalid_username"));
         }
       }
     }
@@ -5825,7 +6235,7 @@ var RemoteStorageUsernameInput_component = normalizeComponent(
 if (false) { var RemoteStorageUsernameInput_api; }
 RemoteStorageUsernameInput_component.options.__file = "ui/panel/components/RemoteStorageUsernameInput.vue"
 /* harmony default export */ var RemoteStorageUsernameInput = (RemoteStorageUsernameInput_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Sync.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/pages/Sync.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -5912,6 +6322,7 @@ RemoteStorageUsernameInput_component.options.__file = "ui/panel/components/Remot
 
 /* harmony default export */ var Syncvue_type_script_lang_js_ = ({
   name: "Sync",
+  localePath: "panel/pages/Sync",
   components: {
     "manual-auth": ManualAuth,
     "remoteStorage-username-input": RemoteStorageUsernameInput
@@ -5970,7 +6381,7 @@ RemoteStorageUsernameInput_component.options.__file = "ui/panel/components/Remot
     disableSync: function disableSync() {
       var _this = this;
 
-      this.$app.confirm(this.$t("sync_disable_confirmation")).then(function (disable) {
+      this.$app.confirm(this.$t("disable_confirmation")).then(function (disable) {
         if (disable) {
           sync.disable().then(function () {
             _this.$app.sync = {
@@ -6072,7 +6483,7 @@ Confirmvue_type_template_id_a7691b38_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/Confirm.vue?vue&type=template&id=a7691b38&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/Confirm.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/Confirm.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -6093,6 +6504,7 @@ Confirmvue_type_template_id_a7691b38_render._withStripped = true
 
 /* harmony default export */ var Confirmvue_type_script_lang_js_ = ({
   name: "Confirm",
+  localePath: "components/Confirm",
   data: function data() {
     return {
       message: null,
@@ -6140,36 +6552,40 @@ var UnknownErrorvue_type_template_id_04dc75ea_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "warning" }, [
-    _c("a", {
-      staticClass: "unknown-error-cancel cancel",
-      attrs: { href: "#", title: _vm.$t("close") },
-      on: {
-        click: function($event) {
-          $event.preventDefault()
-          return _vm.$emit("close")
+  return _c(
+    "div",
+    { staticClass: "unknown-error warning" },
+    [
+      _c("iconic-link", {
+        staticClass: "unknown-error-cancel cancel",
+        attrs: { title: _vm.$t("close") },
+        on: {
+          click: function($event) {
+            return _vm.$emit("close")
+          }
         }
-      }
-    }),
-    _c("span", [_vm._v(_vm._s(_vm.$t("unknown_error") + " "))]),
-    !_vm.showDetails
-      ? _c(
-          "a",
-          {
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.showDetails = true
+      }),
+      _c("span", [_vm._v(_vm._s(_vm.$t("description") + " "))]),
+      !_vm.showDetails
+        ? _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.showDetails = true
+                }
               }
-            }
-          },
-          [_vm._v(_vm._s(_vm.$t("unknown_error_more")))]
-        )
-      : _c("div", { staticClass: "unknown-error-details" }, [
-          _vm._v(_vm._s(_vm.stringify(_vm.error)))
-        ])
-  ])
+            },
+            [_vm._v(_vm._s(_vm.$t("more")))]
+          )
+        : _c("div", { staticClass: "unknown-error-details" }, [
+            _vm._v(_vm._s(_vm.stringify(_vm.error)))
+          ])
+    ],
+    1
+  )
 }
 var UnknownErrorvue_type_template_id_04dc75ea_staticRenderFns = []
 UnknownErrorvue_type_template_id_04dc75ea_render._withStripped = true
@@ -6177,7 +6593,7 @@ UnknownErrorvue_type_template_id_04dc75ea_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/components/UnknownError.vue?vue&type=template&id=04dc75ea&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/UnknownError.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/components/UnknownError.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -6197,6 +6613,7 @@ UnknownErrorvue_type_template_id_04dc75ea_render._withStripped = true
 
 /* harmony default export */ var UnknownErrorvue_type_script_lang_js_ = ({
   name: "UnknownError",
+  localePath: "components/UnknownError",
   props: {
     error: {
       type: Object,
@@ -6239,7 +6656,8 @@ var UnknownError_component = normalizeComponent(
 if (false) { var UnknownError_api; }
 UnknownError_component.options.__file = "ui/components/UnknownError.vue"
 /* harmony default export */ var UnknownError = (UnknownError_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/App.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/panel/App.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -6332,9 +6750,10 @@ messaging_port.on("init", function (state) {
 });
 /* harmony default export */ var Appvue_type_script_lang_js_ = ({
   name: "App",
+  localePath: "panel/App",
   components: {
     "change-master": ChangeMaster,
-    "enter-master": EnterMaster,
+    "enter-master": pages_EnterMaster,
     "migration": Migration,
     "password-list": PasswordList,
     "select-site": SelectSite,
@@ -6444,7 +6863,7 @@ var Appvue_type_template_id_63a462b4_render = function() {
     [
       _vm.inProgress ? _c("in-progress") : _vm._e(),
       _vm.masterPromise
-        ? _c("enter-master", { on: { cancel: _vm.enterMasterDone } })
+        ? _c("enter-master", { on: { done: _vm.enterMasterDone } })
         : _vm._e(),
       _c("confirm", { ref: "confirm" }),
       _vm.unknownError
@@ -6461,7 +6880,9 @@ var Appvue_type_template_id_63a462b4_render = function() {
         ref: "global-message",
         attrs: {
           messages: {
-            allpasswords_import_success: true
+            import_success: true,
+            unknown_data_format: false,
+            syntax_error: false
           }
         }
       }),
@@ -6469,9 +6890,7 @@ var Appvue_type_template_id_63a462b4_render = function() {
         "div",
         { staticClass: "title-container" },
         [
-          _c("h1", { staticClass: "title" }, [
-            _vm._v(_vm._s(_vm.$t("allpasswords_title")))
-          ]),
+          _c("h1", { staticClass: "title" }, [_vm._v(_vm._s(_vm.$t("title")))]),
           _c("global-actions")
         ],
         1
@@ -6516,7 +6935,7 @@ var Appvue_type_template_id_63a462b4_render = function() {
                 }
               }
             }),
-            _vm._v(_vm._s(_vm.$t("allpasswords_show_notes")))
+            _vm._v(_vm._s(_vm.$t("show_notes")))
           ])
         ]),
         _c("div", [
@@ -6558,13 +6977,11 @@ var Appvue_type_template_id_63a462b4_render = function() {
                 }
               }
             }),
-            _vm._v(_vm._s(_vm.$t("allpasswords_show_passwords")))
+            _vm._v(_vm._s(_vm.$t("show_passwords")))
           ])
         ])
       ]),
-      _c("div", { staticClass: "intro" }, [
-        _vm._v(_vm._s(_vm.$t("allpasswords_intro")))
-      ]),
+      _c("div", { staticClass: "intro" }, [_vm._v(_vm._s(_vm.$t("intro")))]),
       _c("site-list", {
         ref: "siteList",
         attrs: {
@@ -6591,35 +7008,20 @@ var GlobalActionsvue_type_template_id_a5878ba8_render = function() {
     "div",
     { staticClass: "global-actions" },
     [
-      _c("a", {
+      _c("iconic-link", {
         staticClass: "export",
-        attrs: { href: "#", title: _vm.$t("allpasswords_export") },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.exportData($event)
-          }
-        }
+        attrs: { title: _vm.$t("export") },
+        on: { click: _vm.exportData }
       }),
-      _c("a", {
+      _c("iconic-link", {
         staticClass: "import",
-        attrs: { href: "#", title: _vm.$t("allpasswords_import") },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.selectImportFile($event)
-          }
-        }
+        attrs: { title: _vm.$t("import") },
+        on: { click: _vm.selectImportFile }
       }),
-      _c("a", {
+      _c("iconic-link", {
         staticClass: "print",
-        attrs: { href: "#", title: _vm.$t("allpasswords_print") },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.printPage($event)
-          }
-        }
+        attrs: { title: _vm.$t("print") },
+        on: { click: _vm.printPage }
       }),
       _c("input", {
         ref: "importFile",
@@ -6633,12 +7035,13 @@ var GlobalActionsvue_type_template_id_a5878ba8_render = function() {
       _c("iframe", { ref: "frame", staticClass: "exportDataFrame" }),
       _vm.enterMasterCallback
         ? _c("enter-master", {
+            staticClass: "modal-form",
             attrs: {
-              warning: _vm.$t("allpasswords_import_with_master"),
+              warning: _vm.$t("import_with_master"),
               callback: _vm.enterMasterCallback
             },
             on: {
-              cancel: function($event) {
+              done: function($event) {
                 _vm.enterMasterCallback = null
               }
             }
@@ -6664,60 +7067,16 @@ var EnterMastervue_type_template_id_103845fc_render = function() {
     {
       on: {
         cancel: function($event) {
-          return _vm.$emit("cancel", false)
+          return _vm.done(false)
         }
       }
     },
     [
-      _c(
-        "validated-form",
-        {
-          staticClass: "modal-form",
-          on: { validated: _vm.submit },
-          nativeOn: {
-            reset: function($event) {
-              $event.preventDefault()
-              return _vm.$emit("cancel", false)
-            }
-          }
-        },
-        [
-          _vm.warning
-            ? _c("div", { staticClass: "warning" }, [
-                _vm._v(_vm._s(_vm.warning))
-              ])
-            : _vm._e(),
-          _c("label", { attrs: { for: "master-password" } }, [
-            _vm._v(_vm._s(_vm.$t("master_password")))
-          ]),
-          _c("validated-input", {
-            directives: [{ name: "focus", rawName: "v-focus" }],
-            attrs: { id: "master-password", type: "password" },
-            on: { validate: _vm.validateMasterPassword },
-            model: {
-              value: _vm.masterPassword,
-              callback: function($$v) {
-                _vm.masterPassword = $$v
-              },
-              expression: "masterPassword"
-            }
-          }),
-          _vm.masterPassword.error
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(" " + _vm._s(_vm.masterPassword.error) + " ")
-              ])
-            : _vm._e(),
-          _c("div", { staticClass: "button-container" }, [
-            _c("button", { attrs: { type: "submit" } }, [
-              _vm._v(_vm._s(_vm.$t("enter_master_submit")))
-            ]),
-            _c("button", { attrs: { type: "reset" } }, [
-              _vm._v(_vm._s(_vm.$t("cancel")))
-            ])
-          ])
-        ],
-        1
-      )
+      _c("enter-master", {
+        staticClass: "modal-form",
+        attrs: { warning: _vm.warning, callback: _vm.callback },
+        on: { done: _vm.done }
+      })
     ],
     1
   )
@@ -6728,7 +7087,7 @@ EnterMastervue_type_template_id_103845fc_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/allpasswords/modals/EnterMaster.vue?vue&type=template&id=103845fc&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/modals/EnterMaster.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/modals/EnterMaster.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -6741,25 +7100,14 @@ EnterMastervue_type_template_id_103845fc_render._withStripped = true
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
 /* harmony default export */ var modals_EnterMastervue_type_script_lang_js_ = ({
   name: "EnterMaster",
+  components: {
+    "enter-master": EnterMaster
+  },
   props: {
     callback: {
       type: Function,
@@ -6770,29 +7118,10 @@ EnterMastervue_type_template_id_103845fc_render._withStripped = true
       "default": null
     }
   },
-  data: function data() {
-    return {
-      masterPassword: {
-        value: ""
-      }
-    };
-  },
   methods: {
-    submit: function submit() {
-      var _this = this;
-
-      if (this.callback) {
-        this.callback(this.masterPassword.value);
-        this.$emit("cancel", true);
-      } else {
-        masterPassword.checkPassword(this.masterPassword.value).then(function () {
-          _this.$emit("cancel", true);
-        })["catch"](function (error) {
-          if (error == "declined") _this.masterPassword.error = _this.$t("password_declined");else _this.$app.showUnknownError(error);
-        });
-      }
-    },
-    validateMasterPassword: validateMasterPassword
+    done: function done(success) {
+      this.$emit("done", success);
+    }
   }
 });
 // CONCATENATED MODULE: ./ui/allpasswords/modals/EnterMaster.vue?vue&type=script&lang=js&
@@ -6820,7 +7149,7 @@ var modals_EnterMaster_component = normalizeComponent(
 if (false) { var modals_EnterMaster_api; }
 modals_EnterMaster_component.options.__file = "ui/allpasswords/modals/EnterMaster.vue"
 /* harmony default export */ var modals_EnterMaster = (modals_EnterMaster_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/GlobalActions.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/GlobalActions.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -6848,6 +7177,7 @@ modals_EnterMaster_component.options.__file = "ui/allpasswords/modals/EnterMaste
 
 /* harmony default export */ var GlobalActionsvue_type_script_lang_js_ = ({
   name: "GlobalActions",
+  localePath: "allpasswords/components/GlobalActions",
   components: {
     "enter-master": modals_EnterMaster
   },
@@ -6877,7 +7207,7 @@ modals_EnterMaster_component.options.__file = "ui/allpasswords/modals/EnterMaste
         link.href = URL.createObjectURL(blob);
         link.download = "passwords-backup-" + new Date().toISOString().replace(/T.*/, "") + ".json";
         link.click();
-      })["catch"](this.$app.showUnknownError);
+      })["catch"](this.$app.showGlobalMessage);
     },
     selectImportFile: function selectImportFile() {
       this.$refs.importFile.click();
@@ -6888,7 +7218,7 @@ modals_EnterMaster_component.options.__file = "ui/allpasswords/modals/EnterMaste
       var reader = new FileReader();
 
       reader.onload = function () {
-        _this2.$app.confirm(_this2.$t("allpasswords_import_confirm")).then(function (accepted) {
+        _this2.$app.confirm(_this2.$t("import_confirm")).then(function (accepted) {
           if (accepted) _this2.doImport(reader.result);
         });
       };
@@ -6903,14 +7233,14 @@ modals_EnterMaster_component.options.__file = "ui/allpasswords/modals/EnterMaste
       passwords.importPasswordData(data, masterPass).then(function () {
         _this3.$app.inProgress = false;
 
-        _this3.$app.showGlobalMessage("allpasswords_import_success");
+        _this3.$app.showGlobalMessage("import_success");
 
         _this3.$app.updateData();
       })["catch"](function (error) {
         _this3.$app.inProgress = false;
         if (error == "wrong_master_password") _this3.enterMasterCallback = function (newMaster) {
           return _this3.doImport(data, newMaster);
-        };else _this3.$app.showUnknownError(error);
+        };else _this3.$app.showGlobalMessage(error);
       });
     },
     printPage: function printPage() {
@@ -7035,7 +7365,7 @@ Shortcutsvue_type_template_id_465c82bf_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/allpasswords/components/Shortcuts.vue?vue&type=template&id=465c82bf&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/Shortcuts.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/Shortcuts.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -7120,17 +7450,18 @@ var SiteInfovue_type_template_id_6d2b9bb3_render = function() {
       ),
       _vm.site.aliases.length
         ? _c("div", [
-            _c("span", [_vm._v(_vm._s(_vm.$t("allpasswords_aliases")))]),
-            _c("span", [
-              _vm._v(
+            _vm._v(
+              " " +
+                _vm._s(_vm.$t("aliases_label")) +
+                " " +
                 _vm._s(
                   _vm.site.aliases
                     .slice()
                     .sort()
                     .join(", ")
-                )
-              )
-            ])
+                ) +
+                " "
+            )
           ])
         : _vm._e(),
       _vm._l(_vm.site.passwords, function(password) {
@@ -7174,49 +7505,50 @@ var PasswordInfovue_type_template_id_6765f007_render = function() {
         ref: "password-message",
         attrs: {
           messages: {
-            password_ready_message: false,
-            password_copied_message: true
+            password_ready: false,
+            password_copied: true,
+            no_such_password: false,
+            unknown_generation_method: false
           }
         }
       }),
-      _c("div", { staticClass: "password-container" }, [
-        _c("a", {
-          ref: "to-clipboard",
-          staticClass: "to-clipboard-link",
-          attrs: { href: "#", title: _vm.$t("to_clipboard") },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.copy($event)
-            }
-          }
-        }),
-        _c("span", { staticClass: "user-name-container" }, [
-          _c("span", { staticClass: "user-name" }, [
-            _vm._v(_vm._s(_vm.password.name))
+      _c(
+        "div",
+        { staticClass: "password-container" },
+        [
+          _c("iconic-link", {
+            ref: "to-clipboard",
+            staticClass: "to-clipboard-link",
+            attrs: {
+              title: _vm.$t("/(panel)(components)(PasswordMenu)to_clipboard")
+            },
+            on: { click: _vm.copy }
+          }),
+          _c("span", { staticClass: "user-name-container" }, [
+            _c("span", { staticClass: "user-name" }, [
+              _vm._v(_vm._s(_vm.password.name))
+            ]),
+            _vm.password.revision
+              ? _c("span", { staticClass: "password-revision" }, [
+                  _vm._v(_vm._s(_vm.password.revision))
+                ])
+              : _vm._e()
           ]),
-          _vm.password.revision
-            ? _c("span", { staticClass: "password-revision" }, [
-                _vm._v(_vm._s(_vm.password.revision))
+          _vm.showPasswords && _vm.value
+            ? _c("span", { staticClass: "password-value" }, [
+                _vm._v(_vm._s(_vm.value))
               ])
-            : _vm._e()
-        ]),
-        _vm.showPasswords && _vm.value
-          ? _c("span", { staticClass: "password-value" }, [
-              _vm._v(_vm._s(_vm.value))
-            ])
-          : _vm._e(),
-        _c("a", {
-          staticClass: "password-remove-link",
-          attrs: { href: "#", title: _vm.$t("remove_password") },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.removePassword($event)
-            }
-          }
-        })
-      ]),
+            : _vm._e(),
+          _c("iconic-link", {
+            staticClass: "password-remove-link",
+            attrs: {
+              title: _vm.$t("/(panel)(components)(PasswordMenu)remove_password")
+            },
+            on: { click: _vm.removePassword }
+          })
+        ],
+        1
+      ),
       _c(
         "div",
         { staticClass: "password-info" },
@@ -7224,18 +7556,32 @@ var PasswordInfovue_type_template_id_6765f007_render = function() {
           _vm.password.type == "generated2"
             ? [
                 _c("div", { staticClass: "password-type" }, [
-                  _vm._v(_vm._s(_vm.$t("password_type_generated2")) + " ")
+                  _vm._v(
+                    _vm._s(
+                      _vm.$t(
+                        "/(panel)(components)(PasswordEntry)password_type_generated2"
+                      )
+                    ) + " "
+                  )
                 ]),
                 _c("div", [
                   _vm._v(
-                    _vm._s(_vm.$t("password_length")) +
+                    _vm._s(
+                      _vm.$t(
+                        "/(panel)(components)(PasswordEntry)password_length"
+                      )
+                    ) +
                       " " +
                       _vm._s(_vm.password.length)
                   )
                 ]),
                 _c("div", [
                   _vm._v(
-                    _vm._s(_vm.$t("allowed_characters")) +
+                    _vm._s(
+                      _vm.$t(
+                        "/(panel)(components)(PasswordEntry)allowed_characters"
+                      )
+                    ) +
                       " " +
                       _vm._s(_vm.allowedChars)
                   )
@@ -7244,12 +7590,13 @@ var PasswordInfovue_type_template_id_6765f007_render = function() {
             : _vm.password.type == "stored"
             ? [
                 _c("div", { staticClass: "password-type" }, [
-                  _vm._v(
-                    _vm._s(_vm.$t("password_type_stored_with_recovery")) + " "
-                  ),
+                  _vm._v(" " + _vm._s(_vm.$t("password_type_stored")) + " "),
                   _c("span", {
                     staticClass: "help-icon",
-                    attrs: { title: _vm.$t("recovery_code_explanation") }
+                    attrs: {
+                      title: _vm.$t("recovery_code_explanation"),
+                      "aria-label": _vm.$t("recovery_code_explanation")
+                    }
                   })
                 ]),
                 _vm.recoveryCode
@@ -7260,7 +7607,7 @@ var PasswordInfovue_type_template_id_6765f007_render = function() {
           _vm.showNotes && _vm.password.notes
             ? _c("div", [
                 _vm._v(
-                  _vm._s(_vm.$t("password_info_notes")) +
+                  _vm._s(_vm.$t("/(panel)(components)(PasswordEntry)notes")) +
                     " " +
                     _vm._s(_vm.password.notes)
                 )
@@ -7279,7 +7626,14 @@ PasswordInfovue_type_template_id_6765f007_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/allpasswords/components/PasswordInfo.vue?vue&type=template&id=6765f007&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/PasswordInfo.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/PasswordInfo.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7326,6 +7680,7 @@ PasswordInfovue_type_template_id_6765f007_render._withStripped = true
 
 /* harmony default export */ var PasswordInfovue_type_script_lang_js_ = ({
   name: "PasswordInfo",
+  localePath: "allpasswords/components/PasswordInfo",
   components: {
     "password-message": PasswordMessage
   },
@@ -7395,13 +7750,13 @@ PasswordInfovue_type_template_id_6765f007_render._withStripped = true
       var doCopy = function doCopy() {
         set(_this3.value);
 
-        _this3.showPasswordMessage("password_copied_message");
+        _this3.showPasswordMessage("password_copied");
       };
 
       if (this.value) doCopy();else {
         this.ensureValue().then(function () {
           if (!_this3.$isWebClient) doCopy();else {
-            _this3.showPasswordMessage("password_ready_message");
+            _this3.showPasswordMessage("password_ready");
 
             var handler = function handler(event) {
               window.removeEventListener("click", handler, true);
@@ -7418,8 +7773,8 @@ PasswordInfovue_type_template_id_6765f007_render._withStripped = true
     removePassword: function removePassword() {
       var _this4 = this;
 
-      var message = this.$t("remove_password_confirmation", this.password.name, this.siteDisplayName);
-      if (this.password.notes) message += " " + this.$t("remove_password_confirmation_notes", this.password.notes);
+      var message = this.$t("/(panel)(components)(PasswordEntry)remove_confirmation", this.password.name, this.siteDisplayName);
+      if (this.password.notes) message += " " + this.$t("/(panel)(components)(PasswordEntry)remove_confirmation_notes", this.password.notes);
       this.$app.confirm(message).then(function (accepted) {
         if (!accepted) return;
         passwords.removePassword(_this4.password).then(function () {
@@ -7428,7 +7783,7 @@ PasswordInfovue_type_template_id_6765f007_render._withStripped = true
       });
     },
     activate: function activate() {
-      this.$refs["to-clipboard"].focus();
+      this.$refs["to-clipboard"].$el.focus();
     }
   }
 });
@@ -7457,7 +7812,7 @@ var PasswordInfo_component = normalizeComponent(
 if (false) { var PasswordInfo_api; }
 PasswordInfo_component.options.__file = "ui/allpasswords/components/PasswordInfo.vue"
 /* harmony default export */ var PasswordInfo = (PasswordInfo_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/SiteInfo.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/SiteInfo.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -7493,6 +7848,7 @@ PasswordInfo_component.options.__file = "ui/allpasswords/components/PasswordInfo
 
 /* harmony default export */ var SiteInfovue_type_script_lang_js_ = ({
   name: "SiteInfo",
+  localePath: "allpasswords/components/SiteInfo",
   components: {
     "password-info": PasswordInfo
   },
@@ -7558,7 +7914,7 @@ var SiteInfo_component = normalizeComponent(
 if (false) { var SiteInfo_api; }
 SiteInfo_component.options.__file = "ui/allpasswords/components/SiteInfo.vue"
 /* harmony default export */ var SiteInfo = (SiteInfo_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/SiteList.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/components/SiteList.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -7719,7 +8075,7 @@ InProgressvue_type_template_id_5c272c80_render._withStripped = true
 
 // CONCATENATED MODULE: ./ui/allpasswords/modals/InProgress.vue?vue&type=template&id=5c272c80&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/modals/InProgress.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/modals/InProgress.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -7764,7 +8120,9 @@ var InProgress_component = normalizeComponent(
 if (false) { var InProgress_api; }
 InProgress_component.options.__file = "ui/allpasswords/modals/InProgress.vue"
 /* harmony default export */ var InProgress = (InProgress_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/App.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./ui/allpasswords/App.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -7815,6 +8173,7 @@ InProgress_component.options.__file = "ui/allpasswords/modals/InProgress.vue"
 
 /* harmony default export */ var allpasswords_Appvue_type_script_lang_js_ = ({
   name: "App",
+  localePath: "allpasswords/App",
   components: {
     "confirm": Confirm,
     "password-message": PasswordMessage,
@@ -7842,7 +8201,7 @@ InProgress_component.options.__file = "ui/allpasswords/modals/InProgress.vue"
       var _this = this;
 
       if (this.showPasswords && !this.confirmedPasswords) {
-        this.confirm(this.$t("allpasswords_show_confirm")).then(function (accepted) {
+        this.confirm(this.$t("show_passwords_confirm")).then(function (accepted) {
           if (accepted) _this.confirmedPasswords = true;else _this.showPasswords = false;
         });
       }
@@ -7851,7 +8210,7 @@ InProgress_component.options.__file = "ui/allpasswords/modals/InProgress.vue"
   mounted: function mounted() {
     var _this2 = this;
 
-    document.title = this.$t("allpasswords_title");
+    document.title = this.$t("title");
     setErrorHandler("master_password_required", function () {
       return new Promise(function (resolve, reject) {
         _this2.masterPromise = {
@@ -7884,13 +8243,9 @@ InProgress_component.options.__file = "ui/allpasswords/modals/InProgress.vue"
     showGlobalMessage: function showGlobalMessage(message) {
       this.$refs["global-message"].message = message;
     },
-    localize: function localize(error) {
-      if (/\s/.test(error)) return error;
-      return this.$t(error) || error;
-    },
     showUnknownError: function showUnknownError(error) {
       if (error == "canceled") return;
-      this.unknownError = this.localize(error);
+      this.unknownError = error;
     },
     updateData: function updateData() {
       this.$refs.siteList.updateData();
@@ -7922,7 +8277,7 @@ var allpasswords_App_component = normalizeComponent(
 if (false) { var allpasswords_App_api; }
 allpasswords_App_component.options.__file = "ui/allpasswords/App.vue"
 /* harmony default export */ var allpasswords_App = (allpasswords_App_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2!./node_modules/vue-loader/lib??vue-loader-options!./web/App.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./web/App.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -7950,6 +8305,7 @@ allpasswords_App_component.options.__file = "ui/allpasswords/App.vue"
 
 /* harmony default export */ var lib_vue_loader_options_web_Appvue_type_script_lang_js_ = ({
   name: "App",
+  localePath: "web/App",
   components: {
     "panel-app": panel_App,
     "allpasswords-app": allpasswords_App

@@ -179,6 +179,9 @@ a {
   flex-direction: column;
   padding: 10px; }
 
+.unknown-error {
+  margin: 5px; }
+
 .special-site {
   font-style: italic; }
 
@@ -426,6 +429,10 @@ a.iconic-link:hover {
     padding-left: 37px; }
   :root[dir="rtl"] .add-password-link {
     padding-right: 37px; }
+
+.password-name-entry {
+  display: flex;
+  flex-direction: column; }
 
 .length-container,
 .charsets-container {

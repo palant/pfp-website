@@ -2427,7 +2427,7 @@ sync.addModificationListener(function () {
     sync: state
   });
 
-  if (browser.browserAction) {
+  if (browser.browserAction && browser.browserAction.setBadgeText) {
     browser.browserAction.setBadgeText({
       text: state.error && state.error != "sync_connection_error" ? "!" : ""
     });
@@ -3808,7 +3808,7 @@ function fillIn(passwordData) {
         _ = _ref2$$[0],
         currentSite = _ref2$$[1];
 
-    if (currentSite != passwordData.site) return Promise.reject("wrong_site_message");
+    if (currentSite != passwordData.site) return Promise.reject("wrong_site");
     return new Promise(function (resolve, reject) {
       var scriptID = ++maxScriptID;
 
@@ -3977,7 +3977,7 @@ function isValid(recoveryCode) {
     for (var i = 0; i < blocks; i++) {
       var blockStart = i * (blockSize + 1);
       if (i == blocks - 1 && buffer[blockStart + blockSize] == crypto.pearsonHash(buffer, blockStart, blockSize, 255 - i)) return "ok";
-      if (buffer[blockStart + blockSize] != crypto.pearsonHash(buffer, blockStart, blockSize, i)) return "checksum-mismatch";
+      if (buffer[blockStart + blockSize] != crypto.pearsonHash(buffer, blockStart, blockSize, i)) return "checksum_mismatch";
     }
 
     return "unterminated";
