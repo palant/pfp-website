@@ -1,6 +1,6 @@
 ---
 title: Keyboard navigation
-image: keyboard.jpg
+image: access_keys_small.png
 description: PfP can be used efficiently with keyboard only. Use Ctrl+Shift+F to open the pop-up and navigate lists using arrow keys.
 ---
 
@@ -26,6 +26,14 @@ Clickable elements in PfP can always be navigated using Tab and Shift+Tab keys, 
 * Items in the password menu
 
 In addition, you can use Ctrl+↑ and Ctrl+↓ to switch tabs in the pop-up conveniently.
+
+## Triggering any element directly
+
+Want to press a button or navigate to a text field with a single key combination? Press Alt key and hold. PfP will show you the access keys for all elements.
+
+{{< img src="access_keys.png" alt="Access keys showing up for all elements" width="612" />}}
+
+Here, the right combination to generate a new password is Alt+G (note the letter "G" being underlined in "Generate new password"). If you want to switch to settings, press Alt+T (note the letter "T" being displayed on top of the "Settings" icon).
 
 ## Filling in a password with keyboard only
 
