@@ -11,7 +11,7 @@ Germany
 
 ## Contact Information
 
-E-Mail: [pkopfp@palant.de](mailto:pkopfp@palant.de)\
+E-Mail: [phkpfp@palant.de](mailto:phkpfp@palant.de)\
 Internet address: https://palant.de/
 
 ## Disclaimer
