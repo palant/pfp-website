@@ -20,3 +20,12 @@ menu:
     - Name: Contributing
       URL: /contributing/
       Weight: 4
+
+markup:
+  goldmark:
+    extensions:
+      linkify: false
+    parser:
+      autoHeadingIDType: blackfriday
+    renderer:
+      unsafe: true
