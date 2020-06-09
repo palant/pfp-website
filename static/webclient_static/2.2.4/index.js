@@ -1,4 +1,6 @@
 'use strict';function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
       return typeof obj;
@@ -28,19 +30,15 @@ function _defineProperty(obj, key, value) {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 
 function _arrayWithHoles(arr) {
@@ -48,10 +46,11 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -77,18 +76,91 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function () {};
+
+      return {
+        s: F,
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function (e) {
+          throw e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function () {
+      it = o[Symbol.iterator]();
+    },
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function (e) {
+      didErr = true;
+      err = e;
+    },
+    f: function () {
+      try {
+        if (!normalCompletion && it.return != null) it.return();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
 }/*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
  */
-
 function EventTarget() {
   this._listeners = [];
 }
@@ -102,28 +174,18 @@ EventTarget.prototype = {
     if (index >= 0) this._listeners.splice(index, 1);
   },
   _emit: function _emit() {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    var _iterator = _createForOfIteratorHelper(this._listeners),
+        _step;
 
     try {
-      for (var _iterator = this._listeners[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var listener = _step.value;
         listener.apply(void 0, arguments);
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
   }
 };function scryptWorker () {
@@ -137,14 +199,18 @@ EventTarget.prototype = {
     return obj;
   }
 
-  function unwrapExports(x) {
-    return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+  function createCommonjsModule(fn, basedir, module) {
+    return module = {
+      path: basedir,
+      exports: {},
+      require: function require(path, base) {
+        return commonjsRequire(path, base === undefined || base === null ? module.path : base);
+      }
+    }, fn(module, module.exports), module.exports;
   }
 
-  function createCommonjsModule(fn, module) {
-    return module = {
-      exports: {}
-    }, fn(module, module.exports), module.exports;
+  function commonjsRequire() {
+    throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
   }
 
   var hash = createCommonjsModule(function (module, exports) {
@@ -160,13 +226,15 @@ EventTarget.prototype = {
     exports.isSerializableHash = isSerializableHash; // TODO(dchest): figure out the standardized interface for XOF such as
     // SHAKE and BLAKE2X.
   });
-  unwrapExports(hash);
-  var hash_1 = hash.isSerializableHash;
   var constantTime = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
+    /**
+     * Package constant-time provides functions for performing algorithmically constant-time operations.
+     */
+
     /**
      * NOTE! Due to the inability to guarantee real constant time evaluation of
      * anything in JavaScript VM, this is module is the best effort.
@@ -235,11 +303,6 @@ EventTarget.prototype = {
 
     exports.equal = equal;
   });
-  unwrapExports(constantTime);
-  var constantTime_1 = constantTime.select;
-  var constantTime_2 = constantTime.lessOrEqual;
-  var constantTime_3 = constantTime.compare;
-  var constantTime_4 = constantTime.equal;
   var wipe_1 = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
@@ -272,17 +335,29 @@ EventTarget.prototype = {
 
     exports.wipe = wipe;
   });
-  unwrapExports(wipe_1);
-  var wipe_2 = wipe_1.wipe;
   var hmac_1 = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
-    }); // HMAC implements hash-based message authentication algorithm.
+    });
+    /**
+     * Package hmac implements HMAC algorithm.
+     */
 
-    var HMAC = function () {
+    /**
+     *  HMAC implements hash-based message authentication algorithm.
+     */
+
+    var HMAC =
+    /** @class */
+    function () {
+      /**
+       * Constructs a new HMAC with the given Hash and secret key.
+       */
       function HMAC(hash$1, key) {
+        this._finished = false; // true if HMAC was finalized
         // Initialize inner and outer hashes.
+
         this._inner = new hash$1();
         this._outer = new hash$1(); // Set block and digest sizes for this HMAC
         // instance to values from the hash.
@@ -331,9 +406,12 @@ EventTarget.prototype = {
 
 
         wipe_1.wipe(pad);
-      } // Returns HMAC state to the state initialized with key
-      // to make it possible to run HMAC over the other data with the same
-      // key without creating a new instance.
+      }
+      /**
+       * Returns HMAC state to the state initialized with key
+       * to make it possible to run HMAC over the other data with the same
+       * key without creating a new instance.
+       */
 
 
       HMAC.prototype.reset = function () {
@@ -348,7 +426,10 @@ EventTarget.prototype = {
 
         this._finished = false;
         return this;
-      }; // Cleans HMAC state.
+      };
+      /**
+       * Cleans HMAC state.
+       */
 
 
       HMAC.prototype.clean = function () {
@@ -363,14 +444,20 @@ EventTarget.prototype = {
         this._inner.clean();
 
         this._outer.clean();
-      }; // Updates state with provided data.
+      };
+      /**
+       * Updates state with provided data.
+       */
 
 
       HMAC.prototype.update = function (data) {
         this._inner.update(data);
 
         return this;
-      }; // Finalizes HMAC and puts the result in out.
+      };
+      /**
+       * Finalizes HMAC and puts the result in out.
+       */
 
 
       HMAC.prototype.finish = function (out) {
@@ -391,15 +478,21 @@ EventTarget.prototype = {
 
         this._finished = true;
         return this;
-      }; // Returns message authentication code.
+      };
+      /**
+       * Returns the computed message authentication code.
+       */
 
 
       HMAC.prototype.digest = function () {
         var out = new Uint8Array(this.digestLength);
         this.finish(out);
         return out;
-      }; // Saves HMAC state.
-      // This function is needed for PBKDF2 optimization.
+      };
+      /**
+       * Saves HMAC state.
+       * This function is needed for PBKDF2 optimization.
+       */
 
 
       HMAC.prototype.saveState = function () {
@@ -450,7 +543,7 @@ EventTarget.prototype = {
     exports.hmac = hmac;
     /**
      * Returns true if two HMAC digests are equal.
-     * Uses contant-time comparison to avoid leaking timing information.
+     * Uses constant-time comparison to avoid leaking timing information.
      *
      * Example:
      *
@@ -463,15 +556,15 @@ EventTarget.prototype = {
 
     exports.equal = constantTime.equal;
   });
-  unwrapExports(hmac_1);
-  var hmac_2 = hmac_1.HMAC;
-  var hmac_3 = hmac_1.hmac;
-  var hmac_4 = hmac_1.equal;
   var int_1 = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
-    }); // Shim using 16-bit pieces.
+    });
+    /**
+     * Package int provides helper functions for integerss.
+     */
+    // Shim using 16-bit pieces.
 
     function imulShim(a, b) {
       var ah = a >>> 16 & 0xffff,
@@ -543,20 +636,15 @@ EventTarget.prototype = {
       return exports.isInteger(n) && n >= -exports.MAX_SAFE_INTEGER && n <= exports.MAX_SAFE_INTEGER;
     };
   });
-  unwrapExports(int_1);
-  var int_2 = int_1.mul;
-  var int_3 = int_1.add;
-  var int_4 = int_1.sub;
-  var int_5 = int_1.rotl;
-  var int_6 = int_1.rotr;
-  var int_7 = int_1.isInteger;
-  var int_8 = int_1.MAX_SAFE_INTEGER;
-  var int_9 = int_1.isSafeInteger;
   var binary = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
-    }); // TODO(dchest): add asserts for correct value ranges and array offsets.
+    });
+    /**
+     * Package binary provides functions for encoding and decoding numbers in byte arrays.
+     */
+    // TODO(dchest): add asserts for correct value ranges and array offsets.
 
     /**
      * Reads 2 bytes from array starting at offset as big-endian
@@ -778,9 +866,10 @@ EventTarget.prototype = {
      * Reads 8 bytes from array starting at offset as big-endian
      * signed 64-bit integer and returns it.
      *
-     * Due to JavaScript limitation, supports values up to 2^53-1.
-     *
-     * XXX: not constant-time.
+     * IMPORTANT: due to JavaScript limitation, supports exact
+     * numbers in range -9007199254740991 to 9007199254740991.
+     * If the number stored in the byte array is outside this range,
+     * the result is not exact.
      */
 
     function readInt64BE(array, offset) {
@@ -790,13 +879,7 @@ EventTarget.prototype = {
 
       var hi = readInt32BE(array, offset);
       var lo = readInt32BE(array, offset + 4);
-      var result = hi * 0x100000000 + lo; // TODO(dchest): make constant-time.
-
-      if (lo < 0) {
-        result += 0x100000000;
-      }
-
-      return result;
+      return hi * 0x100000000 + lo - (lo >> 31) * 0x100000000;
     }
 
     exports.readInt64BE = readInt64BE;
@@ -804,7 +887,7 @@ EventTarget.prototype = {
      * Reads 8 bytes from array starting at offset as big-endian
      * unsigned 64-bit integer and returns it.
      *
-     * Due to JavaScript limitation, supports values up to 2^53-1.
+     * IMPORTANT: due to JavaScript limitation, supports values up to 2^53-1.
      */
 
     function readUint64BE(array, offset) {
@@ -822,9 +905,10 @@ EventTarget.prototype = {
      * Reads 8 bytes from array starting at offset as little-endian
      * signed 64-bit integer and returns it.
      *
-     * Due to JavaScript limitation, supports values up to 2^53-1.
-     *
-     * XXX: not constant-time.
+     * IMPORTANT: due to JavaScript limitation, supports exact
+     * numbers in range -9007199254740991 to 9007199254740991.
+     * If the number stored in the byte array is outside this range,
+     * the result is not exact.
      */
 
     function readInt64LE(array, offset) {
@@ -834,13 +918,7 @@ EventTarget.prototype = {
 
       var lo = readInt32LE(array, offset);
       var hi = readInt32LE(array, offset + 4);
-      var result = hi * 0x100000000 + lo; // TODO(dchest): make constant-time.
-
-      if (lo < 0) {
-        result += 0x100000000;
-      }
-
-      return result;
+      return hi * 0x100000000 + lo - (lo >> 31) * 0x100000000;
     }
 
     exports.readInt64LE = readInt64LE;
@@ -848,7 +926,7 @@ EventTarget.prototype = {
      * Reads 8 bytes from array starting at offset as little-endian
      * unsigned 64-bit integer and returns it.
      *
-     * Due to JavaScript limitation, supports values up to 2^53-1.
+     * IMPORTANT: due to JavaScript limitation, supports values up to 2^53-1.
      */
 
     function readUint64LE(array, offset) {
@@ -926,7 +1004,7 @@ EventTarget.prototype = {
     function readUintBE(bitLength, array, offset) {
       if (offset === void 0) {
         offset = 0;
-      } // TODO(dchest): implement support for bitLenghts non-divisible by 8
+      } // TODO(dchest): implement support for bitLengths non-divisible by 8
 
 
       if (bitLength % 8 !== 0) {
@@ -959,7 +1037,7 @@ EventTarget.prototype = {
     function readUintLE(bitLength, array, offset) {
       if (offset === void 0) {
         offset = 0;
-      } // TODO(dchest): implement support for bitLenghts non-divisible by 8
+      } // TODO(dchest): implement support for bitLengths non-divisible by 8
 
 
       if (bitLength % 8 !== 0) {
@@ -1000,7 +1078,7 @@ EventTarget.prototype = {
 
       if (offset === void 0) {
         offset = 0;
-      } // TODO(dchest): implement support for bitLenghts non-divisible by 8
+      } // TODO(dchest): implement support for bitLengths non-divisible by 8
 
 
       if (bitLength % 8 !== 0) {
@@ -1040,7 +1118,7 @@ EventTarget.prototype = {
 
       if (offset === void 0) {
         offset = 0;
-      } // TODO(dchest): implement support for bitLenghts non-divisible by 8
+      } // TODO(dchest): implement support for bitLengths non-divisible by 8
 
 
       if (bitLength % 8 !== 0) {
@@ -1219,48 +1297,15 @@ EventTarget.prototype = {
 
     exports.writeFloat64LE = writeFloat64LE;
   });
-  unwrapExports(binary);
-  var binary_1 = binary.readInt16BE;
-  var binary_2 = binary.readUint16BE;
-  var binary_3 = binary.readInt16LE;
-  var binary_4 = binary.readUint16LE;
-  var binary_5 = binary.writeUint16BE;
-  var binary_6 = binary.writeInt16BE;
-  var binary_7 = binary.writeUint16LE;
-  var binary_8 = binary.writeInt16LE;
-  var binary_9 = binary.readInt32BE;
-  var binary_10 = binary.readUint32BE;
-  var binary_11 = binary.readInt32LE;
-  var binary_12 = binary.readUint32LE;
-  var binary_13 = binary.writeUint32BE;
-  var binary_14 = binary.writeInt32BE;
-  var binary_15 = binary.writeUint32LE;
-  var binary_16 = binary.writeInt32LE;
-  var binary_17 = binary.readInt64BE;
-  var binary_18 = binary.readUint64BE;
-  var binary_19 = binary.readInt64LE;
-  var binary_20 = binary.readUint64LE;
-  var binary_21 = binary.writeUint64BE;
-  var binary_22 = binary.writeInt64BE;
-  var binary_23 = binary.writeUint64LE;
-  var binary_24 = binary.writeInt64LE;
-  var binary_25 = binary.readUintBE;
-  var binary_26 = binary.readUintLE;
-  var binary_27 = binary.writeUintBE;
-  var binary_28 = binary.writeUintLE;
-  var binary_29 = binary.readFloat32BE;
-  var binary_30 = binary.readFloat32LE;
-  var binary_31 = binary.readFloat64BE;
-  var binary_32 = binary.readFloat64LE;
-  var binary_33 = binary.writeFloat32BE;
-  var binary_34 = binary.writeFloat32LE;
-  var binary_35 = binary.writeFloat64BE;
-  var binary_36 = binary.writeFloat64LE;
   var pbkdf2 = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
+    /**
+     * Derives key from password with PBKDF2 algorithm using
+     * the given hash function in HMAC construction.
+     */
 
     function deriveKey(hash, password, salt, iterations, length) {
       var prf = new hmac_1.HMAC(hash, password);
@@ -1302,8 +1347,6 @@ EventTarget.prototype = {
 
     exports.deriveKey = deriveKey;
   });
-  unwrapExports(pbkdf2);
-  var pbkdf2_1 = pbkdf2.deriveKey;
   var sha256 = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
@@ -1315,7 +1358,9 @@ EventTarget.prototype = {
      * SHA2-256 cryptographic hash algorithm.
      */
 
-    var SHA256 = function () {
+    var SHA256 =
+    /** @class */
+    function () {
       function SHA256() {
         /** Length of hash output */
         this.digestLength = exports.DIGEST_LENGTH;
@@ -1582,18 +1627,18 @@ EventTarget.prototype = {
 
     exports.hash = hash;
   });
-  unwrapExports(sha256);
-  var sha256_1 = sha256.DIGEST_LENGTH;
-  var sha256_2 = sha256.BLOCK_SIZE;
-  var sha256_3 = sha256.SHA256;
-  var sha256_4 = sha256.hash;
   var scrypt = createCommonjsModule(function (module, exports) {
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
+    /**
+     * Package scrypt implements scrypt password-based key derivation function.
+     */
 
-    var Scrypt = function () {
+    var Scrypt =
+    /** @class */
+    function () {
       function Scrypt(N, r, p) {
         this._step = 256; // initial step for non-blocking calculation
         // Check parallelization parameter.
@@ -1960,10 +2005,6 @@ EventTarget.prototype = {
       return B[bi + (2 * r - 1) * 16];
     }
   });
-  unwrapExports(scrypt);
-  var scrypt_1 = scrypt.Scrypt;
-  var scrypt_2 = scrypt.deriveKey;
-  var scrypt_3 = scrypt.deriveKeyNonBlocking;
   /*
   * This Source Code is subject to the terms of the Mozilla Public License
   * version 2.0 (the "License"). You can obtain a copy of the License at
@@ -1973,9 +2014,9 @@ EventTarget.prototype = {
   var N = 32768;
   var r = 8;
   var p = 1;
-  var hasher = new scrypt_1(N, r, p);
+  var hasher = new scrypt.Scrypt(N, r, p);
 
-  function scrypt$1(password, salt, length) {
+  function scrypt$2(password, salt, length) {
     return hasher.deriveKey(password, salt, length);
   }
 
@@ -1993,11 +2034,11 @@ EventTarget.prototype = {
     };
   }
 
-  if (typeof exports != "undefined") exports.scrypt = scrypt$1;
+  if (typeof exports != "undefined") exports.scrypt = scrypt$2;
 }function pbkdf2Worker () {
 
   function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
 
   function _arrayWithHoles(arr) {
@@ -2005,6 +2046,7 @@ EventTarget.prototype = {
   }
 
   function _iterableToArrayLimit(arr, i) {
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
     var _arr = [];
     var _n = true;
     var _d = false;
@@ -2030,8 +2072,27 @@ EventTarget.prototype = {
     return _arr;
   }
 
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
   function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
   /*
   * This Source Code is subject to the terms of the Mozilla Public License
@@ -2477,28 +2538,25 @@ var browser = {
         if (typeof keys == "string") keys = [keys];
         if (!keys) keys = Object.keys(localStorage);
         var items = {};
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+
+        var _iterator = _createForOfIteratorHelper(keys),
+            _step;
 
         try {
-          for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var key = _step.value;
-            if (key in localStorage) items[key] = JSON.parse(localStorage[key]);
+
+            if (key in localStorage) {
+              try {
+                items[key] = JSON.parse(localStorage[key]);
+              } catch (e) {// Ignore non-JSON values
+              }
+            }
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
 
         return Promise.resolve(items);
@@ -2514,28 +2572,19 @@ var browser = {
       remove: function remove(keys) {
         return Promise.resolve().then(function () {
           if (typeof keys == "string") keys = [keys];
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
+
+          var _iterator2 = _createForOfIteratorHelper(keys),
+              _step2;
 
           try {
-            for (var _iterator2 = keys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var key = _step2.value;
               delete localStorage[key];
             }
           } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _iterator2.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-                _iterator2["return"]();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
+            _iterator2.f();
           }
         });
       },
@@ -2589,7 +2638,6 @@ window.addEventListener("show-panel", function (event) {
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
  */
-
 var proto = {
   on: function on(eventName, listener) {
     if (!(eventName in this._listeners)) this._listeners[eventName] = [];
@@ -2624,28 +2672,18 @@ function emit(obj, eventName) {
     args[_key - 2] = arguments[_key];
   }
 
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  var _iterator = _createForOfIteratorHelper(obj._listeners[eventName] || []),
+      _step;
 
   try {
-    for (var _iterator = (obj._listeners[eventName] || [])[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var listener = _step.value;
       results.push(listener.apply(void 0, args));
     }
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 
   return Promise.all(results);
@@ -2679,12 +2717,21 @@ function getPort(name) {
         args[_key - 1] = arguments[_key];
       }
 
-      for (var _i = 0, _targets = targets; _i < _targets.length; _i++) {
-        var target = _targets[_i];
-        target.postMessage({
-          eventName: eventName,
-          args: args
-        });
+      var _iterator = _createForOfIteratorHelper(targets),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var target = _step.value;
+          target.postMessage({
+            eventName: eventName,
+            args: args
+          });
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
     };
 
@@ -2892,12 +2939,11 @@ function toPassword(array, lower, upper, number, symbol) {
 
   for (var i = 0; i < array.length; i++) {
     if (charsets.length - seen.size >= array.length - i) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var _iterator = _createForOfIteratorHelper(seen.values()),
+          _step;
 
       try {
-        for (var _iterator = seen.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var value = _step.value;
 
           var _index = charsets.indexOf(value);
@@ -2905,18 +2951,9 @@ function toPassword(array, lower, upper, number, symbol) {
           if (_index >= 0) charsets.splice(_index, 1);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       seen.clear();
@@ -2925,16 +2962,25 @@ function toPassword(array, lower, upper, number, symbol) {
 
     var index = array[i] % numChars;
 
-    for (var _i = 0, _charsets = charsets; _i < _charsets.length; _i++) {
-      var charset = _charsets[_i];
+    var _iterator2 = _createForOfIteratorHelper(charsets),
+        _step2;
 
-      if (index < charset.length) {
-        result.push(charset[index]);
-        seen.add(charset);
-        break;
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var charset = _step2.value;
+
+        if (index < charset.length) {
+          result.push(charset[index]);
+          seen.add(charset);
+          break;
+        }
+
+        index -= charset.length;
       }
-
-      index -= charset.length;
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
     }
   }
 
@@ -2953,8 +2999,8 @@ function pearsonHash(buffer, start, len, virtualByte) {
 
   var hash = pearsonHashPermutations[virtualByte];
 
-  for (var _i2 = start; _i2 < start + len; _i2++) {
-    hash = pearsonHashPermutations[hash ^ buffer[_i2]];
+  for (var _i = start; _i < start + len; _i++) {
+    hash = pearsonHashPermutations[hash ^ buffer[_i]];
   }
 
   return hash;
@@ -3018,8 +3064,8 @@ function fromBase32(str) {
   var currentBits = 0;
   var result = new Uint8Array(str.length / 8 * 5);
 
-  for (var _i3 = 0; _i3 < str.length; _i3++) {
-    current = current << 5 | mapping.get(str[_i3]);
+  for (var _i2 = 0; _i2 < str.length; _i2++) {
+    current = current << 5 | mapping.get(str[_i2]);
     currentBits += 5;
 
     if (currentBits >= 8) {
@@ -3175,9 +3221,9 @@ function migrateData(masterPassword, STORAGE_PREFIX, setPassword) {
     var entries = Object.keys(data).map(function (key) {
       return data[key];
     });
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(entries),
+        _step;
 
     try {
       var _loop = function _loop() {
@@ -3216,24 +3262,15 @@ function migrateData(masterPassword, STORAGE_PREFIX, setPassword) {
         }));
       };
 
-      for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var _ret = _loop();
 
         if (_ret === "continue") continue;
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     return Promise.all(actions);
@@ -3458,93 +3495,64 @@ function getAllPasswords() {
       return data[key];
     });
     var result = Object.create(null);
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(entries),
+        _step;
 
     try {
-      for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var siteData = _step.value;
-        if (siteData.type || siteData.alias) continue;
-        result[siteData.site] = siteData;
-        siteData.passwords = [];
-        siteData.aliases = [];
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _siteData = _step.value;
+        if (_siteData.type || _siteData.alias) continue;
+        result[_siteData.site] = _siteData;
+        _siteData.passwords = [];
+        _siteData.aliases = [];
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+    var _iterator2 = _createForOfIteratorHelper(entries),
+        _step2;
 
     try {
-      for (var _iterator2 = entries[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var passwordData = _step2.value;
         if (!passwordData.type) continue;
-        var _siteData = result[passwordData.site];
-        if (_siteData) _siteData.passwords.push(passwordData);else _deletePassword(passwordData.site, passwordData.name, passwordData.revision);
+        var _siteData2 = result[passwordData.site];
+        if (_siteData2) _siteData2.passwords.push(passwordData);else _deletePassword(passwordData.site, passwordData.name, passwordData.revision);
       }
     } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
+      _iterator2.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
+      _iterator2.f();
     }
 
-    var _iteratorNormalCompletion3 = true;
-    var _didIteratorError3 = false;
-    var _iteratorError3 = undefined;
+    var _iterator3 = _createForOfIteratorHelper(entries),
+        _step3;
 
     try {
-      for (var _iterator3 = entries[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-        var _siteData2 = _step3.value;
-        if (_siteData2.type || !_siteData2.alias) continue;
-        var targetSiteData = result[_siteData2.alias];
-        if (targetSiteData && targetSiteData.passwords.length) targetSiteData.aliases.push(_siteData2.site);else _deleteSiteData(_siteData2.site);
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var _siteData3 = _step3.value;
+        if (_siteData3.type || !_siteData3.alias) continue;
+        var targetSiteData = result[_siteData3.alias];
+        if (targetSiteData && targetSiteData.passwords.length) targetSiteData.aliases.push(_siteData3.site);else _deleteSiteData(_siteData3.site);
       }
     } catch (err) {
-      _didIteratorError3 = true;
-      _iteratorError3 = err;
+      _iterator3.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-          _iterator3["return"]();
-        }
-      } finally {
-        if (_didIteratorError3) {
-          throw _iteratorError3;
-        }
-      }
+      _iterator3.f();
     }
 
     for (var _i = 0, _Object$keys = Object.keys(result); _i < _Object$keys.length; _i++) {
       var site = _Object$keys[_i];
-      var _siteData3 = result[site];
+      var siteData = result[site];
 
-      if (_siteData3.passwords.length) {
-        _sortPasswords(_siteData3.passwords);
+      if (siteData.passwords.length) {
+        _sortPasswords(siteData.passwords);
 
-        _siteData3.aliases.sort();
+        siteData.aliases.sort();
       } else {
         delete result[site];
 
@@ -4226,14 +4234,10 @@ function fetch$1(url, options) {
     request.open(options.method || "GET", url);
     request.responseType = "text";
     request.withCredentials = false;
-
-    if (options.headers) {
-      for (var _i2 = 0, _Object$keys2 = Object.keys(options.headers); _i2 < _Object$keys2.length; _i2++) {
-        var key = _Object$keys2[_i2];
-        request.setRequestHeader(key, options.headers[key]);
-      }
+    if (options.headers) for (var _i2 = 0, _Object$keys2 = Object.keys(options.headers); _i2 < _Object$keys2.length; _i2++) {
+      var key = _Object$keys2[_i2];
+      request.setRequestHeader(key, options.headers[key]);
     }
-
     request.addEventListener("load", function (event) {
       var status = request.status;
 
@@ -4271,12 +4275,12 @@ function authorize() {
     var hash = new URL(url).hash;
     if (!hash) throw "sync_malformed_response";
     var response = {};
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(hash.substr(1).split("&")),
+        _step;
 
     try {
-      for (var _iterator = hash.substr(1).split("&")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var pair = _step.value;
 
         var _pair$split$map = pair.split("=", 2).map(function (s) {
@@ -4289,18 +4293,9 @@ function authorize() {
         response[key] = value;
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     if (response.token_type != "bearer" || !response.access_token) throw "sync_malformed_response";
@@ -4358,7 +4353,7 @@ function put(path, contents, replaceRevision, token) {
   })["catch"](function (error) {
     if (error == "path/conflict/file") throw "sync_wrong_revision";else if (error == "invalid_access_token") throw "sync_invalid_token";else if (typeof error == "string" && error != "sync_connection_error") throw new Error("Unexpected error: ".concat(error));else throw error;
   });
-}var dropboxProvider = /*#__PURE__*/Object.freeze({authorize: authorize,getManualAuthURL: getManualAuthURL,processAuthCode: processAuthCode,get: get$1,put: put});/*
+}var dropboxProvider=/*#__PURE__*/Object.freeze({__proto__:null,authorize: authorize,getManualAuthURL: getManualAuthURL,processAuthCode: processAuthCode,get: get$1,put: put});/*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
@@ -4444,12 +4439,12 @@ function authorize$1() {
     var params = new URL(url).search;
     if (!params) throw "sync_malformed_response";
     var response = {};
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(params.substr(1).split("&")),
+        _step;
 
     try {
-      for (var _iterator = params.substr(1).split("&")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var pair = _step.value;
 
         var _pair$split$map = pair.split("=", 2).map(function (s) {
@@ -4462,18 +4457,9 @@ function authorize$1() {
         response[key] = value;
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     if (!response.code) throw "sync_malformed_response";
@@ -4595,7 +4581,7 @@ function put$1(path, contents, replaceRevision, token) {
       });
     }
   });
-}var gdriveProvider = /*#__PURE__*/Object.freeze({authorize: authorize$1,getManualAuthURL: getManualAuthURL$1,processAuthCode: processAuthCode$1,get: get$2,put: put$1});/*
+}var gdriveProvider=/*#__PURE__*/Object.freeze({__proto__:null,authorize: authorize$1,getManualAuthURL: getManualAuthURL$1,processAuthCode: processAuthCode$1,get: get$2,put: put$1});/*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
@@ -4617,28 +4603,19 @@ function accountInfo(username) {
   }).then(function (response) {
     if (!Array.isArray(response.links)) throw "sync_malformed_response";
     var link = null;
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(response.links),
+        _step;
 
     try {
-      for (var _iterator = response.links[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var l = _step.value;
         if (l.rel == "http://tools.ietf.org/id/draft-dejong-remotestorage") link = l;
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     if (!link || typeof link.href != "string" || !link.href) throw "sync_malformed_response";
@@ -4690,12 +4667,12 @@ function authorize$2(username) {
     var hash = new URL(url).hash;
     if (!hash) throw "sync_malformed_response";
     var response = {};
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+
+    var _iterator2 = _createForOfIteratorHelper(hash.substr(1).split("&")),
+        _step2;
 
     try {
-      for (var _iterator2 = hash.substr(1).split("&")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var pair = _step2.value;
 
         var _pair$split$map = pair.split("=", 2).map(function (s) {
@@ -4708,18 +4685,9 @@ function authorize$2(username) {
         response[key] = value;
       }
     } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
+      _iterator2.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
+      _iterator2.f();
     }
 
     if (!response.access_token) throw "sync_malformed_response";
@@ -4779,7 +4747,7 @@ function put$2(path, contents, replaceRevision, token, username) {
   }).then(function (response) {
     if (response.status == 401 || response.status == 403) throw "sync_invalid_token";else if (response.status == 412) throw "sync_wrong_revision";else if (response.status != 200 && response.status != 201) throw new Error("Unexpected server response: ".concat(response.status, " ").concat(response.statusText));
   });
-}var remotestorageProvider = /*#__PURE__*/Object.freeze({authorize: authorize$2,getManualAuthURL: getManualAuthURL$2,processAuthCode: processAuthCode$2,get: get$3,put: put$2});/*
+}var remotestorageProvider=/*#__PURE__*/Object.freeze({__proto__:null,authorize: authorize$2,getManualAuthURL: getManualAuthURL$2,processAuthCode: processAuthCode$2,get: get$3,put: put$2});/*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
@@ -5066,12 +5034,12 @@ var engine = {
 
       tracker.override = true;
       var actions = [tracker.clearModifiedKeys()];
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = _createForOfIteratorHelper(additions),
+          _step;
 
       try {
-        for (var _iterator = additions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var _step$value = _slicedToArray(_step.value, 2),
               key = _step$value[0],
               value = _step$value[1];
@@ -5079,18 +5047,9 @@ var engine = {
           actions.push(storage.set(key, value, null));
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       if (removals.length) actions.push(storage["delete"](removals));
@@ -5313,9 +5272,9 @@ function decryptThenImport(data, masterPass, setSite, setPassword) {
     return Promise.all(decryptActions);
   }).then(function (entries) {
     var mergeActions = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(entries),
+        _step;
 
     try {
       var _loop = function _loop() {
@@ -5350,22 +5309,13 @@ function decryptThenImport(data, masterPass, setSite, setPassword) {
         } else if (entry.type == "stored") mergeActions.push(setPassword(entry));
       };
 
-      for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         _loop();
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     return Promise.all(mergeActions);
@@ -5484,12 +5434,12 @@ function import_$1(data, setRaw, setSite, setPassword) {
     var seenSites = new Set();
     var seenPasswords = new Set();
     var entries = parseCSV(data);
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(entries),
+        _step;
 
     try {
-      for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var _step$value = _step.value,
             url = _step$value.url,
             username = _step$value.username,
@@ -5545,18 +5495,9 @@ function import_$1(data, setRaw, setSite, setPassword) {
         }
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
 
     return Promise.all(mergeActions);
@@ -5621,6 +5562,11 @@ events$2.on("dataModified", function () {
   "ok": "OK",
   "cancel": "Cancel",
   "no_site_placeholder": "(none)",
+  "panel@App@select_site": "Select site",
+  "panel@App@password_list": "Password list",
+  "panel@App@sync": "Data sync",
+  "panel@App@settings": "Settings",
+  "panel@App@lock_passwords": "Lock passwords",
   "components@Confirm@yes": "Yes",
   "components@Confirm@no": "No",
   "components@EnterMaster@master_password": "Enter master password:",
@@ -5650,19 +5596,52 @@ events$2.on("dataModified", function () {
   "allpasswords@App@show_passwords": "Show passwords",
   "allpasswords@App@intro": "Here you can create an encrypted backup of your data. This page is also safe to print as long as the passwords aren't shown, the information shown is sufficient to recreate the passwords (same master password has to be used).",
   "allpasswords@App@show_passwords_confirm": "This will display all your passwords on screen, please only proceed if nobody can watch over your shoulder. This action might take some time to complete.",
-  "panel@App@select_site": "Select site",
-  "panel@App@password_list": "Password list",
-  "panel@App@sync": "Data sync",
-  "panel@App@settings": "Settings",
-  "panel@App@lock_passwords": "Lock passwords",
-  "allpasswords@components@GlobalActions@export": "Export password definitions to a file",
-  "allpasswords@components@GlobalActions@import": "Import password definitions from a file",
-  "allpasswords@components@GlobalActions@print": "Print",
-  "allpasswords@components@GlobalActions@import_with_master": "It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.",
-  "allpasswords@components@GlobalActions@import_confirm": "Your existing passwords might get overwritten. Are you sure you want to proceed?",
-  "allpasswords@components@PasswordInfo@password_type_stored": "Stored password, recovery code below",
-  "allpasswords@components@PasswordInfo@recovery_code_explanation": "Recovery codes can be entered instead of the password when adding a stored password. They are safe to print, decryption is only possible with the right master password.",
-  "allpasswords@components@SiteInfo@aliases_label": "Aliases:",
+  "panel@components@GeneratedPassword@replace_warning": "Making this a generated password will change its value. Make sure that you already filled in \"current password\" in the website's password change form.",
+  "panel@components@GeneratedPassword@keep_notes": "Keep notes from original password",
+  "panel@components@GeneratedPassword@length_label": "Length:",
+  "panel@components@GeneratedPassword@allowed_characters_label": "Allowed characters:",
+  "panel@components@GeneratedPassword@submit": "Generate password",
+  "panel@components@GeneratedPassword@no_characters_selected": "At least one character set has to be selected.",
+  "panel@components@ManualAuth@token_label": "Please paste the code given by the storage provider:",
+  "panel@components@NotesEditor@notes_label": "Password notes:",
+  "panel@components@NotesEditor@submit": "Save notes",
+  "panel@components@PasswordEntry@password_menu": "All actions",
+  "panel@components@PasswordEntry@password_type_generated2": "Generated password",
+  "panel@components@PasswordEntry@password_type_stored": "Stored password",
+  "panel@components@PasswordEntry@password_length": "Length:",
+  "panel@components@PasswordEntry@allowed_characters": "Allowed characters:",
+  "panel@components@PasswordEntry@notes": "Notes:",
+  "panel@components@PasswordEntry@remove_confirmation": "Do you really want to remove the password \"{1}\" for the website {2}?",
+  "panel@components@PasswordEntry@remove_confirmation_notes": "This password has notes attached to it: {1}",
+  "panel@components@PasswordMenu@to_document": "Fill in",
+  "panel@components@PasswordMenu@to_clipboard": "Copy to clipboard",
+  "panel@components@PasswordMenu@to_clipboard_username": "Copy user name",
+  "panel@components@PasswordMenu@show_qrcode": "Show as QR code",
+  "panel@components@PasswordMenu@add_notes": "Add notes",
+  "panel@components@PasswordMenu@edit_notes": "Edit notes",
+  "panel@components@PasswordMenu@make_generated": "Replace by generated password",
+  "panel@components@PasswordMenu@bump_revision": "Generate new password for this user name",
+  "panel@components@PasswordMenu@remove_password": "Remove password",
+  "panel@components@PasswordNameEntry@username_label": "User name:",
+  "panel@components@PasswordNameEntry@change_password_revision": "Need a new password for the same username?",
+  "panel@components@PasswordNameEntry@revision_label": "Revision:",
+  "panel@components@PasswordNameEntry@username_required": "Please enter your user name or an arbitrary name if the website doesn't require one.",
+  "panel@components@PasswordNameEntry@username_exists": "This user name and revision combination already exists. Maybe increase the revision number?",
+  "panel@components@RecoveryCode@label": "Recovery code:",
+  "panel@components@RecoveryCode@remove_line": "Remove line",
+  "panel@components@RecoveryCode@checksum_mismatch": "Row is mistyped or not the next row.",
+  "panel@components@RecoveryCode@wrong_version": "Unknown recovery code format, maybe generated by a newer version.",
+  "panel@components@RemoteStorageUsernameInput@username_label": "Please enter your remoteStorage user address:",
+  "panel@components@RemoteStorageUsernameInput@get_account": "Don't have remoteStorage? Learn where to get an account or how to host your own.",
+  "panel@components@RemoteStorageUsernameInput@invalid_username": "This doesn't seem to be a valid remoteStorage user address.",
+  "panel@components@SiteSelection@no_sites": "No sites matched your search",
+  "panel@components@SiteSelection@submit": "Select",
+  "panel@components@StoredPassword@warning": "Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.",
+  "panel@components@StoredPassword@password_label": "Password:",
+  "panel@components@StoredPassword@use_recovery": "Use recovery code",
+  "panel@components@StoredPassword@cancel_recovery": "Enter password directly",
+  "panel@components@StoredPassword@submit": "Save password",
+  "panel@components@StoredPassword@password_value_required": "Please enter the password you used on this website.",
   "panel@pages@ChangeMaster@new_master_message": "You didn't define a master password yet, please do so below.",
   "panel@pages@ChangeMaster@reset_master_message": "Warning: If you change your master password all your existing passwords will be reset.",
   "panel@pages@ChangeMaster@master_security_message": "It is essential that you choose a strong master password.",
@@ -5719,52 +5698,14 @@ events$2.on("dataModified", function () {
   "panel@pages@Sync@sync_tampered_data": "It seems that remote data has either been tampered with or reset to an older revision. Remove remote data to fix this issue.",
   "panel@pages@Sync@sync_master_password_required": "Initial sync requires passwords to be unlocked, please click \"Upload now\" to retry.",
   "panel@pages@learn_more": "Learn more…",
-  "panel@components@GeneratedPassword@replace_warning": "Making this a generated password will change its value. Make sure that you already filled in \"current password\" in the website's password change form.",
-  "panel@components@GeneratedPassword@keep_notes": "Keep notes from original password",
-  "panel@components@GeneratedPassword@length_label": "Length:",
-  "panel@components@GeneratedPassword@allowed_characters_label": "Allowed characters:",
-  "panel@components@GeneratedPassword@submit": "Generate password",
-  "panel@components@GeneratedPassword@no_characters_selected": "At least one character set has to be selected.",
-  "panel@components@ManualAuth@token_label": "Please paste the code given by the storage provider:",
-  "panel@components@NotesEditor@notes_label": "Password notes:",
-  "panel@components@NotesEditor@submit": "Save notes",
-  "panel@components@PasswordEntry@password_menu": "All actions",
-  "panel@components@PasswordEntry@password_type_generated2": "Generated password",
-  "panel@components@PasswordEntry@password_type_stored": "Stored password",
-  "panel@components@PasswordEntry@password_length": "Length:",
-  "panel@components@PasswordEntry@allowed_characters": "Allowed characters:",
-  "panel@components@PasswordEntry@notes": "Notes:",
-  "panel@components@PasswordEntry@remove_confirmation": "Do you really want to remove the password \"{1}\" for the website {2}?",
-  "panel@components@PasswordEntry@remove_confirmation_notes": "This password has notes attached to it: {1}",
-  "panel@components@PasswordMenu@to_document": "Fill in",
-  "panel@components@PasswordMenu@to_clipboard": "Copy to clipboard",
-  "panel@components@PasswordMenu@to_clipboard_username": "Copy user name",
-  "panel@components@PasswordMenu@show_qrcode": "Show as QR code",
-  "panel@components@PasswordMenu@add_notes": "Add notes",
-  "panel@components@PasswordMenu@edit_notes": "Edit notes",
-  "panel@components@PasswordMenu@make_generated": "Replace by generated password",
-  "panel@components@PasswordMenu@bump_revision": "Generate new password for this user name",
-  "panel@components@PasswordMenu@remove_password": "Remove password",
-  "panel@components@PasswordNameEntry@username_label": "User name:",
-  "panel@components@PasswordNameEntry@change_password_revision": "Need a new password for the same username?",
-  "panel@components@PasswordNameEntry@revision_label": "Revision:",
-  "panel@components@PasswordNameEntry@username_required": "Please enter your user name or an arbitrary name if the website doesn't require one.",
-  "panel@components@PasswordNameEntry@username_exists": "This user name and revision combination already exists. Maybe increase the revision number?",
-  "panel@components@RecoveryCode@label": "Recovery code:",
-  "panel@components@RecoveryCode@remove_line": "Remove line",
-  "panel@components@RecoveryCode@checksum_mismatch": "Row is mistyped or not the next row.",
-  "panel@components@RecoveryCode@wrong_version": "Unknown recovery code format, maybe generated by a newer version.",
-  "panel@components@RemoteStorageUsernameInput@username_label": "Please enter your remoteStorage user address:",
-  "panel@components@RemoteStorageUsernameInput@get_account": "Don't have remoteStorage? Learn where to get an account or how to host your own.",
-  "panel@components@RemoteStorageUsernameInput@invalid_username": "This doesn't seem to be a valid remoteStorage user address.",
-  "panel@components@SiteSelection@no_sites": "No sites matched your search",
-  "panel@components@SiteSelection@submit": "Select",
-  "panel@components@StoredPassword@warning": "Generated passwords are preferable, these can be easily recovered as long as you still remember your master password and user name.",
-  "panel@components@StoredPassword@password_label": "Password:",
-  "panel@components@StoredPassword@use_recovery": "Use recovery code",
-  "panel@components@StoredPassword@cancel_recovery": "Enter password directly",
-  "panel@components@StoredPassword@submit": "Save password",
-  "panel@components@StoredPassword@password_value_required": "Please enter the password you used on this website."
+  "allpasswords@components@GlobalActions@export": "Export password definitions to a file",
+  "allpasswords@components@GlobalActions@import": "Import password definitions from a file",
+  "allpasswords@components@GlobalActions@print": "Print",
+  "allpasswords@components@GlobalActions@import_with_master": "It seems that this backup was created with a different master password. It can still be imported, all generated passwords will be converted to stored passwords however.",
+  "allpasswords@components@GlobalActions@import_confirm": "Your existing passwords might get overwritten. Are you sure you want to proceed?",
+  "allpasswords@components@PasswordInfo@password_type_stored": "Stored password, recovery code below",
+  "allpasswords@components@PasswordInfo@recovery_code_explanation": "Recovery codes can be entered instead of the password when adding a stored password. They are safe to print, decryption is only possible with the right master password.",
+  "allpasswords@components@SiteInfo@aliases_label": "Aliases:"
 };/*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
@@ -5925,29 +5866,20 @@ function onBlur(event) {
 function showHints() {
   var elements = [];
   var root = document.querySelector(".modalOverlay") || document;
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+
+  var _iterator = _createForOfIteratorHelper(root.querySelectorAll("button,label,a")),
+      _step;
 
   try {
-    for (var _iterator = root.querySelectorAll("button,label,a")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var element = _step.value;
-      if (element.hasAttribute("data-noaccesskey")) continue;
-      if (element.classList.contains("tab")) elements.push([0, element.title.trim(), element]);else if (element.localName == "button") elements.push([1, element.textContent.trim(), element]);else if (element.localName != "a") elements.push([2, element.textContent.trim(), element]);else if (!element.classList.contains("iconic-link")) elements.push([3, element.textContent.trim() || element.title.trim(), element]);else elements.push([4, element.textContent.trim() || element.title.trim(), element]);
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _element2 = _step.value;
+      if (_element2.hasAttribute("data-noaccesskey")) continue;
+      if (_element2.classList.contains("tab")) elements.push([0, _element2.title.trim(), _element2]);else if (_element2.localName == "button") elements.push([1, _element2.textContent.trim(), _element2]);else if (_element2.localName != "a") elements.push([2, _element2.textContent.trim(), _element2]);else if (!_element2.classList.contains("iconic-link")) elements.push([3, _element2.textContent.trim() || _element2.title.trim(), _element2]);else elements.push([4, _element2.textContent.trim() || _element2.title.trim(), _element2]);
     }
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 
   elements.sort(function (a, b) {
@@ -5969,13 +5901,22 @@ function showHints() {
     for (var _i = 0, _selectors = selectors; _i < _selectors.length; _i++) {
       var selector = _selectors[_i];
 
-      for (var _i2 = 0, _letters = letters; _i2 < _letters.length; _i2++) {
-        var letter = _letters[_i2];
+      var _iterator2 = _createForOfIteratorHelper(letters),
+          _step2;
 
-        if (selector(letter) && !accessKeys.has(letter.toUpperCase())) {
-          accessKeys.set(letter.toUpperCase(), element);
-          return true;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var letter = _step2.value;
+
+          if (selector(letter) && !accessKeys.has(letter.toUpperCase())) {
+            accessKeys.set(letter.toUpperCase(), element);
+            return true;
+          }
         }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
       }
     }
 
@@ -5984,63 +5925,65 @@ function showHints() {
 
   var needFallback = [];
 
-  for (var _i3 = 0, _elements = elements; _i3 < _elements.length; _i3++) {
-    var _elements$_i = _slicedToArray(_elements[_i3], 3),
+  for (var _i2 = 0, _elements = elements; _i2 < _elements.length; _i2++) {
+    var _elements$_i = _slicedToArray(_elements[_i2], 3),
         text = _elements$_i[1],
-        _element = _elements$_i[2];
+        element = _elements$_i[2];
 
-    if (!findAccessKey(text, _element, isUpperCase, isConsonant, isLetter, function () {
+    if (!findAccessKey(text, element, isUpperCase, isConsonant, isLetter, function () {
       return true;
-    })) needFallback.push(_element);
+    })) needFallback.push(element);
   }
 
-  for (var _i4 = 0, _needFallback = needFallback; _i4 < _needFallback.length; _i4++) {
-    var _element2 = _needFallback[_i4];
+  for (var _i3 = 0, _needFallback = needFallback; _i3 < _needFallback.length; _i3++) {
+    var _element = _needFallback[_i3];
 
     for (var i = 0; i < fallbackKeys.length; i++) {
       if (!accessKeys.has(fallbackKeys[i])) {
-        accessKeys.set(fallbackKeys[i], _element2);
+        accessKeys.set(fallbackKeys[i], _element);
         break;
       }
     }
   }
 
   accessKeyElements = [];
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
+
+  var _iterator3 = _createForOfIteratorHelper(accessKeys),
+      _step3;
 
   try {
-    for (var _iterator2 = accessKeys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var _step2$value = _slicedToArray(_step2.value, 2),
-          letter = _step2$value[0],
-          _element3 = _step2$value[1];
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var _step3$value = _slicedToArray(_step3.value, 2),
+          letter = _step3$value[0],
+          _element3 = _step3$value[1];
 
       var found = false;
 
       for (var child = _element3.firstChild; child; child = child.nextSibling) {
         if (child.nodeType == Node.TEXT_NODE) {
-          var text = child.nodeValue;
-          var index = text.indexOf(letter);
-          if (index < 0) index = text.indexOf(letter.toLowerCase());
+          var _text = child.nodeValue;
+
+          var index = _text.indexOf(letter);
+
+          if (index < 0) index = _text.indexOf(letter.toLowerCase());
 
           if (index >= 0) {
             found = true;
             var replacements = [];
-            if (index > 0) replacements.push(document.createTextNode(text.substr(0, index)));
+            if (index > 0) replacements.push(document.createTextNode(_text.substr(0, index)));
             var span = document.createElement("span");
             span.className = "accessKeyMarker";
-            span.textContent = text.substr(index, 1);
+            span.textContent = _text.substr(index, 1);
             replacements.push(span);
             accessKeyElements.push(span);
-            if (index + 1 < text.length) replacements.push(document.createTextNode(text.substr(index + 1)));
+            if (index + 1 < _text.length) replacements.push(document.createTextNode(_text.substr(index + 1)));
 
             _element3.replaceChild(replacements[0], child);
 
             var insertionPoint = replacements[0].nextSibling;
 
-            for (var _i5 = 1; _i5 < replacements.length; _i5++) {
-              _element3.insertBefore(replacements[_i5], insertionPoint);
+            for (var _i4 = 1; _i4 < replacements.length; _i4++) {
+              _element3.insertBefore(replacements[_i4], insertionPoint);
             }
 
             break;
@@ -6061,18 +6004,9 @@ function showHints() {
       }
     }
   } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
+    _iterator3.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-        _iterator2["return"]();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
+    _iterator3.f();
   }
 
   observer = new MutationObserver(hideHints);
@@ -6088,13 +6022,12 @@ function hideHints() {
   accessKeys = null;
 
   if (accessKeyElements) {
-    var _iteratorNormalCompletion3 = true;
-    var _didIteratorError3 = false;
-    var _iteratorError3 = undefined;
+    var _iterator4 = _createForOfIteratorHelper(accessKeyElements),
+        _step4;
 
     try {
-      for (var _iterator3 = accessKeyElements[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-        var element = _step3.value;
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var element = _step4.value;
         if (!element.parentNode) continue;
 
         if (element.localName == "span") {
@@ -6116,18 +6049,9 @@ function hideHints() {
         } else element.parentNode.removeChild(element);
       }
     } catch (err) {
-      _didIteratorError3 = true;
-      _iteratorError3 = err;
+      _iterator4.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-          _iterator3["return"]();
-        }
-      } finally {
-        if (_didIteratorError3) {
-          throw _iteratorError3;
-        }
-      }
+      _iterator4.f();
     }
   }
 
@@ -6171,28 +6095,19 @@ if (typeof runtime.getBackgroundPage == "function") {
   document.addEventListener("DOMContentLoaded", function (event) {
     var queue = messageQueue;
     messageQueue = null;
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+
+    var _iterator = _createForOfIteratorHelper(queue),
+        _step;
 
     try {
-      for (var _iterator = queue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var message = _step.value;
         emit.apply(void 0, [port$3, message.eventName].concat(_toConsumableArray(message.args)));
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _iterator.e(err);
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      _iterator.f();
     }
   });
 }
@@ -6215,6 +6130,7 @@ port$3.emit = function (eventName) {
 };
 
 port$3.disconnect = function () {
+  nativePort.disconnect();
 };
 
 nativePort.onMessage.addListener(function (message) {
@@ -6391,8 +6307,8 @@ var script = {
 
     options._ssrRegister = hook;
   } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    hook = shadowMode ? function (context) {
+      style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
     } : function (context) {
       style.call(this, createInjector(context));
     };
@@ -6415,9 +6331,7 @@ var script = {
   }
 
   return script;
-}
-
-var normalizeComponent_1 = normalizeComponent;/* script */
+}/* script */
 const __vue_script__ = script;
 
 /* template */
@@ -6462,15 +6376,19 @@ __vue_render__._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ExternalLink = normalizeComponent_1(
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -6516,15 +6434,19 @@ __vue_render__$1._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var IconicLink = normalizeComponent_1(
+  const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -6678,46 +6600,40 @@ __vue_render__$2._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ModalOverlay = normalizeComponent_1(
+  const __vue_component__$2 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );//
-
 var script$3 = {
   name: "ValidatedForm",
   methods: {
     forValidatedChildren: function forValidatedChildren(callback, vm) {
       if (!vm) vm = this;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = _createForOfIteratorHelper(vm.$children),
+          _step;
 
       try {
-        for (var _iterator = vm.$children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var child = _step.value;
           if (child.$options.name == "ValidatedInput") callback(child);else this.forValidatedChildren(callback, child);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
     },
     submit: function submit() {
@@ -6771,15 +6687,19 @@ __vue_render__$3._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ValidatedForm = normalizeComponent_1(
+  const __vue_component__$3 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
     __vue_scope_id__$3,
     __vue_is_functional_template__$3,
     __vue_module_identifier__$3,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -6875,15 +6795,19 @@ __vue_render__$4._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ValidatedInput = normalizeComponent_1(
+  const __vue_component__$4 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
     __vue_script__$4,
     __vue_scope_id__$4,
     __vue_is_functional_template__$4,
     __vue_module_identifier__$4,
+    false,
+    undefined,
     undefined,
     undefined
   );/*
@@ -6903,11 +6827,11 @@ if (!("isConnected" in Node.prototype)) {
 
 Vue.use(I18n);
 Vue.use(AccessKeys);
-Vue.component("external-link", ExternalLink);
-Vue.component("iconic-link", IconicLink);
-Vue.component("modal-overlay", ModalOverlay);
-Vue.component("validated-form", ValidatedForm);
-Vue.component("validated-input", ValidatedInput);
+Vue.component("external-link", __vue_component__);
+Vue.component("iconic-link", __vue_component__$1);
+Vue.component("modal-overlay", __vue_component__$2);
+Vue.component("validated-form", __vue_component__$3);
+Vue.component("validated-input", __vue_component__$4);
 Vue.directive("focus", {
   inserted: function inserted(element, binding) {
     if (typeof binding.value == "undefined" || binding.value) element.focus();
@@ -7099,15 +7023,19 @@ __vue_render__$5._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var EnterMaster = normalizeComponent_1(
+  const __vue_component__$5 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
     __vue_inject_styles__$5,
     __vue_script__$5,
     __vue_scope_id__$5,
     __vue_is_functional_template__$5,
     __vue_module_identifier__$5,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7115,7 +7043,7 @@ var script$6 = {
   name: "EnterMaster",
   localePath: "panel/pages/EnterMaster",
   components: {
-    "enter-master": EnterMaster
+    "enter-master": __vue_component__$5
   },
   methods: {
     done: function done(success) {
@@ -7192,15 +7120,19 @@ __vue_render__$6._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var EnterMaster$1 = normalizeComponent_1(
+  const __vue_component__$6 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
     __vue_scope_id__$6,
     __vue_is_functional_template__$6,
     __vue_module_identifier__$6,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7257,15 +7189,19 @@ __vue_render__$7._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordScore = normalizeComponent_1(
+  const __vue_component__$7 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
     __vue_inject_styles__$7,
     __vue_script__$7,
     __vue_scope_id__$7,
     __vue_is_functional_template__$7,
     __vue_module_identifier__$7,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7273,7 +7209,7 @@ var script$8 = {
   name: "ChangeMaster",
   localePath: "panel/pages/ChangeMaster",
   components: {
-    "password-score": PasswordScore
+    "password-score": __vue_component__$7
   },
   data: function data() {
     return {
@@ -7460,15 +7396,19 @@ __vue_render__$8._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ChangeMaster = normalizeComponent_1(
+  const __vue_component__$8 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
     __vue_inject_styles__$8,
     __vue_script__$8,
     __vue_scope_id__$8,
     __vue_is_functional_template__$8,
     __vue_module_identifier__$8,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7578,15 +7518,19 @@ __vue_render__$9._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Migration = normalizeComponent_1(
+  const __vue_component__$9 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
     __vue_inject_styles__$9,
     __vue_script__$9,
     __vue_scope_id__$9,
     __vue_is_functional_template__$9,
     __vue_module_identifier__$9,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7655,15 +7599,19 @@ __vue_render__$a._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordMessage = normalizeComponent_1(
+  const __vue_component__$a = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
     __vue_inject_styles__$a,
     __vue_script__$a,
     __vue_scope_id__$a,
     __vue_is_functional_template__$a,
     __vue_module_identifier__$a,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7847,15 +7795,19 @@ __vue_render__$b._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordNameEntry = normalizeComponent_1(
+  const __vue_component__$b = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
     __vue_inject_styles__$b,
     __vue_script__$b,
     __vue_scope_id__$b,
     __vue_is_functional_template__$b,
     __vue_module_identifier__$b,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -7863,7 +7815,7 @@ var script$c = {
   name: "GeneratedPassword",
   localePath: "panel/components/GeneratedPassword",
   components: {
-    "password-name-entry": PasswordNameEntry
+    "password-name-entry": __vue_component__$b
   },
   props: {
     password: {
@@ -8309,15 +8261,19 @@ __vue_render__$c._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var GeneratedPassword = normalizeComponent_1(
+  const __vue_component__$c = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
     __vue_inject_styles__$c,
     __vue_script__$c,
     __vue_scope_id__$c,
     __vue_is_functional_template__$c,
     __vue_module_identifier__$c,
+    false,
+    undefined,
     undefined,
     undefined
   );/*
@@ -8470,15 +8426,19 @@ __vue_render__$d._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NotesEditor = normalizeComponent_1(
+  const __vue_component__$d = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
     __vue_inject_styles__$d,
     __vue_script__$d,
     __vue_scope_id__$d,
     __vue_is_functional_template__$d,
     __vue_module_identifier__$d,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -8571,15 +8531,19 @@ __vue_render__$e._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var QRCode = normalizeComponent_1(
+  const __vue_component__$e = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
     __vue_inject_styles__$e,
     __vue_script__$e,
     __vue_scope_id__$e,
     __vue_is_functional_template__$e,
     __vue_module_identifier__$e,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -8789,15 +8753,19 @@ __vue_render__$f._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordMenu = normalizeComponent_1(
+  const __vue_component__$f = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
     __vue_inject_styles__$f,
     __vue_script__$f,
     __vue_scope_id__$f,
     __vue_is_functional_template__$f,
     __vue_module_identifier__$f,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -8805,10 +8773,10 @@ var script$g = {
   name: "PasswordEntry",
   localePath: "panel/components/PasswordEntry",
   components: {
-    "generated-password": GeneratedPassword,
-    "notes-editor": NotesEditor,
-    "qr-code": QRCode,
-    "password-menu": PasswordMenu
+    "generated-password": __vue_component__$c,
+    "notes-editor": __vue_component__$d,
+    "qr-code": __vue_component__$e,
+    "password-menu": __vue_component__$f
   },
   props: {
     password: {
@@ -9076,15 +9044,19 @@ __vue_render__$g._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordEntry = normalizeComponent_1(
+  const __vue_component__$g = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
     __vue_inject_styles__$g,
     __vue_script__$g,
     __vue_scope_id__$g,
     __vue_is_functional_template__$g,
     __vue_module_identifier__$g,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -9314,15 +9286,19 @@ __vue_render__$h._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SiteSelection = normalizeComponent_1(
+  const __vue_component__$h = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
     __vue_inject_styles__$h,
     __vue_script__$h,
     __vue_scope_id__$h,
     __vue_is_functional_template__$h,
     __vue_module_identifier__$h,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -9548,15 +9524,19 @@ __vue_render__$i._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var RecoveryCode = normalizeComponent_1(
+  const __vue_component__$i = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
     __vue_inject_styles__$i,
     __vue_script__$i,
     __vue_scope_id__$i,
     __vue_is_functional_template__$i,
     __vue_module_identifier__$i,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -9564,8 +9544,8 @@ var script$j = {
   name: "StoredPassword",
   localePath: "panel/components/StoredPassword",
   components: {
-    "password-name-entry": PasswordNameEntry,
-    "recovery-code": RecoveryCode
+    "password-name-entry": __vue_component__$b,
+    "recovery-code": __vue_component__$i
   },
   data: function data() {
     return {
@@ -9760,15 +9740,19 @@ __vue_render__$j._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var StoredPassword = normalizeComponent_1(
+  const __vue_component__$j = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
     __vue_inject_styles__$j,
     __vue_script__$j,
     __vue_scope_id__$j,
     __vue_is_functional_template__$j,
     __vue_module_identifier__$j,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -9776,11 +9760,11 @@ var script$k = {
   name: "PasswordList",
   localePath: "panel/pages/PasswordList",
   components: {
-    "password-message": PasswordMessage,
-    "generated-password": GeneratedPassword,
-    "password-entry": PasswordEntry,
-    "site-selection": SiteSelection,
-    "stored-password": StoredPassword
+    "password-message": __vue_component__$a,
+    "generated-password": __vue_component__$c,
+    "password-entry": __vue_component__$g,
+    "site-selection": __vue_component__$h,
+    "stored-password": __vue_component__$j
   },
   data: function data() {
     return {
@@ -10100,15 +10084,19 @@ __vue_render__$k._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordList = normalizeComponent_1(
+  const __vue_component__$k = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
     __vue_inject_styles__$k,
     __vue_script__$k,
     __vue_scope_id__$k,
     __vue_is_functional_template__$k,
     __vue_module_identifier__$k,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -10116,7 +10104,7 @@ var script$l = {
   name: "SelectSite",
   localePath: "panel/pages/SelectSite",
   components: {
-    "site-selection": SiteSelection
+    "site-selection": __vue_component__$h
   },
   methods: {
     selected: function selected(site) {
@@ -10170,15 +10158,19 @@ __vue_render__$l._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SelectSite = normalizeComponent_1(
+  const __vue_component__$l = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
     __vue_inject_styles__$l,
     __vue_script__$l,
     __vue_scope_id__$l,
     __vue_is_functional_template__$l,
     __vue_module_identifier__$l,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -10320,22 +10312,26 @@ __vue_render__$m._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Setting = normalizeComponent_1(
+  const __vue_component__$m = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
     __vue_inject_styles__$m,
     __vue_script__$m,
     __vue_scope_id__$m,
     __vue_is_functional_template__$m,
     __vue_module_identifier__$m,
+    false,
+    undefined,
     undefined,
     undefined
   );//
 var script$n = {
   name: "Settings",
   components: {
-    setting: Setting
+    setting: __vue_component__$m
   }
 };/* script */
 const __vue_script__$n = script$n;
@@ -10372,15 +10368,19 @@ __vue_render__$n._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Settings = normalizeComponent_1(
+  const __vue_component__$n = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
     __vue_inject_styles__$n,
     __vue_script__$n,
     __vue_scope_id__$n,
     __vue_is_functional_template__$n,
     __vue_module_identifier__$n,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -10488,15 +10488,19 @@ __vue_render__$o._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ManualAuth = normalizeComponent_1(
+  const __vue_component__$o = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
     __vue_inject_styles__$o,
     __vue_script__$o,
     __vue_scope_id__$o,
     __vue_is_functional_template__$o,
     __vue_module_identifier__$o,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -10636,15 +10640,19 @@ __vue_render__$p._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var RemoteStorageUsernameInput = normalizeComponent_1(
+  const __vue_component__$p = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
     __vue_inject_styles__$p,
     __vue_script__$p,
     __vue_scope_id__$p,
     __vue_is_functional_template__$p,
     __vue_module_identifier__$p,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -10652,8 +10660,8 @@ var script$q = {
   name: "Sync",
   localePath: "panel/pages/Sync",
   components: {
-    "manual-auth": ManualAuth,
-    "remoteStorage-username-input": RemoteStorageUsernameInput
+    "manual-auth": __vue_component__$o,
+    "remoteStorage-username-input": __vue_component__$p
   },
   data: function data() {
     return {
@@ -10673,28 +10681,18 @@ var script$q = {
   },
   methods: {
     labelForProvider: function labelForProvider(name) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var _iterator = _createForOfIteratorHelper(this.providers),
+          _step;
 
       try {
-        for (var _iterator = this.providers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var provider = _step.value;
           if (provider.name == name) return provider.label;
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       return name;
@@ -10966,15 +10964,19 @@ __vue_render__$q._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Sync = normalizeComponent_1(
+  const __vue_component__$q = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
     __vue_inject_styles__$q,
     __vue_script__$q,
     __vue_scope_id__$q,
     __vue_is_functional_template__$q,
     __vue_module_identifier__$q,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11040,15 +11042,19 @@ __vue_render__$r._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Confirm = normalizeComponent_1(
+  const __vue_component__$r = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
     __vue_inject_styles__$r,
     __vue_script__$r,
     __vue_scope_id__$r,
     __vue_is_functional_template__$r,
     __vue_module_identifier__$r,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11130,15 +11136,19 @@ __vue_render__$s._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var UnknownError = normalizeComponent_1(
+  const __vue_component__$s = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
     __vue_inject_styles__$s,
     __vue_script__$s,
     __vue_scope_id__$s,
     __vue_is_functional_template__$s,
     __vue_module_identifier__$s,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11163,15 +11173,15 @@ var script$t = {
   name: "App",
   localePath: "panel/App",
   components: {
-    "change-master": ChangeMaster,
-    "enter-master": EnterMaster$1,
-    "migration": Migration,
-    "password-list": PasswordList,
-    "select-site": SelectSite,
-    "settings": Settings,
-    "sync": Sync,
-    "confirm": Confirm,
-    "unknown-error": UnknownError
+    "change-master": __vue_component__$8,
+    "enter-master": __vue_component__$6,
+    "migration": __vue_component__$9,
+    "password-list": __vue_component__$k,
+    "select-site": __vue_component__$l,
+    "settings": __vue_component__$n,
+    "sync": __vue_component__$q,
+    "confirm": __vue_component__$r,
+    "unknown-error": __vue_component__$s
   },
   data: function data() {
     return Object.assign({
@@ -11404,22 +11414,26 @@ __vue_render__$t._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PanelApp = normalizeComponent_1(
+  const __vue_component__$t = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
     __vue_inject_styles__$t,
     __vue_script__$t,
     __vue_scope_id__$t,
     __vue_is_functional_template__$t,
     __vue_module_identifier__$t,
+    false,
+    undefined,
     undefined,
     undefined
   );//
 var script$u = {
   name: "EnterMaster",
   components: {
-    "enter-master": EnterMaster
+    "enter-master": __vue_component__$5
   },
   props: {
     callback: {
@@ -11478,15 +11492,19 @@ __vue_render__$u._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var EnterMaster$2 = normalizeComponent_1(
+  const __vue_component__$u = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
     __vue_inject_styles__$u,
     __vue_script__$u,
     __vue_scope_id__$u,
     __vue_is_functional_template__$u,
     __vue_module_identifier__$u,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11494,7 +11512,7 @@ var script$v = {
   name: "GlobalActions",
   localePath: "allpasswords/components/GlobalActions",
   components: {
-    "enter-master": EnterMaster$2
+    "enter-master": __vue_component__$u
   },
   data: function data() {
     return {
@@ -11632,15 +11650,19 @@ __vue_render__$v._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var GlobalActions = normalizeComponent_1(
+  const __vue_component__$v = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
     __vue_inject_styles__$v,
     __vue_script__$v,
     __vue_scope_id__$v,
     __vue_is_functional_template__$v,
     __vue_module_identifier__$v,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11717,15 +11739,19 @@ __vue_render__$w._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Shortcuts = normalizeComponent_1(
+  const __vue_component__$w = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
     __vue_inject_styles__$w,
     __vue_script__$w,
     __vue_scope_id__$w,
     __vue_is_functional_template__$w,
     __vue_module_identifier__$w,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -11733,7 +11759,7 @@ var script$x = {
   name: "PasswordInfo",
   localePath: "allpasswords/components/PasswordInfo",
   components: {
-    "password-message": PasswordMessage
+    "password-message": __vue_component__$a
   },
   props: {
     password: {
@@ -11988,15 +12014,19 @@ __vue_render__$x._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PasswordInfo = normalizeComponent_1(
+  const __vue_component__$x = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
     __vue_inject_styles__$x,
     __vue_script__$x,
     __vue_scope_id__$x,
     __vue_is_functional_template__$x,
     __vue_module_identifier__$x,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -12004,7 +12034,7 @@ var script$y = {
   name: "SiteInfo",
   localePath: "allpasswords/components/SiteInfo",
   components: {
-    "password-info": PasswordInfo
+    "password-info": __vue_component__$x
   },
   props: {
     site: {
@@ -12129,23 +12159,27 @@ __vue_render__$y._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SiteInfo = normalizeComponent_1(
+  const __vue_component__$y = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
     __vue_inject_styles__$y,
     __vue_script__$y,
     __vue_scope_id__$y,
     __vue_is_functional_template__$y,
     __vue_module_identifier__$y,
+    false,
+    undefined,
     undefined,
     undefined
   );//
 var script$z = {
   name: "SiteList",
   components: {
-    "shortcuts": Shortcuts,
-    "site-info": SiteInfo
+    "shortcuts": __vue_component__$w,
+    "site-info": __vue_component__$y
   },
   props: {
     showNotes: {
@@ -12193,12 +12227,12 @@ var script$z = {
     getLetters: function getLetters(sites) {
       var letters = [];
       var currentLetter = null;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = _createForOfIteratorHelper(sites),
+          _step;
 
       try {
-        for (var _iterator = sites[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var site = _step.value;
           var letter = getSiteDisplayName(site.site).toUpperCase()[0];
 
@@ -12211,18 +12245,9 @@ var script$z = {
           }
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       return letters;
@@ -12287,15 +12312,19 @@ __vue_render__$z._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SiteList = normalizeComponent_1(
+  const __vue_component__$z = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
     __vue_inject_styles__$z,
     __vue_script__$z,
     __vue_scope_id__$z,
     __vue_is_functional_template__$z,
     __vue_module_identifier__$z,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -12331,15 +12360,19 @@ __vue_render__$A._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var InProgress = normalizeComponent_1(
+  const __vue_component__$A = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
     __vue_inject_styles__$A,
     __vue_script__$A,
     __vue_scope_id__$A,
     __vue_is_functional_template__$A,
     __vue_module_identifier__$A,
+    false,
+    undefined,
     undefined,
     undefined
   );//
@@ -12347,13 +12380,13 @@ var script$B = {
   name: "App",
   localePath: "allpasswords/App",
   components: {
-    "confirm": Confirm,
-    "password-message": PasswordMessage,
-    "unknown-error": UnknownError,
-    "global-actions": GlobalActions,
-    "site-list": SiteList,
-    "enter-master": EnterMaster$2,
-    "in-progress": InProgress
+    "confirm": __vue_component__$r,
+    "password-message": __vue_component__$a,
+    "unknown-error": __vue_component__$s,
+    "global-actions": __vue_component__$v,
+    "site-list": __vue_component__$z,
+    "enter-master": __vue_component__$u,
+    "in-progress": __vue_component__$A
   },
   data: function data() {
     return {
@@ -12595,23 +12628,27 @@ __vue_render__$B._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var AllPasswordsApp = normalizeComponent_1(
+  const __vue_component__$B = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
     __vue_inject_styles__$B,
     __vue_script__$B,
     __vue_scope_id__$B,
     __vue_is_functional_template__$B,
     __vue_module_identifier__$B,
+    false,
+    undefined,
     undefined,
     undefined
   );//
 var script$C = {
   name: "App",
   components: {
-    "panel-app": PanelApp,
-    "allpasswords-app": AllPasswordsApp
+    "panel-app": __vue_component__$t,
+    "allpasswords-app": __vue_component__$B
   },
   data: function data() {
     return {
@@ -12703,15 +12740,19 @@ __vue_render__$C._withStripped = true;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var App = normalizeComponent_1(
+  const __vue_component__$C = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
     __vue_inject_styles__$C,
     __vue_script__$C,
     __vue_scope_id__$C,
     __vue_is_functional_template__$C,
     __vue_module_identifier__$C,
+    false,
+    undefined,
     undefined,
     undefined
   );/*
@@ -12719,4 +12760,4 @@ __vue_render__$C._withStripped = true;
  * version 2.0 (the "License"). You can obtain a copy of the License at
  * http://mozilla.org/MPL/2.0/.
  */
-runApp(App, true);
+runApp(__vue_component__$C, true);
