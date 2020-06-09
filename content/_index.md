@@ -5,13 +5,13 @@ subtitle: Your new best way to manage passwords
 
 {{< script "index.js" >}}
 
-* Only one password to remember
+* Only [one password](/documentation/choosing-master-password/) to remember
 * Conveniently integrated into your browser
 * No need to trust us, your data stays on your device (safely encrypted)
-* Most passwords never stored but generated when needed
-* Easy to recover a password without access to your device
-* Multiple backup strategies supported
-* Sync data between multiple devices easily
+* Most passwords never stored but [generated when needed](/documentation/generated-vs-stored/)
+* Easy to [recover a password](/documentation/recovery-strategies/#recovering-generated-passwords-without-backup) without access to your device
+* Multiple [backup strategies](/documentation/recovery-strategies/) supported
+* [Sync data](/documentation/sync/) between multiple devices easily
 * Free and open source
 
 <p>
