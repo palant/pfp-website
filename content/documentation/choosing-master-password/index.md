@@ -1,8 +1,13 @@
 ---
 title: "Choosing a master password"
-description: "Choosing a strong master password is essential to protect your data. Common passwords and dictionary words offer little protection."
-image: master-password.png
+date: 2018-03-08
 ---
+
+A strong master password is the main protection of the data you store in PfP. With common passwords and dictionary words too easy to guess, you should go for something better.
+
+When setting a new master password, PfP will aid you by indicating the strength of your chosen password. Red means a very weak password, green a good one. PfP will also recognize some common passwords and flag them as weak.
+
+{{< toc >}}
 
 ## Why master password strength is important
 
@@ -13,6 +18,8 @@ That's why PfP uses a password generation approach that is hard to speed up. Whe
 ## How to know whether the password is good enough
 
 There is a password strength indicator when you set your master password in PfP. You should try to make all bars light up green, these passwords should be strong enough even against the most determined attackers. Note that this indicator isn't perfect however and you should still read the next section. While it will check your password against a list of common passwords, it doesn't know your dog's name whereas somebody trying to crack your passwords might.
+
+{{< img src="master-password.png" alt="Long master password with all bars green" width="594" />}}
 
 Concerned that you won't be able to remember such a long password? You can write it down at first. Since you will likely be typing this password multiple times per day, your written note should become unnecessary very soon.
 

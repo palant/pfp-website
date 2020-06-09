@@ -1,8 +1,14 @@
 ---
 title: "What's so painful about passwords?"
 image: password-rules.png
-description: "When attempting to keep passwords in memory, most people will either use insecure passwords or overuse the \"Forgot password\" feature."
+date: 2018-02-14
 ---
+
+Why is this tool's name stressing the pain of using passwords? The reason is that passwords are currently designed for robots with infinite and infallible memory, not humans. No person can come up with strong individual passwords for every website and remember them.
+
+Actual people will resort to various strategies to cope with this situation. Usually it boils down to reusing passwords between websites and/or overusing "Forgot password" feature. Both have considerable security drawbacks.
+
+{{< toc >}}
 
 ## Too many passwords to remember
 
@@ -13,6 +19,8 @@ Various single sign-on solutions also seek to address this issue. For example, m
 ## Arbitrary complexity rules
 
 Every website has its own rules for passwords. Some require that passwords contain all of lowercase and uppercase letters, numbers and special characters, others want you to change the password every few months and not reuse any of the passwords you used before. Each website has its own ideas about minimal and maximal password length. Fact is, [password complexity rules don't work](https://blog.codinghorror.com/password-rules-are-bullshit/). They are even counterproductive, as users will often resort to simple variations of a standard password or resetting passwords because they cannot remember them. In the end, by far the most important factor contributing to password strength is its length and not the few special characters. PfP will generate extremely strong passwords by default, and you can easily adjust password generation settings to match any website's complexity rules without making the password insecure.
+
+{{< img src="password-rules.png" width="300" alt="A website enforcing particularly specific password rules" />}}
 
 ## Your email account is the single point of failure
 

@@ -1,12 +1,18 @@
 ---
 title: Keyboard navigation
 image: access_keys_small.png
-description: PfP can be used efficiently with keyboard only. Use Ctrl+Shift+F to open the pop-up and navigate lists using arrow keys.
+date: 2019-10-01
 ---
 
-## Opening the pop-up
+Do you prefer using the keyboard instead of clicking? All PfP functions can be reached using keyboard only, and it's even more convenient than using the mouse.
 
-The default shortcut key to open the PfP pop-up is Ctrl+Shift+F. It might happen that this shortcut key doesn't work, because of either the browser itself or another extension claiming it. The good news is: you can change it to whatever you like! The bad news: browsers hide this configuration interface pretty well.
+The main keyboard shortcut you need is Ctrl+Shift+F which by default will open the PfP pop-up. There you can access all PfP functionality then.
+
+{{< toc >}}
+
+## Changing keyboard shortcut to open the pop-up
+
+It might happen that the default Ctrl+Shift+F shortcut key doesn't work, because of either the browser itself or another extension claiming it. The good news is: you can change it to whatever you like! The bad news: browsers hide this configuration interface pretty well.
 
 * On Chrome and Opera the easiest way to get there is typing `chrome://extensions/shortcuts` into the address bar.
 * On Firefox you go to `about:addons` and click the "Tools" cogwheel. You will find the option "Manage Extension Shortcuts" there. See also the [official and slightly more detailed explanation](https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox).

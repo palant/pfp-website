@@ -1,19 +1,16 @@
-<footer>
-  <div class="container">
-    <div class="license">
-      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" src="{{ partial "res" "img/cc-by-sa.svg" }}"></a><br>
-      This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-    </div>
-    <div>
-      <span class="flipped">P</span>fP: Pain-free Passwords is a project by <a rel="author" href="https://palant.info/">Wladimir Palant</a><br>
-      <a href="/impressum/">Legal Notice / Impressum</a>
-      <a href="/privacy-policy/" style="margin-left: 2em;">Privacy Policy / Datenschutzerklärung</a>
+<footer id="footer" class="footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div>
+        <span class="flipped">P</span>fP: Pain-free Passwords is a project by <a rel="author" href="https://palant.info/">Wladimir Palant</a><br>
+        {{ `[Legal Notice / Impressum](/impressum/)` | markdownify }} &nbsp; &nbsp; {{ `[Privacy Policy / Datenschutzerklärung](/privacy-policy/)` | markdownify }}
+      </div>
+      <div>
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license external"><img src="{{ partial "res" "icons/cc-by-sa.svg" }}" alt="Creative Commons Attribution-ShareAlike 4.0 International License"></a>
+        Content under <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license external">CC BY-SA 4.0 license</a><br>
+        Powered by <a href="https://github.com/gohugoio/hugo" rel="external">Hugo</a> |
+        Theme is <a href="https://github.com/reuixiy/hugo-theme-meme" rel="external">MemE</a>
+      </div>
     </div>
   </div>
-
-  <a href="" class="scrollup">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="18" height="18">
-      <path d="M16 112 l48 -48 l48 48" fill="none" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </a>
 </footer>

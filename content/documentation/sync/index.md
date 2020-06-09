@@ -1,7 +1,15 @@
 ---
 title: Data synchronization
-description: PfP can synchronize data between multiple devices. How does that work and is it safe?
+date: 2018-03-08
 ---
+
+PfP can automatically upload your data to a storage provider. This is useful to synchronize it between multiple devices or simply as an automatic backup.
+
+{{< img src="sync-settings.png" width="596" alt="Sync status displayed by PfP" />}}
+
+The supported storage providers are currently Dropbox, Google Drive and any service supporting [remoteStorage protocol](https://remotestorage.io/). The provider isn't being trusted in this setup, they can neither read not manipulate your data.
+
+{{< toc >}}
 
 ## If PfP doesn't have a server, how can it sync data?
 
@@ -11,7 +19,7 @@ For data synchronization, PfP uses your account at a storage provider like Dropb
 
 You should choose the provider that is most convenient for you, usually meaning the one where you have an account already. If you are still undecided, choose Dropbox. Unlike Google Drive, Dropbox will make the data uploaded by PfP visible to you and allow downloading it. Also, Dropbox support is simpler and should be less error-prone.
 
-## Can PfP read my files?
+## Will PfP read other stored files?
 
 No. PfP requests access only to its own folder at your storage provider. All it can do is read and write files in that folder. In fact, it will only access the file `passwords.json` there.
 

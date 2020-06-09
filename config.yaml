@@ -1,25 +1,132 @@
 baseURL: https://pfp.works/
 languageCode: en-us
+copyright: "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License"
 title: "PfP: Pain-free Passwords"
-disableKinds:
-  - RSS
-  - taxonomyTerm
+theme: meme
 enableRobotsTXT: true
+
+author:
+  name: Wladimir Palant
+  twitter: WPalant
+
+params:
+  enableHeader: true
+  displayHeaderInHome: true
+  headerBackground: "linear-gradient(90deg, rgba(96, 168, 224, 0.4) 0%, rgba(80, 80, 255, 0.4) 100%)"
+  headerLayout: "flex"
+  enableNavToggle: true
+  navHeight: "10em"
+  siteBrandSVG: true
+  siteBrandSVGWidth: 35
+  siteBrandSVGHeight: 35
+  siteBrandSVGFill: "var(--color-contrast-high)"
+  enableMenu: true
+  displayMenuInHome: true
+  homeLayout: "page"
+  siteLogo: "/icons/apple-touch-icon.png"
+  siteDescription: "PfP: Pain-free Passwords"
+  siteCreatedTime:  "2006-07-10T00:00:00+00:00"
+  siteTwitter: "WPalant"
+  displayPosts: false
+  displayPostsCount: true
+  listWidth: 42
+  displayListTitle: true
+  listDateFormat: "2006-01-02"
+  listDatePosition: "right"
+  groupByMonth: false
+  i18nYear: false
+  i18nMonth: false
+  limitEntriesLimit: 5
+  mainSections:
+    - "documentation"
+  includeContent: true
+  enableDarkMode: true
+  defaultTheme: "light"
+  hideThemeToggle: false
+  hideThemeToggleInHome: false
+  themeColor: "#fff"
+  themeColorDark: "#282a36"
+  safariMaskColor: "#2a6df4"
+  msApplicationTileColor: "#fff"
+  openGraph: true
+  twitterCards: true
+  autoDetectImages: true
+
+  duration: 0.5
+  primaryColorLight: "220, 90%, 56%"
+  primaryColorDark: "201, 65%, 62%"
+  postWidth: 42
+  original: true
+  hrefTargetBlank: false
+
+  enableTOC: false
+  enableHeadingsAnchor: true
+  headingsOpt: "1-6"
+  anchorSymbol: "#"
+  anchorIcon: "link"
+  enableAnchorLink: true
+  enableAnchorAutoHide: true
+
+  squareBrackets: true
+  footnoteReturnLinkIcon: "angle-up"
+  insertHrBySelf: true
+
+  fontFamilySiteBrand: "'Orkney', sans-serif"
+  fontFamilyTitle: "'Orkney', sans-serif"
+  fontFamilyHeadings: "'Orkney', sans-serif"
+  fontFamilyCode: "'SometypeMono', monospace"
+  fontFamilyBody: "'Adelle', serif"
+  fontSize: 20
+  lineHeight: 1.618
+
+  enableFooter: true
+  enableSocials: true
+
+  enableFingerprint: true
+  enableLunrSearch: true
+
+  fofPoster: ""
 
 menu:
   main:
     - Name: Home
       URL: /
       Weight: 1
+      pre: "internal"
+      post: "home"
     - Name: Try Online
       URL: /webclient/
       Weight: 2
+      pre: "internal"
+      post: "play-circle"
     - Name: Documentation
       URL: /documentation/
       Weight: 3
+      pre: "internal"
+      post: "archive"
     - Name: Contributing
       URL: /contributing/
       Weight: 4
+      pre: "internal"
+      post: "star"
+    - identifier: "theme-switcher"
+      weight: 5
+    - identifier: "search"
+      weight: 6
+
+outputFormats:
+  SearchIndex:
+    baseName: search
+    mediaType: application/json
+
+outputs:
+  home:
+    - HTML
+    - SearchIndex
+
+disableKinds:
+  - RSS
+  - taxonomyTerm
 
 markup:
   goldmark:

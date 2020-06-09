@@ -1,8 +1,13 @@
 ---
 title: Could my passwords be compromised?
-description: PfP can prevent many attacks on your credentials and limit the damage of others.
-image: bomb.svg
+date: 2018-02-07
 ---
+
+There are plenty of malicious actors seeking access to your passwords. This article provides an overview of the common threats which might compromise your passwords.
+
+Using PfP helps avoid several of these scenarios completely. For others, PfP will reduce the impact. The only scenario where PfP cannot help at all is a malware application running on your device.
+
+{{< toc >}}
 
 ## Phishing attacks
 

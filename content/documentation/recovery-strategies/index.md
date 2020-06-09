@@ -1,8 +1,13 @@
 ---
 title: Recovery strategies
-description: What if your PfP data gets corrupted or you simply don't have access to your device? No reason to reset your passwords.
-image: backup-options.png
+date: 2018-03-08
 ---
+
+What if your PfP data ever gets corrupted or you simply don't have access to your device? Usually this doesn't mean that you have to recover access to all your accounts, there are various ways to recover your PfP data.
+
+{{< img src="backup-options.png" width="597" alt="Backup options available on the All Passwords page" />}}
+
+{{< toc >}}
 
 ## Recovering generated passwords without backup
 
