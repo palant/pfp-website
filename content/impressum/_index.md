@@ -1,31 +1,27 @@
 ---
-title: Legal Notice
+title: Impressum
 ---
 
-Responsible for this website in accordance with § 5 of the Telemedia Act (TMG):
+pfp.works website is being maintained by **Wladimir Palant**.
 
-Wladimir Palant\
+{{< toc >}}
+
+## Contact information
+
+E-mail: <phkpfp@pfp.works>\
+Web: <https://palant.info/>
+
+## Postal address
+
 Lübecker Str. 11\
 50858 Köln\
 Germany
 
-## Contact Information
+## Copyright
 
-E-Mail: <phkpfp@pfp.works>\
-Internet address: https://palant.info/
+The contents of this website are subject to the [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). The website source code is available on [GitHub](https://github.com/palant/pfp-website/).
+
 
 ## Disclaimer
 
-### Accountability for content
-
-The contents of our pages have been created with the utmost care. However, we cannot guarantee the contents' accuracy, completeness or topicality. According to statutory provisions, we are furthermore responsible for our own content on these web pages. In this matter, please note that we are not obliged to monitor the transmitted or saved information of third parties, or investigate circumstances pointing to illegal activity. Our obligations to remove or block the use of information under generally applicable laws remain unaffected by this as per §§ 8 to 10 of the Telemedia Act (TMG).
-
-### Accountability for links
-
-Responsibility for the content of external links (to web pages of third parties) lies solely with the operators of the linked pages. No violations were evident to us at the time of linking. Should any legal infringement become known to us, we will remove the respective link immediately.
-
-## Copyright
-
-The contents of this website are subject to the [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). The corresponding source code is available on [GitHub](https://github.com/palant/pfp-website/).
-
-Source: [translate-24h Deutsch-Englisch Übersetzungen](http://www.translate-24h.de/)
+Despite spending a significant effort on ensuring quality of this website's content, we cannot guarantee its correctness, completeness or availability. Furthermore, this website contains links to external websites that we have no control over. No law violations by these websites were evident at the time when the links were created. Should we become aware of law violations, we will remove the link to the respective website immediately.
