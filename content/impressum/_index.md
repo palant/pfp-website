@@ -8,7 +8,7 @@ pfp.works website is being maintained by **Wladimir Palant**.
 
 ## Contact information
 
-E-mail: <exlpfp@palant.de>\
+E-mail: <exlpfp@pfp.works>\
 Web: <https://palant.info/>
 
 ## Postal address
