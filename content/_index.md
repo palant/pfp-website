@@ -5,6 +5,8 @@ subtitle: Your new best way to manage passwords
 
 {{< script "index.js" >}}
 
+**IMPORTANT**: PfP: Pain-free Passwords is no longer being developed. While it might still work for you, no issues will be fixed.
+
 * Only [one password](/documentation/choosing-master-password/) to remember
 * Conveniently integrated into your browser
 * No need to trust us, your data stays on your device (safely encrypted)

@@ -1,0 +1,663 @@
+@charset "UTF-8";
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+body {
+  background-color: #fff;
+  color: #000;
+}
+
+body,
+input,
+button {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  /* Make sure outline is always visible, browsers normally won’t show it before Tab is pressed */
+  outline: 1px dotted;
+}
+
+.warning {
+  background-color: #faa;
+  border-radius: 5px;
+  padding: 5px;
+  background-image: url("../images/ionicons/md-warning.svg");
+  background-size: 32px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+}
+:root:not([dir=rtl]) .warning {
+  padding-left: 42px;
+}
+:root[dir=rtl] .warning {
+  padding-right: 42px;
+}
+
+.success {
+  background-color: #cfc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.error {
+  font-size: 16px;
+  color: #f44;
+}
+
+:root:not([dir=rtl]) .unknown-error-cancel {
+  float: right;
+}
+:root[dir=rtl] .unknown-error-cancel {
+  float: left;
+}
+
+.unknown-error-details {
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+.help-icon {
+  display: inline-block;
+  cursor: help;
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: url("../images/ionicons/md-help-circle-outline.svg");
+}
+@media print {
+  .help-icon {
+    display: none;
+  }
+}
+
+input[type=checkbox] {
+  width: 24px;
+  height: 24px;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+:root:not([dir=rtl]) input[type=checkbox] {
+  margin-right: 5px;
+}
+:root[dir=rtl] input[type=checkbox] {
+  margin-left: 5px;
+}
+
+input[type=checkbox]:checked {
+  background-image: url("../images/ionicons/md-checkmark.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modalOverlay {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalOverlay-inner {
+  margin: auto;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.modalOverlay-inner.stretch {
+  width: 100%;
+}
+.modalOverlay-inner > :last-child {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.modalOverlay-inner.cancelable > :last-child {
+  padding-top: 0;
+}
+
+.modalOverlay-cancel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cancel {
+  display: inline-block;
+  min-width: 16px;
+  min-height: 16px;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-image: url("../images/ionicons/md-close.svg");
+}
+.cancel:hover {
+  background-color: #e2f4ff;
+}
+
+.modalOverlay-cancel-container > .cancel {
+  margin: 5px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.setting {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 15px 0;
+}
+
+.setting:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.setting-label {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  width: 70%;
+  margin-right: 15px;
+}
+
+.description {
+  font-size: 80%;
+  opacity: 0.5;
+  padding-left: 15px;
+}
+
+.setting input:not([type=checkbox]) {
+  flex-grow: 1;
+  width: 24px;
+}
+
+.accessKeyMarker {
+  text-decoration: underline;
+}
+
+.accessKeyHint {
+  position: absolute;
+  display: flex;
+  font-size: 18px;
+  border: 1px solid black !important;
+  border-radius: 3px;
+  background-color: #ffffe0;
+  text-decoration: underline;
+  min-width: 28px;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  z-index: 10001;
+}
+
+:root {
+  margin: 0;
+}
+
+body {
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 100%;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.deprecationNote {
+  font-size: 16px;
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.unknown-error {
+  margin: 5px;
+}
+
+.special-site {
+  font-style: italic;
+}
+
+.block-start,
+.button-container,
+.link-container {
+  margin-top: 15px;
+}
+
+.button-container:not([hidden]),
+.link-container:not([hidden]) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.link-container {
+  font-size: 16px;
+}
+
+.unknown-error-details {
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+.password-score {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+}
+.password-score * {
+  flex-grow: 1;
+  background-color: #ccc;
+  height: 5px;
+  margin: 2px;
+}
+
+.password-score[data-score="0"] .password-score-0 {
+  background-color: #f00;
+}
+
+.password-score[data-score="1"] .password-score-0,
+.password-score[data-score="1"] .password-score-1 {
+  background-color: #f80;
+}
+
+.password-score[data-score="2"] .password-score-0,
+.password-score[data-score="2"] .password-score-1,
+.password-score[data-score="2"] .password-score-2 {
+  background-color: #ee0;
+}
+
+.password-score[data-score="3"] .password-score-0,
+.password-score[data-score="3"] .password-score-1,
+.password-score[data-score="3"] .password-score-2,
+.password-score[data-score="3"] .password-score-3 {
+  background-color: #cf0;
+}
+
+.password-score[data-score="4"] .password-score-0,
+.password-score[data-score="4"] .password-score-1,
+.password-score[data-score="4"] .password-score-2,
+.password-score[data-score="4"] .password-score-3,
+.password-score[data-score="4"] .password-score-4 {
+  background-color: #0f0;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+.tabs > :not(.tablist) {
+  flex-grow: 1;
+}
+
+.tablist {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+}
+:root:not([dir=rtl]) .tablist {
+  padding-left: 5px;
+}
+:root[dir=rtl] .tablist {
+  padding-right: 5px;
+}
+.tablist > :first-child {
+  height: 5px;
+}
+:root:not([dir=rtl]) .tablist > :not(.active) {
+  border-right: 1px solid #ccc;
+}
+:root[dir=rtl] .tablist > :not(.active) {
+  border-left: 1px solid #ccc;
+}
+
+.tab {
+  min-width: 42px;
+  min-height: 42px;
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border: 1px solid #eee;
+}
+.tab.active {
+  background-color: #fff;
+  border-color: #ccc;
+  border-radius: 5px 0 0 5px;
+  border-right-color: #fff;
+}
+:root[dir=rtl] .tab.active {
+  border-radius: 0 5px 5px 0;
+  border-left-color: #fff;
+}
+.tab:not(.active):hover {
+  background-color: #f8f8f8;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.select-site {
+  background-image: url("../images/ionicons/md-search.svg");
+}
+
+.password-list {
+  background-image: url("../images/ionicons/md-list.svg");
+}
+
+.sync {
+  background-image: url("../images/ionicons/md-sync.svg");
+}
+.sync.failed:not(.active) {
+  background-color: #fcc;
+}
+
+.settings {
+  background-image: url("../images/ionicons/md-settings.svg");
+}
+
+.lock {
+  background-image: url("../images/ionicons/md-exit.svg");
+}
+
+.alias-container {
+  font-size: 16px;
+}
+
+.password-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.password-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.password-container:hover {
+  background-color: #e2f4ff;
+}
+
+.user-name-container {
+  flex-grow: 1;
+}
+
+.password-revision::before {
+  content: "#";
+}
+
+.password-revision {
+  font-size: 16px;
+  vertical-align: text-top;
+}
+
+.iconic-link {
+  min-width: 32px;
+  min-height: 32px;
+  background-size: 32px;
+  background-repeat: no-repeat;
+  margin: 1px;
+}
+
+a.iconic-link:hover {
+  outline: 1px solid #888;
+}
+
+.password-menu-link {
+  background-image: url("../images/ionicons/md-more.svg");
+}
+
+.password-menu-link.menuactive {
+  background-color: #b3b3b3;
+}
+
+.to-document-link {
+  background-image: url("../images/ionicons/md-color-wand.svg");
+}
+
+.to-clipboard-link {
+  background-image: url("../images/ionicons/md-clipboard.svg");
+}
+
+.show-qrcode-link {
+  background-image: url("../images/ionicons/md-barcode.svg");
+}
+
+.notes-link {
+  background-image: url("../images/ionicons/md-paper.svg");
+}
+
+.make-generated-link {
+  background-image: url("../images/ionicons/md-arrow-round-up.svg");
+}
+
+.bump-revision-link {
+  background-image: url("../images/ionicons/md-refresh.svg");
+}
+
+.password-remove-link {
+  background-image: url("../images/ionicons/md-trash.svg");
+}
+
+.password-menu-entry:not([hidden]) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+}
+.password-menu-entry:hover {
+  background-color: #e2f4ff;
+}
+:root:not([dir=rtl]) .password-menu-entry > .iconic-link {
+  margin-right: 5px;
+}
+:root[dir=rtl] .password-menu-entry > .iconic-link {
+  margin-left: 5px;
+}
+
+.password-menu-entry-container {
+  display: flex;
+  flex-direction: row;
+}
+.password-menu-entry-container > .password-menu-entry {
+  flex-grow: 1;
+}
+:root:not([dir=rtl]) .password-menu-entry-container > .password-menu-entry:first-child {
+  padding-right: 5px;
+}
+:root[dir=rtl] .password-menu-entry-container > .password-menu-entry:first-child {
+  padding-left: 5px;
+}
+:root:not([dir=rtl]) .password-menu-entry-container > .password-menu-entry:first-child {
+  border-right: 1px solid #ccc;
+}
+:root[dir=rtl] .password-menu-entry-container > .password-menu-entry:first-child {
+  border-left: 1px solid #ccc;
+}
+.password-menu-entry-container > .password-menu-entry:last-child {
+  justify-content: flex-end;
+}
+:root:not([dir=rtl]) .password-menu-entry-container > .password-menu-entry:last-child {
+  padding-left: 5px;
+}
+:root[dir=rtl] .password-menu-entry-container > .password-menu-entry:last-child {
+  padding-right: 5px;
+}
+
+.add-password-link {
+  min-height: 32px;
+  background-image: url("../images/ionicons/md-add-circle-outline.svg");
+  background-size: 32px;
+  background-repeat: no-repeat;
+}
+:root:not([dir=rtl]) .add-password-link {
+  padding-left: 37px;
+}
+:root[dir=rtl] .add-password-link {
+  padding-right: 37px;
+}
+
+.password-name-entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.length-container,
+.charsets-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.warning.replacing {
+  font-size: 16px;
+}
+
+.change-password-revision,
+.use-recovery,
+.cancel-recovery {
+  font-size: 16px;
+}
+
+#password-length {
+  flex-grow: 1;
+}
+
+.password-length-value {
+  min-width: 3ch;
+}
+
+.site-autocomplete {
+  border: 1px solid #000;
+  padding: 5px;
+  max-height: 192px;
+  overflow: auto;
+}
+.site-autocomplete > .site-entry {
+  cursor: pointer;
+}
+.site-autocomplete > .site-entry.active, .site-autocomplete > .site-entry:hover {
+  background-color: #e2f4ff;
+}
+
+.recovery-code-accepted {
+  margin: 0;
+  font-size: 16px;
+}
+
+.recovery-code-strip {
+  margin: -2px 5px;
+}
+
+#recoveryInput {
+  min-height: 100px;
+}
+
+.qrcode-canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#notes-textarea {
+  min-height: 300px;
+}
+
+.sync-section {
+  font-weight: bold;
+}
+
+.sync-explanation,
+.remoteStorage-hosting-link {
+  font-size: 16px;
+}
+
+.sync-provider-selection {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.sync-provider-link {
+  font-size: 120%;
+  font-weight: bold;
+  color: #000;
+}
+
+.sync-provider-icon {
+  display: inline-block;
+  margin: 0 5px;
+  height: 24px;
+  background-size: auto 24px;
+  background-repeat: no-repeat;
+}
+
+.sync-provider-icon.dropbox {
+  width: 28.183px;
+  background-image: url("../images/logos/dropbox.svg");
+}
+
+.sync-provider-icon.gdrive {
+  width: 27.676px;
+  background-image: url("../images/logos/gdrive.svg");
+}
+
+.sync-provider-icon.remotestorage {
+  width: 20.792px;
+  background-image: url("../images/remotestorage.svg");
+}
+
+.sync-failed {
+  color: #f44;
+}
+
+.sync-error {
+  margin-top: 15px;
+}
+
+.modalOverlay-inner {
+  box-sizing: border-box;
+  max-width: 600px;
+}

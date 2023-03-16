@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
  * This Source Code is subject to the terms of the Mozilla Public License
  * version 2.0 (the "License"). You can obtain a copy of the License at
@@ -10,50 +11,66 @@
  */
 body {
   background-color: #fff;
-  color: #000; }
+  color: #000;
+}
 
 body,
 input,
 button {
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
-  font-size: 24px; }
+  font-size: 24px;
+}
 
 a {
-  text-decoration: none; }
-  a:hover {
-    text-decoration: underline; }
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  /* Make sure outline is always visible, browsers normally won’t show it before Tab is pressed */
+  outline: 1px dotted;
+}
 
 .warning {
   background-color: #faa;
   border-radius: 5px;
   padding: 5px;
-  background-image: url(../images/ionicons/md-warning.svg);
+  background-image: url("../images/ionicons/md-warning.svg");
   background-size: 32px;
   background-position: 5px 5px;
-  background-repeat: no-repeat; }
-  :root:not([dir="rtl"]) .warning {
-    padding-left: 42px; }
-  :root[dir="rtl"] .warning {
-    padding-right: 42px; }
+  background-repeat: no-repeat;
+}
+:root:not([dir=rtl]) .warning {
+  padding-left: 42px;
+}
+:root[dir=rtl] .warning {
+  padding-right: 42px;
+}
 
 .success {
   background-color: #cfc;
   border-radius: 5px;
-  padding: 5px; }
+  padding: 5px;
+}
 
 .error {
   font-size: 16px;
-  color: #f44; }
+  color: #f44;
+}
 
-:root:not([dir="rtl"]) .unknown-error-cancel {
-  float: right; }
-
-:root[dir="rtl"] .unknown-error-cancel {
-  float: left; }
+:root:not([dir=rtl]) .unknown-error-cancel {
+  float: right;
+}
+:root[dir=rtl] .unknown-error-cancel {
+  float: left;
+}
 
 .unknown-error-details {
   font-size: 16px;
-  white-space: pre-wrap; }
+  white-space: pre-wrap;
+}
 
 .help-icon {
   display: inline-block;
@@ -62,29 +79,36 @@ a {
   height: 24px;
   background-size: 24px;
   background-repeat: no-repeat;
-  background-image: url(../images/ionicons/md-help-circle-outline.svg); }
-  @media print {
-    .help-icon {
-      display: none; } }
+  background-image: url("../images/ionicons/md-help-circle-outline.svg");
+}
+@media print {
+  .help-icon {
+    display: none;
+  }
+}
 
-input[type="checkbox"] {
+input[type=checkbox] {
   width: 24px;
   height: 24px;
   border: 1px solid black;
   border-radius: 2px;
   margin: 0;
   -moz-appearance: none;
-  -webkit-appearance: none; }
-  :root:not([dir="rtl"]) input[type="checkbox"] {
-    margin-right: 5px; }
-  :root[dir="rtl"] input[type="checkbox"] {
-    margin-left: 5px; }
+  -webkit-appearance: none;
+}
+:root:not([dir=rtl]) input[type=checkbox] {
+  margin-right: 5px;
+}
+:root[dir=rtl] input[type=checkbox] {
+  margin-left: 5px;
+}
 
-input[type="checkbox"]:checked {
-  background-image: url(../images/ionicons/md-checkmark.svg);
+input[type=checkbox]:checked {
+  background-image: url("../images/ionicons/md-checkmark.svg");
   background-size: 20px;
   background-repeat: no-repeat;
-  background-position: center; }
+  background-position: center;
+}
 
 .modalOverlay {
   display: flex;
@@ -97,26 +121,32 @@ input[type="checkbox"]:checked {
   z-index: 10000;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
 .modalOverlay-inner {
   margin: auto;
   background-color: #fff;
   border: 1px solid black;
-  border-radius: 5px; }
-  .modalOverlay-inner.stretch {
-    width: 100%; }
-  .modalOverlay-inner > :last-child {
-    display: flex;
-    flex-direction: column;
-    padding: 20px; }
-  .modalOverlay-inner.cancelable > :last-child {
-    padding-top: 0; }
+  border-radius: 5px;
+}
+.modalOverlay-inner.stretch {
+  width: 100%;
+}
+.modalOverlay-inner > :last-child {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.modalOverlay-inner.cancelable > :last-child {
+  padding-top: 0;
+}
 
 .modalOverlay-cancel-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; }
+  align-items: flex-end;
+}
 
 .cancel {
   display: inline-block;
@@ -124,45 +154,55 @@ input[type="checkbox"]:checked {
   min-height: 16px;
   background-size: 16px;
   background-repeat: no-repeat;
-  background-image: url(../images/ionicons/md-close.svg); }
-  .cancel:hover {
-    background-color: #e2f4ff; }
+  background-image: url("../images/ionicons/md-close.svg");
+}
+.cancel:hover {
+  background-color: #e2f4ff;
+}
 
 .modalOverlay-cancel-container > .cancel {
-  margin: 5px; }
+  margin: 5px;
+}
 
 .modal-form {
   display: flex;
   flex-direction: column;
-  margin: 0; }
+  margin: 0;
+}
 
 .setting {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 15px 0; }
+  padding: 15px 0;
+}
 
 .setting:not(:last-child) {
-  border-bottom: 1px solid #ccc; }
+  border-bottom: 1px solid #ccc;
+}
 
 .setting-label {
   display: flex;
   flex-direction: column;
   flex-grow: 0;
   width: 70%;
-  margin-right: 15px; }
+  margin-right: 15px;
+}
 
 .description {
   font-size: 80%;
   opacity: 0.5;
-  padding-left: 15px; }
+  padding-left: 15px;
+}
 
-.setting input:not([type="checkbox"]) {
+.setting input:not([type=checkbox]) {
   flex-grow: 1;
-  width: 24px; }
+  width: 24px;
+}
 
 .accessKeyMarker {
-  text-decoration: underline; }
+  text-decoration: underline;
+}
 
 .accessKeyHint {
   position: absolute;
@@ -177,11 +217,13 @@ input[type="checkbox"]:checked {
   align-items: center;
   justify-content: center;
   opacity: 0.8;
-  z-index: 10001; }
+  z-index: 10001;
+}
 
 .spinning-wheel {
   min-width: 200px;
   min-height: 200px;
   background-size: 200px;
   background-repeat: no-repeat;
-  background-image: url(images/circles.svg); }
+  background-image: url(images/circles.svg);
+}

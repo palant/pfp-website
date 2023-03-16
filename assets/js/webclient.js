@@ -1,6 +1,6 @@
 "use strict";
 
-var webclientVersion = "2.2.4";
+var webclientVersion = "2.2.5";
 
 document.addEventListener("click", function(event)
 {
