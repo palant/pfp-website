@@ -74,8 +74,8 @@ params:
   fontFamilySiteBrand: "'Orkney', sans-serif"
   fontFamilyTitle: "'Orkney', sans-serif"
   fontFamilyHeadings: "'Orkney', sans-serif"
-  fontFamilyCode: "'SometypeMono', monospace"
-  fontFamilyBody: "'Philosopher', serif"
+  fontFamilyCode: "'mononoki', monospace"
+  fontFamilyBody: "'Lato', sans-serif"
   fontSize: 20
   lineHeight: 1.618
 
