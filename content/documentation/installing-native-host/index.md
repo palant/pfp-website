@@ -3,7 +3,7 @@ title: "Installing native host application"
 date: 2023-04-26T09:28:21Z
 ---
 
-Starting with PfP 3.0, the application PfP Native Host has to be installed for PfP to work. This application provides the extension with access to a single KeePass passwords database.
+Starting with PfP 3.0, the application PfP Native Host has to be installed for PfP to work. This application provides the extension with access to configured KeePass password databases.
 
 The application is designed to require no dependencies, it doesn’t need to be installed in a particular folder and doesn’t require special privileges. You merely need to download a file and to run it once for the initial setup.
 
@@ -21,11 +21,11 @@ The following script will install PfP Native Host in your Downloads folder. To r
 
 Click “Windows PowerShell” to start it. Then right-click the PowerShell window to paste the script. You might still need to press Enter for PowerShell to exit.
 
-```ps
+```powershell
 $Shell = New-Object -ComObject Shell.Application
 $Downloads = $Shell.NameSpace('shell:Downloads').Self.Path
 Invoke-WebRequest `
-  -Uri 'https://github.com/palant/pfp-native-host/releases/download/v1.0.1/pfp-native-host-windows.exe' `
+  -Uri 'https://github.com/palant/pfp-native-host/releases/download/v1.1/pfp-native-host-windows.exe' `
   -OutFile "$Downloads\pfp-native-host.exe"
 Start-Process -FilePath "$Downloads\pfp-native-host.exe"
 exit
@@ -37,7 +37,7 @@ The following script will install PfP Native Host in your Downloads folder. To r
 
 ```sh
 curl -L \
-  https://github.com/palant/pfp-native-host/releases/download/v1.0.1/pfp-native-host-linux \
+  https://github.com/palant/pfp-native-host/releases/download/v1.1/pfp-native-host-linux \
   -o $HOME/Downloads/pfp-native-host
 chmod 755 $HOME/Downloads/pfp-native-host
 $HOME/Downloads/pfp-native-host
@@ -49,7 +49,7 @@ The following script will install PfP Native Host in your Downloads folder. To r
 
 ```sh
 curl -L \
-  https://github.com/palant/pfp-native-host/releases/download/v1.0.1/pfp-native-host-macos \
+  https://github.com/palant/pfp-native-host/releases/download/v1.1/pfp-native-host-macos \
   -o $HOME/Downloads/pfp-native-host
 chmod 755 $HOME/Downloads/pfp-native-host
 spctl --add $HOME/Downloads/pfp-native-host
@@ -62,9 +62,9 @@ For manual installation, download the application binary for your operating syst
 
 ## Initial setup
 
-The initial setup has two purposes: selecting a database file to be used and making sure browsers know where PfP Native Host is located. You can select an option by using arrow keys and pressing Enter. You can close the application by pressing Esc.
+The initial setup has two purposes: selecting database files to be used and making sure browsers know where PfP Native Host is located. You can select an option by using arrow keys and pressing Enter. You can exit the application by pressing Esc.
 
-{{< img src="initial-setup.png" width="465" alt="Terminal window displaying the text: “Database is not configured. If you already have a KeePass database, this application can use it.” Two options are being displayed below: “Select an existing database” and “Create a new database.”" />}}
+{{< img src="initial-setup.png" width="548" alt="Terminal window displaying the text: “No databases configured, you need to add a database. If you already have a KeePass database, this application can use it.” Two options are being displayed below: “Select an existing database” and “Create a new database.”" />}}
 
 If you don’t have a KeePass passwords database already (e.g. one created by KeePass or KeePassXC), the application will guide you through the process of creating a new database and setting up a secure passphrase.
 
