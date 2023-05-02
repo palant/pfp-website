@@ -5,10 +5,12 @@ subtitle: Your new best way to manage passwords
 
 {{< script "index.js" >}}
 
-* Can be used in parallel with KeePass, KeePassXC or any other tool working with KeePass databases.
+* Works with KeePass databases via PfP Native Host application.
+* Can be used in parallel with KeePass, KeePassXC or similar tools.
 * The extension keeps no data, all data stays in the KeePass database file on your hard drive.
-* Only becomes active when requested, no attack surface towards web pages (good for security).
+* Only becomes active on explicit request, no attack surface towards web pages.
 * Passwords are locked automatically after a period of inactivity (configurable).
+* Designed to be [fully accessible via keyboard](/documentation/keyboard-navigation/).
 * Recovery codes can be printed, a secure way to recover passwords after a data loss.
 * Free and open source.
 
