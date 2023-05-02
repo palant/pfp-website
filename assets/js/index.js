@@ -29,12 +29,14 @@ document.addEventListener("click", function(event)
 // Try detecting user's browser
 var ua = navigator.userAgent;
 var type = null;
-if (ua.indexOf("OPR/") >= 0)
+/*if (ua.indexOf("OPR/") >= 0)
   type = "opera";
-else if (ua.indexOf("Chromium/") >= 0)
+else */if (ua.indexOf("Chromium/") >= 0 || ua.indexOf("Chrome/") >= 0)
   type = "chrome";
 else if (ua.indexOf("Firefox/") >= 0)
   type = "firefox";
 
-if (type)
-  document.documentElement.className = type;
+if (!type)
+  type = "chrome";
+
+document.documentElement.className = type;
