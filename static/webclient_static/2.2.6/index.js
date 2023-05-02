@@ -3187,14 +3187,14 @@ function isDeprecationAccepted() {return _isDeprecationAccepted.apply(this, argu
             deprecationAccepted) {_context2.next = 2;break;}return _context2.abrupt("return",
             true);case 2:_context2.next = 4;return (
 
-              getPref("deprecationAccepted", false));case 4:return _context2.abrupt("return", _context2.sent);case 5:case "end":return _context2.stop();}}}, _callee2);}));return _isDeprecationAccepted.apply(this, arguments);}
+              getPref("deprecationAccepted2", false));case 4:return _context2.abrupt("return", _context2.sent);case 5:case "end":return _context2.stop();}}}, _callee2);}));return _isDeprecationAccepted.apply(this, arguments);}
 
 
 function acceptDeprecation(_x) {return _acceptDeprecation.apply(this, arguments);}function _acceptDeprecation() {_acceptDeprecation = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3(permanent) {return regenerator.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
 
             deprecationAccepted = true;if (!
             permanent) {_context3.next = 4;break;}_context3.next = 4;return (
-              setPref("deprecationAccepted", true));case 4:case "end":return _context3.stop();}}}, _callee3);}));return _acceptDeprecation.apply(this, arguments);}
+              setPref("deprecationAccepted2", true));case 4:case "end":return _context3.stop();}}}, _callee3);}));return _acceptDeprecation.apply(this, arguments);}
 
 
 function showAllPasswords() {return _showAllPasswords.apply(this, arguments);}function _showAllPasswords() {_showAllPasswords = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {var url, tabs;return regenerator.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
@@ -4958,13 +4958,13 @@ var locale = {
   "panel@pages@ChangeMaster@submit": "Set master password",
   "panel@pages@ChangeMaster@weak_password": "Your master password is too simple and wouldn't take long enough to guess. It is recommended that you choose a more complicated password. Do you really want to proceed with this master password?",
   "panel@pages@DeprecationNote@accept": "Continue",
-  "panel@pages@DeprecationNote@par1": "All good things must come to an end. It has been seven years since PfP was first introduced, back then under the name EasyPasswords. It has features that no other password manager can match, and I still like it.",
-  "panel@pages@DeprecationNote@par2": "Unfortunately, developing a good password manager is lots of effort. I notice that I’ve been neglecting PfP, and this won’t change any more. So I’m now making official what has been somewhat obvious already: PfP is no longer being developed.",
-  "panel@pages@DeprecationNote@par3": "Does this mean that you can no longer use it? You can. But whatever breaks now stays broken. Sync to Google Drive in particular is already broken and non-trivial to fix unfortunately.",
-  "panel@pages@DeprecationNote@par4": "What can you use instead? Not LastPass please. Maybe Bitwarden or 1Password. Definitely KeePass or a clone if you don’t mind it being less intuitive. Personally, I’ll be using KeePassXC.",
-  "panel@pages@DeprecationNote@par5": "How to get your passwords over? On the “All Passwords” page, there is a new button for CSV export. It should be possible to import the resulting file into any password manager. In KeePassXC you’ll need to check “First line has field names,” otherwise the default import settings will do.",
+  "panel@pages@DeprecationNote@more_info": "More information",
+  "panel@pages@DeprecationNote@par1": "Contrary to the previous announcement, PfP: Pain-free Passwords will be developed further after all. However, PfP 3.x is essentially a new extension now and won’t be served as an update to this legacy extension.",
+  "panel@pages@DeprecationNote@par2": "Most important change: PfP 3.x reads and writes KeePass databases, so that it can be used in parallel to KeePass, KeePassXC and other applications. However, it now relies on an external application (PfP Native Host) being installed and configured.",
+  "panel@pages@DeprecationNote@par3": "You can try out PfP 3.x without removing this PfP version. PfP 3.x can import backup files from PfP 2.x, making migration easy.",
+  "panel@pages@DeprecationNote@par4": "Or you can just continue using legacy PfP. While it is no longer being developed, it should continue working as before.",
   "panel@pages@DeprecationNote@rememberAccept": "Do not show this message again",
-  "panel@pages@DeprecationNote@title": "PfP: Pain-free Passwords is being discontinued",
+  "panel@pages@DeprecationNote@title": "Further PfP: Pain-free Passwords development",
   "panel@pages@EnterMaster@reset": "Reset master password",
   "panel@pages@PasswordList@add_alias": "This website shares passwords with another?",
   "panel@pages@PasswordList@alias_description": "You indicated that {1} shares passwords with this website.",
@@ -8676,11 +8676,11 @@ var _hoisted_2$k = { "class": "deprecationNote" };
 var _hoisted_3$g = { "class": "deprecationNote" };
 var _hoisted_4$d = { "class": "deprecationNote" };
 var _hoisted_5$9 = { "class": "deprecationNote" };
-var _hoisted_6$6 = { "class": "deprecationNote" };
-var _hoisted_7$4 = { "class": "block-start" };
-var _hoisted_8$4 = { "class": "button-container" };
+var _hoisted_6$6 = { "class": "block-start" };
+var _hoisted_7$4 = { "class": "button-container" };
 
 function render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_ExternalLink = jo("ExternalLink");
   var _directive_focus = zo("focus");
 
   return Yo(), or("div", _hoisted_1$q, [
@@ -8689,8 +8689,16 @@ function render$s(_ctx, _cache, $props, $setup, $data, $options) {
   ur("p", _hoisted_3$g, u(_ctx.$t("par2")), 1 /* TEXT */),
   ur("p", _hoisted_4$d, u(_ctx.$t("par3")), 1 /* TEXT */),
   ur("p", _hoisted_5$9, u(_ctx.$t("par4")), 1 /* TEXT */),
-  ur("p", _hoisted_6$6, u(_ctx.$t("par5")), 1 /* TEXT */),
-  ur("label", _hoisted_7$4, [
+  ur(_component_ExternalLink, {
+    type: "url",
+    param: "https://palant.info/2023/05/02/a-way-forward-for-pfp-pain-free-passwords/" },
+  {
+    "default": mt(function () {return [
+      fr(u(_ctx.$t("more_info")), 1 /* TEXT */)];}),
+
+    _: 1 /* STABLE */ }),
+
+  ur("label", _hoisted_6$6, [
   go(ur("input", {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {return $data.rememberAccept = $event;}),
     type: "checkbox" },
@@ -8699,7 +8707,7 @@ function render$s(_ctx, _cache, $props, $setup, $data, $options) {
 
   fr(" " + u(_ctx.$t("rememberAccept")), 1 /* TEXT */)]),
 
-  ur("div", _hoisted_8$4, [
+  ur("div", _hoisted_7$4, [
   go(ur("button", {
     onClick: _cache[2] || (_cache[2] = function () {return $options.accept && $options.accept.apply($options, arguments);}) },
   u(_ctx.$t("accept")), 513 /* TEXT, NEED_PATCH */), [
