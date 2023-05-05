@@ -18,7 +18,7 @@ subtitle: Your new best way to manage passwords
   <span class="install-container">
     <a class="install firefox" href="https://addons.mozilla.org/addon/pfp-pain-free-passwords/">Get PfP for Mozilla Firefox</a>
     <a class="install chrome" href="https://chrome.google.com/webstore/detail/pfp-pain-free-passwords/dkmnfejkonkiccilfpackimaflcijhbj">Get PfP for Google Chrome</a>
-<!--    <a class="install opera" href="https://addons.opera.com/extensions/details/easy-passwords/">Get PfP for Opera</a> -->
+    <a class="install opera" href="https://addons.opera.com/extensions/details/pfp-pain-free-passwords/">Get PfP for Opera</a>
     <a class="show-type-selector" href="#">Using a different browser?</a>
   </span>
 <!--
@@ -32,6 +32,6 @@ subtitle: Your new best way to manage passwords
   <ul class="type-selector-inner">
     <li><a class="type-selector-link" data-type="firefox" href="#">Mozilla Firefox</a></li>
     <li><a class="type-selector-link" data-type="chrome" href="#">Google Chrome</a></li>
-<!--    <li><a class="type-selector-link" data-type="opera" href="#">Opera</a></li> -->
+    <li><a class="type-selector-link" data-type="opera" href="#">Opera</a></li>
   </ul>
 </div>
